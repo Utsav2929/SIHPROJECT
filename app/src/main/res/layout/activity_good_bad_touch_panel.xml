@@ -16,19 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/opencomic"
-            android:text="Want to read ?"
-            android:layout_width="150dp"
-            android:layout_margin="35dp"
-            android:backgroundTint="#77CDF4"
-            android:fontFamily="@font/salsa"
-            android:textColor="#616060"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:cornerRadius="20dp"
 
-            android:layout_height="150dp"/>
 
         <Button
             android:id="@+id/openvideos"
@@ -41,6 +29,6 @@
             android:textStyle="bold"
             app:cornerRadius="20dp"
             android:layout_height="150dp"
-            android:text="Want to watch ?"/>
+            android:text="Lets Watch"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

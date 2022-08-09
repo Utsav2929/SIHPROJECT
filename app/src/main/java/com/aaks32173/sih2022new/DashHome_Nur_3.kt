@@ -1,19 +1,24 @@
 package com.aaks32173.sih2022new
 
 import android.content.Intent
-import com.aaks32173.sih2022new.ui.MainActivity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class DashHome_Nur_3 : AppCompatActivity() {
+    lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_home_nur3)
 
         val poemsandrhymes = findViewById<ImageButton>(R.id.poemsryhmes)
+        val email = FirebaseAuth.getInstance().currentUser?.email
+
+         val encodedemmail=encodeUserEmail(email.toString())
+        val email1="hi123@gmail,com"
+        Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
 
         poemsandrhymes.setOnClickListener {
             val a = Intent(this, yoga::class.java)
@@ -24,7 +29,9 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val stories = findViewById<ImageButton>(R.id.stories)
 
         stories.setOnClickListener {
-
+            val a = Intent(this, yoga::class.java)
+                .putExtra("category","stories")
+            startActivity(a)
         }
         val gtbt = findViewById<ImageButton>(R.id.gtbt)
 
@@ -56,9 +63,9 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val wetime = findViewById<ImageButton>(R.id.wetime)
 
         wetime.setOnClickListener {
-            val a = Intent(this, yoga::class.java)
-                .putExtra("category","wetime")
-            startActivity(a)
+            val a = Intent(this, WetimeActivity::class.java)
+                .putExtra("email",email1)
+                startActivity(a)
         }
         val screentimerecord = findViewById<ImageButton>(R.id.screentimerecord)
 
@@ -71,15 +78,18 @@ class DashHome_Nur_3 : AppCompatActivity() {
         letshaveconversation.setOnClickListener {
 
             val a =  Intent(this,com.aaks32173.sih2022new.ui.MainActivity::class.java)
+
             startActivity(a)
 
 
         }
 
-        val todolist = findViewById<ImageButton>(R.id.todolist)
+        val health = findViewById<ImageButton>(R.id.health)
 
-        todolist.setOnClickListener {
-
+        health.setOnClickListener {
+            val a = Intent(this, yoga::class.java)
+                .putExtra("category","health")
+            startActivity(a)
 
 
         }
@@ -95,8 +105,13 @@ class DashHome_Nur_3 : AppCompatActivity() {
 
         relaxingactivity.setOnClickListener{
 
-            val a = Intent(this, relaxingactivity::class.java)
+            val a = Intent(this, relaxingActivityKids::class.java)
             startActivity(a)
         }
     }
+
+    private fun encodeUserEmail(email: String): String? {
+        return email.replace(".", ",")
+    }
+
 }

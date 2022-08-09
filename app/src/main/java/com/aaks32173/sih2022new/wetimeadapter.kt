@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
 
-class wetimeadapter(private val userList : ArrayList<wetime> ) : RecyclerView.Adapter<wetimeadapter.MyViewHolder>() {
+class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String) : RecyclerView.Adapter<wetimeadapter.MyViewHolder>() {
 
 
     private lateinit var database : DatabaseReference
@@ -39,18 +40,17 @@ class wetimeadapter(private val userList : ArrayList<wetime> ) : RecyclerView.Ad
         val currentitem = userList[position]
 
 
-        holder.name.text = currentitem.descripton
+        holder.name.text = currentitem.Description
 
 
         holder.btndelete.setOnClickListener() {
             val today= LocalDate.now()
             currentitem.Status="TRUE"
 
-            database = FirebaseDatabase.getInstance().getReference("WeTime")
-            val at= wetime(currentitem.rank, currentitem.descripton,currentitem.Status)
+            database = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime")
+            val at= wetime(currentitem.ID, currentitem.Description,currentitem.Status)
 
-                database.child(currentitem.rank.toString()).setValue(at).addOnSuccessListener {
-
+                database.child(currentitem.ID.toString()).setValue(at).addOnSuccessListener {
 
                 }
 
@@ -59,6 +59,8 @@ class wetimeadapter(private val userList : ArrayList<wetime> ) : RecyclerView.Ad
 
 
     }
+
+
 
     override fun getItemCount(): Int {
 

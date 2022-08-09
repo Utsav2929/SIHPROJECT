@@ -14,7 +14,7 @@ public class good_bad_touch_panel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_good_bad_touch_panel);
-        Button btn1 = findViewById(R.id.opencomic);
+
         Button btn2 = findViewById(R.id.openvideos);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,12 +22,7 @@ public class good_bad_touch_panel extends AppCompatActivity {
                 activityviedos();
             }
         });
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activitycomics();
-            }
-        });
+
     }
 
     private void activityviedos(){

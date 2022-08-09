@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReference2;
     UserInfo userInfo;
 
     @Override
@@ -151,17 +152,20 @@ public class RegisterActivity extends AppCompatActivity {
                                         {"16","Check your photo albums with your family."}
                                 };
 
-                                databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email.toString())).child("WeTime");
+                                databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email.toString()));
 
                                 for (int i = 1; i <= 16; i++) {
-                                    databaseReference.child(""+i).child("Status").setValue("False");
-                                    databaseReference.child(""+i).child("Description").setValue(wetime[i-1][1]);
-                                    databaseReference.child(""+i).child("ID").setValue(wetime[i-1][0]);
+                                    databaseReference2.child("WeTime").child(""+i).child("Status").setValue("False");
+                                    databaseReference2.child("WeTime").child(""+i).child("Description").setValue(wetime[i-1][1]);
+                                    databaseReference2.child("WeTime").child(""+i).child("ID").setValue(wetime[i-1][0]);
                                 }
 
                             }
-                            Intent intent = new Intent(RegisterActivity.this,Interest.class);
-                            startActivity(intent);
+
+//                            if (Integer.parseInt()<=8) {
+                                Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
+                                startActivity(intent);
+//                            }
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Registration failed!!"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
@@ -182,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child(encodeUserEmail(email.toString())).setValue(userInfo);
+                databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
                 Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
 

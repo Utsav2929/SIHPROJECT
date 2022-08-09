@@ -321,7 +321,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/todolist"
+                        android:id="@+id/health"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -332,7 +332,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="TO-DO LIST "
+                        android:text="Health"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>

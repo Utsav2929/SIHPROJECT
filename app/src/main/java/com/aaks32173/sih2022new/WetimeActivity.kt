@@ -35,7 +35,8 @@ class WetimeActivity  : AppCompatActivity() {
 
     private fun getUserData() {
 
-        dbref = FirebaseDatabase.getInstance().getReference("WeTime")
+        val email = intent.getStringExtra("email").toString()
+        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime")
 
         dbref.addValueEventListener(object : ValueEventListener{
 
@@ -52,7 +53,7 @@ class WetimeActivity  : AppCompatActivity() {
                     }
 
 
-                    userRecyclerview.adapter = wetimeadapter(userArrayList)
+                    userRecyclerview.adapter = wetimeadapter(userArrayList,email.toString())
 
 
 

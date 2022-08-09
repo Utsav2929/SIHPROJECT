@@ -29,7 +29,17 @@ public class yoga extends AppCompatActivity {
           Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
             int age=5;
 
-          if(age>8){
+            Button btn1 = findViewById(R.id.btn1);
+          Button btn4 = findViewById(R.id.btn4);
+          Button btn2 = findViewById(R.id.btn2);
+          Button btn3 = findViewById(R.id.btn3);
+          Button btn5 = findViewById(R.id.btn5);
+          Button btn6 = findViewById(R.id.btn6);
+          Button btn7 = findViewById(R.id.btn7);
+          Button btn8 = findViewById(R.id.btn8);
+          Button btn9 = findViewById(R.id.btn9);
+
+          if(age>8 && category.equals("exercises")){
 
                  videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
                  videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
@@ -42,8 +52,16 @@ public class yoga extends AppCompatActivity {
                 videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
 
             }
-          else if(category=="gksection"){
-
+          else if(category.equals("health")){
+              btn1.setText("Lets Learn 1");
+              btn2.setText("Lets Learn 2");
+              btn3.setText("Lets Learn 3");
+              btn4.setText("Lets Learn 4");
+              btn5.setText("Lets Learn 5");
+              btn6.setText("Lets Learn 6");
+              btn7.setText("Lets Learn 7");
+              btn8.setText("Lets Learn 8");
+              btn9.setText("Lets Learn 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
@@ -55,8 +73,37 @@ public class yoga extends AppCompatActivity {
               videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
 
           }
-          else if(category=="fightyourfear"){
+          else if(category.equals("gksection")){
+              btn1.setText("Lets Learn 1");
+              btn2.setText("Lets Learn 2");
+              btn3.setText("Lets Learn 3");
+              btn4.setText("Lets Learn 4");
+              btn5.setText("Lets Learn 5");
+              btn6.setText("Lets Learn 6");
+              btn7.setText("Lets Learn 7");
+              btn8.setText("Lets Learn 8");
+              btn9.setText("Lets Learn 9");
+              videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
+              videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
+              videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
+              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz4.mp4?alt=media&token=16aaea66-a049-4867-8f8a-0de8251cae14";
+              videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback%20(1).mp4?alt=media&token=0aebfebc-cba0-4cbb-9b26-88bdcb99f160";
+              videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback%20(2).mp4?alt=media&token=faafabcd-2e68-46d3-b129-f266e8895443";
+              videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
+              videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
+              videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
 
+          }
+          else if(category.equals("fightyourfear")){
+              btn1.setText("Lets Fight 1");
+              btn2.setText("Lets Fight 2");
+              btn3.setText("Lets Fight 3");
+              btn4.setText("Lets Fight 4");
+              btn5.setText("Lets Fight 5");
+              btn6.setText("Lets Fight 6");
+              btn7.setText("Lets Fight 7");
+              btn8.setText("Lets Fight 8");
+              btn9.setText("Lets Fight 9");
                videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2F100%20Kids%20Tell%20Us%20Their%20Fears%20%F0%9F%91%B9%F0%9F%8E%83%F0%9F%91%BB%20_%20100%20Kids%20_%20HiHo%20Kids.mp4?alt=media&token=05d8" +
                       "1a20-a16b-44eb-8c50-46ed6044c298";
                videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2FFight%20Your%20Fears%20to%20Be%20Victorious%20_%20Coward%20Pompu%20Story%20_%20Moral%20Stories%20By%20Granny%20_%20Woka%20English.mp4?a" +
@@ -76,8 +123,16 @@ public class yoga extends AppCompatActivity {
                videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2Fvideoplayback%20(2).mp4?alt=media&token=cea6a8c5-b4a1-" +
                       "4792-9728-1440545d081f";
           }
-          else if(category=="wetime"){
-
+          else if(category.equals("stories")){
+              btn1.setText("Lets Fight 1");
+              btn2.setText("Lets Fight 2");
+              btn3.setText("Lets Fight 3");
+              btn4.setText("Lets Fight 4");
+              btn5.setText("Lets Fight 5");
+              btn6.setText("Lets Fight 6");
+              btn7.setText("Lets Fight 7");
+              btn8.setText("Lets Fight 8");
+              btn9.setText("Lets Fight 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(1).mp4?alt=media&token=03fb5dee-5dd1-4636-95ab-e0e600140ce5";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(2).mp4?alt=media&token=94fb88f1-ddcc-46c2-9ec1-281a7d8bfbd8";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(3).mp4?alt=media&token=f08c7496-28a8-4870-b223-76569da775e4";
@@ -90,6 +145,16 @@ public class yoga extends AppCompatActivity {
 
           }
          else{
+
+              btn1.setText("Rhyme 1");
+              btn2.setText("Rhyme 2");
+              btn3.setText("Rhyme 3");
+              btn4.setText("Rhyme 4");
+              btn5.setText("Rhyme 5");
+              btn6.setText("Rhyme 6");
+              btn7.setText("Rhyme 7");
+              btn8.setText("Rhyme 8");
+              btn9.setText("Rhyme 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(1).mp4?alt=media&token=f4681b94-8e25-493f-903e-db18bc31f0ba";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(2).mp4?alt=media&token=2129d043-103a-4204-8b01-d3cdbb0d9936";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
@@ -102,15 +167,7 @@ public class yoga extends AppCompatActivity {
 
           }
 
-            Button btn1 = findViewById(R.id.btn1);
-            Button btn2 = findViewById(R.id.btn2);
-            Button btn3 = findViewById(R.id.btn3);
-            Button btn4 = findViewById(R.id.btn4);
-            Button btn5 = findViewById(R.id.btn5);
-            Button btn6 = findViewById(R.id.btn6);
-            Button btn7 = findViewById(R.id.btn7);
-            Button btn8 = findViewById(R.id.btn8);
-            Button btn9 = findViewById(R.id.btn9);
+
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
