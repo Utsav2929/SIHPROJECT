@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_councellor.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_dash_home.xml" value="0.264" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.2" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_good_bad_touch_comic.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_mainchatbot.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_music_player_playlist.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_personeltodo.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_phq9.xml" value="0.17255434782608695" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_higher.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_hobies.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_journaling.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_kids.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_panel.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_primary.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_quizes.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_riddles.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_showpost.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_todo.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_web_view.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_wetime.xml" value="0.264" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_yoga.xml" value="0.11203703703703703" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/bot_msg_rv_item.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/popup_window12.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/popup_windowhobbies1.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/user_list2.xml" value="0.1359375" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/user_listwetime.xml" value="0.1359375" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-mdpi/ic_baseline_favorite_24.xml" value="0.1415" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-mdpi/send_round_box.xml" value="0.1415" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-v24/toggle_selector.xml" value="0.1415" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_addpost.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_chatbotquestion.xml" value="0.176" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_dash_home.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_diet.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_doanddont.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_exercise.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_flex_time.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_get_sleep_details.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_log.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_magazine.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_mainchatbot.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_meditation.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_menstrual_home.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_music_sleep.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_reciever_alarm.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_refresh.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_showpost.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_showpost_cardview.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_hygiene_panle.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_tips.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_tracker.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_stretching.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_symptoms_sleep.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_vedio_play.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_workout.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_yoga.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/dropdown_items.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/message_item.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/nav_header_main.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window10.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window11.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window2.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window3.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window4.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window5.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window6.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window7.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window8.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window9.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/text_color_layout.xml" value="0.25" />
+        <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/user_msg_rv_item.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

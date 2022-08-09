@@ -1,0 +1,251 @@
+package com.aaks32173.sih2022new.ui
+
+import android.content.Intent
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
+import com.aaks32173.sih2022new.data.Message
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aaks32173.sih2022new.R
+import com.aaks32173.sih2022new.councellor
+import com.aaks32173.sih2022new.depressn_main
+import com.aaks32173.sih2022new.personeltodo
+import com.aaks32173.sih2022new.utils.Constants.OPEN_GOOGLE
+import com.aaks32173.sih2022new.utils.Constants.OPEN_SEARCH
+import com.aaks32173.sih2022new.utils.Constants.RECEIVE_ID
+import com.aaks32173.sih2022new.utils.Constants.SEND_ID
+import com.aaks32173.sih2022new.utils.Time
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_mainchatbot.*
+import kotlinx.coroutines.*
+
+class MainActivity : AppCompatActivity() {
+    private val TAG = "MainActivity"
+
+    private lateinit var database: DatabaseReference
+
+
+
+ var qs="1"
+    var chatbottype="chatbot"
+//    private var mainindex=""
+//   private var question=""
+//   private var answer1=""
+//    var answer1index=""
+//    var answer2=""
+//    var answer2index=""
+//    var answer3=""
+//    var answer3index=""
+
+    var messagesList = mutableListOf<Message>()
+
+    private lateinit var adapter: MessagingAdapter
+    private val botList = listOf("Kiki", "Kiki", "Kiki", "Kiki")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_mainchatbot)
+
+
+        val name=" utsav"
+        var etmsg = findViewById<EditText>(R.id.et_message)
+        etmsg.setText(name)
+        recyclerView()
+
+        clickEvents()
+
+
+
+        val random = (0..3).random()
+
+                when (random) {
+                    0 ->customBotMessage("Hello! I am ${botList[random]} your friend. How are you doing today?")
+                    1 -> customBotMessage("Hi there ! It's nice to meet you. I'm  ${botList[random]} .I love meeting new people and I'm excited to get to know you. so tell me your name?")
+                    2 ->   customBotMessage("Hello! I am ${botList[random]} ")
+                     }
+
+    }
+
+    private fun clickEvents() {
+
+        //Send a message
+
+        btn_send.setOnClickListener {
+            sendMessage()
+        }
+
+        //Scroll back to correct position when user clicks on text view
+        et_message.setOnClickListener {
+            GlobalScope.launch {
+//                delay(100)
+
+                withContext(Dispatchers.Main) {
+                    rv_messages.scrollToPosition(adapter.itemCount - 1)
+
+                }
+            }
+        }
+    }
+
+    private fun recyclerView() {
+        adapter = MessagingAdapter()
+        rv_messages.adapter = adapter
+        rv_messages.layoutManager = LinearLayoutManager(applicationContext)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //In case there are messages, scroll to bottom when re-opening app
+        GlobalScope.launch {
+//            delay(100)
+            withContext(Dispatchers.Main) {
+                rv_messages.scrollToPosition(adapter.itemCount - 1)
+            }
+        }
+    }
+
+    private fun sendMessage() {
+        val message = et_message.text.toString()
+        val timeStamp = Time.timeStamp()
+
+        if (message.isNotEmpty()) {
+            //Adds it to our local list
+            messagesList.add(Message(message, SEND_ID, timeStamp))
+            et_message.setText("")
+
+            adapter.insertMessage(Message(message, SEND_ID, timeStamp))
+            rv_messages.scrollToPosition(adapter.itemCount - 1)
+
+
+            botResponse(message)
+        }
+    }
+
+    private fun botResponse(message: String) {
+        val timeStamp = Time.timeStamp()
+
+        database = FirebaseDatabase.getInstance().getReference(chatbottype.toString())
+        database.child(qs).get().addOnSuccessListener {
+//            Toast.makeText(applicationContext, chatbottype, Toast.LENGTH_SHORT).show()
+
+            if (it.exists()) {
+              val  mainindex = it.child("mainindex").value.toString()
+               val question = it.child("question").value.toString()
+               val answer1 = it.child("answer1").value.toString()
+
+              val  answer1index= it.child("answer1index").value.toString()
+               val answer2 = it.child("answer2").value.toString()
+
+               val answer2index= it.child("answer2index").value.toString()
+
+               val answer3= it.child("answer3").value.toString()
+
+                 val answer3index= it.child("answer3index").value.toString()
+
+
+                btn_send1.text=answer1
+
+                btn_send2.text=answer2
+
+                btn_send3.text=answer3
+
+
+
+
+
+
+
+                btn_send1.setOnClickListener {
+
+                    et_message.setText(answer1)
+                    if(answer1.toString()=="yes" && mainindex.toString()=="14" && chatbottype=="chatbotprimary"){
+                        chatbottype="chatbot"
+                    }
+                    if(answer1.toString()=="yes" && mainindex.toString()=="27" && chatbottype=="chatbot"){
+                        chatbottype="chatbotprimary"
+                    }
+                    qs = answer1index
+                    sendMessage()
+
+                }
+                btn_send2.setOnClickListener {
+
+                    et_message.setText(answer2)
+                    if(answer2.toString()=="Sad" && chatbottype=="chatbot"){
+                        val a = Intent(this, depressn_main::class.java)
+                        startActivity(a)
+                    }
+                    qs = answer2index
+                    sendMessage()
+                }
+                btn_send3.setOnClickListener {
+                    qs = answer3index
+
+                    et_message.setText(answer3)
+
+                    sendMessage()
+                }
+                GlobalScope.launch {
+                    //Fake response delay
+                    delay(1000)
+
+                    withContext(Dispatchers.Main) {
+                        //Gets the response
+
+                        val response=question
+
+
+                        //Adds it to our local list
+                        messagesList.add(Message(response, RECEIVE_ID, timeStamp))
+
+                        //Inserts our message into the adapter
+                        adapter.insertMessage(Message(response, RECEIVE_ID, timeStamp))
+
+                        //Scrolls us to the position of the latest message
+                        rv_messages.scrollToPosition(adapter.itemCount - 1)
+
+                        //Starts Google
+                        when (response) {
+                            OPEN_GOOGLE -> {
+                                val site = Intent(Intent.ACTION_VIEW)
+                                site.data = Uri.parse("https://www.google.com/")
+                                startActivity(site)
+                            }
+                            OPEN_SEARCH -> {
+                                val site = Intent(Intent.ACTION_VIEW)
+                                val searchTerm: String? = message.substringAfterLast("search")
+                                site.data = Uri.parse("https://www.google.com/search?&q=$searchTerm")
+                                startActivity(site)
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+    }
+
+
+
+    private fun customBotMessage(message: String) {
+
+        GlobalScope.launch {
+            delay(1000)
+            withContext(Dispatchers.Main) {
+                val timeStamp = Time.timeStamp()
+                messagesList.add(Message(message, RECEIVE_ID, timeStamp))
+                adapter.insertMessage(Message(message, RECEIVE_ID, timeStamp))
+
+                rv_messages.scrollToPosition(adapter.itemCount - 1)
+            }
+        }
+    }
+}
