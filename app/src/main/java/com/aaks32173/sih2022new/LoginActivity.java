@@ -90,15 +90,14 @@ public class LoginActivity extends AppCompatActivity {
                     @NonNull Task<AuthResult> task)
             {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Login successful!!2",Toast.LENGTH_LONG).show();
+
                     Currentuser = mAuth.getCurrentUser();
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo");
 
                     databaseReference2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            String age = dataSnapshot.child("info").child("age").getValue().toString();
+                            String age = dataSnapshot.child(encodeUserEmail(email)).child("info").child("age").getValue().toString();
                             if(parseInt(age)<8 && parseInt(age)>2)
                             {
                                 Intent intent = new Intent(LoginActivity.this, DashHome_Nur_3.class);
@@ -110,16 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                                 String strDate = mdformat.format(calendar.getTime());
                                 String hour = strDate.substring(0,2);
                                 int hourday = parseInt(hour);
-                                Toast.makeText(getApplicationContext(), "Login successful!!"+hour,Toast.LENGTH_LONG).show();
                                 final boolean[] processDone = {true};
                                 databaseReference2.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(processDone[0]) {
-                                            String booleanvar = dataSnapshot.child("SleepActivity").getValue().toString();
+                                            String booleanvar = dataSnapshot.child(encodeUserEmail(email)).child("SleepDetails").child("SleepActivity").getValue().toString();
                                             if(hourday>=7 && hourday<=9 && booleanvar.equals("true"))
                                             {
-
                                                 Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);
                                                 startActivity(intent);
                                             }
@@ -131,11 +128,12 @@ public class LoginActivity extends AppCompatActivity {
                                                 int hourday2 = parseInt(hour2);
                                                 if(hourday2>9)
                                                 {
-                                                    databaseReference2.child("SleepActivity").setValue("true");
+                                                    databaseReference2.child(encodeUserEmail(email)).child("SleepDetails").child("SleepActivity").setValue("true");
                                                 }
-                                                Intent intent = new Intent(LoginActivity.this, Dash_home.class);
-                                                startActivity(intent);
-                                            }
+                                                if(parseInt(age)>8 && parseInt(age)<11) {
+                                                    Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
+                                                    startActivity(intent);
+                                                }                                            }
                                             processDone[0] =false;
                                         }
                                     }

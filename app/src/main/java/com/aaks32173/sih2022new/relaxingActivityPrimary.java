@@ -45,9 +45,18 @@ public class relaxingActivityPrimary extends AppCompatActivity {
                 gotojournalism();
             }
         });
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoHobbies();
+            }
+        });
 
     }
-
+    private void gotoHobbies() {
+        Intent intent = new Intent(relaxingActivityPrimary.this, relaxingHobies.class);
+        startActivity(intent);
+    }
     private void gotojournalism() {
         Intent intent = new Intent(relaxingActivityPrimary.this, relaxingJournaling.class);
         startActivity(intent);
