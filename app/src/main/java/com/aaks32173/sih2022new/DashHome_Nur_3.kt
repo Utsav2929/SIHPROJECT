@@ -48,11 +48,7 @@ class DashHome_Nur_3 : AppCompatActivity() {
             startActivity(a)
         }
 
-        val sports = findViewById<ImageButton>(R.id.sports)
 
-        sports.setOnClickListener {
-
-        }
         val gksection = findViewById<ImageButton>(R.id.gksection)
 
         gksection.setOnClickListener {
@@ -67,11 +63,7 @@ class DashHome_Nur_3 : AppCompatActivity() {
                 .putExtra("email",email1)
                 startActivity(a)
         }
-        val screentimerecord = findViewById<ImageButton>(R.id.screentimerecord)
 
-        screentimerecord.setOnClickListener {
-
-        }
 
         val letshaveconversation = findViewById<ImageButton>(R.id.letshaveconversation)
 
