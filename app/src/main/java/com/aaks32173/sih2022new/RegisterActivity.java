@@ -187,6 +187,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
+                databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
                 Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
 

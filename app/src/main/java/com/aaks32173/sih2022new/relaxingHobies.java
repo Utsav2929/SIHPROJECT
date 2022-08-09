@@ -17,70 +17,70 @@ public class relaxingHobies extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relaxing_hobies);
-        LinearLayout hoby1 = findViewById(R.id.btn1);
+        ImageButton hoby1 = findViewById(R.id.btn1);
         hoby1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies1);
             }
         });
-        LinearLayout hoby2 = findViewById(R.id.btn2);
+        ImageButton hoby2 = findViewById(R.id.btn2);
         hoby2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies2);
             }
         });
-        LinearLayout hoby3 = findViewById(R.id.btn3);
+        ImageButton hoby3 = findViewById(R.id.btn3);
         hoby3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies3);
             }
         });
-        LinearLayout hoby4 = findViewById(R.id.btn4);
+        ImageButton hoby4 = findViewById(R.id.btn4);
         hoby4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies4);
             }
         });
-        LinearLayout hoby5 = findViewById(R.id.btn5);
+        ImageButton hoby5 = findViewById(R.id.btn5);
         hoby5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies5);
             }
         });
-        LinearLayout hoby6 = findViewById(R.id.btn6);
+        ImageButton hoby6 = findViewById(R.id.btn6);
         hoby6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies6);
             }
         });
-        LinearLayout hoby7 = findViewById(R.id.btn7);
+        ImageButton hoby7 = findViewById(R.id.btn7);
         hoby7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies7);
             }
         });
-        LinearLayout hoby8 = findViewById(R.id.btn8);
+        ImageButton hoby8 = findViewById(R.id.btn8);
         hoby8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies8);
             }
         });
-        LinearLayout hoby9 = findViewById(R.id.btn9);
+        ImageButton hoby9 = findViewById(R.id.btn9);
         hoby9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v, R.layout.popup_windowhobbies9);
             }
         });
-        LinearLayout hoby10 = findViewById(R.id.btn10);
+        ImageButton hoby10 = findViewById(R.id.btn10);
         hoby10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

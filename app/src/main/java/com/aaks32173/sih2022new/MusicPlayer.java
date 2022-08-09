@@ -45,8 +45,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class MusicPlayer extends AppCompatActivity {
-
+public class MusicPlayer extends AppCompatActivity{
+    String path;
     private boolean checkPermission = false;
     Uri uri;
     String songName,songUrl;
@@ -55,8 +55,6 @@ public class MusicPlayer extends AppCompatActivity {
     ArrayList<String> arrayListSongsName = new ArrayList<>();
     ArrayList<String> arrayListSongsUrl = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
-
-
     JcPlayerView jcPlayerView;
     ArrayList<JcAudio> jcAudios = new ArrayList<>();
 
@@ -66,8 +64,8 @@ public class MusicPlayer extends AppCompatActivity {
         setContentView(R.layout.activity_music_player);
         listView = findViewById(R.id.myListView);
         jcPlayerView = findViewById(R.id.jcplayer);
-
-        retrieveSongs();
+        path = getIntent().getExtras().getString("path");
+        retrieveSongs(path);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +74,7 @@ public class MusicPlayer extends AppCompatActivity {
 
                 jcPlayerView.playAudio(jcAudios.get(position));
                 jcPlayerView.setVisibility(View.VISIBLE);
-                jcPlayerView.createNotification();
+                //jcPlayerView.createNotification();
             }
         });
 
@@ -85,10 +83,10 @@ public class MusicPlayer extends AppCompatActivity {
 
     }
 
-    private void retrieveSongs() {
+    private void retrieveSongs(String path) {
 
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Songs");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(path);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -148,7 +146,7 @@ public class MusicPlayer extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId()==R.id.nav_upload){
+        if(item.getItemId()== R.id.nav_upload){
 
             if(validatePermision()){
                 pickSong();
@@ -247,18 +245,18 @@ public class MusicPlayer extends AppCompatActivity {
 
         FirebaseDatabase.getInstance().getReference("Songs")
                 .push().setValue(songObj).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MusicPlayer.this, "Song Uploaded", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MusicPlayer.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MusicPlayer.this, "Song Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MusicPlayer.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
     }
