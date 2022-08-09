@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.aaks32173.sih2022new.data.Message
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 //    var answer3=""
 //    var answer3index=""
 
+
     var messagesList = mutableListOf<Message>()
 
     private lateinit var adapter: MessagingAdapter
@@ -49,9 +51,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainchatbot)
+        ll_layout_bar.setVisibility(View.INVISIBLE)
 
 
-        val name=" utsav"
+
+
+
+        val name="Hello Kiki"
         var etmsg = findViewById<EditText>(R.id.et_message)
         etmsg.setText(name)
         recyclerView()
@@ -60,11 +66,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         val random = (0..3).random()
 
                 when (random) {
                     0 ->customBotMessage("Hello! I am ${botList[random]} your friend. How are you doing today?")
-                    1 -> customBotMessage("Hi there ! It's nice to meet you. I'm  ${botList[random]} .I love meeting new people and I'm excited to get to know you. so tell me your name?")
+                    1 -> customBotMessage("Hi there ! It's nice to meet you. I'm  ${botList[random]} .I love meeting new people.")
                     2 ->   customBotMessage("Hello! I am ${botList[random]} ")
                      }
 
@@ -76,6 +83,8 @@ class MainActivity : AppCompatActivity() {
 
         btn_send.setOnClickListener {
             sendMessage()
+            et_message.setVisibility(View.INVISIBLE)
+            btn_send.setVisibility(View.INVISIBLE)
         }
 
         //Scroll back to correct position when user clicks on text view
@@ -132,6 +141,7 @@ class MainActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference(chatbottype.toString())
         database.child(qs).get().addOnSuccessListener {
 //            Toast.makeText(applicationContext, chatbottype, Toast.LENGTH_SHORT).show()
+            ll_layout_bar.setVisibility(View.VISIBLE)
 
             if (it.exists()) {
               val  mainindex = it.child("mainindex").value.toString()

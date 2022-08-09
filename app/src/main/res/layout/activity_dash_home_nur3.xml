@@ -172,68 +172,6 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/sports"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_20"
-                        android:background="@drawable/shape"/>
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-
-                        android:fontFamily="@font/salsa"
-                        android:layout_height="wrap_content"
-                        android:text="SPORTS"
-                        android:textAlignment="center"
-
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/gksection"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_9"
-                        android:background="@drawable/shape"/>
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:fontFamily="@font/salsa"
-                        android:layout_height="wrap_content"
-                        android:text="GK SECTION"
-                        android:textAlignment="center"
-
-                        android:textColor="@color/black"/>
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageButton
                         android:id="@+id/wetime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -261,24 +199,25 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/screentimerecord"
+                        android:id="@+id/gksection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_13"
+                        app:srcCompat="@drawable/rectangle_9"
                         android:background="@drawable/shape"/>
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/textView3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="SCREEN TIME RECORD"
+                        android:layout_height="wrap_content"
+                        android:text="GK SECTION"
                         android:textAlignment="center"
-
                         android:textColor="@color/black"/>
+
 
                 </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
