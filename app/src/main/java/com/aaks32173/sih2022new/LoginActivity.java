@@ -34,9 +34,9 @@ import java.util.Calendar;
 
 public class LoginActivity extends AppCompatActivity {
 
-        EditText login_email,login_password;
-        Button login;
-        private FirebaseAuth mAuth;
+    EditText login_email,login_password;
+    Button login;
+    private FirebaseAuth mAuth;
     DatabaseReference databaseReference2;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
@@ -91,48 +91,63 @@ public class LoginActivity extends AppCompatActivity {
             {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Login successful!!2",Toast.LENGTH_LONG).show();
-
-
-                    // mauth = FirebaseAuth.getInstance();
                     Currentuser = mAuth.getCurrentUser();
+                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo");
 
-                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("SleepDetails");
-
-
-                    Toast.makeText(getApplicationContext(), "Login successful!!",Toast.LENGTH_LONG).show();
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
-                    String strDate = mdformat.format(calendar.getTime());
-                    String hour = strDate.substring(0,2);
-                    int hourday = parseInt(hour);
-                    Toast.makeText(getApplicationContext(), "Login successful!!"+hour,Toast.LENGTH_LONG).show();
-                    final boolean[] processDone = {true};
                     databaseReference2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(processDone[0]) {
-                                String booleanvar = dataSnapshot.child("SleepActivity").getValue().toString();
-                                if(hourday>=7 && hourday<=9 && booleanvar.equals("true"))
-                                {
 
-                                    Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);
-                                    startActivity(intent);
-                                }
-                                else {
-                                    Calendar calendar2 = Calendar.getInstance();
-                                    SimpleDateFormat mdformat2 = new SimpleDateFormat("HH:mm");
-                                    String strDate2 = mdformat2.format(calendar2.getTime());
-                                    String hour2 = strDate2.substring(0,1);
-                                    int hourday2 = parseInt(hour2);
-                                    if(hourday2>9)
-                                    {
-                                        databaseReference2.child("SleepActivity").setValue("true");
-                                    }
-                                    Intent intent = new Intent(LoginActivity.this, Dash_home.class);
-                                    startActivity(intent);
-                                }
-                                processDone[0] =false;
+                            String age = dataSnapshot.child("info").child("age").getValue().toString();
+                            if(parseInt(age)<8 && parseInt(age)>2)
+                            {
+                                Intent intent = new Intent(LoginActivity.this, DashHome_Nur_3.class);
+                                startActivity(intent);
                             }
+                            else{
+                                Calendar calendar = Calendar.getInstance();
+                                SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+                                String strDate = mdformat.format(calendar.getTime());
+                                String hour = strDate.substring(0,2);
+                                int hourday = parseInt(hour);
+                                Toast.makeText(getApplicationContext(), "Login successful!!"+hour,Toast.LENGTH_LONG).show();
+                                final boolean[] processDone = {true};
+                                databaseReference2.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if(processDone[0]) {
+                                            String booleanvar = dataSnapshot.child("SleepActivity").getValue().toString();
+                                            if(hourday>=7 && hourday<=9 && booleanvar.equals("true"))
+                                            {
+
+                                                Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);
+                                                startActivity(intent);
+                                            }
+                                            else {
+                                                Calendar calendar2 = Calendar.getInstance();
+                                                SimpleDateFormat mdformat2 = new SimpleDateFormat("HH:mm");
+                                                String strDate2 = mdformat2.format(calendar2.getTime());
+                                                String hour2 = strDate2.substring(0,1);
+                                                int hourday2 = parseInt(hour2);
+                                                if(hourday2>9)
+                                                {
+                                                    databaseReference2.child("SleepActivity").setValue("true");
+                                                }
+                                                Intent intent = new Intent(LoginActivity.this, Dash_home.class);
+                                                startActivity(intent);
+                                            }
+                                            processDone[0] =false;
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                    }
+
+                                });
+                            }
+
+
                         }
 
                         @Override
@@ -140,12 +155,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     });
+                    Toast.makeText(getApplicationContext(), "Login successful!!",Toast.LENGTH_LONG).show();
 
-//                    Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_LONG).show();
+
 
                 }
                 else {
-
                     // sign-in failed
                     Toast.makeText(getApplicationContext(), "Login failed!!", Toast.LENGTH_LONG).show();
                 }
