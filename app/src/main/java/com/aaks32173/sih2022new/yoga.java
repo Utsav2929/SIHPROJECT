@@ -124,15 +124,15 @@ public class yoga extends AppCompatActivity {
                       "4792-9728-1440545d081f";
           }
           else if(category.equals("stories")){
-              btn1.setText("Lets Fight 1");
-              btn2.setText("Lets Fight 2");
-              btn3.setText("Lets Fight 3");
-              btn4.setText("Lets Fight 4");
-              btn5.setText("Lets Fight 5");
-              btn6.setText("Lets Fight 6");
-              btn7.setText("Lets Fight 7");
-              btn8.setText("Lets Fight 8");
-              btn9.setText("Lets Fight 9");
+              btn1.setText("Story 1");
+              btn2.setText("Story 2");
+              btn3.setText("Story 3");
+              btn4.setText("Story 4");
+              btn5.setText("Story 5");
+              btn6.setText("Story 6");
+              btn7.setText("Story 7");
+              btn8.setText("Story 8");
+              btn9.setText("Story 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(1).mp4?alt=media&token=03fb5dee-5dd1-4636-95ab-e0e600140ce5";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(2).mp4?alt=media&token=94fb88f1-ddcc-46c2-9ec1-281a7d8bfbd8";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(3).mp4?alt=media&token=f08c7496-28a8-4870-b223-76569da775e4";
