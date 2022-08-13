@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,9 @@ import java.util.Date;
 
 public class log extends AppCompatActivity {
     private ListView mListView;
+    FirebaseAuth mauth;
+    DatabaseReference databaseReference2;
+    FirebaseUser Currentuser;
     private ListView newDates;
     private ArrayList<String> oldPeriods = new ArrayList<String>();
     private ArrayList<String> newDatess = new ArrayList<String>();
@@ -38,7 +43,8 @@ public class log extends AppCompatActivity {
         setContentView(R.layout.activity_log);
         mListView = (ListView) findViewById(R.id.oldPeriods);
         newDates = (ListView) findViewById(R.id.predictedPeriods);
-
+        mauth = FirebaseAuth.getInstance();
+        Currentuser = mauth.getCurrentUser();
    // while(x<=4)
         getOldDate();
         getOldDate();
@@ -59,7 +65,7 @@ public class log extends AppCompatActivity {
 
         // below line is used for getting reference
         // of our Firebase Database.
-        reference = FirebaseDatabase.getInstance().getReference().child("PeriodDetails").child("lastDates");
+        reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails").child("lastDates");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -123,6 +129,9 @@ public class log extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+    private String encodeUserEmail(String email) {
+        return email.replace(".",",");
     }
 
 }

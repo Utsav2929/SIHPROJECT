@@ -3,14 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_addtodo.xml" value="0.4" />
-        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.23489583333333333" />
-        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_list.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml" value="0.16576086956521738" />
@@ -88,12 +84,18 @@
         <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/text_color_layout.xml" value="0.25" />
         <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/user_msg_rv_item.xml" value="0.25" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_flex_time.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_flextimefourthfifth.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_gtbt_panel_fourth_fifth.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_main.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_menstrual_home.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_podcasts.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_register.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_relaxing_hobies.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_sixth_eighth_group.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_vedio_play.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.11548913043478261" />
       </map>
     </option>
   </component>
