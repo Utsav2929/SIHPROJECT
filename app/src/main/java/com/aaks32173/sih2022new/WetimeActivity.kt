@@ -1,6 +1,7 @@
 package com.aaks32173.sih2022new
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +35,11 @@ class WetimeActivity  : AppCompatActivity() {
     }
 
     private fun getUserData() {
-
+        val today =LocalDate.now()
         val email = intent.getStringExtra("email").toString()
-        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime")
+
+
+        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime/"+today.toString())
 
         dbref.addValueEventListener(object : ValueEventListener{
 
@@ -47,11 +50,12 @@ class WetimeActivity  : AppCompatActivity() {
                     for (userSnapshot in snapshot.children){
 
 
+
+
                         val user = userSnapshot.getValue(wetime::class.java)
                         userArrayList.add(user!!)
 
                     }
-
 
                     userRecyclerview.adapter = wetimeadapter(userArrayList,email.toString())
 

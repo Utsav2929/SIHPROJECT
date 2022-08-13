@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class podcasts extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
@@ -45,6 +46,8 @@ public class podcasts extends AppCompatActivity {
         mauth = FirebaseAuth.getInstance();
         //sleepdetail = false;
         Currentuser = mauth.getCurrentUser();
+
+        String email = getIntent().getExtras().getString("email");
 
         String group = getIntent().getExtras().getString("group");
         if(group.equals("FourthFifth"))
@@ -92,6 +95,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("1");
+                increasecounter(email);
             }
         });
         LinearLayout btn7 = findViewById(R.id.btn7);
@@ -99,6 +103,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("7");
+                increasecounter(email);
             }
         });
         LinearLayout btn2 = findViewById(R.id.btn2);
@@ -106,6 +111,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("2");
+                increasecounter(email);
             }
         });
         LinearLayout btn3 = findViewById(R.id.btn3);
@@ -113,6 +119,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("3");
+                increasecounter(email);
             }
         });
         LinearLayout btn4 = findViewById(R.id.btn4);
@@ -120,6 +127,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("4");
+                increasecounter(email);
             }
         });
         LinearLayout btn5 = findViewById(R.id.btn5);
@@ -127,6 +135,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("5");
+                increasecounter(email);
             }
         });
         LinearLayout btn6 = findViewById(R.id.btn6);
@@ -134,6 +143,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("6");
+                increasecounter(email);
             }
         });
     }
@@ -170,5 +180,39 @@ public class podcasts extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void increasecounter(String email) {
+        LocalDate today=LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
+
+                if(Integer.parseInt(progress)<=90) {
+                    int prg = Integer.parseInt(progress) + 10;
+
+                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+
+                }else{
+
+                    int prg = 100;
+
+                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
     }
 }

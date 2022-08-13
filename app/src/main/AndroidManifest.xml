@@ -28,7 +28,7 @@
             android:name=".splash"
             android:exported="false" />
         <activity
-            android:name=".fouthFifthGroup"
+            android:name=".addtodo"
             android:exported="false" />
         <activity
             android:name=".flextimefourthfifth"
@@ -55,10 +55,10 @@
             android:name=".personeltodo"
             android:exported="false" />
         <activity
-            android:name=".addtodo"
+            android:name=".todo"
             android:exported="false" />
         <activity
-            android:name=".todo"
+            android:name=".fouthFifthGroup"
             android:exported="false" />
         <activity
             android:name=".sports"

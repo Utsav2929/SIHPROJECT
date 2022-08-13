@@ -1,18 +1,12 @@
 package com.aaks32173.sih2022new
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import java.time.LocalDate
 
 class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String) : RecyclerView.Adapter<wetimeadapter.MyViewHolder>() {
@@ -40,20 +34,16 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
         val currentitem = userList[position]
 
 
-        holder.name.text = currentitem.Description
-
+        holder.name.text = currentitem.description
 
         holder.btndelete.setOnClickListener() {
             val today= LocalDate.now()
-            currentitem.Status="TRUE"
 
-            database = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime")
-            val at= wetime(currentitem.ID, currentitem.Description,currentitem.Status)
+            database = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime/"+today.toString())
 
-                database.child(currentitem.ID.toString()).setValue(at).addOnSuccessListener {
-
+                database.child(currentitem.id.toString()).removeValue().addOnSuccessListener {
+                    increasecounter(email)
                 }
-
 
         }
 
@@ -83,6 +73,32 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
 
 
 
+    }
+
+
+    private fun increasecounter(email: String) {
+        val today = LocalDate.now()
+        val reference1 =
+            FirebaseDatabase.getInstance().reference.child("UserInfo").child(email).child("TODO")
+                .child(today.toString())
+        reference1.addListenerForSingleValueEvent(object : ValueEventListener {
+            var progress: String? = null
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                progress =
+                    dataSnapshot.child("wetime").child("progress").value.toString()
+                if (progress!!.toInt() <= 90) {
+                    val prg = progress!!.toInt() + 10
+                    reference1.child("wetime").child("progress")
+                        .setValue(Integer.toString(prg))
+                } else {
+                    val prg = 100
+                    reference1.child("wetime").child("progress")
+                        .setValue(Integer.toString(prg))
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
 
