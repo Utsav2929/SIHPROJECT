@@ -1,5 +1,8 @@
 package com.aaks32173.sih2022new;
 
+import static java.lang.Integer.parseInt;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,7 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class yoga extends AppCompatActivity {
     String videoUrl9=null;
@@ -19,17 +31,25 @@ public class yoga extends AppCompatActivity {
     String videoUrl3=null;
     String videoUrl = null;
     String videoUrl2=null;
+
+    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseAuth mauth;
+    FirebaseUser Currentuser;
+
       @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_yoga);
-
+          // String[] age = new String[1];
+          firebaseDatabase = FirebaseDatabase.getInstance();
+          mauth = FirebaseAuth.getInstance();
+          Currentuser = mauth.getCurrentUser();
           String category = getIntent().getExtras().getString("category");
+          String group = getIntent().getExtras().getString("group");
+          String age = getIntent().getExtras().getString("age");
 
-          Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
-            int age=5;
-
-            Button btn1 = findViewById(R.id.btn1);
+          Button btn1 = findViewById(R.id.btn1);
           Button btn4 = findViewById(R.id.btn4);
           Button btn2 = findViewById(R.id.btn2);
           Button btn3 = findViewById(R.id.btn3);
@@ -38,19 +58,35 @@ public class yoga extends AppCompatActivity {
           Button btn7 = findViewById(R.id.btn7);
           Button btn8 = findViewById(R.id.btn8);
           Button btn9 = findViewById(R.id.btn9);
+        //  Toast.makeText(this, category + age[0], Toast.LENGTH_SHORT).show();
+          int ageint =  parseInt(age);
 
-          if(age>8 && category.equals("exercises")){
+          if(ageint>8 && category.equals("exercises")){
 
-                 videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
-                 videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
-                 videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
-                 videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga3.mp4?alt=media&token=1dcf914f-c059-4f30-ad98-f4ff2f1d24a0";
-                 videoUrl5 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga.mp4?alt=media&token=7ac66073-e040-4268-8385-3df8acc266b5";
-                 videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fneck_streching_yoga.mp4?alt=media&token=4834a212-a6e8-47f1-979b-bda7fc5bf124";
-                 videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Ffocus_build_yoga.mp4?alt=media&token=ac306705-5d17-419b-b010-c4f001603aae";
-                 videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga1.mp4?alt=media&token=7208a3c5-5d4c-4a79-82e0-cca9cd53e1a9";
-                videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
+              if(group.equals("SixthEight"))
+              {
+                  videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(1).mp4?alt=media&token=579b48f5-ba9a-4598-9dcc-7983ab216893";
+                  videoUrl2="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(2).mp4?alt=media&token=1d14f5a1-ab58-4ade-b23f-ce966bf1ee2d";
+                  videoUrl3="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(3).mp4?alt=media&token=a4b71586-53ee-4c97-a771-2796c3f54a71";
+                    videoUrl4="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(4).mp4?alt=media&token=106f4d5e-3610-4f63-8899-da0e4dcb9364";
+                    videoUrl5="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(5).mp4?alt=media&token=aee20862-a48f-4be1-a4db-1ede902579b4";
+                    videoUrl6="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(6).mp4?alt=media&token=c36794c3-7aa8-4acb-b3cd-c3af1d572650";
+                    videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(7).mp4?alt=media&token=2f458a56-0215-4a94-8d1c-2c7d4c3d9219";
+                    videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback.mp4?alt=media&token=bce8a246-547f-4711-a18b-a5037ba79d3a";
+                  videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
 
+              }
+              else {
+                  videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
+                  videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
+                  videoUrl6 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
+                  videoUrl7 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga3.mp4?alt=media&token=1dcf914f-c059-4f30-ad98-f4ff2f1d24a0";
+                  videoUrl5 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga.mp4?alt=media&token=7ac66073-e040-4268-8385-3df8acc266b5";
+                  videoUrl4 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fneck_streching_yoga.mp4?alt=media&token=4834a212-a6e8-47f1-979b-bda7fc5bf124";
+                  videoUrl3 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Ffocus_build_yoga.mp4?alt=media&token=ac306705-5d17-419b-b010-c4f001603aae";
+                  videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga1.mp4?alt=media&token=7208a3c5-5d4c-4a79-82e0-cca9cd53e1a9";
+                  videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
+              }
             }
           else if(category.equals("health")){
               btn1.setText("Lets Learn 1");
@@ -166,8 +202,6 @@ public class yoga extends AppCompatActivity {
               videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback.mp4?alt=media&token=11b9d95e-0648-4ecb-866f-bea3d43b6117";
 
           }
-
-
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -230,4 +264,7 @@ public class yoga extends AppCompatActivity {
             startActivity(intent);
 
         }
+    private String encodeUserEmail(String email) {
+        return email.replace(".",",");
+    }
 }

@@ -1,14 +1,31 @@
 package com.aaks32173.sih2022new;
 
+import static java.lang.Integer.parseInt;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class flex_time extends AppCompatActivity {
-
+    private FirebaseAuth mauth;
+    DatabaseReference databaseReference;
+    FirebaseUser Currentuser;
+    FirebaseDatabase firebaseDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +34,23 @@ public class flex_time extends AppCompatActivity {
         ImageButton workout = findViewById(R.id.workoutbtn);
         ImageButton stretching = findViewById(R.id.stretchingbth);
         ImageButton meditation = findViewById(R.id.meditationbtn);
+        mauth = FirebaseAuth.getInstance();
+        Currentuser = mauth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String age = dataSnapshot.child("age").getValue().toString();
+                if (parseInt(age) < 14 && parseInt(age) >= 11) {
+                    LinearLayout ly = findViewById(R.id.workout);
+                    ly.setVisibility(ly.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        });
         yoga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,8 +78,10 @@ public class flex_time extends AppCompatActivity {
     }
     private void openyogas(){
         Intent intent = new Intent(this,yoga.class);
+        intent.putExtra("category", "exercises");
+       intent.putExtra("group", "SixthEight");
+       intent.putExtra("age", "10");
         startActivity(intent);
-
     }
     private void openworkouts(){
         Intent intent = new Intent(this,workout.class);
@@ -61,5 +97,8 @@ public class flex_time extends AppCompatActivity {
         Intent intent = new Intent(this,meditation.class);
         startActivity(intent);
 
+    }
+    private String encodeUserEmail(String email) {
+        return email.replace(".",",");
     }
 }

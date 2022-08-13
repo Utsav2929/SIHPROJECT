@@ -63,13 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
 //        female = findViewById(R.id.female);
 //        male = findViewById(R.id.male);
         radioGroup=findViewById(R.id.radioGroup);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("UserInfo");//.child(encode_email);//.child(encodeUserEmail(register_email.toString()));
         userInfo = new UserInfo();
-
-
-
 //        if(female.isSelected()){
 //            male.setSelected(false);
 //        }
@@ -98,8 +94,6 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this, gender,
                 Toast.LENGTH_SHORT).show();
     }
-
-
     private void RegisterNewUser(){
         String name,email,password,confirm_password,age,sssm_id,family_id;
         name = register_name.getText().toString();
@@ -109,18 +103,15 @@ public class RegisterActivity extends AppCompatActivity {
         age = register_age.getText().toString();
         sssm_id = register_sssm_id.getText().toString();
         family_id = register_family_id.getText().toString();
-
-
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)|| TextUtils.isEmpty(confirm_password)
                 || TextUtils.isEmpty(age)|| TextUtils.isEmpty(sssm_id)|| TextUtils.isEmpty(family_id) || gender.equals("")){
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
-//        if (password != confirm_password){
-//            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
-//            return;
-//        }
-
+        if (!password.equals(confirm_password)){
+            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                     @Override
@@ -161,9 +152,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
 
                             }
-
 //                            if (Integer.parseInt()<=8) {
-                                Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
 //                            }
                         }
@@ -182,13 +172,16 @@ public class RegisterActivity extends AppCompatActivity {
         userInfo.setSssm_id(sssmid);
         userInfo.setFamily_id(familyid);
         userInfo.setGender(gender);
-
+        final boolean[] processDone = {true};
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
-                databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
-                Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                if(processDone[0]) {
+                    databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
+                    databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
+                    Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                    processDone[0] =false;
+                }
             }
 
             @Override
@@ -201,11 +194,7 @@ public class RegisterActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }
-
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
     }
-
-
-
 }

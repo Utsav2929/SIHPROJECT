@@ -68,49 +68,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/salsa"
-                    android:text="Workout"
-                    android:autoSizeTextType="uniform"
-                    app:autoSizeMinTextSize="16sp"
-                    app:autoSizeMaxTextSize="100sp"
-                    app:autoSizeStepGranularity="1sp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="15sp"
-                    android:layout_marginTop="15sp"
-                    android:layout_marginBottom="15sp"
-                    />
-                <LinearLayout
-                    android:layout_marginStart="50dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/roundedcorners"
-                    >
-                    <ImageButton
-                        android:layout_weight="1"
-                        android:layout_width="106dp"
-                        android:id="@+id/workoutbtn"
-                        android:layout_height="100dp"
-                        android:layout_margin="15dp"
-                        android:src="@drawable/workout2"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:weightSum="2"
-                android:background="@drawable/shape4">
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/salsa"
                     android:text="Streching"
                     android:gravity="center"
                     android:autoSizeTextType="uniform"
@@ -120,12 +77,10 @@
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:textSize="20sp"
-
                     android:textStyle="bold"
                     android:layout_marginStart="15sp"
                     android:layout_marginTop="15sp"
                     android:layout_marginBottom="15sp"
-
                     />
                 <LinearLayout
                     android:layout_marginStart="50dp"
@@ -188,6 +143,51 @@
                         android:src="@drawable/meditation"/>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/workout"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:weightSum="2"
+                android:background="@drawable/shape4">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/salsa"
+                    android:text="Workout"
+                    android:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginBottom="15sp"
+                    />
+                <LinearLayout
+                    android:layout_marginStart="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/roundedcorners"
+                    >
+                    <ImageButton
+                        android:layout_weight="1"
+                        android:layout_width="106dp"
+                        android:id="@+id/workoutbtn"
+                        android:layout_height="100dp"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/workout2"/>
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
