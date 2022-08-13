@@ -43,7 +43,7 @@ public class flex_time extends AppCompatActivity {
                 String age = dataSnapshot.child("age").getValue().toString();
                 if (parseInt(age) < 14 && parseInt(age) >= 11) {
                     LinearLayout ly = findViewById(R.id.workout);
-                    ly.setVisibility(ly.INVISIBLE);
+                    ly.setVisibility(LinearLayout.GONE);
                 }
             }
             @Override
@@ -90,6 +90,7 @@ public class flex_time extends AppCompatActivity {
     }
     private void openstrerchings(){
         Intent intent = new Intent(this,stretching.class);
+        intent.putExtra("group", "SixthEight");
         startActivity(intent);
 
     }
