@@ -36,11 +36,14 @@ public class flex_time extends AppCompatActivity {
         ImageButton meditation = findViewById(R.id.meditationbtn);
         mauth = FirebaseAuth.getInstance();
         Currentuser = mauth.getCurrentUser();
+        final String[] age1 = new String[1];
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 String age = dataSnapshot.child("age").getValue().toString();
+                age1[0] =age;
                 if (parseInt(age) < 14 && parseInt(age) >= 11) {
                     LinearLayout ly = findViewById(R.id.workout);
                     ly.setVisibility(LinearLayout.GONE);
