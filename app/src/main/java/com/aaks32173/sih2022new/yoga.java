@@ -7,7 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class yoga extends AppCompatActivity {
     String videoUrl9=null;
@@ -29,15 +35,19 @@ public class yoga extends AppCompatActivity {
           Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
             int age=5;
 
-            Button btn1 = findViewById(R.id.btn1);
-          Button btn4 = findViewById(R.id.btn4);
-          Button btn2 = findViewById(R.id.btn2);
-          Button btn3 = findViewById(R.id.btn3);
-          Button btn5 = findViewById(R.id.btn5);
-          Button btn6 = findViewById(R.id.btn6);
-          Button btn7 = findViewById(R.id.btn7);
-          Button btn8 = findViewById(R.id.btn8);
-          Button btn9 = findViewById(R.id.btn9);
+          TextView heading=findViewById(R.id.head);
+            ImageButton btn1 = findViewById(R.id.btn1);
+          ImageView background= findViewById(R.id.background) ;
+          ImageButton btn4 = findViewById(R.id.btn4);
+          ImageButton btn2 = findViewById(R.id.btn2);
+          ImageButton btn3 = findViewById(R.id.btn3);
+          ImageButton btn5 = findViewById(R.id.btn5);
+          ImageButton btn6 = findViewById(R.id.btn6);
+          ImageButton btn7 = findViewById(R.id.btn7);
+          ImageButton btn8 = findViewById(R.id.btn8);
+          LottieAnimationView gif2 =findViewById(R.id.gif2);
+          GifImageView gif1=findViewById(R.id.gif1);
+          ImageButton btn9 = findViewById(R.id.btn9);
 
           if(age>8 && category.equals("exercises")){
 
@@ -53,15 +63,22 @@ public class yoga extends AppCompatActivity {
 
             }
           else if(category.equals("health")){
-              btn1.setText("Lets Learn 1");
-              btn2.setText("Lets Learn 2");
-              btn3.setText("Lets Learn 3");
-              btn4.setText("Lets Learn 4");
-              btn5.setText("Lets Learn 5");
-              btn6.setText("Lets Learn 6");
-              btn7.setText("Lets Learn 7");
-              btn8.setText("Lets Learn 8");
-              btn9.setText("Lets Learn 9");
+
+
+              background.setImageResource(R.drawable.gk_bg2);
+              heading.setVisibility(View.INVISIBLE);
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.food_gif);
+//              btn1.setText("Lets Learn 1");
+//              btn2.setText("Lets Learn 2");
+//              btn3.setText("Lets Learn 3");
+//              btn4.setText("Lets Learn 4");
+//              btn5.setText("Lets Learn 5");
+//              btn6.setText("Lets Learn 6");
+//              btn7.setText("Lets Learn 7");
+//              btn8.setText("Lets Learn 8");
+//              btn9.setText("Lets Learn 9");
+
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
@@ -74,15 +91,22 @@ public class yoga extends AppCompatActivity {
 
           }
           else if(category.equals("gksection")){
-              btn1.setText("Lets Learn 1");
-              btn2.setText("Lets Learn 2");
-              btn3.setText("Lets Learn 3");
-              btn4.setText("Lets Learn 4");
-              btn5.setText("Lets Learn 5");
-              btn6.setText("Lets Learn 6");
-              btn7.setText("Lets Learn 7");
-              btn8.setText("Lets Learn 8");
-              btn9.setText("Lets Learn 9");
+
+              background.setImageResource(R.drawable.evai);
+
+              heading.setText("Did you Know?");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.quiz);
+
+              btn1.setImageResource(R.drawable.gk1);
+              btn2.setImageResource(R.drawable.gk2);
+              btn3.setImageResource(R.drawable.gk3);
+              btn4.setImageResource(R.drawable.gk4);
+              btn5.setImageResource(R.drawable.gk5);
+              btn6.setImageResource(R.drawable.gk6);
+              btn7.setImageResource(R.drawable.gk7);
+              btn8.setImageResource(R.drawable.gk1);
+              btn9.setImageResource(R.drawable.gk2);
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
@@ -95,15 +119,30 @@ public class yoga extends AppCompatActivity {
 
           }
           else if(category.equals("fightyourfear")){
-              btn1.setText("Lets Fight 1");
-              btn2.setText("Lets Fight 2");
-              btn3.setText("Lets Fight 3");
-              btn4.setText("Lets Fight 4");
-              btn5.setText("Lets Fight 5");
-              btn6.setText("Lets Fight 6");
-              btn7.setText("Lets Fight 7");
-              btn8.setText("Lets Fight 8");
-              btn9.setText("Lets Fight 9");
+
+              background.setImageResource(R.drawable.fightfear_bg2);
+              heading.setText("Fight Your Fears");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.birdie_gif);
+
+              btn1.setImageResource(R.drawable.fear1);
+              btn2.setImageResource(R.drawable.fear2);
+              btn3.setImageResource(R.drawable.fear3);
+              btn4.setImageResource(R.drawable.fear4);
+              btn5.setImageResource(R.drawable.fear5);
+              btn6.setImageResource(R.drawable.fear1);
+              btn7.setImageResource(R.drawable.fear3);
+              btn8.setImageResource(R.drawable.fear2);
+              btn9.setImageResource(R.drawable.fear4);
+//              btn1.setText("Lets Fight 1");
+//              btn2.setText("Lets Fight 2");
+//              btn3.setText("Lets Fight 3");
+//              btn4.setText("Lets Fight 4");
+//              btn5.setText("Lets Fight 5");
+//              btn6.setText("Lets Fight 6");
+//              btn7.setText("Lets Fight 7");
+//              btn8.setText("Lets Fight 8");
+//              btn9.setText("Lets Fight 9");
                videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2F100%20Kids%20Tell%20Us%20Their%20Fears%20%F0%9F%91%B9%F0%9F%8E%83%F0%9F%91%BB%20_%20100%20Kids%20_%20HiHo%20Kids.mp4?alt=media&token=05d8" +
                       "1a20-a16b-44eb-8c50-46ed6044c298";
                videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2FFight%20Your%20Fears%20to%20Be%20Victorious%20_%20Coward%20Pompu%20Story%20_%20Moral%20Stories%20By%20Granny%20_%20Woka%20English.mp4?a" +
@@ -124,15 +163,31 @@ public class yoga extends AppCompatActivity {
                       "4792-9728-1440545d081f";
           }
           else if(category.equals("stories")){
-              btn1.setText("Story 1");
-              btn2.setText("Story 2");
-              btn3.setText("Story 3");
-              btn4.setText("Story 4");
-              btn5.setText("Story 5");
-              btn6.setText("Story 6");
-              btn7.setText("Story 7");
-              btn8.setText("Story 8");
-              btn9.setText("Story 9");
+
+              background.setImageResource(R.drawable.fightfear_bg);
+              heading.setText("Stories");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.ttrain);
+
+              btn1.setImageResource(R.drawable.story1);
+              btn2.setImageResource(R.drawable.story2);
+              btn3.setImageResource(R.drawable.story3);
+              btn4.setImageResource(R.drawable.story4);
+              btn5.setImageResource(R.drawable.story5);
+              btn6.setImageResource(R.drawable.story6);
+              btn7.setImageResource(R.drawable.story7);
+              btn8.setImageResource(R.drawable.story8);
+              btn9.setImageResource(R.drawable.story1);
+
+//              btn1.setText("Story 1");
+//              btn2.setText("Story 2");
+//              btn3.setText("Story 3");
+//              btn4.setText("Story 4");
+//              btn5.setText("Story 5");
+//              btn6.setText("Story 6");
+//              btn7.setText("Story 7");
+//              btn8.setText("Story 8");
+//              btn9.setText("Story 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(1).mp4?alt=media&token=03fb5dee-5dd1-4636-95ab-e0e600140ce5";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(2).mp4?alt=media&token=94fb88f1-ddcc-46c2-9ec1-281a7d8bfbd8";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(3).mp4?alt=media&token=f08c7496-28a8-4870-b223-76569da775e4";
@@ -146,15 +201,27 @@ public class yoga extends AppCompatActivity {
           }
          else{
 
-              btn1.setText("Rhyme 1");
-              btn2.setText("Rhyme 2");
-              btn3.setText("Rhyme 3");
-              btn4.setText("Rhyme 4");
-              btn5.setText("Rhyme 5");
-              btn6.setText("Rhyme 6");
-              btn7.setText("Rhyme 7");
-              btn8.setText("Rhyme 8");
-              btn9.setText("Rhyme 9");
+             heading.setText("Rhymes");
+              background.setImageResource(R.drawable.bg_poem);
+             gif2.setAnimation(R.raw.unicorn);
+             gif1.setVisibility(View.INVISIBLE);
+              btn1.setImageResource(R.drawable.rhyme1);
+              btn2.setImageResource(R.drawable.rhyme5);
+              btn3.setImageResource(R.drawable.rhyme3);
+              btn4.setImageResource(R.drawable.rhyme4);
+              btn5.setImageResource(R.drawable.rhyme2);
+              btn6.setImageResource(R.drawable.rhyme6);
+              btn7.setImageResource(R.drawable.rhyme7);
+              btn8.setImageResource(R.drawable.rhyme8);
+              btn9.setImageResource(R.drawable.rhyme9);
+//              btn2.setText("Rhyme 2");
+//              btn3.setText("Rhyme 3");
+//              btn4.setText("Rhyme 4");
+//              btn5.setText("Rhyme 5");
+//              btn6.setText("Rhyme 6");
+//              btn7.setText("Rhyme 7");
+//              btn8.setText("Rhyme 8");
+//              btn9.setText("Rhyme 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(1).mp4?alt=media&token=f4681b94-8e25-493f-903e-db18bc31f0ba";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(2).mp4?alt=media&token=2129d043-103a-4204-8b01-d3cdbb0d9936";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";

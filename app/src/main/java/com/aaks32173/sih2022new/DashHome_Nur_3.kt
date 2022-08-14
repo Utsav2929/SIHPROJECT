@@ -2,19 +2,33 @@ package com.aaks32173.sih2022new
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
+
 
 class DashHome_Nur_3 : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+
+    var recycler_view: RecyclerView? = null
+    var autoScrollAdapter: AutoScrollAdapter? = null
+    var layoutManager: LinearLayoutManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_home_nur3)
 
         val poemsandrhymes = findViewById<ImageButton>(R.id.poemsryhmes)
         val email = FirebaseAuth.getInstance().currentUser?.email
+        recycler_view = findViewById(R.id.recycler_view)
+        setRV()
 
          val encodedemmail=encodeUserEmail(email.toString())
         val email1="hi123@gmail,com"
@@ -36,7 +50,7 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val gtbt = findViewById<ImageButton>(R.id.gtbt)
 
         gtbt.setOnClickListener {
-            val a = Intent(this, good_bad_touch_panel::class.java)
+            val a = Intent(this, goodBadtouch::class.java)
             startActivity(a)
         }
 
@@ -65,8 +79,14 @@ class DashHome_Nur_3 : AppCompatActivity() {
         }
 
 
-        val letshaveconversation = findViewById<ImageButton>(R.id.letshaveconversation)
 
+
+        val letshaveconversation = findViewById<ExtendedFloatingActionButton>(R.id.chatbot)
+
+        val badge = findViewById<TextView>(R.id.chatbotbadge)
+        val myanim2 = AnimationUtils.loadAnimation(this, R.anim.shake)
+        letshaveconversation.startAnimation(myanim2)
+        badge.startAnimation(myanim2)
         letshaveconversation.setOnClickListener {
 
             val a =  Intent(this,com.aaks32173.sih2022new.ui.MainActivity::class.java)
@@ -104,6 +124,29 @@ class DashHome_Nur_3 : AppCompatActivity() {
 
     private fun encodeUserEmail(email: String): String? {
         return email.replace(".", ",")
+    }
+    private fun setRV() {
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recycler_view!!.layoutManager = layoutManager
+        autoScrollAdapter = AutoScrollAdapter(this)
+        recycler_view!!.adapter = autoScrollAdapter
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recycler_view)
+        val timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                if (layoutManager!!.findLastCompletelyVisibleItemPosition() < autoScrollAdapter!!.itemCount - 1) {
+                    layoutManager!!.smoothScrollToPosition(
+                        recycler_view,
+                        RecyclerView.State(),
+                        layoutManager!!.findLastCompletelyVisibleItemPosition() + 1
+                    )
+                } else if (layoutManager!!.findLastCompletelyVisibleItemPosition() < autoScrollAdapter!!.itemCount - 1) {
+                    layoutManager!!.smoothScrollToPosition(recycler_view, RecyclerView.State(), 0)
+                }
+                run {}
+            }
+        }, 0, 6000)
     }
 
 }
