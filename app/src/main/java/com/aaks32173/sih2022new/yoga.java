@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -120,10 +121,20 @@ public class yoga extends AppCompatActivity {
           }
           else if(category.equals("fightyourfear")){
 
-              background.setImageResource(R.drawable.fightfear_bg2);
+              background.setImageResource(R.drawable.fightfear_bg);
               heading.setText("Fight Your Fears");
               gif2.setVisibility(View.INVISIBLE);
-              gif1.setImageResource(R.drawable.birdie_gif);
+
+
+
+              new Handler().postDelayed(new Runnable() {
+                  @Override
+                  public void run() {
+                      gif1.setImageResource(R.drawable.fight_fear_gif2);
+                  }
+              }, 8000);
+
+              gif1.setImageResource(R.drawable.fightfeargif2);
 
               btn1.setImageResource(R.drawable.fear1);
               btn2.setImageResource(R.drawable.fear2);

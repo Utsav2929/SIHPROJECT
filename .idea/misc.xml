@@ -17,8 +17,10 @@
         <entry key="..\:/SIHPROJECT/app/src/main/res/drawable/shapeflex.xml" value="0.1425" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_chat_bot.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_chatbotquestion.xml" value="0.2484375" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_councellor.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.136" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_depressn_main.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_diet.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_exercise.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml" value="0.2484375" />
@@ -26,9 +28,12 @@
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_interest.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml" value="0.128" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_menstrual_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_phq9.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_refresh.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_relaxing_kids.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_splash.xml" value="0.22826086956521738" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml" value="0.2484375" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_workout.xml" value="0.2484375" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.176" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/bot_msg_rv_item.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/content_main.xml" value="0.22826086956521738" />
@@ -37,7 +42,7 @@
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/rv_layout.xml" value="0.136" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/scroll_layout.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_list.xml" value="0.22826086956521738" />
-        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.22826086956521738" />
+        <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.2" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/welcome.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml" value="0.25416666666666665" />
