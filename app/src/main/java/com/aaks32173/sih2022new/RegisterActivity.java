@@ -116,6 +116,11 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
+        if(Integer.parseInt(age)<3)
+        {
+            Toast.makeText(getApplicationContext(),"age must be atlest 3",Toast.LENGTH_LONG).show();
+            return;
+        }
 //        if (password != confirm_password){
 //            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
 //            return;
@@ -132,38 +137,12 @@ public class RegisterActivity extends AppCompatActivity {
                             addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
 
 
-                            if(Integer.parseInt(age)<=8) {
-                                String[][] wetime={
-                                        {"1","Go for a walk with your parents"},
-                                        {"2","Have dinner with family"},
-                                        {"3","Ask your family members to tell you a story before bed."},
-                                        {"4","Plant a seed with the help with your elder and water it daily"},
-                                        {"5","Ask your mom to let you help in kitchen. Do as she instructs."},
-                                        {"6","Tell your mom how good she looks."},
-                                        {"7","Take blessings from your elders."},
-                                        {"8","Ask your parents to help you with your TODO list "},
-                                        {"9","Thank god for givng you such a wonderful family."},
-                                        {"10","Have a small dance party with songs played on your phone with your family."},
-                                        {"11","Maintain a piggy bank.Save money and add to it."},
-                                        {"12","Dress up and join your elders to temples, mosques,churches or gurudwaras"},
-                                        {"13","Set tables  for meals."},
-                                        {"14","Go to fruit or vegetable market with your elders."},
-                                        {"15","Arrange your closet with your elders."},
-                                        {"16","Check your photo albums with your family."}
-                                };
 
-                                databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email.toString()));
 
-                                for (int i = 1; i <= 16; i++) {
-                                    databaseReference2.child("WeTime").child(""+i).child("Status").setValue("False");
-                                    databaseReference2.child("WeTime").child(""+i).child("Description").setValue(wetime[i-1][1]);
-                                    databaseReference2.child("WeTime").child(""+i).child("ID").setValue(wetime[i-1][0]);
-                                }
 
-                            }
 
 //                            if (Integer.parseInt()<=8) {
-                                Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
+                                Intent intent = new Intent(RegisterActivity.this, fouthFifthGroup.class);
                                 startActivity(intent);
 //                            }
                         }

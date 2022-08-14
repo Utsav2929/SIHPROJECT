@@ -12,6 +12,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.time.LocalDate;
+
 public class relaxingJournaling extends AppCompatActivity {
 
     @Override
@@ -20,10 +28,16 @@ public class relaxingJournaling extends AppCompatActivity {
         setContentView(R.layout.activity_relaxing_journaling);
        // https://journey.cloud/
         LinearLayout pop1 = findViewById(R.id.pop1);
+
+
+
+        String email = getIntent().getExtras().getString("email");
+
         pop1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v,R.layout.popup_window12);
+                increasecounter(email);
             }
         });
         ImageButton benifits = findViewById(R.id.benifits);
@@ -31,6 +45,7 @@ public class relaxingJournaling extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v,R.layout.popup_windowjournal);
+                increasecounter(email);
             }
         });
         ImageButton tips = findViewById(R.id.tips);
@@ -38,6 +53,7 @@ public class relaxingJournaling extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(v,R.layout.popup_windowjournal2);
+                increasecounter(email);
             }
         });
         ImageButton img1 = findViewById(R.id.journal);
@@ -45,7 +61,9 @@ public class relaxingJournaling extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String url = "https://journey.cloud/";
-                openWeb(url);
+
+                increasecounter(email);
+                openWeb(url,email);
             }
         });
     }
@@ -75,10 +93,49 @@ public class relaxingJournaling extends AppCompatActivity {
             }
         });
     }
-    public void openWeb(String url)
+    public void openWeb(String url,String email)
     {
         Intent intent = new Intent(relaxingJournaling.this, webView.class);
         intent.putExtra("url",url );
+        increasecounter(email);
         startActivity(intent);
     }
+
+
+
+
+
+    private void increasecounter(String email) {
+        LocalDate today=LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("relaxinactivities").child("progress").getValue().toString();
+
+                if(Integer.parseInt(progress)<=90) {
+                    int prg = Integer.parseInt(progress) + 10;
+
+                    reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
+
+                }else{
+
+                    int prg = 100;
+
+                    reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
+
 }

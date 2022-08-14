@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     Currentuser = mAuth.getCurrentUser();
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo");
 
-                    databaseReference2.addValueEventListener(new ValueEventListener() {
+                    databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String age = dataSnapshot.child(encodeUserEmail(email)).child("info").child("age").getValue().toString();
@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String hour = strDate.substring(0,2);
                                 int hourday = parseInt(hour);
                                 final boolean[] processDone = {true};
-                                databaseReference2.addValueEventListener(new ValueEventListener() {
+                                databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(processDone[0]) {

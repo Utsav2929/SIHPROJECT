@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIH2022NEW">
         <activity
+            android:name=".SixthEighthGroup"
+            android:exported="false" />
+        <activity
             android:name=".gtbtPanelFourthFifth"
             android:exported="false" />
         <activity
@@ -30,7 +33,7 @@
 
         </activity>
         <activity
-            android:name=".fouthFifthGroup"
+            android:name=".addtodo"
             android:exported="false" />
         <activity
             android:name=".flextimefourthfifth"
@@ -57,10 +60,10 @@
             android:name=".personeltodo"
             android:exported="false" />
         <activity
-            android:name=".addtodo"
+            android:name=".todo"
             android:exported="false" />
         <activity
-            android:name=".todo"
+            android:name=".fouthFifthGroup"
             android:exported="false" />
         <activity
             android:name=".sports"
@@ -193,7 +196,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".BottomNavigation"
             android:exported="false"
