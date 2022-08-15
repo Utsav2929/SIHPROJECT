@@ -9,10 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.aaks32173.sih2022new.data.Message
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aaks32173.sih2022new.R
-import com.aaks32173.sih2022new.councellor
-import com.aaks32173.sih2022new.depressn_main
-import com.aaks32173.sih2022new.personeltodo
+import com.aaks32173.sih2022new.*
 import com.aaks32173.sih2022new.utils.Constants.OPEN_GOOGLE
 import com.aaks32173.sih2022new.utils.Constants.OPEN_SEARCH
 import com.aaks32173.sih2022new.utils.Constants.RECEIVE_ID
@@ -173,11 +170,19 @@ class MainActivity : AppCompatActivity() {
                 btn_send1.setOnClickListener {
 
                     et_message.setText(answer1)
-                    if(answer1.toString()=="yes" && mainindex.toString()=="14" && chatbottype=="chatbotprimary"){
+                    if(answer1.toString()=="yes"  && chatbottype=="chatbotprimary"){
                         chatbottype="chatbot"
                     }
                     if(answer1.toString()=="yes" && mainindex.toString()=="27" && chatbottype=="chatbot"){
                         chatbottype="chatbotprimary"
+                    }
+                    if(answer1.toString()=="yes" && mainindex.toString()=="13" && chatbottype=="chatbotprimary"){
+                        val intent=Intent(this, councellor::class.java)
+                            startActivity(intent)
+                    }
+                    if(answer1.toString()=="threapist" && mainindex.toString()=="13" && chatbottype=="chatbotprimary"){
+                        val intent=Intent(this, councellor::class.java)
+                        startActivity(intent)
                     }
                     qs = answer1index
                     sendMessage()
@@ -187,9 +192,9 @@ class MainActivity : AppCompatActivity() {
 
                     et_message.setText(answer2)
                     if(answer2.toString()=="Sad" && chatbottype=="chatbot"){
-                        val a = Intent(this, depressn_main::class.java)
-                        startActivity(a)
+                        chatbottype="chatbotprimary"
                     }
+
                     qs = answer2index
                     sendMessage()
                 }
