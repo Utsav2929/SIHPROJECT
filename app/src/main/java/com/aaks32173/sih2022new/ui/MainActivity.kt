@@ -187,9 +187,9 @@ class MainActivity : AppCompatActivity() {
 
                     et_message.setText(answer2)
                     if(answer2.toString()=="Sad" && chatbottype=="chatbot"){
-                        val a = Intent(this, depressn_main::class.java)
-                        startActivity(a)
+                        chatbottype="chatbotprimary"
                     }
+
                     qs = answer2index
                     sendMessage()
                 }

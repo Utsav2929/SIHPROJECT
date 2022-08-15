@@ -148,11 +148,27 @@
             android:name=".vedioPlay"
             android:exported="false" />
         <activity
+            android:name=".chekk"
+            android:exported="false" />
+        <activity
+            android:name=".Diett"
+            android:exported="false" />
+        <activity
+            android:name=".character_quotes"
+            android:exported="false" />
+        <activity
+            android:name=".Details"
+            android:exported="false" />
+        <activity
+            android:name=".UserDiet"
+            android:exported="false" />
+        <activity
             android:name=".goodBadtouch"
             android:exported="false" />
         <activity
             android:name=".AddpostActivity"
             android:exported="false" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
