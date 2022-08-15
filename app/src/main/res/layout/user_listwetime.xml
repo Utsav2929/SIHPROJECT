@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="#393E46"
-    android:backgroundTint="#00ADB5"
-    app:cardBackgroundColor="#393E46"
+    android:layout_margin="10dp"
+    android:backgroundTint="#FFCD28"
+    android:background="@drawable/shape5"
+    android:padding="10dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="8dp">
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="327dp"
@@ -16,7 +16,6 @@
         android:layout_marginVertical="6dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20sp"
-        android:background="#393E46"
         android:backgroundTint="#00ADB5"
         android:orientation="vertical">
 
@@ -34,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="cursive"
+                android:fontFamily="@font/salsa"
                 android:text="We Time"
                 android:textColor="#222831"
                 android:textSize="20sp" />
@@ -45,7 +44,10 @@
             android:id="@+id/btndelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/bot_back"
+            android:text="Done"
+            app:cornerRadius="30dp" />
 
 
     </LinearLayout>
