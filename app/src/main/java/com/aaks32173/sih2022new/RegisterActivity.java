@@ -44,12 +44,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final TextView register_loginnow = findViewById(R.id.register_loginnow);
-        register_loginnow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                movetologin();
-            }
-        });
+//        register_loginnow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                movetologin();
+//            }
+//        });
 
         mAuth = FirebaseAuth.getInstance();
         register_name = findViewById(R.id.register_name);
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        register_registerbtn.setOnClickListener(new View.OnClickListener() {
+        register_loginnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -142,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 //                            if (Integer.parseInt()<=8) {
-                                Intent intent = new Intent(RegisterActivity.this, fouthFifthGroup.class);
+                                Intent intent = new Intent(RegisterActivity.this, UserDiet.class);
                                 startActivity(intent);
 //                            }
                         }
