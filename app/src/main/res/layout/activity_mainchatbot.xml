@@ -5,6 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/ch"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:translationZ="50dp"
+        android:src="@drawable/hiii_chatbot"
+        android:visibility="invisible" />
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bg"
+        android:layout_marginTop="-30dp"
+        android:alpha="0.5"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/listening"
+        android:visibility="visible" />
+
 
     <LinearLayout
         android:id="@+id/ll_layout_bar"
@@ -13,41 +35,45 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="59dp"
         android:background="#E4E4E4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:translationZ="2dp">
 
 
         <Button
             android:id="@+id/btn_send1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            app:cornerRadius="20dp"
             android:backgroundTint="#9964F8"
             android:text="Send"
-            android:textColor="@android:color/white" />
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/white"
+            app:cornerRadius="20dp" />
 
         <Button
             android:id="@+id/btn_send2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            app:cornerRadius="20dp"
+            android:textAlignment="viewEnd"
             android:backgroundTint="#9964F8"
             android:text="Send"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            app:cornerRadius="20dp" />
 
         <Button
             android:id="@+id/btn_send3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="3dp"
             android:layout_weight="1"
-            app:cornerRadius="20dp"
+            android:textAlignment="viewEnd"
             android:backgroundTint="#9964F8"
             android:text="Send"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
 
@@ -92,6 +118,7 @@
         android:layout_below="@+id/dark_divider"
         android:layout_marginTop="-7dp"
         android:layout_marginBottom="8dp"
+        android:translationZ="2dp"
         tools:itemCount="20"
         tools:listitem="@layout/message_item" />
 
