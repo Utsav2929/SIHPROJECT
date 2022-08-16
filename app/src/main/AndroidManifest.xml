@@ -30,6 +30,11 @@
         <activity
             android:name=".splash"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -64,7 +69,11 @@
             android:exported="false" />
         <activity
             android:name=".fouthFifthGroup"
-            android:exported="false" />
+            android:exported="false" >
+
+
+
+        </activity>
         <activity
             android:name=".sports"
             android:exported="false" />
@@ -139,12 +148,8 @@
             android:exported="false" />
         <activity
             android:name=".DashHome_Nur_3"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".good_bad_touch_comic"
@@ -210,6 +215,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.SIH2022NEW.NoActionBar">
+
 
         </activity>
 

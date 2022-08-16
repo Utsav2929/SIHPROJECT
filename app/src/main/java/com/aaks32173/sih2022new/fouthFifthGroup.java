@@ -1,7 +1,12 @@
 package com.aaks32173.sih2022new;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.aaks32173.sih2022new.ui.MainActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -12,13 +17,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.time.LocalDate;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class fouthFifthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
@@ -26,13 +35,19 @@ public class fouthFifthGroup extends AppCompatActivity {
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
+    RecyclerView recycler_view;
+    LinearLayoutManager layoutManager;
+    AutoScrollAdapter autoScrollAdapter;
     DatabaseReference databaseReference2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fouth_fifth_group);
-        ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);
+
+        recycler_view = findViewById(R.id.recycler_view_3to5);
+        setRV();
 
         ImageButton todobtn = findViewById(R.id.todobtn);
         ImageButton music = findViewById(R.id.music);
@@ -40,16 +55,38 @@ public class fouthFifthGroup extends AppCompatActivity {
         ImageButton gtbt = findViewById(R.id.gtbt);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton menstural = findViewById(R.id.menstural);
-        ImageButton chatbot = findViewById(R.id.chatbot);
         ImageButton post =findViewById(R.id.post);
+        ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);
+        ImageButton health=(ImageButton)findViewById(R.id.imageButton3) ;
+
+
+
+
 
         ImageButton wetime =findViewById(R.id.wetime);
 
+        ExtendedFloatingActionButton letshaveconversation = findViewById(R.id.chatbot_3to5);
+
+                TextView badge = findViewById(R.id.chatbotbadge_3to5);
+                Animation myanim2 = AnimationUtils.loadAnimation(this, R.anim.shake);
+        letshaveconversation.startAnimation(myanim2);
+        badge.startAnimation(myanim2);
+        letshaveconversation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a =  new Intent(fouthFifthGroup.this,com.aaks32173.sih2022new.ui.MainActivity.class);
+                startActivity(a);
+            }
+        });
                 firebaseDatabase = FirebaseDatabase.getInstance();
         LocalDate td= LocalDate.now();
         Toast.makeText(getApplicationContext(),td.toString(),Toast.LENGTH_LONG).show();
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        String encodedemmail=encodeUserEmail(email.toString());
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
@@ -139,16 +176,31 @@ public class fouthFifthGroup extends AppCompatActivity {
                 openwetime(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
+//        wetime.setOnClickListener(new View.OnClickListener( {
+//                Intent a =  new Intent(fouthFifthGroup.this,com.aaks32173.sih2022new.ui.MainActivity.class);
+//
+////        Intent intent = new Intent(fouthFifthGroup.this, WetimeActivity.class).putExtra("email",encodedemmail);
+//            startActivity(intent);
+//        )};
         todobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opentodo(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
-        button5.setOnClickListener(new View.OnClickListener() {
+        exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 movetoflextime(encodeUserEmail(Currentuser.getEmail().toString()));
+            }
+        });
+
+        health.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(fouthFifthGroup.this, yoga.class);
+                intent.putExtra("category", "health");
+                startActivity(intent);
             }
         });
         music.setOnClickListener(new View.OnClickListener() {
@@ -175,12 +227,12 @@ public class fouthFifthGroup extends AppCompatActivity {
                 movetoMenstural(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
-        chatbot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movetoBot();
-            }
-        });
+//        chatbot.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                movetoBot();
+//            }
+//        });
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,6 +300,33 @@ public class fouthFifthGroup extends AppCompatActivity {
 
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
+    }
+
+    private void setRV() {
+
+        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        recycler_view.setLayoutManager(layoutManager);
+        autoScrollAdapter = new AutoScrollAdapter(this);
+        recycler_view.setAdapter(autoScrollAdapter);
+
+        LinearSnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recycler_view);
+
+        Timer timer =new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(layoutManager.findLastCompletelyVisibleItemPosition() <(autoScrollAdapter.getItemCount()-1)){
+                    layoutManager.smoothScrollToPosition(recycler_view, new RecyclerView.State(),layoutManager.findLastCompletelyVisibleItemPosition()+1);
+                }
+                else if(layoutManager.findLastCompletelyVisibleItemPosition()<(autoScrollAdapter.getItemCount()-1)){
+                    layoutManager.smoothScrollToPosition(recycler_view, new RecyclerView.State(),0);
+                }
+                {
+
+                }
+            }
+        },0,3000);
     }
 
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +27,7 @@ public class flextimefourthfifth extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,10 @@ public class flextimefourthfifth extends AppCompatActivity {
         //sleepdetail = false;
 
         String email = getIntent().getExtras().getString("email");
+//                LottieAnimationView gif2 =findViewById(R.id.gif1_exercise_3to5);
+//        gif2.setImageResource(R.drawable.exercisegif_3to5);
+
+
 
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("FlexFouthFifth");

@@ -24,17 +24,7 @@
         android:fontFamily="@font/salsa"
         android:textAlignment="center"
         android:textSize="30dp"/>
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gif1"
-        android:layout_width="800dp"
-        android:layout_height="270dp"
-        android:layout_below="@+id/relax"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/chidiya1"
-        android:visibility="visible" />
+
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif2"
@@ -47,24 +37,25 @@
         android:translationZ="-10dp"
         android:visibility="visible" />
 
-    <LinearLayout
-        android:id="@+id/head"
-        android:layout_below="@+id/gif1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/head">
+        android:layout_below="@+id/relax">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gif1"
+                android:layout_width="800dp"
+                android:layout_height="270dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/chidiya1"
+                android:visibility="visible" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

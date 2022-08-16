@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,8 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
 
                 database.child(currentitem.id.toString()).removeValue().addOnSuccessListener {
                     increasecounter(email)
+
+
                 }
 
         }
