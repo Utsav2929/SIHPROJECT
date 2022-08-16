@@ -1,5 +1,4 @@
 package com.aaks32173.sih2022new;
-
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +19,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 public class flex_time extends AppCompatActivity {
     private FirebaseAuth mauth;
     DatabaseReference databaseReference;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
+    final String[] age1 = new String[1];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,6 @@ public class flex_time extends AppCompatActivity {
         ImageButton meditation = findViewById(R.id.meditationbtn);
         mauth = FirebaseAuth.getInstance();
         Currentuser = mauth.getCurrentUser();
-        final String[] age1 = new String[1];
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -52,7 +50,6 @@ public class flex_time extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-
         });
         yoga.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,25 +79,27 @@ public class flex_time extends AppCompatActivity {
     private void openyogas(){
         Intent intent = new Intent(this,yoga.class);
         intent.putExtra("category", "exercises");
-       intent.putExtra("group", "SixthEight");
-       intent.putExtra("age", "10");
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
     }
     private void openworkouts(){
         Intent intent = new Intent(this,workout.class);
         startActivity(intent);
-
     }
     private void openstrerchings(){
         Intent intent = new Intent(this,stretching.class);
-        intent.putExtra("group", "SixthEight");
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
-
     }
     private void openmeditations(){
         Intent intent = new Intent(this,meditation.class);
         startActivity(intent);
-
     }
     private String encodeUserEmail(String email) {
         return email.replace(".",",");

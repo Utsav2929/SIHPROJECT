@@ -48,7 +48,6 @@ public class yoga extends AppCompatActivity {
           String category = getIntent().getExtras().getString("category");
           String group = getIntent().getExtras().getString("group");
           String age = getIntent().getExtras().getString("age");
-
           Button btn1 = findViewById(R.id.btn1);
           Button btn4 = findViewById(R.id.btn4);
           Button btn2 = findViewById(R.id.btn2);
