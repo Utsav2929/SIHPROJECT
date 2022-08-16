@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+
 public class flextimefourthfifth extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
@@ -31,6 +33,9 @@ public class flextimefourthfifth extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
         //sleepdetail = false;
+
+        String email = getIntent().getExtras().getString("email");
+
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("FlexFouthFifth");
         LinearLayout btn1 = findViewById(R.id.btn1);
@@ -38,6 +43,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("1");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn7 = findViewById(R.id.btn7);
@@ -45,6 +52,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("7");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn2 = findViewById(R.id.btn2);
@@ -52,6 +61,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("2");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn3 = findViewById(R.id.btn3);
@@ -59,6 +70,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("3");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn4 = findViewById(R.id.btn4);
@@ -66,6 +79,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("4");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn5 = findViewById(R.id.btn5);
@@ -73,6 +88,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("5");
+
+                increasecounter(email);
             }
         });
         LinearLayout btn6 = findViewById(R.id.btn6);
@@ -80,6 +97,8 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("6");
+
+                increasecounter(email);
             }
         });
 
@@ -102,4 +121,37 @@ public  void getfun(String s)
     });
 
 }
+
+    private void increasecounter(String email) {
+        LocalDate today=LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("exercise").child("progress").getValue().toString();
+
+                if(Integer.parseInt(progress)<=90) {
+                    int prg = Integer.parseInt(progress) + 10;
+
+                    reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
+
+                }else{
+
+                    int prg = 100;
+
+                    reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.aaks32173.sih2022new
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,15 +18,6 @@ class todo  : AppCompatActivity() {
     private lateinit var dbref : DatabaseReference
     private lateinit var userRecyclerview : RecyclerView
     private lateinit var userArrayList : ArrayList<usertodo>
-
-    val today= LocalDate.now()
-
-    val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)
-//    val date= Calendar.getInstance()
-//
-//    val year=date.get(Calendar.YEAR).toString()
-//    val datee= date.get(Calendar.DATE).toString()
-    val d ="weektodo/"+tomorrow.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +36,24 @@ class todo  : AppCompatActivity() {
 
     private fun getUserData() {
 
-        dbref = FirebaseDatabase.getInstance().getReference("weektodo/"+today)
+        val email = intent.getStringExtra("email").toString()
+        Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
+
+        val today= LocalDate.now()
+        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/TODO/"+today)
 
         dbref.addValueEventListener(object : ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                if (snapshot.exists()){
+               if (snapshot.exists()){
 
                     for (userSnapshot in snapshot.children){
 
 
                         val user = userSnapshot.getValue(usertodo::class.java)
                         userArrayList.add(user!!)
+
 
                     }
 

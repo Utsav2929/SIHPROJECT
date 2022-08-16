@@ -16,7 +16,7 @@ class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Ad
 
         userList.sortBy {
             it.intrest?.toInt()
-            it.percent?.toInt()
+            it.progress?.toInt()
         }
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.user_list,
@@ -36,17 +36,15 @@ class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Ad
 //        holder.cname.text = currentitem.cname
 //if (currentitem.name=)
 
-        holder.name.text = currentitem.name
+        holder.name.text = currentitem.activity
 
-        holder.percent.text = currentitem.intrest
 
-        holder.tv.text = currentitem.percent
+        holder.tv.text = currentitem.progress
 
-        holder.ismarked.text = currentitem.ismarked
         val t = Timer()
         val tt: TimerTask = object : TimerTask() {
             override fun run() {
-                holder.pb!!.progress = currentitem.percent!!.toInt()
+                holder.pb!!.progress = currentitem.progress!!.toInt()
 
 
             }
@@ -66,10 +64,6 @@ class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Ad
 
         //        val cname : TextView = itemView.findViewById(R.id.cname)
         val name : TextView = itemView.findViewById(R.id.tvfirstName)
-
-        val percent : TextView = itemView.findViewById(R.id.percent)
-
-        val ismarked : TextView = itemView.findViewById(R.id.ismarked)
 
         val pb : ProgressBar = itemView.findViewById(R.id.pb) as ProgressBar
 

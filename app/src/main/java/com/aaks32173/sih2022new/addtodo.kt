@@ -61,8 +61,8 @@ class addtodo : AppCompatActivity() {
         Toast.makeText(this,percent,Toast.LENGTH_SHORT).show()
 
 //val d= datee+year.toString()
-        database = FirebaseDatabase.getInstance().getReference("weektodo/"+tomorrow.toString())
-        val attendance = usertodo(tomorrow.toString(),Name, percent,intrest,ismark)
+        database = FirebaseDatabase.getInstance().getReference("TODO/"+tomorrow.toString())
+        val attendance = usertodo(tomorrow.toString(),Name, intrest,percent)
 
         database.child(Name).setValue(attendance).addOnSuccessListener {
             Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()

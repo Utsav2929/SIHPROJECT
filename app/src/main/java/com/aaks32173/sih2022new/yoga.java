@@ -1,25 +1,20 @@
 package com.aaks32173.sih2022new;
 
-import static java.lang.Integer.parseInt;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.airbnb.lottie.LottieAnimationView;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class yoga extends AppCompatActivity {
     String videoUrl9=null;
@@ -31,72 +26,60 @@ public class yoga extends AppCompatActivity {
     String videoUrl3=null;
     String videoUrl = null;
     String videoUrl2=null;
-
-    DatabaseReference databaseReference;
-    FirebaseDatabase firebaseDatabase;
-    FirebaseAuth mauth;
-    FirebaseUser Currentuser;
-
       @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_yoga);
-          // String[] age = new String[1];
-          firebaseDatabase = FirebaseDatabase.getInstance();
-          mauth = FirebaseAuth.getInstance();
-          Currentuser = mauth.getCurrentUser();
+
           String category = getIntent().getExtras().getString("category");
-          String group = getIntent().getExtras().getString("group");
-          String age = getIntent().getExtras().getString("age");
-          Button btn1 = findViewById(R.id.btn1);
-          Button btn4 = findViewById(R.id.btn4);
-          Button btn2 = findViewById(R.id.btn2);
-          Button btn3 = findViewById(R.id.btn3);
-          Button btn5 = findViewById(R.id.btn5);
-          Button btn6 = findViewById(R.id.btn6);
-          Button btn7 = findViewById(R.id.btn7);
-          Button btn8 = findViewById(R.id.btn8);
-          Button btn9 = findViewById(R.id.btn9);
-        //  Toast.makeText(this, category + age[0], Toast.LENGTH_SHORT).show();
-          int ageint =  parseInt(age);
 
-          if(ageint>8 && category.equals("exercises")){
+          Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
+            int age=5;
 
-              if(group.equals("SixthEight"))
-              {
-                  videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(1).mp4?alt=media&token=579b48f5-ba9a-4598-9dcc-7983ab216893";
-                  videoUrl2="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(2).mp4?alt=media&token=1d14f5a1-ab58-4ade-b23f-ce966bf1ee2d";
-                  videoUrl3="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(3).mp4?alt=media&token=a4b71586-53ee-4c97-a771-2796c3f54a71";
-                    videoUrl4="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(4).mp4?alt=media&token=106f4d5e-3610-4f63-8899-da0e4dcb9364";
-                    videoUrl5="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(5).mp4?alt=media&token=aee20862-a48f-4be1-a4db-1ede902579b4";
-                    videoUrl6="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(6).mp4?alt=media&token=c36794c3-7aa8-4acb-b3cd-c3af1d572650";
-                    videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback%20(7).mp4?alt=media&token=2f458a56-0215-4a94-8d1c-2c7d4c3d9219";
-                    videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fexercise%2Fvideoplayback.mp4?alt=media&token=bce8a246-547f-4711-a18b-a5037ba79d3a";
-                  videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
+          TextView heading=findViewById(R.id.head);
+            ImageButton btn1 = findViewById(R.id.btn1);
+          ImageView background= findViewById(R.id.background) ;
+          ImageButton btn4 = findViewById(R.id.btn4);
+          ImageButton btn2 = findViewById(R.id.btn2);
+          ImageButton btn3 = findViewById(R.id.btn3);
+          ImageButton btn5 = findViewById(R.id.btn5);
+          ImageButton btn6 = findViewById(R.id.btn6);
+          ImageButton btn7 = findViewById(R.id.btn7);
+          ImageButton btn8 = findViewById(R.id.btn8);
+          LottieAnimationView gif2 =findViewById(R.id.gif2);
+          GifImageView gif1=findViewById(R.id.gif1);
+          ImageButton btn9 = findViewById(R.id.btn9);
 
-              }
-              else {
-                  videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
-                  videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
-                  videoUrl6 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
-                  videoUrl7 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga3.mp4?alt=media&token=1dcf914f-c059-4f30-ad98-f4ff2f1d24a0";
-                  videoUrl5 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga.mp4?alt=media&token=7ac66073-e040-4268-8385-3df8acc266b5";
-                  videoUrl4 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fneck_streching_yoga.mp4?alt=media&token=4834a212-a6e8-47f1-979b-bda7fc5bf124";
-                  videoUrl3 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Ffocus_build_yoga.mp4?alt=media&token=ac306705-5d17-419b-b010-c4f001603aae";
-                  videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga1.mp4?alt=media&token=7208a3c5-5d4c-4a79-82e0-cca9cd53e1a9";
-                  videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
-              }
+          if(age>8 && category.equals("exercises")){
+
+                 videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
+                 videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
+                 videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
+                 videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga3.mp4?alt=media&token=1dcf914f-c059-4f30-ad98-f4ff2f1d24a0";
+                 videoUrl5 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga.mp4?alt=media&token=7ac66073-e040-4268-8385-3df8acc266b5";
+                 videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fneck_streching_yoga.mp4?alt=media&token=4834a212-a6e8-47f1-979b-bda7fc5bf124";
+                 videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Ffocus_build_yoga.mp4?alt=media&token=ac306705-5d17-419b-b010-c4f001603aae";
+                 videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga1.mp4?alt=media&token=7208a3c5-5d4c-4a79-82e0-cca9cd53e1a9";
+                videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
+
             }
           else if(category.equals("health")){
-              btn1.setText("Lets Learn 1");
-              btn2.setText("Lets Learn 2");
-              btn3.setText("Lets Learn 3");
-              btn4.setText("Lets Learn 4");
-              btn5.setText("Lets Learn 5");
-              btn6.setText("Lets Learn 6");
-              btn7.setText("Lets Learn 7");
-              btn8.setText("Lets Learn 8");
-              btn9.setText("Lets Learn 9");
+
+
+              background.setImageResource(R.drawable.gk_bg2);
+              heading.setVisibility(View.INVISIBLE);
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.food_gif);
+//              btn1.setText("Lets Learn 1");
+//              btn2.setText("Lets Learn 2");
+//              btn3.setText("Lets Learn 3");
+//              btn4.setText("Lets Learn 4");
+//              btn5.setText("Lets Learn 5");
+//              btn6.setText("Lets Learn 6");
+//              btn7.setText("Lets Learn 7");
+//              btn8.setText("Lets Learn 8");
+//              btn9.setText("Lets Learn 9");
+
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
@@ -108,16 +91,53 @@ public class yoga extends AppCompatActivity {
               videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
 
           }
+        else if(category.equals("health1")){
+          btn1.setText("Eat Healthy 1");
+          btn2.setText("Eat Healthy 2");
+          btn3.setText("Eat Healthy 3");
+          btn4.setText("Eat Healthy 4");
+          btn5.setText("Eat Healthy 5");
+          btn6.setText("Eat Healthy 6");
+          btn7.setText("Eat Healthy 7");
+          btn8.setText("Eat Healthy 8");
+          btn9.setText("Eat Healthy 9");
+          videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
+                  "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
+          videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
+                  "en=eb4f0015-3351-453e-a6b7-3a253ed6ed7f";
+          videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Conjunctivitis_%20_%20CONJUNCTIVITIS%20_%20Pink-Eye%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=" +
+                  "b49d872d-dc18-4e5e-abbc-a693c913be50";
+          videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Diarrhea_%20-%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=m" +
+                  "edia&token=bd1d85e1-fbf3-4a07-a5cd-322c85a67581";
+          videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stop%20Brushing%20Teeth_%20_%20Why%20Do%20We%20BRUSH%20TEETH_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=ab1" +
+                  "94c0a-e36b-428c-846a-818f089c16ec";
+          videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stopped%20Washing%20Hair_%20_%20Importance%20of%20HAIR%20WASH%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=" +
+                  "media&token=19d3d225-5086-47a8-9bf7-fafdf4a9ef8a";
+          videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Appendix%20Burst_%20_%20APPENDIX%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz" +
+                  ".mp4?alt=media&token=8f43aab8-46e9-4e96-a19d-e832792d6de0";
+          videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Drink%20Water_%20_%20Importance%20Of%20Water%20_%20Stay%20Hydrated%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=medi" +
+                  "a&token=8b94a616-39b7-48a6-bedf-eb635b865912";
+          videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Puke_%20_%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=media&token=92" +
+                  "a5fef9-8a3b-498e-b403-8c584f3741bd";
+
+      }
           else if(category.equals("gksection")){
-              btn1.setText("Lets Learn 1");
-              btn2.setText("Lets Learn 2");
-              btn3.setText("Lets Learn 3");
-              btn4.setText("Lets Learn 4");
-              btn5.setText("Lets Learn 5");
-              btn6.setText("Lets Learn 6");
-              btn7.setText("Lets Learn 7");
-              btn8.setText("Lets Learn 8");
-              btn9.setText("Lets Learn 9");
+
+              background.setImageResource(R.drawable.evai);
+
+              heading.setText("Did you Know?");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.quiz);
+
+              btn1.setImageResource(R.drawable.gk1);
+              btn2.setImageResource(R.drawable.gk2);
+              btn3.setImageResource(R.drawable.gk3);
+              btn4.setImageResource(R.drawable.gk4);
+              btn5.setImageResource(R.drawable.gk5);
+              btn6.setImageResource(R.drawable.gk6);
+              btn7.setImageResource(R.drawable.gk7);
+              btn8.setImageResource(R.drawable.gk1);
+              btn9.setImageResource(R.drawable.gk2);
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
@@ -130,15 +150,40 @@ public class yoga extends AppCompatActivity {
 
           }
           else if(category.equals("fightyourfear")){
-              btn1.setText("Lets Fight 1");
-              btn2.setText("Lets Fight 2");
-              btn3.setText("Lets Fight 3");
-              btn4.setText("Lets Fight 4");
-              btn5.setText("Lets Fight 5");
-              btn6.setText("Lets Fight 6");
-              btn7.setText("Lets Fight 7");
-              btn8.setText("Lets Fight 8");
-              btn9.setText("Lets Fight 9");
+
+              background.setImageResource(R.drawable.fightfear_bg);
+              heading.setText("Fight Your Fears");
+              gif2.setVisibility(View.INVISIBLE);
+
+
+
+              new Handler().postDelayed(new Runnable() {
+                  @Override
+                  public void run() {
+                      gif1.setImageResource(R.drawable.fight_fear_gif2);
+                  }
+              }, 8000);
+
+              gif1.setImageResource(R.drawable.fightfeargif2);
+
+              btn1.setImageResource(R.drawable.fear1);
+              btn2.setImageResource(R.drawable.fear2);
+              btn3.setImageResource(R.drawable.fear3);
+              btn4.setImageResource(R.drawable.fear4);
+              btn5.setImageResource(R.drawable.fear5);
+              btn6.setImageResource(R.drawable.fear1);
+              btn7.setImageResource(R.drawable.fear3);
+              btn8.setImageResource(R.drawable.fear2);
+              btn9.setImageResource(R.drawable.fear4);
+//              btn1.setText("Lets Fight 1");
+//              btn2.setText("Lets Fight 2");
+//              btn3.setText("Lets Fight 3");
+//              btn4.setText("Lets Fight 4");
+//              btn5.setText("Lets Fight 5");
+//              btn6.setText("Lets Fight 6");
+//              btn7.setText("Lets Fight 7");
+//              btn8.setText("Lets Fight 8");
+//              btn9.setText("Lets Fight 9");
                videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2F100%20Kids%20Tell%20Us%20Their%20Fears%20%F0%9F%91%B9%F0%9F%8E%83%F0%9F%91%BB%20_%20100%20Kids%20_%20HiHo%20Kids.mp4?alt=media&token=05d8" +
                       "1a20-a16b-44eb-8c50-46ed6044c298";
                videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2FFight%20Your%20Fears%20to%20Be%20Victorious%20_%20Coward%20Pompu%20Story%20_%20Moral%20Stories%20By%20Granny%20_%20Woka%20English.mp4?a" +
@@ -159,15 +204,31 @@ public class yoga extends AppCompatActivity {
                       "4792-9728-1440545d081f";
           }
           else if(category.equals("stories")){
-              btn1.setText("Story 1");
-              btn2.setText("Story 2");
-              btn3.setText("Story 3");
-              btn4.setText("Story 4");
-              btn5.setText("Story 5");
-              btn6.setText("Story 6");
-              btn7.setText("Story 7");
-              btn8.setText("Story 8");
-              btn9.setText("Story 9");
+
+              background.setImageResource(R.drawable.fightfear_bg);
+              heading.setText("Stories");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.ttrain);
+
+              btn1.setImageResource(R.drawable.story1);
+              btn2.setImageResource(R.drawable.story2);
+              btn3.setImageResource(R.drawable.story3);
+              btn4.setImageResource(R.drawable.story4);
+              btn5.setImageResource(R.drawable.story5);
+              btn6.setImageResource(R.drawable.story6);
+              btn7.setImageResource(R.drawable.story7);
+              btn8.setImageResource(R.drawable.story8);
+              btn9.setImageResource(R.drawable.story1);
+
+//              btn1.setText("Story 1");
+//              btn2.setText("Story 2");
+//              btn3.setText("Story 3");
+//              btn4.setText("Story 4");
+//              btn5.setText("Story 5");
+//              btn6.setText("Story 6");
+//              btn7.setText("Story 7");
+//              btn8.setText("Story 8");
+//              btn9.setText("Story 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(1).mp4?alt=media&token=03fb5dee-5dd1-4636-95ab-e0e600140ce5";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(2).mp4?alt=media&token=94fb88f1-ddcc-46c2-9ec1-281a7d8bfbd8";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(3).mp4?alt=media&token=f08c7496-28a8-4870-b223-76569da775e4";
@@ -181,15 +242,55 @@ public class yoga extends AppCompatActivity {
           }
          else{
 
-              btn1.setText("Rhyme 1");
-              btn2.setText("Rhyme 2");
-              btn3.setText("Rhyme 3");
-              btn4.setText("Rhyme 4");
-              btn5.setText("Rhyme 5");
-              btn6.setText("Rhyme 6");
-              btn7.setText("Rhyme 7");
-              btn8.setText("Rhyme 8");
-              btn9.setText("Rhyme 9");
+
+              btn1.setText("Eat Healthy 1");
+              btn2.setText("Eat Healthy 2");
+              btn3.setText("Eat Healthy 3");
+              btn4.setText("Eat Healthy 4");
+              btn5.setText("Eat Healthy 5");
+              btn6.setText("Eat Healthy 6");
+              btn7.setText("Eat Healthy 7");
+              btn8.setText("Eat Healthy 8");
+              btn9.setText("Eat Healthy 9");
+              videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
+                      "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
+              videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
+                      "en=eb4f0015-3351-453e-a6b7-3a253ed6ed7f";
+              videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Conjunctivitis_%20_%20CONJUNCTIVITIS%20_%20Pink-Eye%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=" +
+                      "b49d872d-dc18-4e5e-abbc-a693c913be50";
+              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Diarrhea_%20-%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=m" +
+                      "edia&token=bd1d85e1-fbf3-4a07-a5cd-322c85a67581";
+              videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stop%20Brushing%20Teeth_%20_%20Why%20Do%20We%20BRUSH%20TEETH_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=ab1" +
+                      "94c0a-e36b-428c-846a-818f089c16ec";
+              videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stopped%20Washing%20Hair_%20_%20Importance%20of%20HAIR%20WASH%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=" +
+                      "media&token=19d3d225-5086-47a8-9bf7-fafdf4a9ef8a";
+              videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Appendix%20Burst_%20_%20APPENDIX%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz" +
+                      ".mp4?alt=media&token=8f43aab8-46e9-4e96-a19d-e832792d6de0";
+              videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Drink%20Water_%20_%20Importance%20Of%20Water%20_%20Stay%20Hydrated%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=medi" +
+                      "a&token=8b94a616-39b7-48a6-bedf-eb635b865912";
+              videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Puke_%20_%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=media&token=92" +
+                      "a5fef9-8a3b-498e-b403-8c584f3741bd";
+             heading.setText("Rhymes");
+              background.setImageResource(R.drawable.bg_poem);
+             gif2.setAnimation(R.raw.unicorn);
+             gif1.setVisibility(View.INVISIBLE);
+              btn1.setImageResource(R.drawable.rhyme1);
+              btn2.setImageResource(R.drawable.rhyme5);
+              btn3.setImageResource(R.drawable.rhyme3);
+              btn4.setImageResource(R.drawable.rhyme4);
+              btn5.setImageResource(R.drawable.rhyme2);
+              btn6.setImageResource(R.drawable.rhyme6);
+              btn7.setImageResource(R.drawable.rhyme7);
+              btn8.setImageResource(R.drawable.rhyme8);
+              btn9.setImageResource(R.drawable.rhyme9);
+//              btn2.setText("Rhyme 2");
+//              btn3.setText("Rhyme 3");
+//              btn4.setText("Rhyme 4");
+//              btn5.setText("Rhyme 5");
+//              btn6.setText("Rhyme 6");
+//              btn7.setText("Rhyme 7");
+//              btn8.setText("Rhyme 8");
+//              btn9.setText("Rhyme 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(1).mp4?alt=media&token=f4681b94-8e25-493f-903e-db18bc31f0ba";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(2).mp4?alt=media&token=2129d043-103a-4204-8b01-d3cdbb0d9936";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";
@@ -200,7 +301,10 @@ public class yoga extends AppCompatActivity {
               videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(8).mp4?alt=media&token=37fbb7e8-0f98-4c15-a7bc-576206775fb6";
               videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback.mp4?alt=media&token=11b9d95e-0648-4ecb-866f-bea3d43b6117";
 
+
           }
+
+
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -263,7 +367,4 @@ public class yoga extends AppCompatActivity {
             startActivity(intent);
 
         }
-    private String encodeUserEmail(String email) {
-        return email.replace(".",",");
-    }
 }

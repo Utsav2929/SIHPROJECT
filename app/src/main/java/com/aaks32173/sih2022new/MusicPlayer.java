@@ -43,6 +43,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MusicPlayer extends AppCompatActivity{
@@ -67,16 +68,20 @@ public class MusicPlayer extends AppCompatActivity{
         path = getIntent().getExtras().getString("path");
         retrieveSongs(path);
 
+        String email = getIntent().getExtras().getString("email");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    increasecounter(email);
                 jcPlayerView.playAudio(jcAudios.get(position));
                 jcPlayerView.setVisibility(View.VISIBLE);
                 //jcPlayerView.createNotification();
             }
         });
+
+
+
 
 
 
@@ -283,5 +288,40 @@ public class MusicPlayer extends AppCompatActivity{
                 }).check();
 
         return checkPermission;
+    }
+
+
+
+    private void increasecounter(String email) {
+        LocalDate today=LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
+
+                if(Integer.parseInt(progress)<=90) {
+                    int prg = Integer.parseInt(progress) + 10;
+
+                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+
+                }else{
+
+                    int prg = 100;
+
+                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
     }
 }

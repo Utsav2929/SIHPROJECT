@@ -44,12 +44,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final TextView register_loginnow = findViewById(R.id.register_loginnow);
-        register_loginnow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                movetologin();
-            }
-        });
+//        register_loginnow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                movetologin();
+//            }
+//        });
 
         mAuth = FirebaseAuth.getInstance();
         register_name = findViewById(R.id.register_name);
@@ -63,9 +63,13 @@ public class RegisterActivity extends AppCompatActivity {
 //        female = findViewById(R.id.female);
 //        male = findViewById(R.id.male);
         radioGroup=findViewById(R.id.radioGroup);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("UserInfo");//.child(encode_email);//.child(encodeUserEmail(register_email.toString()));
         userInfo = new UserInfo();
+
+
+
 //        if(female.isSelected()){
 //            male.setSelected(false);
 //        }
@@ -76,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        register_registerbtn.setOnClickListener(new View.OnClickListener() {
+        register_loginnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -94,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this, gender,
                 Toast.LENGTH_SHORT).show();
     }
+
+
     private void RegisterNewUser(){
         String name,email,password,confirm_password,age,sssm_id,family_id;
         name = register_name.getText().toString();
@@ -103,15 +109,23 @@ public class RegisterActivity extends AppCompatActivity {
         age = register_age.getText().toString();
         sssm_id = register_sssm_id.getText().toString();
         family_id = register_family_id.getText().toString();
+
+
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)|| TextUtils.isEmpty(confirm_password)
                 || TextUtils.isEmpty(age)|| TextUtils.isEmpty(sssm_id)|| TextUtils.isEmpty(family_id) || gender.equals("")){
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
-        if (!password.equals(confirm_password)){
-            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
+        if(Integer.parseInt(age)<3)
+        {
+            Toast.makeText(getApplicationContext(),"age must be atlest 3",Toast.LENGTH_LONG).show();
             return;
         }
+//        if (password != confirm_password){
+//            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
+//            return;
+//        }
+
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                     @Override
@@ -123,37 +137,12 @@ public class RegisterActivity extends AppCompatActivity {
                             addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
 
 
-                            if(Integer.parseInt(age)<=8) {
-                                String[][] wetime={
-                                        {"1","Go for a walk with your parents"},
-                                        {"2","Have dinner with family"},
-                                        {"3","Ask your family members to tell you a story before bed."},
-                                        {"4","Plant a seed with the help with your elder and water it daily"},
-                                        {"5","Ask your mom to let you help in kitchen. Do as she instructs."},
-                                        {"6","Tell your mom how good she looks."},
-                                        {"7","Take blessings from your elders."},
-                                        {"8","Ask your parents to help you with your TODO list "},
-                                        {"9","Thank god for givng you such a wonderful family."},
-                                        {"10","Have a small dance party with songs played on your phone with your family."},
-                                        {"11","Maintain a piggy bank.Save money and add to it."},
-                                        {"12","Dress up and join your elders to temples, mosques,churches or gurudwaras"},
-                                        {"13","Set tables  for meals."},
-                                        {"14","Go to fruit or vegetable market with your elders."},
-                                        {"15","Arrange your closet with your elders."},
-                                        {"16","Check your photo albums with your family."}
-                                };
 
-                                databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email.toString()));
 
-                                for (int i = 1; i <= 16; i++) {
-                                    databaseReference2.child("WeTime").child(""+i).child("Status").setValue("False");
-                                    databaseReference2.child("WeTime").child(""+i).child("Description").setValue(wetime[i-1][1]);
-                                    databaseReference2.child("WeTime").child(""+i).child("ID").setValue(wetime[i-1][0]);
-                                }
 
-                            }
+
 //                            if (Integer.parseInt()<=8) {
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, UserDiet.class);
                                 startActivity(intent);
 //                            }
                         }
@@ -172,16 +161,13 @@ public class RegisterActivity extends AppCompatActivity {
         userInfo.setSssm_id(sssmid);
         userInfo.setFamily_id(familyid);
         userInfo.setGender(gender);
-        final boolean[] processDone = {true};
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(processDone[0]) {
-                    databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
-                    databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
-                    Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
-                    processDone[0] =false;
-                }
+                databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
+                databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
+                Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -194,7 +180,11 @@ public class RegisterActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }
+
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
     }
+
+
+
 }
