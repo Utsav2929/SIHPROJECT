@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -84,9 +85,30 @@ public class fouthFifthGroup extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
+        String [] interests ={"exercisee", "nutrition", "musicpodcast","relaxinactivities", "wetimee"};
         String encodedemmail=encodeUserEmail(email.toString());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
+        String [] intrestspoint = new String[5];
 
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child(interests[0]).getValue().toString();
+                intrestspoint[0]= (exercise);
+                String nutrition = snapshot.child(interests[1]).getValue().toString();
+                intrestspoint[1]= (nutrition);
+                String music = snapshot.child(interests[2]).getValue().toString();
+                intrestspoint[2]= (music);
+                String relaxin = snapshot.child(interests[3]).getValue().toString();
+                intrestspoint[3]= (relaxin);
+                String wetime = snapshot.child(interests[4]).getValue().toString();
+                intrestspoint[4]= (wetime);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
@@ -105,7 +127,7 @@ public class fouthFifthGroup extends AppCompatActivity {
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
                     for (int i = 1; i <= 5; i++) {
-                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue("50");
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue(intrestspoint[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("progress").setValue("0");
@@ -311,7 +333,6 @@ public class fouthFifthGroup extends AppCompatActivity {
 
         LinearSnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recycler_view);
-
         Timer timer =new Timer();
         timer.schedule(new TimerTask() {
             @Override
