@@ -32,6 +32,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton podcast = findViewById(R.id.podcasts);
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
+        ImageButton todo = findViewById(R.id.todo);
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
 
@@ -66,7 +67,6 @@ public class SixthEighthGroup extends AppCompatActivity {
                     for (int i = 1; i <= 16; i++) {
                         databaseReference2.child(td.toString()).child(""+i).child("status").setValue("False");
                         databaseReference2.child(td.toString()).child(""+i).child("description").setValue(wetime[i-1][1]);
-
                         databaseReference2.child(td.toString()).child(""+i).child("date").setValue(td.toString());
                         databaseReference2.child(td.toString()).child(""+i).child("id").setValue(wetime[i-1][0]);
                     }
@@ -87,6 +87,12 @@ public class SixthEighthGroup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gotoWetime(encodeUserEmail(Currentuser.getEmail().toString()));
+            }
+        });
+        todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoTodo(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
         podcast.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +156,11 @@ public class SixthEighthGroup extends AppCompatActivity {
     }
     private void gotoMenstural() {
         Intent intent = new Intent(SixthEighthGroup.this, MainActivity.class);
+        startActivity(intent);
+    }
+    private void gotoTodo(String email) {
+        Intent intent = new Intent(SixthEighthGroup.this, todo.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
     private String encodeUserEmail(String email) {

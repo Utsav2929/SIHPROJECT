@@ -232,7 +232,6 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
-
                     <ImageButton
                         android:id="@+id/wetime"
                         android:layout_width="match_parent"
@@ -321,7 +320,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton9"
+                        android:id="@+id/todo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
