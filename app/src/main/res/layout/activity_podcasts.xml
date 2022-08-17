@@ -65,11 +65,11 @@
 
                 <ImageView
                     android:id="@+id/img1"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_1" />
             </LinearLayout>
 
             <LinearLayout
@@ -95,11 +95,11 @@
 
                 <ImageView
                     android:id="@+id/img2"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_2" />
             </LinearLayout>
 
             <LinearLayout
@@ -125,11 +125,11 @@
 
                 <ImageView
                     android:id="@+id/img3"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:layout_gravity="center"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_3" />
             </LinearLayout>
 
             <LinearLayout
@@ -155,11 +155,11 @@
 
                 <ImageView
                     android:id="@+id/img4"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:layout_gravity="center"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_4" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,11 +185,11 @@
 
                 <ImageView
                     android:id="@+id/img5"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:layout_gravity="center"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_5" />
             </LinearLayout>
 
             <LinearLayout
@@ -215,11 +215,11 @@
 
                 <ImageView
                     android:id="@+id/img6"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:layout_gravity="center"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_6" />
             </LinearLayout>
 
             <LinearLayout
@@ -245,11 +245,11 @@
 
                 <ImageView
                     android:id="@+id/img7"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
                     android:layout_weight="3"
                     android:layout_gravity="center"
-                    android:src="@drawable/exercise" />
+                    android:src="@drawable/podcast_gif_3to5_7" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -72,13 +72,11 @@ public class fouthFifthGroup extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);
-        ImageButton health=(ImageButton)findViewById(R.id.imageButton3) ;
 
 
 
 
 
-        ImageButton wetime =findViewById(R.id.wetime);
 
         ExtendedFloatingActionButton letshaveconversation = findViewById(R.id.chatbot_3to5);
 
@@ -238,14 +236,14 @@ public class fouthFifthGroup extends AppCompatActivity {
             }
         });
 
-        health.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(fouthFifthGroup.this, yoga.class);
-                intent.putExtra("category", "health");
-                startActivity(intent);
-            }
-        });
+//        health.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(fouthFifthGroup.this, yoga.class);
+//                intent.putExtra("category", "health");
+//                startActivity(intent);
+//            }
+//        });
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,0 +1,331 @@
+Index: app/src/main/java/com/aaks32173/sih2022new/chekk.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\n\r\nimport android.app.ProgressDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.android.volley.Request;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.StringRequest;\r\nimport com.android.volley.toolbox.Volley;\r\nimport com.google.android.material.progressindicator.CircularProgressIndicator;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport retrofit2.Call;\r\n\r\npublic class chekk extends AppCompatActivity {\r\n\r\n    private RecyclerView recyclerView ;\r\n    private RecyclerView.Adapter adapter ;\r\n    private List<listitem>listitems ;\r\n    private Button btn ;\r\n    private String si ;\r\n    private EditText editText ;\r\n    private static String URL_DATA ;\r\n\r\n    private static String URL_DATA1=\" https://api.nutritionix.com/v1_1/search/\" ;\r\n           private static String URL_DATA2= \"?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=26e9d7d4&appKey=470cf8906c9bcf28bbffec8d6bede0ee\" ;\r\n\r\n\r\n\r\n    DatabaseReference dbref;\r\n    DatabaseReference dbref2;\r\n    FirebaseAuth mAuth;\r\n    FirebaseUser currentUser;\r\n    String email;\r\n    TextView showCalories;\r\n    double calories=0.0;\r\n    public double height=0.0;\r\n    public double weight=0.0;\r\n    public double age_id=0.0;\r\n    ImageView imageView;\r\n\r\n    public MyAdapter.onItemClickListener listener;\r\n    EditText show;\r\n    Button submit;\r\n\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_chekk);\r\n\r\n        recyclerView=(RecyclerView)findViewById(R.id.recyclerv) ;\r\n        recyclerView.setHasFixedSize(false);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n        editText=findViewById(R.id.search) ;\r\n        btn=findViewById(R.id.searchbtn) ;\r\n        listitems=new ArrayList<>() ;\r\n\r\n        mAuth = FirebaseAuth.getInstance();\r\n        currentUser= mAuth.getCurrentUser();\r\n        email = currentUser.getEmail();\r\n        showCalories = findViewById(R.id.showCalories);\r\n        show=findViewById(R.id.diet_show);\r\n        submit=findViewById(R.id.diet_submit);\r\n        imageView = findViewById(R.id.imageView);\r\n\r\n\r\n        dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(encodeUserEmail(email)).child(\"BMI\");\r\n        dbref.child(\"height\").addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                height = Double.parseDouble((String) snapshot.getValue());\r\n                dbref.child(\"weight\").addValueEventListener(new ValueEventListener() {\r\n                    @Override\r\n                    public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                        weight =Double.parseDouble((String) snapshot.getValue());\r\n//                Toast.makeText(getApplicationContext(), Double.toString( weight), Toast.LENGTH_SHORT).show();\r\n                        dbref2= FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(encodeUserEmail(email)).child(\"age\");\r\n                        dbref2.addValueEventListener(new ValueEventListener() {\r\n                            @Override\r\n                            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                                age_id= Double.parseDouble((String)snapshot.getValue());\r\n                                double height_inch=height*100.0*0.394;\r\n                                double weight_pounds = weight*2.205;\r\n//                                Toast.makeText(getApplicationContext(), \"heigth \"+height, Toast.LENGTH_SHORT).show();\r\n//                                //+\"weight \"+weight_pounds\r\n                                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;\r\n                                int a= (int) Math.round(calories);\r\n                                String cc = Integer.toString(a);\r\n                                showCalories.setText(cc);\r\n\r\n\r\n\r\n                            }\r\n\r\n                            @Override\r\n                            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                            }\r\n                        });\r\n                    }\r\n                    @Override\r\n                    public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                    }\r\n                });\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n\r\n\r\n        btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                listitems.clear();\r\n                 si=editText.getText().toString();\r\n                loadRecyclerviewData() ;\r\n\r\n            }\r\n        });\r\n\r\n        submit.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n//                Toast.makeText(chekk.this,show.getText(),Toast.LENGTH_LONG).show();\r\n//                Toast.makeText(getApplicationContext(),\"Calories \"+(showCalories.getText().toString()),Toast.LENGTH_SHORT).show();\r\n                Double p=Double.parseDouble(showCalories.getText().toString()) - Double.parseDouble(show.getText().toString());\r\n//               int diet=Integer.parseInt(showCalories.getText().toString());\r\n//               int ttldiet= Integer.parseInt(show.getText().toString());\r\n//\r\n//                Toast.makeText(chekk.this,diet, Toast.LENGTH_SHORT).show();\r\n//\r\n//                Toast.makeText(chekk.this, ttldiet, Toast.LENGTH_SHORT).show();\r\n\r\n//               increasecounter(email,diet,ttldiet);\r\n\r\n                if(p<0.0d) {\r\n                    Toast.makeText(chekk.this, \"Calorie Intake Achieved\", Toast.LENGTH_SHORT).show();\r\n                    showCalories.setText(\"0\");\r\n                    show.setText(\"\");\r\n                    editText.setText(\"\");\r\n                    listitems.clear();\r\n                    loadRecyclerviewData() ;\r\n                }else\r\n                {\r\n                    showCalories.setText(p.toString());\r\n                    show.setText(\"\");\r\n                    editText.setText(\"\");\r\n                    listitems.clear();\r\n                    loadRecyclerviewData() ;\r\n                }\r\n            }\r\n        });\r\n\r\n        imageView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent=new Intent(chekk.this,Diett.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n    private void loadRecyclerviewData()\r\n    {\r\n        URL_DATA=URL_DATA1+si+URL_DATA2;\r\n//        Toast.makeText(this,URL_DATA,Toast.LENGTH_SHORT).show();\r\n        ProgressDialog progressDialog=new ProgressDialog(this) ;\r\n        progressDialog.setMessage(\"Loading data...\");\r\n        progressDialog.show();\r\n\r\n        StringRequest stringRequest=new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {\r\n            @Override\r\n            public void onResponse(String s) {\r\n                    progressDialog.dismiss();\r\n                try {\r\n                    JSONObject jsonObject=new JSONObject(s) ;\r\n                    JSONArray array=jsonObject.getJSONArray(\"hits\")    ;\r\n\r\n                     for (int i=0;i<array.length();i++)\r\n                     {\r\n                         JSONObject o=array.getJSONObject(i) ;\r\n\r\n                         String fild=o.getString(\"fields\");\r\n//                         Toast.makeText(getApplicationContext(),fild,Toast.LENGTH_SHORT).show();\r\n\r\n                         JSONObject fldfinal=new JSONObject(fild) ;\r\n                         listitem item=new listitem(fldfinal.getString(\"item_name\"),fldfinal.getString(\"nf_calories\")) ;\r\n\r\n\r\n\r\n                        listitems.add(item) ;\r\n                     }\r\n\r\n\r\n\r\n//                        for(int j=0;j<p.length();j++){\r\n//                            JSONObject ff=p.getJSONObject(j) ;\r\n//                            listitem item=new listitem(ff.getString(\"item_name\"),ff.getString(\"item_id\")) ;\r\n//                            listitems.add(item) ;\r\n//\r\n//                        }\r\n\r\n\r\n                    SetOnClickListener();\r\n                     adapter= new MyAdapter(listitems,listener) ;\r\n                     recyclerView.setAdapter(adapter);\r\n//                    recyclerView.setLayoutManager(new LinearLayoutManager(chekk.this));\r\n\r\n\r\n                } catch (JSONException e) {\r\n                    e.printStackTrace();\r\n                }\r\n\r\n            }\r\n        },\r\n                new Response.ErrorListener() {\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        progressDialog.dismiss();\r\n                        Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_LONG).show();\r\n\r\n                    }\r\n                }) ;\r\n\r\n        RequestQueue requestQueue= Volley.newRequestQueue(this) ;\r\n        requestQueue.add(stringRequest);\r\n    }\r\n\r\n    private void SetOnClickListener() {\r\n        listener = new MyAdapter.onItemClickListener(){\r\n            @Override\r\n            public void onClickItem(View v, int positon) {\r\n//                Toast.makeText(getApplicationContext(),\"item \"+positon,Toast.LENGTH_SHORT).show();\r\n\r\n                show.setText(listitems.get(positon).getCal());\r\n//                                recyclerView.setVisibility(View.INVISIBLE);\r\n            }\r\n        };\r\n    }\r\n\r\n\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\", \",\");\r\n    }\r\n\r\n\r\n\r\n\r\n    private void increasecounter(String email,int diet,int ttldiet) {\r\n        LocalDate today=LocalDate.now();\r\n\r\n        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(email).child(\"TODO\").child(today.toString());\r\n        reference1.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            String progress;\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                progress = dataSnapshot.child(\"nutrition\").child(\"progress\").getValue().toString();\r\n\r\n                    int prg=(ttldiet/diet)*100;\r\n\r\n                reference1.child(\"nutrition\").child(\"progress\").setValue(Integer.toString(prg));\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/chekk.java b/app/src/main/java/com/aaks32173/sih2022new/chekk.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/chekk.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/chekk.java	
+@@ -2,6 +2,7 @@
+ 
+ import android.app.ProgressDialog;
+ import android.content.Intent;
++import android.os.Build;
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
+@@ -11,6 +12,7 @@
+ import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
++import androidx.annotation.RequiresApi;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+@@ -41,7 +43,10 @@
+ import retrofit2.Call;
+ 
+ public class chekk extends AppCompatActivity {
+-
++    FirebaseDatabase firebaseDatabase;
++    DatabaseReference databaseReference;
++    FirebaseAuth mauth;
++    FirebaseUser Currentuser;
+     private RecyclerView recyclerView ;
+     private RecyclerView.Adapter adapter ;
+     private List<listitem>listitems ;
+@@ -62,6 +67,7 @@
+     String email;
+     TextView showCalories;
+     double calories=0.0;
++    double ttlcalories=0.0;
+     public double height=0.0;
+     public double weight=0.0;
+     public double age_id=0.0;
+@@ -78,7 +84,11 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_chekk);
+-
++        firebaseDatabase = FirebaseDatabase.getInstance();
++        mauth = FirebaseAuth.getInstance();
++        //sleepdetail = false;
++        Currentuser = mauth.getCurrentUser();
++        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info").child("BMI");
+         recyclerView=(RecyclerView)findViewById(R.id.recyclerv) ;
+         recyclerView.setHasFixedSize(false);
+         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+@@ -94,53 +104,10 @@
+         submit=findViewById(R.id.diet_submit);
+         imageView = findViewById(R.id.imageView);
+ 
+-
+-        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("BMI");
+-        dbref.child("height").addValueEventListener(new ValueEventListener() {
+-            @Override
+-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+-                height = Double.parseDouble((String) snapshot.getValue());
+-                dbref.child("weight").addValueEventListener(new ValueEventListener() {
+-                    @Override
+-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+-                        weight =Double.parseDouble((String) snapshot.getValue());
+-//                Toast.makeText(getApplicationContext(), Double.toString( weight), Toast.LENGTH_SHORT).show();
+-                        dbref2= FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("age");
+-                        dbref2.addValueEventListener(new ValueEventListener() {
+-                            @Override
+-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+-                                age_id= Double.parseDouble((String)snapshot.getValue());
+-                                double height_inch=height*100.0*0.394;
+-                                double weight_pounds = weight*2.205;
+-//                                Toast.makeText(getApplicationContext(), "heigth "+height, Toast.LENGTH_SHORT).show();
+-//                                //+"weight "+weight_pounds
+-                                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;
+-                                int a= (int) Math.round(calories);
+-                                String cc = Integer.toString(a);
+-                                showCalories.setText(cc);
+-
+-
+-
+-                            }
++        fetchdata();
+ 
+-                            @Override
+-                            public void onCancelled(@NonNull DatabaseError error) {
+ 
+-                            }
+-                        });
+-                    }
+-                    @Override
+-                    public void onCancelled(@NonNull DatabaseError error) {
+ 
+-                    }
+-                });
+-            }
+-
+-            @Override
+-            public void onCancelled(@NonNull DatabaseError error) {
+-
+-            }
+-        });
+ 
+ 
+ 
+@@ -158,19 +125,29 @@
+         });
+ 
+         submit.setOnClickListener(new View.OnClickListener() {
++            @RequiresApi(api = Build.VERSION_CODES.O)
+             @Override
+             public void onClick(View view) {
+-//                Toast.makeText(chekk.this,show.getText(),Toast.LENGTH_LONG).show();
+-//                Toast.makeText(getApplicationContext(),"Calories "+(showCalories.getText().toString()),Toast.LENGTH_SHORT).show();
+-                Double p=Double.parseDouble(showCalories.getText().toString()) - Double.parseDouble(show.getText().toString());
+-//               int diet=Integer.parseInt(showCalories.getText().toString());
+-//               int ttldiet= Integer.parseInt(show.getText().toString());
++              Double p= Double.parseDouble(show.getText().toString());
++//                databaseReference.addValueEventListener(new ValueEventListener() {
++//                    @Override
++//                    public void onDataChange(DataSnapshot dataSnapshot) {
++//
++//
++//
++////                        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
++////                        int cl= (int) dataSnapshot.child("calinitial").getValue();
++////                        int i = Integer.parseInt(show.getText().toString()) + cl;
++////                        dbref.child("calinitial").setValue(i+"");
++////                        fetchdata();
+ //
+-//                Toast.makeText(chekk.this,diet, Toast.LENGTH_SHORT).show();
++//                    }
+ //
+-//                Toast.makeText(chekk.this, ttldiet, Toast.LENGTH_SHORT).show();
+-
+-//               increasecounter(email,diet,ttldiet);
++//                    @Override
++//                    public void onCancelled(DatabaseError databaseError) {
++//                    }
++//
++//                });
+ 
+                 if(p<0.0d) {
+                     Toast.makeText(chekk.this, "Calorie Intake Achieved", Toast.LENGTH_SHORT).show();
+@@ -181,6 +158,7 @@
+                     loadRecyclerviewData() ;
+                 }else
+                 {
++                    databaseReference.child("calinitial").setValue(p);
+                     showCalories.setText(p.toString());
+                     show.setText("");
+                     editText.setText("");
+@@ -233,18 +211,9 @@
+ 
+ 
+ 
+-//                        for(int j=0;j<p.length();j++){
+-//                            JSONObject ff=p.getJSONObject(j) ;
+-//                            listitem item=new listitem(ff.getString("item_name"),ff.getString("item_id")) ;
+-//                            listitems.add(item) ;
+-//
+-//                        }
+-
+-
+                     SetOnClickListener();
+                      adapter= new MyAdapter(listitems,listener) ;
+                      recyclerView.setAdapter(adapter);
+-//                    recyclerView.setLayoutManager(new LinearLayoutManager(chekk.this));
+ 
+ 
+                 } catch (JSONException e) {
+@@ -270,10 +239,8 @@
+         listener = new MyAdapter.onItemClickListener(){
+             @Override
+             public void onClickItem(View v, int positon) {
+-//                Toast.makeText(getApplicationContext(),"item "+positon,Toast.LENGTH_SHORT).show();
+-
++//
+                 show.setText(listitems.get(positon).getCal());
+-//                                recyclerView.setVisibility(View.INVISIBLE);
+             }
+         };
+     }
+@@ -286,7 +253,8 @@
+ 
+ 
+ 
+-    private void increasecounter(String email,int diet,int ttldiet) {
++    @RequiresApi(api = Build.VERSION_CODES.O)
++    private void increasecounter(String email, int diet, int ttldiet) {
+         LocalDate today=LocalDate.now();
+ 
+         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+@@ -309,4 +277,31 @@
+ 
+     }
+ 
++
++    private void fetchdata(){
++        dbref2= FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("BMI");
++        dbref2.addValueEventListener(new ValueEventListener() {
++            @Override
++            public void onDataChange(@NonNull DataSnapshot snapshot) {
++
++                //calories= Double.parseDouble(snapshot.child("age").getValue().toString());
++                String calinit = snapshot.child("calinitial").getValue().toString();
++                String calfinal = snapshot.child("calfinal").getValue().toString();
++                double calin = Double.parseDouble(calinit);
++                double calf = Double.parseDouble(calfinal);
++                double ans = calf-calin;
++                String cc = String.valueOf(ans);
++                showCalories.setText(cc);
++
++
++
++            }
++
++            @Override
++            public void onCancelled(@NonNull DatabaseError error) {
++
++            }
++        });
++    }
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/aaks32173/sih2022new/Details.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\npublic class Details extends AppCompatActivity {\r\n\r\n    EditText heightt, weightt;\r\n    Button bmi,next;\r\n    String check;\r\n    TextView showbmi, bmiinfo;\r\n    DatabaseReference dbref;\r\n    private FirebaseAuth mAuth;\r\n    private FirebaseUser mCurrentUser;\r\n\r\n\r\n    DatabaseReference dbref1;\r\n    private FirebaseAuth mAuth1;\r\n    private FirebaseUser mCurrentUser1;\r\n    RadioGroup radioGroup;\r\n    RadioButton rb1,rb2;\r\n    String diet;\r\n    String final_email =\"\";\r\n    int age1;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_details);\r\n\r\n\r\n        heightt = findViewById(R.id.height);\r\n        weightt = findViewById(R.id.weight);\r\n        bmi = findViewById(R.id.bmibtn);\r\n        showbmi = findViewById(R.id.bmishow);\r\n        bmiinfo = findViewById(R.id.bmiinfo);\r\n        next = findViewById(R.id.next_bmi);\r\n\r\n        mAuth = FirebaseAuth.getInstance();\r\n        mCurrentUser = mAuth.getCurrentUser();\r\n\r\n\r\n\r\n        mAuth1 = FirebaseAuth.getInstance();\r\n        mCurrentUser1 = mAuth1.getCurrentUser();\r\n\r\n        radioGroup=findViewById(R.id.radioGroup);\r\n\r\n\r\n\r\n        bmi.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n\r\n                Float h= Float.parseFloat(String.valueOf(heightt.getText()));\r\n                Float w= Float.parseFloat(String.valueOf(weightt.getText()));\r\n                h=h/100;\r\n                Float b=w/(h*h);\r\n                bmiinfo.setVisibility(view.getVisibility());\r\n\r\n                if (b < 18.5) {\r\n                    check = \"Under Weight\";\r\n                } else if (b >= 18.5 && b < 24.9) {\r\n                    check = \"Healthy\";\r\n                } else if (b >= 24.9 && b < 30) {\r\n                    check = \"Overweight\";\r\n                } else if (b >= 30) {\r\n                    check = \"Suffering from Obesity\";\r\n                }\r\n                bmiinfo.setText(check);\r\n                showbmi.setVisibility(view.getVisibility());\r\n                showbmi.setText(b.toString());\r\n                next.setVisibility(view.getVisibility());\r\n                String email = mAuth.getCurrentUser().getEmail();\r\n                final_email = encodeUserEmail(email);\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email).child(\"BMI\");\r\n                dbref.child(\"height\").setValue(h.toString());\r\n                dbref.child(\"weight\").setValue(w.toString());\r\n                dbref.child(\"bmi\").setValue(b.toString());\r\n                dbref.child(\"condition\").setValue(check);\r\n\r\n            }\r\n        });\r\n\r\n//        next.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View view) {\r\n//\r\n//                Intent i= new Intent(Details.this,Diett.class);\r\n//                finish();\r\n//                startActivity(i);\r\n//            }\r\n//        });\r\n        next.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                String email= mCurrentUser1.getEmail();\r\n//                Toast.makeText(view.getContext(), \"2\", Toast.LENGTH_SHORT).show();\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email);\r\n                dbref.child(\"userDiet\").setValue(diet);\r\n\r\n                Intent i = new Intent(Details.this,fouthFifthGroup.class);\r\n                finish();\r\n                startActivity(i);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void getUserData() {\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(final_email).child(\"info\");\r\n        reference.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                String age = dataSnapshot.child(\"age\").getValue().toString();\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email);\r\n                dbref.child(\"age\").setValue(age);\r\n\r\n                age1=Integer.parseInt(age);\r\n\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n    }\r\n    public void rbclick(View v) {\r\n        int radioId = radioGroup.getCheckedRadioButtonId();\r\n        rb1 = findViewById(radioId);\r\n        diet =rb1.getText().toString();\r\n//        Toast.makeText(this, diet,\r\n//                Toast.LENGTH_SHORT).show();\r\n    }\r\n\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\", \",\");\r\n    }\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/Details.java b/app/src/main/java/com/aaks32173/sih2022new/Details.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/Details.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/Details.java	
+@@ -1,5 +1,7 @@
+ package com.aaks32173.sih2022new;
+ 
++import static ai.api.util.ParametersConverter.parseFloat;
++
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.content.Intent;
+@@ -11,6 +13,7 @@
+ import android.widget.RadioButton;
+ import android.widget.RadioGroup;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.auth.FirebaseUser;
+@@ -21,7 +24,10 @@
+ import com.google.firebase.database.ValueEventListener;
+ 
+ public class Details extends AppCompatActivity {
+-
++    FirebaseDatabase firebaseDatabase;
++    DatabaseReference databaseReference;
++    FirebaseAuth mauth;
++    FirebaseUser Currentuser;
+     EditText heightt, weightt;
+     Button bmi,next;
+     String check;
+@@ -31,7 +37,7 @@
+     private FirebaseUser mCurrentUser;
+ 
+ 
+-    DatabaseReference dbref1;
++
+     private FirebaseAuth mAuth1;
+     private FirebaseUser mCurrentUser1;
+     RadioGroup radioGroup;
+@@ -44,7 +50,11 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_details);
+-
++        firebaseDatabase = FirebaseDatabase.getInstance();
++        mauth = FirebaseAuth.getInstance();
++        //sleepdetail = false;
++        Currentuser = mauth.getCurrentUser();
++        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+ 
+         heightt = findViewById(R.id.height);
+         weightt = findViewById(R.id.weight);
+@@ -84,13 +94,38 @@
+                 } else if (b >= 30) {
+                     check = "Suffering from Obesity";
+                 }
++                Float finalH = h;
++                databaseReference.addValueEventListener(new ValueEventListener() {
++                    @Override
++                    public void onDataChange(DataSnapshot dataSnapshot) {
++                        Toast.makeText(Details.this, "Hello ", Toast.LENGTH_SHORT).show();
++                            String age = dataSnapshot.child("age").getValue().toString();
++                            int age2 = Integer.parseInt(age);
++                            double calories = ((finalH *4.7)+(w*4.35)-(age2*4.7))*1.35;
++
++                            String s = calories+"";
++                        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI");
++                        dbref.child("calinitial").setValue("0");
++                        dbref.child("calfinal").setValue(s);
++
++
++                    }
++
++                    @Override
++                    public void onCancelled(DatabaseError databaseError) {
++                    }
++
++                });
++
++//
++//                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;
+                 bmiinfo.setText(check);
+                 showbmi.setVisibility(view.getVisibility());
+                 showbmi.setText(b.toString());
+                 next.setVisibility(view.getVisibility());
+                 String email = mAuth.getCurrentUser().getEmail();
+                 final_email = encodeUserEmail(email);
+-                dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI");
++               dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI");
+                 dbref.child("height").setValue(h.toString());
+                 dbref.child("weight").setValue(w.toString());
+                 dbref.child("bmi").setValue(b.toString());

@@ -2,6 +2,7 @@ package com.aaks32173.sih2022new;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +40,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
 
 public class chekk extends AppCompatActivity {
-
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseAuth mauth;
+    FirebaseUser Currentuser;
     private RecyclerView recyclerView ;
     private RecyclerView.Adapter adapter ;
     private List<listitem>listitems ;
@@ -50,7 +56,7 @@ public class chekk extends AppCompatActivity {
     private static String URL_DATA ;
 
     private static String URL_DATA1=" https://api.nutritionix.com/v1_1/search/" ;
-           private static String URL_DATA2= "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=26e9d7d4&appKey=470cf8906c9bcf28bbffec8d6bede0ee" ;
+    private static String URL_DATA2= "?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=26e9d7d4&appKey=470cf8906c9bcf28bbffec8d6bede0ee" ;
 
 
 
@@ -61,6 +67,7 @@ public class chekk extends AppCompatActivity {
     String email;
     TextView showCalories;
     double calories=0.0;
+    double ttlcalories=0.0;
     public double height=0.0;
     public double weight=0.0;
     public double age_id=0.0;
@@ -77,13 +84,18 @@ public class chekk extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chekk);
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mauth = FirebaseAuth.getInstance();
+        //sleepdetail = false;
+        Currentuser = mauth.getCurrentUser();
         recyclerView=(RecyclerView)findViewById(R.id.recyclerv) ;
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         editText=findViewById(R.id.search) ;
         btn=findViewById(R.id.searchbtn) ;
         listitems=new ArrayList<>() ;
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
 
         mAuth = FirebaseAuth.getInstance();
         currentUser= mAuth.getCurrentUser();
@@ -93,53 +105,10 @@ public class chekk extends AppCompatActivity {
         submit=findViewById(R.id.diet_submit);
         imageView = findViewById(R.id.imageView);
 
-
-        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("BMI");
-        dbref.child("height").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                height = Double.parseDouble((String) snapshot.getValue());
-                dbref.child("weight").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        weight =Double.parseDouble((String) snapshot.getValue());
-//                Toast.makeText(getApplicationContext(), Double.toString( weight), Toast.LENGTH_SHORT).show();
-                        dbref2= FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("age");
-                        dbref2.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                age_id= Double.parseDouble((String)snapshot.getValue());
-                                double height_inch=height*100.0*0.394;
-                                double weight_pounds = weight*2.205;
-//                                Toast.makeText(getApplicationContext(), "heigth "+height, Toast.LENGTH_SHORT).show();
-//                                //+"weight "+weight_pounds
-                                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;
-                                int a= (int) Math.round(calories);
-                                String cc = Integer.toString(a);
-                                showCalories.setText(cc);
+        fetchdata();
 
 
 
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
 
@@ -150,43 +119,63 @@ public class chekk extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 listitems.clear();
-                 si=editText.getText().toString();
+                si=editText.getText().toString();
                 loadRecyclerviewData() ;
 
             }
         });
 
         submit.setOnClickListener(new View.OnClickListener() {
+
+//            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-//                Toast.makeText(chekk.this,show.getText(),Toast.LENGTH_LONG).show();
-//                Toast.makeText(getApplicationContext(),"Calories "+(showCalories.getText().toString()),Toast.LENGTH_SHORT).show();
-                Double p=Double.parseDouble(showCalories.getText().toString()) - Double.parseDouble(show.getText().toString());
-//               int diet=Integer.parseInt(showCalories.getText().toString());
-//               int ttldiet= Integer.parseInt(show.getText().toString());
+                Toast.makeText(chekk.this, "1", Toast.LENGTH_SHORT).show();
 //
-//                Toast.makeText(chekk.this,diet, Toast.LENGTH_SHORT).show();
-//
-//                Toast.makeText(chekk.this, ttldiet, Toast.LENGTH_SHORT).show();
+//                Double p= Double.parseDouble(show.getText().toString());
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-//               increasecounter(email,diet,ttldiet);
 
-                if(p<0.0d) {
-                    Toast.makeText(chekk.this, "Calorie Intake Achieved", Toast.LENGTH_SHORT).show();
-                    showCalories.setText("0");
-                    show.setText("");
-                    editText.setText("");
-                    listitems.clear();
-                    loadRecyclerviewData() ;
-                }else
-                {
-                    showCalories.setText(p.toString());
-                    show.setText("");
-                    editText.setText("");
-                    listitems.clear();
-                    loadRecyclerviewData() ;
-                }
+
+                        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+                        String cl=  dataSnapshot.child("calinitial").getValue().toString();
+
+                        Toast.makeText(chekk.this, cl+"", Toast.LENGTH_SHORT).show();
+
+                        int i = Integer.parseInt(show.getText().toString()) + Integer.parseInt(cl);
+                        dbref.child("calinitial").setValue(i+"");
+
+                        Toast.makeText(chekk.this, i+"", Toast.LENGTH_SHORT).show();
+                        fetchdata();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+
+                });
+
             }
+
+//                if(p<0.0d) {
+//                Toast.makeText(chekk.this, "Calorie Intake Achieved", Toast.LENGTH_SHORT).show();
+//                showCalories.setText("0");
+//                show.setText("");
+//                editText.setText("");
+//                listitems.clear();
+//                loadRecyclerviewData() ;
+//            }else
+//            {
+//                databaseReference.child("calinitial").setValue(p);
+//                showCalories.setText(p.toString());
+//                show.setText("");
+//                editText.setText("");
+//                listitems.clear();
+//                loadRecyclerviewData() ;
+//            }
         });
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -210,40 +199,31 @@ public class chekk extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                    progressDialog.dismiss();
+                progressDialog.dismiss();
                 try {
                     JSONObject jsonObject=new JSONObject(s) ;
                     JSONArray array=jsonObject.getJSONArray("hits")    ;
 
-                     for (int i=0;i<array.length();i++)
-                     {
-                         JSONObject o=array.getJSONObject(i) ;
+                    for (int i=0;i<array.length();i++)
+                    {
+                        JSONObject o=array.getJSONObject(i) ;
 
-                         String fild=o.getString("fields");
+                        String fild=o.getString("fields");
 //                         Toast.makeText(getApplicationContext(),fild,Toast.LENGTH_SHORT).show();
 
-                         JSONObject fldfinal=new JSONObject(fild) ;
-                         listitem item=new listitem(fldfinal.getString("item_name"),fldfinal.getString("nf_calories")) ;
+                        JSONObject fldfinal=new JSONObject(fild) ;
+                        listitem item=new listitem(fldfinal.getString("item_name"),fldfinal.getString("nf_calories")) ;
 
 
 
                         listitems.add(item) ;
-                     }
+                    }
 
-
-
-//                        for(int j=0;j<p.length();j++){
-//                            JSONObject ff=p.getJSONObject(j) ;
-//                            listitem item=new listitem(ff.getString("item_name"),ff.getString("item_id")) ;
-//                            listitems.add(item) ;
-//
-//                        }
 
 
                     SetOnClickListener();
-                     adapter= new MyAdapter(listitems,listener) ;
-                     recyclerView.setAdapter(adapter);
-//                    recyclerView.setLayoutManager(new LinearLayoutManager(chekk.this));
+                    adapter= new MyAdapter(listitems,listener) ;
+                    recyclerView.setAdapter(adapter);
 
 
                 } catch (JSONException e) {
@@ -269,10 +249,8 @@ public class chekk extends AppCompatActivity {
         listener = new MyAdapter.onItemClickListener(){
             @Override
             public void onClickItem(View v, int positon) {
-//                Toast.makeText(getApplicationContext(),"item "+positon,Toast.LENGTH_SHORT).show();
-
+//
                 show.setText(listitems.get(positon).getCal());
-//                                recyclerView.setVisibility(View.INVISIBLE);
             }
         };
     }
@@ -285,7 +263,8 @@ public class chekk extends AppCompatActivity {
 
 
 
-    private void increasecounter(String email,int diet,int ttldiet) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void increasecounter(String email, int diet, int ttldiet) {
         LocalDate today=LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
@@ -295,7 +274,7 @@ public class chekk extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("nutrition").child("progress").getValue().toString();
 
-                    int prg=(ttldiet/diet)*100;
+                int prg=(ttldiet/diet)*100;
 
                 reference1.child("nutrition").child("progress").setValue(Integer.toString(prg));
 
@@ -306,6 +285,34 @@ public class chekk extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private void fetchdata(){
+        dbref2= FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(email)).child("BMI");
+        dbref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                //calories= Double.parseDouble(snapshot.child("age").getValue().toString());
+                String calinit = snapshot.child("calinitial").getValue().toString();
+                String calfinal = snapshot.child("calfinal").getValue().toString();
+                double calin = Double.parseDouble(calinit);
+                double calf = Double.parseDouble(calfinal);
+                double ans = calf-calin;
+                int a =(int)Math.round(ans);
+                String cc = String.valueOf(a);
+                showCalories.setText(cc);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

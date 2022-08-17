@@ -1,5 +1,7 @@
 package com.aaks32173.sih2022new;
 
+import static ai.api.util.ParametersConverter.parseFloat;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Details extends AppCompatActivity {
-
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseAuth mauth;
+    FirebaseUser Currentuser;
     EditText heightt, weightt;
     Button bmi,next;
     String check;
@@ -31,7 +37,7 @@ public class Details extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
 
 
-    DatabaseReference dbref1;
+
     private FirebaseAuth mAuth1;
     private FirebaseUser mCurrentUser1;
     RadioGroup radioGroup;
@@ -44,7 +50,11 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        mauth = FirebaseAuth.getInstance();
+        //sleepdetail = false;
+        Currentuser = mauth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
 
         heightt = findViewById(R.id.height);
         weightt = findViewById(R.id.weight);
@@ -84,6 +94,31 @@ public class Details extends AppCompatActivity {
                 } else if (b >= 30) {
                     check = "Suffering from Obesity";
                 }
+                Float finalH = h;
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Toast.makeText(Details.this, "Hello ", Toast.LENGTH_SHORT).show();
+                        String age = dataSnapshot.child("age").getValue().toString();
+                        int age2 = Integer.parseInt(age);
+                        double calories = ((finalH *4.7)+(w*4.35)-(age2*4.7))*1.35;
+
+                        String s = calories+"";
+                        dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI");
+                        dbref.child("calinitial").setValue("0");
+                        dbref.child("calfinal").setValue(s);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+
+                });
+
+//
+//                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;
                 bmiinfo.setText(check);
                 showbmi.setVisibility(view.getVisibility());
                 showbmi.setText(b.toString());

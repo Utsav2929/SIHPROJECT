@@ -100,6 +100,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
 
         poemsandrhymes.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, yoga::class.java)
                 .putExtra("category","rhymes")
             startActivity(a)
@@ -108,6 +110,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val stories = findViewById<ImageButton>(R.id.stories)
 
         stories.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, yoga::class.java)
                 .putExtra("category","stories")
             startActivity(a)
@@ -115,6 +119,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val gtbt = findViewById<ImageButton>(R.id.gtbt)
 
         gtbt.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, goodBadtouch::class.java)
             startActivity(a)
         }
@@ -122,6 +128,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val fightyourfear = findViewById<ImageButton>(R.id.fightyourfear)
 
         fightyourfear.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, yoga::class.java)
                 .putExtra("category","fightyourfear")
             startActivity(a)
@@ -131,6 +139,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val gksection = findViewById<ImageButton>(R.id.gksection)
 
         gksection.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, yoga::class.java)
                 .putExtra("category","gksection")
             startActivity(a)
@@ -138,6 +148,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val wetime = findViewById<ImageButton>(R.id.wetime)
 
         wetime.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, WetimeActivity::class.java)
                 .putExtra("email",encodedemmail)
                 startActivity(a)
@@ -154,6 +166,7 @@ class DashHome_Nur_3 : AppCompatActivity() {
         badge.startAnimation(myanim2)
         letshaveconversation.setOnClickListener {
 
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a =  Intent(this,com.aaks32173.sih2022new.ui.MainActivity::class.java)
 
             startActivity(a)
@@ -164,6 +177,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val health = findViewById<ImageButton>(R.id.health)
 
         health.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, yoga::class.java)
                 .putExtra("category","health1")
             startActivity(a)
@@ -174,6 +189,8 @@ class DashHome_Nur_3 : AppCompatActivity() {
         val nowcast = findViewById<ImageButton>(R.id.nowcast)
 
         nowcast.setOnClickListener {
+
+            Toast.makeText(applicationContext, email.toString(), Toast.LENGTH_SHORT).show()
             val a = Intent(this, Showpost::class.java)
             startActivity(a)
         }
