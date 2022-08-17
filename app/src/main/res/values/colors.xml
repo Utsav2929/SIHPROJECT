@@ -16,5 +16,8 @@
     <color name="bot_back">#203757</color>
     <color name="user_back">#6965FF</color>
     <color name="fab">#686AFF</color>
-    <color name="fear">#fbfcdd</color>
+
+
+    <color name="yellow">#FFECB510</color>
+    <color name="lightyellow">#F3DFA3</color>
 </resources>

@@ -55,6 +55,11 @@ public class fouthFifthGroup extends AppCompatActivity {
         ImageButton gtbt = findViewById(R.id.gtbt);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton menstural = findViewById(R.id.menstural);
+
+        ImageButton chatbot = findViewById(R.id.chatbot);
+
+        ImageButton diet =findViewById(R.id.imageButton3);
+
         ImageButton post =findViewById(R.id.post);
         ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);
         ImageButton health=(ImageButton)findViewById(R.id.imageButton3) ;
@@ -170,6 +175,12 @@ public class fouthFifthGroup extends AppCompatActivity {
                 openGtbt();
             }
         });
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opendiet(encodeUserEmail(Currentuser.getEmail().toString()));
+            }
+        });
         wetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -274,6 +285,11 @@ public class fouthFifthGroup extends AppCompatActivity {
         intent.putExtra("group", "FourthFifth");
 
         intent.putExtra("email", email);
+        startActivity(intent);
+    }
+    private void opendiet(String email) {
+        Intent intent = new Intent(fouthFifthGroup.this, chekk.class);
+
         startActivity(intent);
     }
     private void movetoflextime(String email) {

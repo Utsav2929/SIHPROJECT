@@ -91,6 +91,36 @@ public class yoga extends AppCompatActivity {
               videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
 
           }
+        else if(category.equals("health1")){
+          btn1.setText("Eat Healthy 1");
+          btn2.setText("Eat Healthy 2");
+          btn3.setText("Eat Healthy 3");
+          btn4.setText("Eat Healthy 4");
+          btn5.setText("Eat Healthy 5");
+          btn6.setText("Eat Healthy 6");
+          btn7.setText("Eat Healthy 7");
+          btn8.setText("Eat Healthy 8");
+          btn9.setText("Eat Healthy 9");
+          videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
+                  "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
+          videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
+                  "en=eb4f0015-3351-453e-a6b7-3a253ed6ed7f";
+          videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Conjunctivitis_%20_%20CONJUNCTIVITIS%20_%20Pink-Eye%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=" +
+                  "b49d872d-dc18-4e5e-abbc-a693c913be50";
+          videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Diarrhea_%20-%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=m" +
+                  "edia&token=bd1d85e1-fbf3-4a07-a5cd-322c85a67581";
+          videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stop%20Brushing%20Teeth_%20_%20Why%20Do%20We%20BRUSH%20TEETH_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=ab1" +
+                  "94c0a-e36b-428c-846a-818f089c16ec";
+          videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stopped%20Washing%20Hair_%20_%20Importance%20of%20HAIR%20WASH%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=" +
+                  "media&token=19d3d225-5086-47a8-9bf7-fafdf4a9ef8a";
+          videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Appendix%20Burst_%20_%20APPENDIX%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz" +
+                  ".mp4?alt=media&token=8f43aab8-46e9-4e96-a19d-e832792d6de0";
+          videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Drink%20Water_%20_%20Importance%20Of%20Water%20_%20Stay%20Hydrated%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=medi" +
+                  "a&token=8b94a616-39b7-48a6-bedf-eb635b865912";
+          videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Puke_%20_%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=media&token=92" +
+                  "a5fef9-8a3b-498e-b403-8c584f3741bd";
+
+      }
           else if(category.equals("gksection")){
 
               background.setImageResource(R.drawable.evai);
@@ -212,6 +242,34 @@ public class yoga extends AppCompatActivity {
           }
          else{
 
+
+              btn1.setText("Eat Healthy 1");
+              btn2.setText("Eat Healthy 2");
+              btn3.setText("Eat Healthy 3");
+              btn4.setText("Eat Healthy 4");
+              btn5.setText("Eat Healthy 5");
+              btn6.setText("Eat Healthy 6");
+              btn7.setText("Eat Healthy 7");
+              btn8.setText("Eat Healthy 8");
+              btn9.setText("Eat Healthy 9");
+              videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
+                      "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
+              videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
+                      "en=eb4f0015-3351-453e-a6b7-3a253ed6ed7f";
+              videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Conjunctivitis_%20_%20CONJUNCTIVITIS%20_%20Pink-Eye%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=" +
+                      "b49d872d-dc18-4e5e-abbc-a693c913be50";
+              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Diarrhea_%20-%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=m" +
+                      "edia&token=bd1d85e1-fbf3-4a07-a5cd-322c85a67581";
+              videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stop%20Brushing%20Teeth_%20_%20Why%20Do%20We%20BRUSH%20TEETH_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=ab1" +
+                      "94c0a-e36b-428c-846a-818f089c16ec";
+              videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stopped%20Washing%20Hair_%20_%20Importance%20of%20HAIR%20WASH%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=" +
+                      "media&token=19d3d225-5086-47a8-9bf7-fafdf4a9ef8a";
+              videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Appendix%20Burst_%20_%20APPENDIX%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz" +
+                      ".mp4?alt=media&token=8f43aab8-46e9-4e96-a19d-e832792d6de0";
+              videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Drink%20Water_%20_%20Importance%20Of%20Water%20_%20Stay%20Hydrated%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=medi" +
+                      "a&token=8b94a616-39b7-48a6-bedf-eb635b865912";
+              videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Puke_%20_%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=media&token=92" +
+                      "a5fef9-8a3b-498e-b403-8c584f3741bd";
              heading.setText("Rhymes");
               background.setImageResource(R.drawable.bg_poem);
              gif2.setAnimation(R.raw.unicorn);
@@ -242,6 +300,7 @@ public class yoga extends AppCompatActivity {
               videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(7).mp4?alt=media&token=f1b9bb6e-4d24-43ec-b232-c032f5146e0f";
               videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(8).mp4?alt=media&token=37fbb7e8-0f98-4c15-a7bc-576206775fb6";
               videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback.mp4?alt=media&token=11b9d95e-0648-4ecb-866f-bea3d43b6117";
+
 
           }
 
