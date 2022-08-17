@@ -3,18 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".MensturalFourthFifthGroup">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif1"
+        android:layout_width="800dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="-20dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/girl_gif"
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
+        android:layout_below="@+id/gif1"
         android:orientation="vertical">
 
         <TextView
@@ -22,7 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="LETS KNOW OUR BODY BETTER"
+            android:padding="10dp"
+            android:textColor="#B4000000"
+            android:fontFamily="@font/salsa"
+            android:text="LET'S KNOW OUR BODY BETTER"
             android:textSize="30dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -41,18 +53,20 @@
                 android:weightSum="10"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:padding="20dp"
+                android:backgroundTint="#f4e4d3"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20dp"
                     android:text="Girls Period Guide Vol 1"/>
                 <ImageView
                     android:layout_weight="3"
-
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:src="@drawable/exercise"/>
@@ -64,14 +78,17 @@
                 android:weightSum="10"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:padding="20dp"
+                android:backgroundTint="#a6dace"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20dp"
                     android:text="Girls Period Guide Vol 2"/>
                 <ImageView
                     android:layout_weight="3"
@@ -87,14 +104,17 @@
                 android:weightSum="10"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:padding="20dp"
+                android:backgroundTint="#f4e4d3"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20dp"
                     android:text="Girls Talk ep. 1"/>
                 <ImageView
                     android:layout_weight="3"
@@ -110,14 +130,17 @@
                 android:weightSum="10"
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:padding="20dp"
+                android:backgroundTint="#a6dace"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20dp"
                     android:text="Girls Talk ep.2 "/>
                 <ImageView
                     android:layout_weight="3"
@@ -134,13 +157,17 @@
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:backgroundTint="#f4e4d3"
+                android:background="@drawable/shape7"
+                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textSize="20dp"
                     android:text="Know About Puberty"/>
                 <ImageView
                     android:layout_weight="3"
@@ -157,12 +184,15 @@
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:backgroundTint="#a6dace"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="left"
                     android:text="Period and Family"/>
                 <ImageView
@@ -180,13 +210,16 @@
                 android:orientation="horizontal"
                 android:layout_margin="10dp"
                 android:padding="10dp"
-                android:background="@drawable/shapeflex">
+                android:backgroundTint="#f4e4d3"
+                android:background="@drawable/shape7">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:layout_gravity="center"
                     android:gravity="left"
+                    android:textSize="20dp"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="Lets Talk About Periods"/>
                 <ImageView
                     android:layout_weight="3"
