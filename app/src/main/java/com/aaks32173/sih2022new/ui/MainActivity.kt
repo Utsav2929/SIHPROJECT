@@ -177,32 +177,33 @@ class MainActivity : AppCompatActivity() {
 
                     et_message.setText(answer1)
 
-                    if (answer1.toString() == "yes" && chatbottype == "chatbotprimary") {
+
+                    if (answer1.toString() == "Happy" && chatbottype == "chatbot") {
+
+                        gif.setImageResource(R.drawable.great_tim)
+                    }
+                    if (answer1.toString() == "yes" && mainindex.toString() == "14" && chatbottype == "chatbotprimary") {
+
+                        chatbottype = "chatbot"
+                    }
+                    if (answer1.toString() == "yes" && mainindex.toString() == "27" && chatbottype == "chatbot") {
+                        chatbottype = "chatbotprimary"
+                    }
+                    if (answer1.toString() == "yes" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
+                        val intent = Intent(this, councellor::class.java)
+                        startActivity(intent)
+                    }
+                    if (answer1.toString() == "threapist" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
+                        val intent = Intent(this, councellor::class.java)
+                        startActivity(intent)
+                    }
 
 
-                        if (answer1.toString() == "Happy" && chatbottype == "chatbot") {
-
-                            gif.setImageResource(R.drawable.great_tim)
-                        }
-                        if (answer1.toString() == "yes" && mainindex.toString() == "14" && chatbottype == "chatbotprimary") {
-
-                            chatbottype = "chatbot"
-                        }
-                        if (answer1.toString() == "yes" && mainindex.toString() == "27" && chatbottype == "chatbot") {
-                            chatbottype = "chatbotprimary"
-                        }
-                        if (answer1.toString() == "yes" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
-                            val intent = Intent(this, councellor::class.java)
-                            startActivity(intent)
-                        }
-                        if (answer1.toString() == "threapist" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
-                            val intent = Intent(this, councellor::class.java)
-                            startActivity(intent)
-                        }
                         qs = answer1index
                         sendMessage()
 
-                    }
+
+                }
                     btn_send2.setOnClickListener {
 
                         et_message.setText(answer2)
@@ -213,15 +214,6 @@ class MainActivity : AppCompatActivity() {
                             gif.setImageResource(R.drawable.hereforyougif)
 
 
-                            Handler().postDelayed({
-                                val startActivity =
-                                    Intent(this, depressn_main::class.java)
-                                startActivity(startActivity)
-                                finish()
-                            }, 2000)
-//                        val a = Intent(this, depressn_main::class.java)
-//                       startActivity(a)
-//
 
                         }
 
@@ -279,7 +271,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    }
+
         private fun customBotMessage(message: String) {
 
             GlobalScope.launch {

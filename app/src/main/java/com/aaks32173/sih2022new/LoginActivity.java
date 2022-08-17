@@ -97,12 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                     databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-//                            String age = dataSnapshot.child(encodeUserEmail(email)).child("info").child("age").getValue().toString();
-//                            if(parseInt(age)<8 && parseInt(age)>2)
-                            int age=1;
-                            if(age==1)
+                            String age = dataSnapshot.child(encodeUserEmail(email)).child("info").child("age").getValue().toString();
+                            if(parseInt(age)<8 && parseInt(age)>2)
                             {
-                                Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
+                                Intent intent = new Intent(LoginActivity.this, DashHome_Nur_3.class);
                                 startActivity(intent);
                             }
                             else{
@@ -132,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 {
                                                     databaseReference2.child(encodeUserEmail(email)).child("SleepDetails").child("SleepActivity").setValue("true");
                                                 }
-
                                                 if(parseInt(age)>8 && parseInt(age)<11) {
                                                     Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
                                                     startActivity(intent);
@@ -142,10 +139,6 @@ public class LoginActivity extends AppCompatActivity {
                                                     startActivity(intent);
                                                 }
                                             }
-
-//                                           
-                                                }
-
                                             processDone[0] =false;
                                         }
                                     }
@@ -185,4 +178,3 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
     }
 }
-

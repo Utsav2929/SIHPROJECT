@@ -36,8 +36,7 @@ public class yoga extends AppCompatActivity {
           String category = getIntent().getExtras().getString("category");
           String group = getIntent().getExtras().getString("group");
           Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
-          String ageint = getIntent().getExtras().getString("age");
-          int age =  parseInt(ageint);
+
 
           TextView heading=findViewById(R.id.head);
             ImageButton btn1 = findViewById(R.id.btn1);
@@ -53,7 +52,7 @@ public class yoga extends AppCompatActivity {
           GifImageView gif1=findViewById(R.id.gif1);
           ImageButton btn9 = findViewById(R.id.btn9);
 
-          if(age>8 && category.equals("exercises")){
+          if( category.equals("exercises")){
               if(group.equals("SixthEight"))
               {
                   videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(1).mp4?alt=media&token=3a92fa5d-8f01-43a8-8460-d2235221fa54";
@@ -84,15 +83,6 @@ public class yoga extends AppCompatActivity {
               heading.setVisibility(View.INVISIBLE);
               gif2.setVisibility(View.INVISIBLE);
               gif1.setImageResource(R.drawable.food_gif);
-//              btn1.setText("Lets Learn 1");
-//              btn2.setText("Lets Learn 2");
-//              btn3.setText("Lets Learn 3");
-//              btn4.setText("Lets Learn 4");
-//              btn5.setText("Lets Learn 5");
-//              btn6.setText("Lets Learn 6");
-//              btn7.setText("Lets Learn 7");
-//              btn8.setText("Lets Learn 8");
-//              btn9.setText("Lets Learn 9");
 
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
@@ -106,15 +96,22 @@ public class yoga extends AppCompatActivity {
 
           }
         else if(category.equals("health1")){
-//          btn1.setText("Eat Healthy 1");
-//          btn2.setText("Eat Healthy 2");
-//          btn3.setText("Eat Healthy 3");
-//          btn4.setText("Eat Healthy 4");
-//          btn5.setText("Eat Healthy 5");
-//          btn6.setText("Eat Healthy 6");
-//          btn7.setText("Eat Healthy 7");
-//          btn8.setText("Eat Healthy 8");
-//          btn9.setText("Eat Healthy 9");
+
+            background.setImageResource(R.drawable.bg_poem);
+
+              heading.setText("Healthy Habits");
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.health35);
+
+              btn1.setImageResource(R.drawable.health1);
+              btn2.setImageResource(R.drawable.health2);
+              btn3.setImageResource(R.drawable.health3);
+              btn4.setImageResource(R.drawable.health4);
+              btn5.setImageResource(R.drawable.health5);
+              btn6.setImageResource(R.drawable.health1);
+              btn7.setImageResource(R.drawable.health2);
+              btn8.setImageResource(R.drawable.health3);
+              btn9.setImageResource(R.drawable.health5);
           videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
                   "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
           videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
@@ -186,15 +183,7 @@ public class yoga extends AppCompatActivity {
               btn7.setImageResource(R.drawable.fear3);
               btn8.setImageResource(R.drawable.fear2);
               btn9.setImageResource(R.drawable.fear4);
-//              btn1.setText("Lets Fight 1");
-//              btn2.setText("Lets Fight 2");
-//              btn3.setText("Lets Fight 3");
-//              btn4.setText("Lets Fight 4");
-//              btn5.setText("Lets Fight 5");
-//              btn6.setText("Lets Fight 6");
-//              btn7.setText("Lets Fight 7");
-//              btn8.setText("Lets Fight 8");
-//              btn9.setText("Lets Fight 9");
+
                videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2F100%20Kids%20Tell%20Us%20Their%20Fears%20%F0%9F%91%B9%F0%9F%8E%83%F0%9F%91%BB%20_%20100%20Kids%20_%20HiHo%20Kids.mp4?alt=media&token=05d8" +
                       "1a20-a16b-44eb-8c50-46ed6044c298";
                videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FFight_your_fear%2FFight%20Your%20Fears%20to%20Be%20Victorious%20_%20Coward%20Pompu%20Story%20_%20Moral%20Stories%20By%20Granny%20_%20Woka%20English.mp4?a" +
@@ -231,15 +220,6 @@ public class yoga extends AppCompatActivity {
               btn8.setImageResource(R.drawable.story8);
               btn9.setImageResource(R.drawable.story1);
 
-//              btn1.setText("Story 1");
-//              btn2.setText("Story 2");
-//              btn3.setText("Story 3");
-//              btn4.setText("Story 4");
-//              btn5.setText("Story 5");
-//              btn6.setText("Story 6");
-//              btn7.setText("Story 7");
-//              btn8.setText("Story 8");
-//              btn9.setText("Story 9");
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(1).mp4?alt=media&token=03fb5dee-5dd1-4636-95ab-e0e600140ce5";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(2).mp4?alt=media&token=94fb88f1-ddcc-46c2-9ec1-281a7d8bfbd8";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(3).mp4?alt=media&token=f08c7496-28a8-4870-b223-76569da775e4";
@@ -251,36 +231,8 @@ public class yoga extends AppCompatActivity {
               videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fpodcast%2Fvideoplayback%20(7).mp4?alt=media&token=308e8eb6-6bf8-46db-9a69-357b42bc4305";
 
           }
-         else{
+         else if(category.equals("rhymes")) {
 
-//
-//              btn1.setText("Eat Healthy 1");
-//              btn2.setText("Eat Healthy 2");
-//              btn3.setText("Eat Healthy 3");
-//              btn4.setText("Eat Healthy 4");
-//              btn5.setText("Eat Healthy 5");
-//              btn6.setText("Eat Healthy 6");
-//              btn7.setText("Eat Healthy 7");
-//              btn8.setText("Eat Healthy 8");
-//              btn9.setText("Eat Healthy 9");
-              videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FIs%20Sugar%20Bad%20For%20You_%20_%20What%20SUGAR%20Does%20To%20Our%20Body_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4" +
-                      "?alt=media&token=037699cb-5d48-4f44-85b5-e7fb81dd9cae";
-              videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWellbeing%20for%20Children_%20Healthy%20Habits.mp4?alt=media&tok" +
-                      "en=eb4f0015-3351-453e-a6b7-3a253ed6ed7f";
-              videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Conjunctivitis_%20_%20CONJUNCTIVITIS%20_%20Pink-Eye%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=" +
-                      "b49d872d-dc18-4e5e-abbc-a693c913be50";
-              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20Causes%20Diarrhea_%20-%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=m" +
-                      "edia&token=bd1d85e1-fbf3-4a07-a5cd-322c85a67581";
-              videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stop%20Brushing%20Teeth_%20_%20Why%20Do%20We%20BRUSH%20TEETH_%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=media&token=ab1" +
-                      "94c0a-e36b-428c-846a-818f089c16ec";
-              videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhat%20If%20We%20Stopped%20Washing%20Hair_%20_%20Importance%20of%20HAIR%20WASH%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=" +
-                      "media&token=19d3d225-5086-47a8-9bf7-fafdf4a9ef8a";
-              videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Appendix%20Burst_%20_%20APPENDIX%20_%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz" +
-                      ".mp4?alt=media&token=8f43aab8-46e9-4e96-a19d-e832792d6de0";
-              videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Drink%20Water_%20_%20Importance%20Of%20Water%20_%20Stay%20Hydrated%20_%20The%20Dr%20Binocs%20Show%20_%20Peekaboo%20Kidz.mp4?alt=medi" +
-                      "a&token=8b94a616-39b7-48a6-bedf-eb635b865912";
-              videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Fhealth%2FWhy%20Do%20We%20Puke_%20_%20The%20Dr.%20Binocs%20Show%20_%20Best%20Learning%20Videos%20For%20Kids%20_%20Peekaboo%20Kidz.mp4?alt=media&token=92" +
-                      "a5fef9-8a3b-498e-b403-8c584f3741bd";
              heading.setText("Rhymes");
               background.setImageResource(R.drawable.bg_poem);
              gif2.setAnimation(R.raw.unicorn);
@@ -294,14 +246,7 @@ public class yoga extends AppCompatActivity {
               btn7.setImageResource(R.drawable.rhyme7);
               btn8.setImageResource(R.drawable.rhyme8);
               btn9.setImageResource(R.drawable.rhyme9);
-//              btn2.setText("Rhyme 2");
-//              btn3.setText("Rhyme 3");
-//              btn4.setText("Rhyme 4");
-//              btn5.setText("Rhyme 5");
-//              btn6.setText("Rhyme 6");
-//              btn7.setText("Rhyme 7");
-//              btn8.setText("Rhyme 8");
-//              btn9.setText("Rhyme 9");
+//
               videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(1).mp4?alt=media&token=f4681b94-8e25-493f-903e-db18bc31f0ba";
               videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2Frhymes%2Fvideoplayback%20(2).mp4?alt=media&token=2129d043-103a-4204-8b01-d3cdbb0d9936";
               videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga2.mp4?alt=media&token=479e5819-5e8d-45ac-bc57-ef7c812a5d32";

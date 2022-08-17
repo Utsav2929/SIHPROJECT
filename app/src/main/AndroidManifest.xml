@@ -24,9 +24,7 @@
         <activity
             android:name=".gtbtPanelFourthFifth"
             android:exported="false" />
-        <activity
-            android:name=".chatbot.MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".splash"
             android:exported="true" >
@@ -142,6 +140,18 @@
         <activity
             android:name=".yoga"
             android:exported="false" />
+
+        <activity
+            android:name=".UserDiet"
+            android:exported="false" />
+
+        <activity
+            android:name=".Details"
+            android:exported="false" />
+
+        <activity
+            android:name=".chekk"
+            android:exported="false" />
         <activity
             android:name=".flex_time"
             android:exported="false" />
@@ -151,12 +161,8 @@
         <activity
 
             android:name=".LoginActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true"/>
 
-
-        </activity>
         <activity
             android:name=".DashHome_Nur_3"
             android:exported="false" />
@@ -169,21 +175,7 @@
         <activity
             android:name=".vedioPlay"
             android:exported="false" />
-        <activity
-            android:name=".chekk"
-            android:exported="false" />
-        <activity
-            android:name=".Diett"
-            android:exported="false" />
-        <activity
-            android:name=".character_quotes"
-            android:exported="false" />
-        <activity
-            android:name=".Details"
-            android:exported="false" />
-        <activity
-            android:name=".UserDiet"
-            android:exported="false" />
+
         <activity
             android:name=".goodBadtouch"
             android:exported="false" />
@@ -239,10 +231,10 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.SIH2022NEW.NoActionBar">
+            android:theme="@style/Theme.SIH2022NEW.NoActionBar"/>
 
 
-        </activity>
+
 
         <receiver android:name=".recieverAlarm" />
 
