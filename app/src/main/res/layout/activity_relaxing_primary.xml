@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#bbf1fd"
+
     tools:context=".relaxingActivityPrimary">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif1"
+        android:layout_width="800dp"
+        android:layout_height="270dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/relaxx"
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/head"
+        android:layout_below="@+id/gif1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp">
 
         <TextView
@@ -24,8 +32,10 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="5dp"
+            android:fontFamily="@font/salsa"
+            android:textColor="#BE000000"
             android:text="@string/relaxingPrimary"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:textStyle="bold" />
     </LinearLayout>
     <ScrollView
@@ -59,6 +69,7 @@
                         android:text="Bubble Wrap"
                         android:textSize="20dp"
                         android:textStyle="bold"
+                        android:textColor="#BE000000"
                         android:layout_margin="5dp"
                         android:padding="3dp"
                         android:layout_gravity="center"/>
@@ -81,6 +92,7 @@
                         android:textSize="20dp"
                         android:textStyle="bold"
                         android:layout_margin="5dp"
+                        android:textColor="#BE000000"
                         android:padding="3dp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
@@ -109,6 +121,7 @@
                         android:textStyle="bold"
                         android:layout_margin="5dp"
                         android:padding="3dp"
+                        android:textColor="#BE000000"
                         android:layout_gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -127,10 +140,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Journaling"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:layout_margin="5dp"
                         android:padding="3dp"
+                        android:textColor="#BE000000"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
@@ -158,6 +172,7 @@
                         android:textStyle="bold"
                         android:layout_margin="5dp"
                         android:padding="3dp"
+                        android:textColor="#BE000000"
                         android:layout_gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -175,10 +190,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Outdoor"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:layout_margin="5dp"
                         android:padding="3dp"
+                        android:textColor="#BE000000"
                         android:layout_gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
