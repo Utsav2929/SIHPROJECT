@@ -2,35 +2,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".fouthFifthGroup"
-    android:background="#ECF9FE">
+    tools:context=".fouthFifthGroup">
+
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="404dp"
-        android:layout_height="149dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="7dp"
-        android:contentDescription="image"
-        android:src="@drawable/selfcareimg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:translationZ="-10dp"
+        android:background="@drawable/bgcheck25"
+        android:alpha="0.4"/>
+<!--        android:background="#ffc76a"-->
+
+
+    <ImageView
+        android:id="@+id/img_3to5"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:alpha="0.96"
+        android:src="@drawable/selfcare_check" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/bg_3to5"
+        android:translationZ="-5dp" />
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image">
+        android:layout_height="610dp"
+        android:id="@+id/scrollable_3to5"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/img_3to5"
+        android:layout_centerInParent="true"
+        >
         <LinearLayout
-         android:gravity="center"
             android:layout_width="369dp"
-            android:layout_height="wrap_content"
+            android:layout_height="654dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            >
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="230dp"
+                    android:layout_height="270dp"
+                    android:layout_marginLeft="-40dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/layer" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_3to5"
+                    android:layout_width="266dp"
+                    android:layout_height="192dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="-80dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="90dp"
+                    android:padding="10sp" />
+            </LinearLayout>
+
+        <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -42,14 +85,15 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
+
                     <ImageButton
                         android:id="@+id/music"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
                         android:layout_marginBottom="0dp"
-                        app:srcCompat="@drawable/rectangle_19"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/music_3to5" />
+
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
@@ -78,7 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="PODCAST"
+                        android:text="INSPIRATIONAL STORIES"
                         android:textAlignment="center"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -96,18 +140,17 @@
                     android:orientation="vertical"
                     android:weightSum="2">
                     <ImageButton
-                        android:id="@+id/imageButton5"
-                        android:layout_width="match_parent"
-                        android:layout_height="143dp"
+                        android:id="@+id/exercise_3to5"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        android:background="@drawable/shape"
-                        app:srcCompat="@drawable/rectangle_20" />
+                        android:background="@drawable/exercise_3to5"/>
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:fontFamily="@font/salsa"
                         android:layout_height="wrap_content"
-                        android:text="FLEX TIME"
+                        android:text="EXERCISE"
                         android:textAlignment="center"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -119,11 +162,10 @@
                     android:weightSum="2">
                     <ImageButton
                         android:id="@+id/imageButton3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_9"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/diet_3to5"/>
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
@@ -147,18 +189,17 @@
                     android:orientation="vertical"
                     android:weightSum="2">
                     <ImageButton
-                        android:id="@+id/chatbot"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/wetime"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_15"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/wetime_3to5"/>
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/wetimetext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="LET'S HAVE CONVERSATION"
+                        android:text="We Time"
                         android:textAlignment="center"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -221,11 +262,10 @@
                     android:weightSum="2">
                     <ImageButton
                         android:id="@+id/relaxing"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/relaxingprimary"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/relaxing_activities_3to5"/>
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
@@ -251,11 +291,10 @@
                     android:weightSum="2">
                     <ImageButton
                         android:id="@+id/gtbt"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/gtbt"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/gtbt_3to5"/>
                     <TextView
                         android:id="@+id/gtbttext"
                         android:layout_width="match_parent"
@@ -273,11 +312,10 @@
                     android:weightSum="2">
                     <ImageButton
                         android:id="@+id/menstural"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_16"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/menstrual_3to5"/>
                     <TextView
                         android:id="@+id/textView90"
                         android:layout_width="match_parent"
@@ -295,53 +333,39 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-                    <ImageButton
-                        android:id="@+id/wetime"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/gtbt"
-                        android:background="@drawable/shape"/>
-                    <TextView
-                        android:id="@+id/wetimetext"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/salsa"
-                        android:text="We Time"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-                    <ImageButton
-                        android:id="@+id/kuch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_16"
-                        android:background="@drawable/shape"/>
-                    <TextView
-                        android:id="@+id/kuchluch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/salsa"
-                        android:text="KNOW YOUR BODY"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
+
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/chatbot_3to5"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:layout_marginStart="32dp"
+        android:text="ChatBot"
+        android:fontFamily="@font/salsa"
+        app:icon="@drawable/ic_baseline_chat_24"
+        android:backgroundTint="#FFC400"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
+        />
+    <TextView
+        android:layout_width="18sp"
+        android:layout_height="18sp"
+        android:background="@drawable/roundbadge"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:text=""
+        android:id="@+id/chatbotbadge_3to5"
+        android:textColor="#fff"
+        android:textSize="10sp"
+        android:layout_alignTop="@id/chatbot_3to5"
+        android:layout_alignRight="@id/chatbot_3to5"/>
+
 </RelativeLayout>

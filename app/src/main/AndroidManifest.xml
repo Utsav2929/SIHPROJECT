@@ -30,6 +30,11 @@
         <activity
             android:name=".splash"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -66,7 +71,11 @@
             android:exported="false" />
         <activity
             android:name=".fouthFifthGroup"
-            android:exported="false" />
+            android:exported="false" >
+
+
+
+        </activity>
         <activity
             android:name=".sports"
             android:exported="false" />
@@ -140,13 +149,13 @@
             android:name=".ui.chatbotquestion"
             android:exported="false" />
         <activity
+
             android:name=".LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".DashHome_Nur_3"
@@ -231,6 +240,7 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SIH2022NEW.NoActionBar">
+
 
         </activity>
 
