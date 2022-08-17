@@ -72,15 +72,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
-
                     <ImageButton
                         android:id="@+id/poemsryhmes"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
+                        android:elevation="20dp"
                         android:layout_margin="20dp"
                         android:layout_marginBottom="0dp"
                         android:background="@drawable/rhyme_bacche1"/>
-
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="match_parent"

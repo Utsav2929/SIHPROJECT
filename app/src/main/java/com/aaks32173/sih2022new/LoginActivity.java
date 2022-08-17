@@ -132,11 +132,20 @@ public class LoginActivity extends AppCompatActivity {
                                                 {
                                                     databaseReference2.child(encodeUserEmail(email)).child("SleepDetails").child("SleepActivity").setValue("true");
                                                 }
-//                                                if(parseInt(age)>8 && parseInt(age)<11) {
-//                                                    Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
-//                                                    startActivity(intent);
-//                                                }
+
+                                                if(parseInt(age)>8 && parseInt(age)<11) {
+                                                    Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
+                                                    startActivity(intent);
                                                 }
+                                                else if (parseInt(age) < 14 && parseInt(age) >= 11) {
+                                                    Intent intent = new Intent(LoginActivity.this, SixthEighthGroup.class);
+                                                    startActivity(intent);
+                                                }
+                                            }
+
+//                                           
+                                                }
+
                                             processDone[0] =false;
                                         }
                                     }

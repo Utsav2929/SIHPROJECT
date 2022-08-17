@@ -40,6 +40,8 @@
         <activity
             android:name=".addtodo"
             android:exported="false" />
+        <activity android:name=".addintrest"
+            android:exported="false"/>
         <activity
             android:name=".flextimefourthfifth"
             android:exported="false" />
@@ -147,12 +149,16 @@
             android:name=".ui.chatbotquestion"
             android:exported="false" />
         <activity
-            android:name=".DashHome_Nur_3"
-            android:exported="false" >
+
+            android:name=".LoginActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
 
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".DashHome_Nur_3"
             android:exported="false" />
         <activity
             android:name=".good_bad_touch_comic"

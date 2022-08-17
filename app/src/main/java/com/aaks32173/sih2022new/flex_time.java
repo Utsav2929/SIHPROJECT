@@ -1,5 +1,4 @@
 package com.aaks32173.sih2022new;
-
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,12 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 public class flex_time extends AppCompatActivity {
     private FirebaseAuth mauth;
     DatabaseReference databaseReference;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
+    final String[] age1 = new String[1];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class flex_time extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String age = dataSnapshot.child("age").getValue().toString();
+                age1[0] =age;
                 if (parseInt(age) < 14 && parseInt(age) >= 11) {
                     LinearLayout ly = findViewById(R.id.workout);
                     ly.setVisibility(LinearLayout.GONE);
@@ -49,7 +50,6 @@ public class flex_time extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-
         });
         yoga.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,25 +79,27 @@ public class flex_time extends AppCompatActivity {
     private void openyogas(){
         Intent intent = new Intent(this,yoga.class);
         intent.putExtra("category", "exercises");
-       intent.putExtra("group", "SixthEight");
-       intent.putExtra("age", "10");
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
     }
     private void openworkouts(){
         Intent intent = new Intent(this,workout.class);
         startActivity(intent);
-
     }
     private void openstrerchings(){
         Intent intent = new Intent(this,stretching.class);
-        intent.putExtra("group", "SixthEight");
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
-
     }
     private void openmeditations(){
         Intent intent = new Intent(this,meditation.class);
         startActivity(intent);
-
     }
     private String encodeUserEmail(String email) {
         return email.replace(".",",");

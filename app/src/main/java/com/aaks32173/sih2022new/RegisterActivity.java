@@ -44,12 +44,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         final TextView register_loginnow = findViewById(R.id.register_loginnow);
-//        register_loginnow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                movetologin();
-//            }
-//        });
+        register_loginnow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                movetologin();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         register_name = findViewById(R.id.register_name);
@@ -63,13 +63,9 @@ public class RegisterActivity extends AppCompatActivity {
 //        female = findViewById(R.id.female);
 //        male = findViewById(R.id.male);
         radioGroup=findViewById(R.id.radioGroup);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("UserInfo");//.child(encode_email);//.child(encodeUserEmail(register_email.toString()));
         userInfo = new UserInfo();
-
-
-
 //        if(female.isSelected()){
 //            male.setSelected(false);
 //        }
@@ -80,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-        register_loginnow.setOnClickListener(new View.OnClickListener() {
+        register_registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
@@ -98,8 +94,6 @@ public class RegisterActivity extends AppCompatActivity {
         Toast.makeText(this, gender,
                 Toast.LENGTH_SHORT).show();
     }
-
-
     private void RegisterNewUser(){
         String name,email,password,confirm_password,age,sssm_id,family_id;
         name = register_name.getText().toString();
@@ -109,48 +103,42 @@ public class RegisterActivity extends AppCompatActivity {
         age = register_age.getText().toString();
         sssm_id = register_sssm_id.getText().toString();
         family_id = register_family_id.getText().toString();
-
-
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)|| TextUtils.isEmpty(confirm_password)
                 || TextUtils.isEmpty(age)|| TextUtils.isEmpty(sssm_id)|| TextUtils.isEmpty(family_id) || gender.equals("")){
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
-        if(Integer.parseInt(age)<3)
-        {
-            Toast.makeText(getApplicationContext(),"age must be atlest 3",Toast.LENGTH_LONG).show();
+        if (!password.equals(confirm_password)){
+            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
             return;
         }
-//        if (password != confirm_password){
-//            Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
-//            return;
-//        }
-
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-                            FirebaseUser user= mAuth.getCurrentUser();
-                            addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task)
+            {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                    FirebaseUser user= mAuth.getCurrentUser();
+                    addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
 
 
 
-
-
-
-//                            if (Integer.parseInt()<=8) {
-                                Intent intent = new Intent(RegisterActivity.this, UserDiet.class);
-                                startActivity(intent);
-//                            }
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(),"Registration failed!!"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                     if (Integer.parseInt(age)<8) {
+                    Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
+                    startActivity(intent);
+                            }
+                     else{
+                         Intent intent = new Intent(RegisterActivity.this, addintrest.class);
+                         intent.putExtra("age", age);
+                         startActivity(intent);
+                     }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Registration failed!!"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void addDatatoFirebase(String name, String email, String password, String age, String sssmid, String familyid, String gender) {
@@ -161,13 +149,16 @@ public class RegisterActivity extends AppCompatActivity {
         userInfo.setSssm_id(sssmid);
         userInfo.setFamily_id(familyid);
         userInfo.setGender(gender);
-
+        final boolean[] processDone = {true};
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
-                databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
-                Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                if(processDone[0]) {
+                    databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
+                    databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
+                    Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
+                    processDone[0] =false;
+                }
             }
 
             @Override
@@ -180,11 +171,7 @@ public class RegisterActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(i);
     }
-
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
     }
-
-
-
 }
