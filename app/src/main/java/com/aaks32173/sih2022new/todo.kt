@@ -28,6 +28,7 @@ class todo  : AppCompatActivity() {
         userRecyclerview.setHasFixedSize(true)
 
         userArrayList = arrayListOf<usertodo>()
+
         getUserData()
 
 
@@ -36,7 +37,7 @@ class todo  : AppCompatActivity() {
 
     private fun getUserData() {
 
-        val email = intent.getStringExtra("email").toString()
+       val email = intent.getStringExtra("email").toString()
         Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
 
         val today= LocalDate.now()

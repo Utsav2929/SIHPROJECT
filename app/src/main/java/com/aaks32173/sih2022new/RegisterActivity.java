@@ -119,18 +119,26 @@ public class RegisterActivity extends AppCompatActivity {
             {
                 if (task.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                    FirebaseUser user= mAuth.getCurrentUser();
                     addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
 
 
 
-                    }
-
+                     if (Integer.parseInt(age)<8) {
+                    Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
+                    startActivity(intent);
+                            }
+                     else{
+                         Intent intent = new Intent(RegisterActivity.this, addintrest.class);
+                         intent.putExtra("age", age);
+                         startActivity(intent);
+                     }
                 }
-
-
+                else {
+                    Toast.makeText(getApplicationContext(),"Registration failed!!"+ task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
         });
-
-
     }
 
     private void addDatatoFirebase(String name, String email, String password, String age, String sssmid, String familyid, String gender) {
@@ -158,10 +166,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-        Intent i = new Intent(RegisterActivity.this, addintrest.class);
-        startActivity(i);
     }
     private void movetologin(){
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);

@@ -8,9 +8,13 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+
+import com.aaks32173.sih2022new.*
+
 import com.aaks32173.sih2022new.R
 import com.aaks32173.sih2022new.data.Message
 import com.aaks32173.sih2022new.depressn_main
+
 import com.aaks32173.sih2022new.utils.Constants.OPEN_GOOGLE
 import com.aaks32173.sih2022new.utils.Constants.OPEN_SEARCH
 import com.aaks32173.sih2022new.utils.Constants.RECEIVE_ID
@@ -31,9 +35,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
 
 
-
- var qs="1"
-    var chatbottype="chatbot"
+    var qs = "1"
+    var chatbottype = "chatbot"
 //    private var mainindex=""
 //   private var question=""
 //   private var answer1=""
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: MessagingAdapter
     private val botList = listOf("Kiki", "Kiki", "Kiki", "Kiki")
-    lateinit var gif : GifImageView
+    lateinit var gif: GifImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,27 +59,22 @@ class MainActivity : AppCompatActivity() {
         ll_layout_bar.setVisibility(View.INVISIBLE)
 
 
-
-
-
-        val name="Hello Kiki"
+        val name = "Hello Kiki"
         var etmsg = findViewById<EditText>(R.id.et_message)
-       gif = findViewById<GifImageView>(R.id.ch)
+        gif = findViewById<GifImageView>(R.id.ch)
         etmsg.setText(name)
         recyclerView()
 
         clickEvents()
 
 
-
-
         val random = (0..3).random()
 
-                when (random) {
-                    0 ->customBotMessage("Hello! I am ${botList[random]} your friend. How are you doing today?")
-                    1 -> customBotMessage("Hi there ! It's nice to meet you. I'm  ${botList[random]} .I love meeting new people.")
-                    2 ->   customBotMessage("Hello! I am ${botList[random]} ")
-                     }
+        when (random) {
+            0 -> customBotMessage("Hello! I am ${botList[random]} your friend. How are you doing today?")
+            1 -> customBotMessage("Hi there ! It's nice to meet you. I'm  ${botList[random]} .I love meeting new people.")
+            2 -> customBotMessage("Hello! I am ${botList[random]} ")
+        }
 
     }
 
@@ -149,25 +147,25 @@ class MainActivity : AppCompatActivity() {
             ll_layout_bar.setVisibility(View.VISIBLE)
 
             if (it.exists()) {
-              val  mainindex = it.child("mainindex").value.toString()
-               val question = it.child("question").value.toString()
-               val answer1 = it.child("answer1").value.toString()
+                val mainindex = it.child("mainindex").value.toString()
+                val question = it.child("question").value.toString()
+                val answer1 = it.child("answer1").value.toString()
 
-              val  answer1index= it.child("answer1index").value.toString()
-               val answer2 = it.child("answer2").value.toString()
+                val answer1index = it.child("answer1index").value.toString()
+                val answer2 = it.child("answer2").value.toString()
 
-               val answer2index= it.child("answer2index").value.toString()
+                val answer2index = it.child("answer2index").value.toString()
 
-               val answer3= it.child("answer3").value.toString()
+                val answer3 = it.child("answer3").value.toString()
 
-                 val answer3index= it.child("answer3index").value.toString()
+                val answer3index = it.child("answer3index").value.toString()
 
 
-                btn_send1.text=answer1
+                btn_send1.text = answer1
 
-                btn_send2.text=answer2
+                btn_send2.text = answer2
 
-                btn_send3.text=answer3
+                btn_send3.text = answer3
 
 
 
@@ -179,105 +177,120 @@ class MainActivity : AppCompatActivity() {
 
                     et_message.setText(answer1)
 
+                    if (answer1.toString() == "yes" && chatbottype == "chatbotprimary") {
 
 
-                    if(answer1.toString()=="Happy" && chatbottype=="chatbot") {
+                        if (answer1.toString() == "Happy" && chatbottype == "chatbot") {
 
-                        gif.setImageResource(R.drawable.great_tim)
+                            gif.setImageResource(R.drawable.great_tim)
+                        }
+                        if (answer1.toString() == "yes" && mainindex.toString() == "14" && chatbottype == "chatbotprimary") {
+
+                            chatbottype = "chatbot"
+                        }
+                        if (answer1.toString() == "yes" && mainindex.toString() == "27" && chatbottype == "chatbot") {
+                            chatbottype = "chatbotprimary"
+                        }
+                        if (answer1.toString() == "yes" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
+                            val intent = Intent(this, councellor::class.java)
+                            startActivity(intent)
+                        }
+                        if (answer1.toString() == "threapist" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
+                            val intent = Intent(this, councellor::class.java)
+                            startActivity(intent)
+                        }
+                        qs = answer1index
+                        sendMessage()
+
                     }
-                    if(answer1.toString()=="yes" && mainindex.toString()=="14" && chatbottype=="chatbotprimary"){
-                        chatbottype="chatbot"
-                    }
-                    if(answer1.toString()=="yes" && mainindex.toString()=="27" && chatbottype=="chatbot"){
-                        chatbottype="chatbotprimary"
-                    }
-                    qs = answer1index
-                    sendMessage()
+                    btn_send2.setOnClickListener {
 
-                }
-                btn_send2.setOnClickListener {
+                        et_message.setText(answer2)
+                        if (answer2.toString() == "Sad" && chatbottype == "chatbot") {
 
-                    et_message.setText(answer2)
-                    if(answer2.toString()=="Sad" && chatbottype=="chatbot"){
-                        gif.setImageResource(R.drawable.hereforyougif)
+                            chatbottype = "chatbotprimary"
+
+                            gif.setImageResource(R.drawable.hereforyougif)
 
 
-                        Handler().postDelayed({
-                            val startActivity =
-                                Intent(this,depressn_main::class.java)
-                            startActivity(startActivity)
-                            finish()
-                        }, 2000)
+                            Handler().postDelayed({
+                                val startActivity =
+                                    Intent(this, depressn_main::class.java)
+                                startActivity(startActivity)
+                                finish()
+                            }, 2000)
 //                        val a = Intent(this, depressn_main::class.java)
 //                       startActivity(a)
 //
+
+                        }
+
+                        qs = answer2index
+                        sendMessage()
                     }
-                    qs = answer2index
-                    sendMessage()
-                }
-                btn_send3.setOnClickListener {
-                    qs = answer3index
+                    btn_send3.setOnClickListener {
+                        qs = answer3index
 
-                    et_message.setText(answer3)
+                        et_message.setText(answer3)
 
-                    sendMessage()
-                }
-                GlobalScope.launch {
-                    //Fake response delay
-                    delay(1000)
+                        sendMessage()
+                    }
+                    GlobalScope.launch {
+                        //Fake response delay
+                        delay(1000)
 
-                    withContext(Dispatchers.Main) {
-                        //Gets the response
+                        withContext(Dispatchers.Main) {
+                            //Gets the response
 
-                        val response=question
+                            val response = question
 
 
-                        //Adds it to our local list
-                        messagesList.add(Message(response, RECEIVE_ID, timeStamp))
+                            //Adds it to our local list
+                            messagesList.add(Message(response, RECEIVE_ID, timeStamp))
 
-                        //Inserts our message into the adapter
-                        adapter.insertMessage(Message(response, RECEIVE_ID, timeStamp))
+                            //Inserts our message into the adapter
+                            adapter.insertMessage(Message(response, RECEIVE_ID, timeStamp))
 
-                        //Scrolls us to the position of the latest message
-                        rv_messages.scrollToPosition(adapter.itemCount - 1)
+                            //Scrolls us to the position of the latest message
+                            rv_messages.scrollToPosition(adapter.itemCount - 1)
 
-                        //Starts Google
-                        when (response) {
-                            OPEN_GOOGLE -> {
-                                val site = Intent(Intent.ACTION_VIEW)
-                                site.data = Uri.parse("https://www.google.com/")
-                                startActivity(site)
+                            //Starts Google
+                            when (response) {
+                                OPEN_GOOGLE -> {
+                                    val site = Intent(Intent.ACTION_VIEW)
+                                    site.data = Uri.parse("https://www.google.com/")
+                                    startActivity(site)
+                                }
+                                OPEN_SEARCH -> {
+                                    val site = Intent(Intent.ACTION_VIEW)
+                                    val searchTerm: String? = message.substringAfterLast("search")
+                                    site.data =
+                                        Uri.parse("https://www.google.com/search?&q=$searchTerm")
+                                    startActivity(site)
+                                }
+
                             }
-                            OPEN_SEARCH -> {
-                                val site = Intent(Intent.ACTION_VIEW)
-                                val searchTerm: String? = message.substringAfterLast("search")
-                                site.data = Uri.parse("https://www.google.com/search?&q=$searchTerm")
-                                startActivity(site)
-                            }
-
                         }
                     }
                 }
+
             }
+
 
         }
 
-
     }
+        private fun customBotMessage(message: String) {
 
+            GlobalScope.launch {
+                delay(1000)
+                withContext(Dispatchers.Main) {
+                    val timeStamp = Time.timeStamp()
+                    messagesList.add(Message(message, RECEIVE_ID, timeStamp))
+                    adapter.insertMessage(Message(message, RECEIVE_ID, timeStamp))
 
-
-    private fun customBotMessage(message: String) {
-
-        GlobalScope.launch {
-            delay(1000)
-            withContext(Dispatchers.Main) {
-                val timeStamp = Time.timeStamp()
-                messagesList.add(Message(message, RECEIVE_ID, timeStamp))
-                adapter.insertMessage(Message(message, RECEIVE_ID, timeStamp))
-
-                rv_messages.scrollToPosition(adapter.itemCount - 1)
+                    rv_messages.scrollToPosition(adapter.itemCount - 1)
+                }
             }
         }
     }
-}

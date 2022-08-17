@@ -49,7 +49,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButtonz"
+                        android:id="@+id/music"
                         android:layout_width="match_parent"
 
                         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="POEMS+RYHMES"
+                        android:text="Music"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         />
@@ -78,7 +78,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/podcasts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -89,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="STORIES"
+                        android:text="Podcast"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>
@@ -110,7 +110,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton12"
+                        android:id="@+id/gtbt"
                         android:layout_width="match_parent"
 
                         android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton6"
+                        android:id="@+id/wetime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -395,11 +395,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="Relaxing ACTIVITY"
+                        android:text="Menstural Tracker"
                         android:textAlignment="center"
-
                         android:textColor="@color/black"/>
-
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

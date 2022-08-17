@@ -94,11 +94,11 @@ public class MenstrualHome extends AppCompatActivity {
         });
 
         getUserData();
-       // Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "here", Toast.LENGTH_SHORT).show();
     }
 
     private void getUserData() {
-       // DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails");
+        // DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -213,8 +213,8 @@ public class MenstrualHome extends AppCompatActivity {
         startActivity(intent);
     }
     public void setdetails(String s, String date) {
-       databaseReference2 = firebaseDatabase.getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails").child("lastDates");
-       databaseReference2.child(s).setValue(date);
+        databaseReference2 = firebaseDatabase.getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails").child("lastDates");
+        databaseReference2.child(s).setValue(date);
         if (i == 5)
             i = 0;
         i++;
