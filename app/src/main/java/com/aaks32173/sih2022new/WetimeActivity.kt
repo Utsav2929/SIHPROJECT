@@ -37,8 +37,6 @@ class WetimeActivity  : AppCompatActivity() {
     private fun getUserData() {
         val today =LocalDate.now()
         val email = intent.getStringExtra("email").toString()
-
-
         dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime/"+today.toString())
 
         dbref.addValueEventListener(object : ValueEventListener{

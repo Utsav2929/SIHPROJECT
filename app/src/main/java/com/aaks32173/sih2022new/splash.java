@@ -35,8 +35,7 @@ public class splash extends AppCompatActivity {
                 startActivity(spash);
                 finish();}
                 else{
-                    Intent spash=new Intent(splash.this,Dash_home.class) ;
-
+                    Intent spash=new Intent(splash.this,LoginActivity.class) ;
                     startActivity(spash);
                     finish();
                 }

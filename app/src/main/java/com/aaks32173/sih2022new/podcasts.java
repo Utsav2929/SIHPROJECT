@@ -1,5 +1,4 @@
 package com.aaks32173.sih2022new;
-
 import static java.lang.Integer.parseInt;
 import static ai.api.util.ParametersConverter.parseFloat;
 import static ai.api.util.ParametersConverter.parseInteger;
@@ -73,13 +72,7 @@ public class podcasts extends AppCompatActivity {
                             storagereference = FirebaseStorage.getInstance().getReference("3rd-6th/podacst/img"+1+".jpg");
                            fetchimg(imv);
                         }
-                        /*
 
-                        String s2 = "R.id.img"+i1;
-                        int x2 = parseInteger(s2);
-                        ImageView iv = findViewById(x2);
-                        fetchimg(iv);
-                        */
 
                     }
                     @Override
@@ -163,7 +156,6 @@ public class podcasts extends AppCompatActivity {
             }
 
         });
-
     }
     void fetchimg(ImageView page)
     {
@@ -181,8 +173,6 @@ public class podcasts extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
     private void increasecounter(String email) {
         LocalDate today=LocalDate.now();
 

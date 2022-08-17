@@ -5,28 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/bg"
-    android:padding="10dp">
-
+    android:background="#D6F4FF">
 
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="378dp"
-        android:layout_height="89dp"
+        android:layout_width="410dp"
+        android:layout_height="66dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/salsa"
         android:padding="10dp"
         android:text="Hello! Register to get started"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        android:textColor="#E4000000"
+        android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <EditText
         android:id="@+id/register_name"
@@ -85,7 +84,7 @@
         android:layout_marginTop="64dp"
         android:background="@drawable/edittext_bg"
         android:padding="10dp"
-        android:hint="  SSSM ID"
+        android:hint="  SSSM ID (Samagra ID)"
         android:drawableLeft="@drawable/ic_sssmid"
         android:textColorHint="#FF302C2C"
         android:textColor="@color/black"
@@ -147,8 +146,8 @@
 
     <Button
         android:id="@+id/register_registerbtn"
-        android:layout_width="194dp"
-        android:layout_height="66dp"
+        android:layout_width="169dp"
+        android:layout_height="56dp"
         android:background="@drawable/button_bg"
         android:padding="10dp"
         android:text="Register"
@@ -159,7 +158,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_family_id"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.177" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -261,6 +260,5 @@
             tools:layout_editor_absoluteY="443dp" />
 
     </RadioGroup>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
