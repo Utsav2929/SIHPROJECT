@@ -165,7 +165,7 @@ class DashHome_Nur_3 : AppCompatActivity() {
 
         health.setOnClickListener {
             val a = Intent(this, yoga::class.java)
-                .putExtra("category","health1")
+                .putExtra("category","health")
             startActivity(a)
 
 

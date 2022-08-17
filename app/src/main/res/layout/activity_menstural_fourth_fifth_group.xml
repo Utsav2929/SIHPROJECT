@@ -67,9 +67,9 @@
                     android:text="Girls Period Guide Vol 1"/>
                 <ImageView
                     android:layout_weight="3"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_1"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn2"
@@ -93,9 +93,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_2"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn3"
@@ -119,9 +119,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_3"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn4"
@@ -145,9 +145,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_4"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn5"
@@ -172,9 +172,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_5"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn6"
@@ -198,9 +198,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_6"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/btn7"
@@ -224,9 +224,9 @@
                 <ImageView
                     android:layout_weight="3"
 
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/exercise"/>
+                    android:src="@drawable/women_gif_3to5_7"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
