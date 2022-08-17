@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.aaks32173.sih2022new.ui.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,14 +27,13 @@ public class fouthFifthGroup extends AppCompatActivity {
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
     DatabaseReference databaseReference2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fouth_fifth_group);
         ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);
-
+        String [] interests ={"exercisee", "nutrition", "musicpodcast","relaxinactivities", "wetimee"};
         ImageButton todobtn = findViewById(R.id.todobtn);
         ImageButton music = findViewById(R.id.music);
         ImageButton podcasts = findViewById(R.id.podcasts);
@@ -41,17 +41,36 @@ public class fouthFifthGroup extends AppCompatActivity {
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton menstural = findViewById(R.id.menstural);
         ImageButton chatbot = findViewById(R.id.chatbot);
-
         ImageButton diet =findViewById(R.id.imageButton3);
         ImageButton post =findViewById(R.id.post);
-
         ImageButton wetime =findViewById(R.id.wetime);
-
-                firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         LocalDate td= LocalDate.now();
         Toast.makeText(getApplicationContext(),td.toString(),Toast.LENGTH_LONG).show();
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
+        String [] intrestspoint = new String[5];
+
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String exercise = snapshot.child(interests[0]).getValue().toString();
+                    intrestspoint[0]= (exercise);
+                    String nutrition = snapshot.child(interests[1]).getValue().toString();
+                    intrestspoint[1]= (nutrition);
+                    String music = snapshot.child(interests[2]).getValue().toString();
+                    intrestspoint[2]= (music);
+                    String relaxin = snapshot.child(interests[3]).getValue().toString();
+                    intrestspoint[3]= (relaxin);
+                    String wetime = snapshot.child(interests[4]).getValue().toString();
+                    intrestspoint[4]= (wetime);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
@@ -70,7 +89,7 @@ public class fouthFifthGroup extends AppCompatActivity {
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
                     for (int i = 1; i <= 5; i++) {
-                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue("50");
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue(intrestspoint[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("progress").setValue("0");
@@ -78,15 +97,11 @@ public class fouthFifthGroup extends AppCompatActivity {
 
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
         DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
-
         reference12.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -197,20 +212,18 @@ public class fouthFifthGroup extends AppCompatActivity {
         });
     }
     private void openShowpost() {
-        Intent intent = new Intent(fouthFifthGroup.this, Showpost.class);
+        Intent intent = new Intent(fouthFifthGroup.this, addintrest.class);
         startActivity(intent);
     }
 
     private void opentodo(String email) {
         Intent intent = new Intent(fouthFifthGroup.this, todo.class);
-
-        intent.putExtra("email", email);
+     intent.putExtra("email", email);
         startActivity(intent);
     }
 
     private void openwetime(String email) {
         Intent intent = new Intent(fouthFifthGroup.this, WetimeActivity.class);
-
         intent.putExtra("email", email);
         startActivity(intent);
     }

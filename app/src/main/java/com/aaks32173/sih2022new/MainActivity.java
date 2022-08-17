@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Please select the bleeding days between 2-7", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "periods details are saved successfully", Toast.LENGTH_SHORT).show();
-
             databaseReference.child("lastDate").setValue(date);
             databaseReference.child("lastDates").child("lastDates1").setValue(date);
             databaseReference.child("cycleLength").setValue(cyclelen);
