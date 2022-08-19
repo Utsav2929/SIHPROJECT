@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if(processDone[0]) {
                                             String booleanvar = dataSnapshot.child(encodeUserEmail(email)).child("SleepDetails").child("SleepActivity").getValue().toString();
-                                            if(hourday>=7 && hourday<=9 && booleanvar.equals("true"))
+                                            if(hourday>=7 && hourday<=12 && booleanvar.equals("true"))
                                             {
                                                 Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);
                                                 startActivity(intent);

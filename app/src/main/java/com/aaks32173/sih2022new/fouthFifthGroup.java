@@ -282,7 +282,7 @@ public class fouthFifthGroup extends AppCompatActivity {
         });
     }
     private void openShowpost() {
-        Intent intent = new Intent(fouthFifthGroup.this, addintrest.class);
+        Intent intent = new Intent(fouthFifthGroup.this, Showpost.class);
         startActivity(intent);
     }
 
