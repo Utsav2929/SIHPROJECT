@@ -3,6 +3,7 @@ import static java.lang.Integer.parseInt;
 import static ai.api.util.ParametersConverter.parseFloat;
 import static ai.api.util.ParametersConverter.parseInteger;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class podcasts extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
     StorageReference storagereference;
+    String email ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class podcasts extends AppCompatActivity {
         //sleepdetail = false;
         Currentuser = mauth.getCurrentUser();
 
-        String email = getIntent().getExtras().getString("email");
+         email = getIntent().getExtras().getString("email");
 
         String group = getIntent().getExtras().getString("group");
         if(group.equals("FourthFifth"))
@@ -65,13 +67,13 @@ public class podcasts extends AppCompatActivity {
                             TextView textView = (TextView) findViewById(id);
                             textView.setText(name);
                         }
-                        String imgname = "img"+i1;
-                        int id2 = getResources().getIdentifier(imgname, "id", getPackageName());
-                        if (id2 != 0) {
-                            ImageView imv = (ImageView) findViewById(id2);
-                            storagereference = FirebaseStorage.getInstance().getReference("3rd-6th/podacst/img"+1+".jpg");
-                           fetchimg(imv);
-                        }
+//                        String imgname = "img"+i1;
+//                        int id2 = getResources().getIdentifier(imgname, "id", getPackageName());
+//                        if (id2 != 0) {
+//                            ImageView imv = (ImageView) findViewById(id2);
+//                            storagereference = FirebaseStorage.getInstance().getReference("3rd-6th/podacst/img"+1+".jpg");
+//                           fetchimg(imv);
+//                        }
 
 
                     }
@@ -173,27 +175,65 @@ public class podcasts extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+//    private void increasecounter(String email) {
+//        LocalDate today=LocalDate.now();
+//
+//        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+//        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+//            String progress;
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
+//
+//                if(Integer.parseInt(progress)<=90) {
+//                    int prg = Integer.parseInt(progress) + 10;
+//
+//                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+//
+//                }else{
+//
+//                    int prg = 100;
+//
+//                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+//
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//
+//    }
+
     private void increasecounter(String email) {
-        LocalDate today=LocalDate.now();
+        LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             String progress;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
 
-                if(Integer.parseInt(progress)<=90) {
+                if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
 
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
 
-                }else{
+                    if(prg==100) {
+
+                        reward() ;
+                    }
+                } else if(Integer.parseInt(progress)==100){
 
                     int prg = 100;
 
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
-
+                    reward();
                 }
 
 
@@ -204,5 +244,31 @@ public class podcasts extends AppCompatActivity {
             }
         });
 
+    }
+
+    void reward() {
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 }

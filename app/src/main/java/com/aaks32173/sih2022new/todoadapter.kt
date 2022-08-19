@@ -38,7 +38,7 @@ class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Ad
 
         holder.name.text = currentitem.activity
 
-
+        holder.pos_t.text=(position+1).toString()
         holder.tv.text = currentitem.progress
 
         val t = Timer()
@@ -69,6 +69,8 @@ class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Ad
 
 
         val tv : TextView = itemView.findViewById(R.id.tv)
+
+        val pos_t : TextView = itemView.findViewById(R.id.pos_t)
 
 
 

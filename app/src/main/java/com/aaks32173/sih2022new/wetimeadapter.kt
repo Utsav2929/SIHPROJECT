@@ -81,6 +81,7 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
 
     private fun increasecounter(email: String) {
         val today = LocalDate.now()
+
         val reference1 =
             FirebaseDatabase.getInstance().reference.child("UserInfo").child(email).child("TODO")
                 .child(today.toString())
@@ -93,15 +94,57 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
                     val prg = progress!!.toInt() + 10
                     reference1.child("wetime").child("progress")
                         .setValue(Integer.toString(prg))
-                } else {
+
+                    if(prg==100) {
+
+                       reward()
+                    }
+                } else if(progress!!.toInt()==100){
                     val prg = 100
                     reference1.child("wetime").child("progress")
                         .setValue(Integer.toString(prg))
+                        reward()
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+
+
+
+
+
+    }
+
+    private fun reward()
+    {
+        val reference1 =
+            FirebaseDatabase.getInstance().reference.child("UserInfo").child(email)
+
+        reference1.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
+
+
+                        val reference2 =
+                            FirebaseDatabase.getInstance().reference.child("UserInfo").child(email)
+                        val rew= dataSnapshot.child("rewards").getValue().toString()
+
+                        val rev= rew.toInt() +50
+                        reference2.child("rewards").setValue(rev.toString())
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+
+
+
+
+
+
+
     }
 
 

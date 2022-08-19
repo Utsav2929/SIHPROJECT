@@ -98,7 +98,7 @@ public class Details extends AppCompatActivity {
                         String age = dataSnapshot.child("age").getValue().toString();
                         int age2 = Integer.parseInt(age);
                         double calories = ((finalH *4.7)+(w*4.35)-(age2*4.7))*1.35;
-
+                        calories=(int)Math.round(calories) ;
                         String s = calories+"";
                         dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI");
                         dbref.child("calinitial").setValue("0");

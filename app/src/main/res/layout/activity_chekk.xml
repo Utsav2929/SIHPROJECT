@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/bluess"
     tools:context=".chekk">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cal_f"
+        android:text="0"
+        android:textSize="10dp"
+        android:layout_marginTop="-100dp"
+        />
 
     <LinearLayout
         android:id="@+id/ll"
@@ -55,11 +63,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@color/white"
+            android:background="@drawable/shape5"
             android:gravity="center"
-            android:padding="5dp"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:paddingLeft="35dp">
 
 
             <EditText
@@ -83,8 +91,8 @@
                 android:drawableEnd="@drawable/ic_baseline_search_24"
                 android:fontFamily="@font/salsa"
                 android:gravity="center"
-                android:textAllCaps="false"
                 android:text="search"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 app:backgroundTint="@color/yellow"
                 app:cornerRadius="80dp" />

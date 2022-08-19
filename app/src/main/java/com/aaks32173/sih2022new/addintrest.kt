@@ -88,7 +88,9 @@ class addintrest : AppCompatActivity() {
         database.child("UserIntrest").setValue(intrest).addOnSuccessListener {
             Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
             val a = Intent(this, Details::class.java)
+
             a.putExtra("age", age)
+
             startActivity(a)
         }
     }

@@ -2,6 +2,7 @@ package com.aaks32173.sih2022new;
 
 import static ai.api.util.ParametersConverter.parseFloat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class flextimefourthfifth extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,9 @@ public class flextimefourthfifth extends AppCompatActivity {
         mauth = FirebaseAuth.getInstance();
         //sleepdetail = false;
 
-        String email = getIntent().getExtras().getString("email");
+        email = getIntent().getExtras().getString("email");
 //                LottieAnimationView gif2 =findViewById(R.id.gif1_exercise_3to5);
 //        gif2.setImageResource(R.drawable.exercisegif_3to5);
-
 
 
         Currentuser = mauth.getCurrentUser();
@@ -108,47 +109,53 @@ public class flextimefourthfifth extends AppCompatActivity {
             }
         });
 
-}
-public  void getfun(String s)
-{
-    databaseReference.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
+    }
 
-            String url = dataSnapshot.child("Vedio"+s).getValue().toString();
-            Intent intent = new Intent(flextimefourthfifth.this, vedioPlay.class);
-            intent.putExtra("url", url);
-            startActivity(intent);
-        }
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-        }
+    public void getfun(String s) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-    });
+                String url = dataSnapshot.child("Vedio" + s).getValue().toString();
+                Intent intent = new Intent(flextimefourthfifth.this, vedioPlay.class);
+                intent.putExtra("url", url);
+                startActivity(intent);
+            }
 
-}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        });
+
+    }
 
     private void increasecounter(String email) {
-        LocalDate today=LocalDate.now();
+        LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             String progress;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("exercise").child("progress").getValue().toString();
 
-                if(Integer.parseInt(progress)<=90) {
+                if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
 
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
 
-                }else{
+                    if(prg==100) {
+
+                        reward() ;
+                    }
+                } else if(Integer.parseInt(progress)==100){
 
                     int prg = 100;
 
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
-
+                    reward();
                 }
 
 
@@ -159,5 +166,31 @@ public  void getfun(String s)
             }
         });
 
+    }
+
+    void reward() {
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 }
