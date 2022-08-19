@@ -15,11 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
-
 public class SixthEighthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
-
     DatabaseReference databaseReference2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +31,15 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
+        ImageButton diet = findViewById(R.id.diet);
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
-
-
         LocalDate td=LocalDate.now();
         DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
         reference12.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Boolean todotoday = dataSnapshot.child(td.toString()).exists();
-
                 if(!todotoday){
                     String[][] wetime={
                             {"1","Go for a walk with your parents"},
@@ -95,6 +91,12 @@ public class SixthEighthGroup extends AppCompatActivity {
                 gotoTodo(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotodiet();
+            }
+        });
         podcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +127,10 @@ public class SixthEighthGroup extends AppCompatActivity {
                 movetogtbt();
             }
         });}
+    private void gotodiet() {
+        Intent intent = new Intent(SixthEighthGroup.this, chekk.class);
+        startActivity(intent);
+    }
     private void gotoWetime(String email) {
         Intent intent = new Intent(SixthEighthGroup.this, WetimeActivity.class);
         intent.putExtra("email",email);

@@ -129,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                             }
                      else{
-                         Intent intent = new Intent(RegisterActivity.this, addintrest.class);
+                         Intent intent = new Intent(RegisterActivity.this, Interest.class);
                          intent.putExtra("age", age);
                          startActivity(intent);
                      }

@@ -225,7 +225,7 @@
             android:label="@string/title_activity_bottom_navigation" />
         <activity
             android:name=".Interest"
-            android:exported="true" >
+            android:exported="false" >
 
         </activity>
         <activity

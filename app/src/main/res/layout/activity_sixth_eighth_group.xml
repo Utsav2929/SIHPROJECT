@@ -150,7 +150,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="Fight Your Fear"
+                        android:text="Personal Todo"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>
@@ -184,7 +184,7 @@
 
                         android:fontFamily="@font/salsa"
                         android:layout_height="wrap_content"
-                        android:text="SPORTS"
+                        android:text="FLEX TIME"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>
@@ -199,7 +199,7 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/diet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -210,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:fontFamily="@font/salsa"
                         android:layout_height="wrap_content"
-                        android:text="GK SECTION"
+                        android:text="DIET"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>
@@ -260,18 +260,19 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/imageButton7"
+                        android:id="@+id/relaxing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_13"
+                        app:srcCompat="@drawable/rectangle_16"
                         android:background="@drawable/shape"/>
+
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/relaxingtv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="SCREEN TIME RECORD"
+                        android:text="RELAXING ACTIVITY"
                         android:textAlignment="center"
 
                         android:textColor="@color/black"/>
@@ -406,60 +407,7 @@
                 android:orientation="horizontal"
                 android:weightSum="5">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
 
-                    <ImageButton
-                        android:id="@+id/imageButton100"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_17"
-                        android:background="@drawable/shape"/>
-
-                    <TextView
-                        android:id="@+id/textView80"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/salsa"
-                        android:text="NOWCAST"
-                        android:textAlignment="center"
-
-                        android:textColor="@color/black"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <ImageButton
-                        android:id="@+id/relaxing"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_16"
-                        android:background="@drawable/shape"/>
-
-                    <TextView
-                        android:id="@+id/relaxingtv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/salsa"
-                        android:text="RELAXING ACTIVITY"
-                        android:textAlignment="center"
-
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
             </LinearLayout>
 
 
