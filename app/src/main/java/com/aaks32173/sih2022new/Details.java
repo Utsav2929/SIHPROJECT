@@ -1,5 +1,4 @@
 package com.aaks32173.sih2022new;
-
 import static ai.api.util.ParametersConverter.parseFloat;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 public class Details extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -33,11 +31,9 @@ public class Details extends AppCompatActivity {
     String check;
     TextView showbmi, bmiinfo;
     DatabaseReference dbref;
+    String age;
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
-
-
-
     private FirebaseAuth mAuth1;
     private FirebaseUser mCurrentUser1;
     RadioGroup radioGroup;
@@ -45,7 +41,6 @@ public class Details extends AppCompatActivity {
     String diet;
     String final_email ="";
     int age1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +50,7 @@ public class Details extends AppCompatActivity {
         //sleepdetail = false;
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+       age =getIntent().getExtras().getString("age");
 
         heightt = findViewById(R.id.height);
         weightt = findViewById(R.id.weight);
@@ -150,10 +146,16 @@ public class Details extends AppCompatActivity {
 //                Toast.makeText(view.getContext(), "2", Toast.LENGTH_SHORT).show();
                 dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email);
                 dbref.child("userDiet").setValue(diet);
-
-                Intent i = new Intent(Details.this,fouthFifthGroup.class);
-                finish();
-                startActivity(i);
+                if (Integer.parseInt(age) > 8 && Integer.parseInt(age) <= 11) {
+            Intent intent =new  Intent(Details.this, fouthFifthGroup.class);
+            startActivity(intent);
+        } else if (Integer.parseInt(age) <= 14 && Integer.parseInt(age) > 11) {
+            Intent intent = new Intent(Details.this, SixthEighthGroup.class);
+            startActivity(intent);
+        }
+//                Intent i = new Intent(Details.this,chekk.class);
+//                finish();
+//                startActivity(i);
             }
         });
 

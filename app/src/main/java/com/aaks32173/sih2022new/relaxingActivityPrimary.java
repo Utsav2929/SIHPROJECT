@@ -21,6 +21,7 @@ import java.time.LocalDate;
 public class relaxingActivityPrimary extends AppCompatActivity {
 
 
+
     DatabaseReference databaseReference2;
     String email ;
 
@@ -43,14 +44,14 @@ public class relaxingActivityPrimary extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openWeb("https://bubblespop.netlify.app/",email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openWeb("https://www.digipuzzle.net/main/kids/",email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -58,29 +59,34 @@ public class relaxingActivityPrimary extends AppCompatActivity {
             public void onClick(View v) {
                 openWeb("https://www.teachingexpertise.com/classroom-ideas/school-scavenger-hunts-for-students/",email);
 
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotojournalism(email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoHobbies(email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
 
     }
 
 
+
+    private void increasecounter(String email, String chld) {
+        LocalDate today=LocalDate.now();
+
     private void increasecounter(String email) {
         LocalDate today = LocalDate.now();
+
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,14 +98,18 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
                 if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-
+                    trending(chld);
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
+
+
+                }else{
 
                     if(prg==100) {
 
                         reward() ;
                     }
                 } else if(Integer.parseInt(progress)==100){
+
 
                     int prg = 100;
 
@@ -115,6 +125,24 @@ public class relaxingActivityPrimary extends AppCompatActivity {
             }
         });
 
+    }
+    private void trending(String trend)
+    {        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference();
+
+
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String p = snapshot.child("trending").child(trend).getValue().toString();
+                int p2 = Integer.parseInt(p);
+                ref2.child(trend).setValue(Integer.toString(10+p2));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     void reward() {

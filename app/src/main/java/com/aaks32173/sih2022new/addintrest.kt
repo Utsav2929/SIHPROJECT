@@ -14,23 +14,23 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 class addintrest : AppCompatActivity() {
-
+    private lateinit var age: String
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private var firebaseUserID: String = ""
-    private lateinit var subButton : Button
+    private lateinit var subButton: Button
     //    lateinit var title : EditText
 //    private lateinit var desc : EditText
 
-    private lateinit var exer : EditText
+    private lateinit var exer: EditText
 
     private lateinit var wet: EditText
 
-    private lateinit var relact : EditText
+    private lateinit var relact: EditText
 
-    private lateinit var nut : EditText
+    private lateinit var nut: EditText
 
-    private lateinit var mus : EditText
+    private lateinit var mus: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,17 +40,17 @@ class addintrest : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val email = FirebaseAuth.getInstance().currentUser?.email
 
-        val encodedemmail=encodeUserEmail(email.toString())
+        val encodedemmail = encodeUserEmail(email.toString())
         subButton = findViewById(R.id.submitbutton)
 //        title= findViewById(R.id.title)
 //        desc= findViewById(R.id.desc)
-        exer= findViewById(R.id.exercise)
-        wet= findViewById(R.id.wetime)
-        relact= findViewById(R.id.relaxingactivity)
-        nut= findViewById(R.id.nutrition)
-        mus= findViewById(R.id.musicpodcast)
-
-
+        exer = findViewById(R.id.exercise)
+        wet = findViewById(R.id.wetime)
+        relact = findViewById(R.id.relaxingactivity)
+        nut = findViewById(R.id.nutrition)
+        mus = findViewById(R.id.musicpodcast)
+        age = intent.getStringExtra("age").toString()
+        Toast.makeText(applicationContext, age, Toast.LENGTH_SHORT).show()
         subButton.setOnClickListener {
             registerUser(encodedemmail.toString())
         }
@@ -66,34 +66,36 @@ class addintrest : AppCompatActivity() {
 //        val title :String= title.text.toString()
 //        val description: String=desc.text.toString()
 
-        val exerc: String=exer.text.toString()
+        val exerc: String = exer.text.toString()
 
-        val wett: String=wet.text.toString()
+        val wett: String = wet.text.toString()
 
-        val rel: String=relact.text.toString()
+        val rel: String = relact.text.toString()
 
-        val nutt: String=nut.text.toString()
+        val nutt: String = nut.text.toString()
 
-        val music: String=mus.text.toString()
-        if (exerc.isBlank()  || wett.isBlank()||rel.isBlank() || nutt.isBlank()|| music.isBlank()) {
+        val music: String = mus.text.toString()
+        if (exerc.isBlank() || wett.isBlank() || rel.isBlank() || nutt.isBlank() || music.isBlank()) {
             Toast.makeText(this, "All fields are compulsory.", Toast.LENGTH_LONG).show()
             return
         }
 //        Toast.makeText(this,title,Toast.LENGTH_SHORT).show()
 
 //val d= datee+year.toString()
-        database = FirebaseDatabase.getInstance().getReference("UserInfo/"+email)
-        val intrest = intrestclass(exerc,music,rel,nutt,wett)
+        database = FirebaseDatabase.getInstance().getReference("UserInfo/" + email)
+        val intrest = intrestclass(exerc, music, rel, nutt, wett)
 
         database.child("UserIntrest").setValue(intrest).addOnSuccessListener {
             Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
             val a = Intent(this, Details::class.java)
+
+            a.putExtra("age", age)
+
             startActivity(a)
         }
     }
+
     private fun encodeUserEmail(email: String): String? {
         return email.replace(".", ",")
     }
-
 }
-

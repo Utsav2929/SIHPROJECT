@@ -48,9 +48,8 @@ public class fouthFifthGroup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fouth_fifth_group);
-
         ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);
-        String [] interests ={"exercisee", "nutrition", "musicpodcast","relaxinactivities", "wetimee"};
+        String [] interests ={"exercise", "dancing", "indoorgames","music", "drawing", "travel", "reading", "sports", "yoga"};
 
 
         recycler_view = findViewById(R.id.recycler_view_3to5);
@@ -99,22 +98,32 @@ public class fouthFifthGroup extends AppCompatActivity {
         Currentuser = mAuth.getCurrentUser();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
-        String [] intrestspoint = new String[5];
+        String [] intrestspoint = new String[9];
 
+//        String [] interests ={"exercise", "dancing", "indoorgames","music", "drawing", "travel", "reading", "sports", "yoga"};
 
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String exercise = snapshot.child(interests[0]).getValue().toString();
                     intrestspoint[0]= (exercise);
-                    String nutrition = snapshot.child(interests[1]).getValue().toString();
-                    intrestspoint[1]= (nutrition);
-                    String music = snapshot.child(interests[2]).getValue().toString();
-                    intrestspoint[2]= (music);
-                    String relaxin = snapshot.child(interests[3]).getValue().toString();
-                    intrestspoint[3]= (relaxin);
-                    String wetime = snapshot.child(interests[4]).getValue().toString();
-                    intrestspoint[4]= (wetime);
+                    String dancing = snapshot.child(interests[1]).getValue().toString();
+                    intrestspoint[1]= (dancing);
+                    String indoorgames = snapshot.child(interests[2]).getValue().toString();
+                    intrestspoint[2]= (indoorgames);
+                    String music = snapshot.child(interests[3]).getValue().toString();
+                    intrestspoint[3]= (music);
+                    String drawing = snapshot.child(interests[4]).getValue().toString();
+                    intrestspoint[4]= (drawing);
+                    String travel = snapshot.child(interests[5]).getValue().toString();
+                    intrestspoint[5]= (travel);
+                    String reading = snapshot.child(interests[6]).getValue().toString();
+                    intrestspoint[6]= (reading);
+                    String sports = snapshot.child(interests[7]).getValue().toString();
+                    intrestspoint[7]= (sports);
+                    String yoga = snapshot.child(interests[8]).getValue().toString();
+                    intrestspoint[8]= (yoga);
+
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -136,14 +145,18 @@ public class fouthFifthGroup extends AppCompatActivity {
 
                 if(!todotoday){
                     String[] wetime={"exercise",
-                            "music&podcast",
-                            "nutrition",
-                            "relaxinactivities",
-                            "wetime"};
+                            "dancing",
+                            "indoorgames",
+                            "music",
+                            "drawing",
+                            "travel",
+                            "reading",
+                            "sports",
+                            "yoga"};
 
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
-                    for (int i = 1; i <= 5; i++) {
+                    for (int i = 1; i <= 9; i++) {
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue(intrestspoint[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());
@@ -317,7 +330,6 @@ public class fouthFifthGroup extends AppCompatActivity {
     }
     private void opendiet(String email) {
         Intent intent = new Intent(fouthFifthGroup.this, chekk.class);
-
         startActivity(intent);
     }
     private void movetoflextime(String email) {

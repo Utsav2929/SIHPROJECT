@@ -90,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                     @NonNull Task<AuthResult> task)
             {
                 if (task.isSuccessful()) {
-
                     Currentuser = mAuth.getCurrentUser();
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo");
 
