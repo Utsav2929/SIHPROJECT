@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,6 +22,7 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
 
     DatabaseReference databaseReference2;
+    String email ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class relaxingActivityPrimary extends AppCompatActivity {
         ImageButton btn6 = findViewById(R.id.btn6);
 
 
-        String email = getIntent().getExtras().getString("email");
+         email = getIntent().getExtras().getString("email");
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -78,26 +80,31 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
 
     private void increasecounter(String email) {
-        LocalDate today=LocalDate.now();
+        LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
-                String progress;
+            String progress;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("relaxinactivities").child("progress").getValue().toString();
 
-                if(Integer.parseInt(progress)<=90) {
+                if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
 
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
 
-                }else{
+                    if(prg==100) {
+
+                        reward() ;
+                    }
+                } else if(Integer.parseInt(progress)==100){
 
                     int prg = 100;
 
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
-
+                    reward();
                 }
 
 
@@ -108,6 +115,32 @@ public class relaxingActivityPrimary extends AppCompatActivity {
             }
         });
 
+    }
+
+    void reward() {
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 
     private void gotoHobbies(String email) {
