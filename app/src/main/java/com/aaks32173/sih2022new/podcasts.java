@@ -3,6 +3,7 @@ import static java.lang.Integer.parseInt;
 import static ai.api.util.ParametersConverter.parseFloat;
 import static ai.api.util.ParametersConverter.parseInteger;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class podcasts extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
     StorageReference storagereference;
+    String email ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class podcasts extends AppCompatActivity {
         //sleepdetail = false;
         Currentuser = mauth.getCurrentUser();
 
-        String email = getIntent().getExtras().getString("email");
+         email = getIntent().getExtras().getString("email");
 
         String group = getIntent().getExtras().getString("group");
         if(group.equals("FourthFifth"))
@@ -65,13 +67,13 @@ public class podcasts extends AppCompatActivity {
                             TextView textView = (TextView) findViewById(id);
                             textView.setText(name);
                         }
-                        String imgname = "img"+i1;
-                        int id2 = getResources().getIdentifier(imgname, "id", getPackageName());
-                        if (id2 != 0) {
-                            ImageView imv = (ImageView) findViewById(id2);
-                            storagereference = FirebaseStorage.getInstance().getReference("3rd-6th/podacst/img"+1+".jpg");
-                           fetchimg(imv);
-                        }
+//                        String imgname = "img"+i1;
+//                        int id2 = getResources().getIdentifier(imgname, "id", getPackageName());
+//                        if (id2 != 0) {
+//                            ImageView imv = (ImageView) findViewById(id2);
+//                            storagereference = FirebaseStorage.getInstance().getReference("3rd-6th/podacst/img"+1+".jpg");
+//                           fetchimg(imv);
+//                        }
 
 
                     }
@@ -88,7 +90,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("1");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn7 = findViewById(R.id.btn7);
@@ -96,7 +98,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("7");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn2 = findViewById(R.id.btn2);
@@ -104,7 +106,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("2");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn3 = findViewById(R.id.btn3);
@@ -112,7 +114,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("3");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn4 = findViewById(R.id.btn4);
@@ -120,7 +122,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("4");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn5 = findViewById(R.id.btn5);
@@ -128,7 +130,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("5");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn6 = findViewById(R.id.btn6);
@@ -136,7 +138,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("6");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
     }
@@ -173,27 +175,65 @@ public class podcasts extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private void increasecounter(String email) {
-        LocalDate today=LocalDate.now();
+//    private void increasecounter(String email) {
+//        LocalDate today=LocalDate.now();
+//
+//        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+//        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+//            String progress;
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
+//
+//                if(Integer.parseInt(progress)<=90) {
+//                    int prg = Integer.parseInt(progress) + 10;
+//
+//                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+//
+//                }else{
+//
+//                    int prg = 100;
+//
+//                    reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
+//
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//
+//    }
+
+    private void increasecounter(String email, String trend) {
+        LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             String progress;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("music&podcast").child("progress").getValue().toString();
 
-                if(Integer.parseInt(progress)<=90) {
+                if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-
+                    trending(trend);
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
 
-                }else{
+                    if(prg==100) {
+
+                        reward() ;
+                    }
+                } else if(Integer.parseInt(progress)==100){
 
                     int prg = 100;
 
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
-
+                    reward();
                 }
 
 
@@ -204,5 +244,49 @@ public class podcasts extends AppCompatActivity {
             }
         });
 
+    }
+    private void trending(String trend)
+    {        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("trending");
+
+
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String p = snapshot.child(trend).getValue().toString();
+                int p2 = Integer.parseInt(p);
+                ref2.child(trend).setValue(Integer.toString(10+p2));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void reward() {
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 }

@@ -48,8 +48,6 @@ class WetimeActivity  : AppCompatActivity() {
                     for (userSnapshot in snapshot.children){
 
 
-
-
                         val user = userSnapshot.getValue(wetime::class.java)
                         userArrayList.add(user!!)
 

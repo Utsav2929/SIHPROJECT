@@ -1,5 +1,6 @@
 package com.aaks32173.sih2022new;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,7 +21,9 @@ import java.time.LocalDate;
 public class relaxingActivityPrimary extends AppCompatActivity {
 
 
+
     DatabaseReference databaseReference2;
+    String email ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +37,21 @@ public class relaxingActivityPrimary extends AppCompatActivity {
         ImageButton btn6 = findViewById(R.id.btn6);
 
 
-        String email = getIntent().getExtras().getString("email");
+         email = getIntent().getExtras().getString("email");
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 openWeb("https://bubblespop.netlify.app/",email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openWeb("https://www.digipuzzle.net/main/kids/",email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -56,58 +59,106 @@ public class relaxingActivityPrimary extends AppCompatActivity {
             public void onClick(View v) {
                 openWeb("https://www.teachingexpertise.com/classroom-ideas/school-scavenger-hunts-for-students/",email);
 
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotojournalism(email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gotoHobbies(email);
-                increasecounter(email);
+                increasecounter(email, "relaxingactivities");
             }
         });
 
     }
 
 
-    private void increasecounter(String email) {
-        LocalDate today=LocalDate.now();
+
+    private void increasecounter(String email, String trend) {
+        LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
-                String progress;
+            String progress;
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("relaxinactivities").child("progress").getValue().toString();
 
-                if(Integer.parseInt(progress)<=90) {
+                if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-
+                    trending(trend);
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
 
-                }else{
+                    if(prg==100) {
+
+                        reward() ;
+                    }
+                } else if(Integer.parseInt(progress)==100){
 
                     int prg = 100;
 
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
-
+                    reward();
                 }
 
 
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
+    }
+    private void trending(String trend)
+    {        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference();
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String p = snapshot.child("trending").child(trend).getValue().toString();
+                int p2 = Integer.parseInt(p);
+                ref2.child("trending").child(trend).setValue(Integer.toString(10+p2));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    void reward() {
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
 
     private void gotoHobbies(String email) {

@@ -1,5 +1,9 @@
 package com.aaks32173.sih2022new;
 
+import static java.lang.Integer.parseInt;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -8,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +41,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-
 
 
 public class chekk extends AppCompatActivity {
@@ -53,6 +59,7 @@ public class chekk extends AppCompatActivity {
     private Button btn ;
     private String si ;
     private EditText editText ;
+    private EditText edt_calf ;
     private static String URL_DATA ;
 
     private static String URL_DATA1=" https://api.nutritionix.com/v1_1/search/" ;
@@ -62,6 +69,7 @@ public class chekk extends AppCompatActivity {
 
     DatabaseReference dbref;
     DatabaseReference dbref2;
+    DatabaseReference dbref22 ;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     String email;
@@ -72,7 +80,7 @@ public class chekk extends AppCompatActivity {
     public double weight=0.0;
     public double age_id=0.0;
     ImageView imageView;
-
+    ProgressBar progress;
     public MyAdapter.onItemClickListener listener;
     EditText show;
     Button submit;
@@ -84,6 +92,7 @@ public class chekk extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chekk);
+        progress = findViewById(R.id.progress_bar1);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
         //sleepdetail = false;
@@ -94,7 +103,7 @@ public class chekk extends AppCompatActivity {
         editText=findViewById(R.id.search) ;
         btn=findViewById(R.id.searchbtn) ;
         listitems=new ArrayList<>() ;
-
+        edt_calf = findViewById(R.id.cal_f) ;
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
 
         mAuth = FirebaseAuth.getInstance();
@@ -127,28 +136,27 @@ public class chekk extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
 
-//            @RequiresApi(api = Build.VERSION_CODES.O)
+            //            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 Toast.makeText(chekk.this, "1", Toast.LENGTH_SHORT).show();
-//
-//                Double p= Double.parseDouble(show.getText().toString());
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
                         dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
-                        String cl=  dataSnapshot.child("calinitial").getValue().toString();
-
-                        Toast.makeText(chekk.this, cl+"", Toast.LENGTH_SHORT).show();
-
+                        String cl = dataSnapshot.child("calinitial").getValue().toString();
                         int i = Integer.parseInt(show.getText().toString()) + Integer.parseInt(cl);
-                        dbref.child("calinitial").setValue(i+"");
+                        dbref.child("calinitial").setValue(i + "");
+                        String finalc=edt_calf.getText().toString();
+                        float calfdd= Float.parseFloat(finalc);
+                        int c=(int)Math.round(calfdd) ;
+                        progress.setMax(c);
+                        progress.setProgress(Integer.parseInt(cl));
+                        Toast.makeText(chekk.this, c+"", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(chekk.this, i+"", Toast.LENGTH_SHORT).show();
                         fetchdata();
+                        increasecounter(encodeUserEmail(email),i,c);
+
 
                     }
 
@@ -158,8 +166,9 @@ public class chekk extends AppCompatActivity {
 
                 });
 
-            }
 
+
+            }
 //                if(p<0.0d) {
 //                Toast.makeText(chekk.this, "Calorie Intake Achieved", Toast.LENGTH_SHORT).show();
 //                showCalories.setText("0");
@@ -250,7 +259,9 @@ public class chekk extends AppCompatActivity {
             @Override
             public void onClickItem(View v, int positon) {
 //
-                show.setText(listitems.get(positon).getCal());
+                float f=Float.parseFloat(listitems.get(positon).getCal()) ;
+                int i=(int)Math.round(f) ;
+                show.setText(i+"");
             }
         };
     }
@@ -263,29 +274,29 @@ public class chekk extends AppCompatActivity {
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void increasecounter(String email, int diet, int ttldiet) {
-        LocalDate today=LocalDate.now();
-
-        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
-        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
-            String progress;
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progress = dataSnapshot.child("nutrition").child("progress").getValue().toString();
-
-                int prg=(ttldiet/diet)*100;
-
-                reference1.child("nutrition").child("progress").setValue(Integer.toString(prg));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    private void increasecounter(String email, int diet, int ttldiet) {
+//        LocalDate today=LocalDate.now();
+//
+//        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+//        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+//            String progress;
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                progress = dataSnapshot.child("nutrition").child("progress").getValue().toString();
+//
+//                int prg=(ttldiet/diet)*100;
+//
+//                reference1.child("nutrition").child("progress").setValue(Integer.toString(prg));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//
+//    }
 
 
     private void fetchdata(){
@@ -297,12 +308,19 @@ public class chekk extends AppCompatActivity {
                 //calories= Double.parseDouble(snapshot.child("age").getValue().toString());
                 String calinit = snapshot.child("calinitial").getValue().toString();
                 String calfinal = snapshot.child("calfinal").getValue().toString();
+                edt_calf.setText(calfinal);
                 double calin = Double.parseDouble(calinit);
                 double calf = Double.parseDouble(calfinal);
                 double ans = calf-calin;
                 int a =(int)Math.round(ans);
-                String cc = String.valueOf(a);
-                showCalories.setText(cc);
+                if(a<0) {
+                    a = 0;
+                }
+                else{
+                    ;
+                }
+
+                showCalories.setText(a+"");
 
 
 
@@ -314,5 +332,74 @@ public class chekk extends AppCompatActivity {
             }
         });
     }
+
+    private void increasecounter(String email,int ttldiet,int diet ) {
+        LocalDate today = LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        DatabaseReference refre2=FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                progress = dataSnapshot.child("nutrition").child("progress").getValue().toString();
+
+                int prg =  ((ttldiet*100)/diet);
+
+                if(prg>100) {
+                    prg = 100;
+
+                }
+                    reference1.child("nutrition").child("progress").setValue(Integer.toString(prg));
+                reward();
+
+                }
+
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+    }
+    void reward() {
+
+        DatabaseReference reference1 =
+                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email));
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                DatabaseReference reference2 =
+                        FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email));
+                String rew = snapshot.child("rewards").getValue().toString();
+
+                Toast.makeText(chekk.this, "initial rewards "+rew, Toast.LENGTH_SHORT).show();
+
+                int rev = Integer.parseInt(rew) + 50;
+                reference2.child("rewards").setValue(rev + "");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
+        return ;
+    }
+
+
 
 }

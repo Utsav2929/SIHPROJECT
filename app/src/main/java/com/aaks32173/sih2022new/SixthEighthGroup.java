@@ -17,11 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
-
 public class SixthEighthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
-
     DatabaseReference databaseReference2;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -36,20 +34,19 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
+
         ImageButton convo = findViewById(R.id.convo6to8);
         ImageButton diet = findViewById(R.id.diet);
         ImageButton nowcast = findViewById(R.id.nowcast6to8);
+
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
-
-
         LocalDate td=LocalDate.now();
         DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
         reference12.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Boolean todotoday = dataSnapshot.child(td.toString()).exists();
-
                 if(!todotoday){
                     String[][] wetime={
                             {"1","Go for a walk with your parents"},
@@ -102,6 +99,7 @@ public class SixthEighthGroup extends AppCompatActivity {
             }
         });
 
+
         nowcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +114,7 @@ public class SixthEighthGroup extends AppCompatActivity {
                 gotoTotherapist();
             }
         });
+
         diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +156,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         Intent intent = new Intent(SixthEighthGroup.this, councellor.class);
         startActivity(intent);
     }
+
 
     private void gotodiet() {
         Intent intent = new Intent(SixthEighthGroup.this, chekk.class);

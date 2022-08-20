@@ -101,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = register_password.getText().toString();
         confirm_password = register_confirm_password.getText().toString();
         age = register_age.getText().toString();
+
         sssm_id = register_sssm_id.getText().toString();
         family_id = register_family_id.getText().toString();
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)|| TextUtils.isEmpty(confirm_password)
@@ -108,8 +109,13 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
-        if (!password.equals(confirm_password)){
+        if (!password.equals(confirm_password) ){
             Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (Integer.parseInt(age)<=0){
+            Toast.makeText(getApplicationContext(),"Enter Valid Age",Toast.LENGTH_LONG).show();
             return;
         }
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -129,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                             }
                      else{
-                         Intent intent = new Intent(RegisterActivity.this, addintrest.class);
+                         Intent intent = new Intent(RegisterActivity.this, Interest.class);
                          intent.putExtra("age", age);
                          startActivity(intent);
                      }
@@ -150,12 +156,16 @@ public class RegisterActivity extends AppCompatActivity {
         userInfo.setFamily_id(familyid);
         userInfo.setGender(gender);
         final boolean[] processDone = {true};
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(processDone[0]) {
                     databaseReference.child(encodeUserEmail(email.toString())).child("info").setValue(userInfo);
+                    databaseReference.child(encodeUserEmail(email.toString())).child("userDiet").setValue("0");
+                    databaseReference.child(encodeUserEmail(email.toString())).child("rewards").setValue("0");
                     databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepActivity").setValue(true);
+                    databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("SleepScore").setValue("0");
+                    databaseReference.child(encodeUserEmail(email.toString())).child("SleepDetails").child("Sleepday").setValue("0");
                     Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
                     processDone[0] =false;
                 }
