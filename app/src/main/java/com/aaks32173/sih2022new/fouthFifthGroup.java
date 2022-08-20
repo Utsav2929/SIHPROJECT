@@ -49,7 +49,7 @@ public class fouthFifthGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fouth_fifth_group);
         ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);
-        String [] interests ={"exercise", "dancing", "indoorgames","music", "drawing", "travel", "reading", "sports", "yoga"};
+        String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
 
 
         recycler_view = findViewById(R.id.recycler_view_3to5);
@@ -115,14 +115,14 @@ public class fouthFifthGroup extends AppCompatActivity {
                     intrestspoint[3]= (music);
                     String drawing = snapshot.child(interests[4]).getValue().toString();
                     intrestspoint[4]= (drawing);
-                    String travel = snapshot.child(interests[5]).getValue().toString();
-                    intrestspoint[5]= (travel);
-                    String reading = snapshot.child(interests[6]).getValue().toString();
-                    intrestspoint[6]= (reading);
-                    String sports = snapshot.child(interests[7]).getValue().toString();
-                    intrestspoint[7]= (sports);
-                    String yoga = snapshot.child(interests[8]).getValue().toString();
-                    intrestspoint[8]= (yoga);
+//                    String travel = snapshot.child(interests[5]).getValue().toString();
+//                    intrestspoint[5]= (travel);
+//                    String reading = snapshot.child(interests[6]).getValue().toString();
+//                    intrestspoint[6]= (reading);
+//                    String sports = snapshot.child(interests[7]).getValue().toString();
+//                    intrestspoint[7]= (sports);
+//                    String yoga = snapshot.child(interests[8]).getValue().toString();
+//                    intrestspoint[8]= (yoga);
 
                 }
                 @Override
@@ -145,18 +145,14 @@ public class fouthFifthGroup extends AppCompatActivity {
 
                 if(!todotoday){
                     String[] wetime={"exercise",
-                            "dancing",
-                            "indoorgames",
-                            "music",
-                            "drawing",
-                            "travel",
-                            "reading",
-                            "sports",
-                            "yoga"};
+                            "music&podcast",
+                            "nutrition",
+                            "relaxinactivities",
+                            "wetime"};
 
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
-                    for (int i = 1; i <= 9; i++) {
+                    for (int i = 1; i <= 5; i++) {
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue(intrestspoint[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());

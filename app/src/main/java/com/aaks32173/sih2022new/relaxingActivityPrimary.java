@@ -81,12 +81,8 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
 
 
-    private void increasecounter(String email, String chld) {
-        LocalDate today=LocalDate.now();
-
-    private void increasecounter(String email) {
+    private void increasecounter(String email, String trend) {
         LocalDate today = LocalDate.now();
-
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -98,18 +94,14 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
                 if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-                    trending(chld);
+                    trending(trend);
                     reference1.child("relaxinactivities").child("progress").setValue(Integer.toString(prg));
-
-
-                }else{
 
                     if(prg==100) {
 
                         reward() ;
                     }
                 } else if(Integer.parseInt(progress)==100){
-
 
                     int prg = 100;
 
@@ -120,6 +112,7 @@ public class relaxingActivityPrimary extends AppCompatActivity {
 
             }
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -128,16 +121,13 @@ public class relaxingActivityPrimary extends AppCompatActivity {
     }
     private void trending(String trend)
     {        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference();
-
-
         ref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String p = snapshot.child("trending").child(trend).getValue().toString();
                 int p2 = Integer.parseInt(p);
-                ref2.child(trend).setValue(Integer.toString(10+p2));
+                ref2.child("trending").child(trend).setValue(Integer.toString(10+p2));
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

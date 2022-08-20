@@ -35,6 +35,10 @@ public class Interest extends AppCompatActivity implements QuantityListener {
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference ref;
+    int exercisepointer=0;
+    int musicpodcastpointer=0;
+    int relaxinpointer=0;
+    int wetimePointer=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,68 +65,66 @@ public class Interest extends AppCompatActivity implements QuantityListener {
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("exercise", img1);
+               exercisepointer= addtoList("exercise", img1, exercisepointer);
+
 
             }
         });
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("dancing", img2);
+              relaxinpointer=  addtoList("dancing", img2,relaxinpointer);
 
             }
         });
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("indoorgames", img3);
+                relaxinpointer =addtoList("indoorgames", img3, relaxinpointer);
 
             }
         });
         img4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("music", img4);
+                musicpodcastpointer = addtoList("music", img4, musicpodcastpointer);
 
             }
         });
         img5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("drawing", img5);
+               relaxinpointer= addtoList("drawing", img5, relaxinpointer);
 
             }
         });
         img6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("travel", img6);
+              wetimePointer =  addtoList("travel", img6, wetimePointer);
 
             }
         });
         img7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("reading", img7);
+               relaxinpointer= addtoList("reading", img7, relaxinpointer);
 
             }
         });
         img8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("sports", img8);
+               wetimePointer= addtoList("sports", img8, wetimePointer);
 
             }
         });
         img9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addtoList("yoga", img9);
-
+                exercisepointer=addtoList("yoga", img9, exercisepointer);
             }
         });
-
-
 //        ref.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -146,81 +148,26 @@ public class Interest extends AppCompatActivity implements QuantityListener {
     }
 
     private void getData() {
-        if(arrayList.contains("exercise"))
-        {
-            ref.child("exercise").setValue("5");
-        }
-        else
-        ref.child("exercise").setValue("0");
-        if(arrayList.contains("dancing"))
-        {
-            ref.child("dancing").setValue("5");
-        }
-        else{
-            ref.child("dancing").setValue("0");
-        }
-        if(arrayList.contains("indoorgames"))
-        {
-            ref.child("indoorgames").setValue("5");
-        }
-        else{
-            ref.child("indoorgames").setValue("0");
-        }
-        if(arrayList.contains("music"))
-        {
-            ref.child("music").setValue("5");
-        }
-        else{
-            ref.child("music").setValue("0");
-        }
-        if(arrayList.contains("drawing"))
-        {
-            ref.child("drawing").setValue("5");
-        }
-        else{
-            ref.child("drawing").setValue("0");
-        }
-        if(arrayList.contains("travel"))
-        {
-            ref.child("travel").setValue("5");
-        }
-        else{
-            ref.child("travel").setValue("0");
-        }
-        if(arrayList.contains("reading"))
-        {
-            ref.child("reading").setValue("5");
-        }
-        else{
-            ref.child("reading").setValue("0");
-        }
-        if(arrayList.contains("sports"))
-        {
-            ref.child("sports").setValue("5");
-        }
-        else{
-            ref.child("sports").setValue("0");
-        }
-        if(arrayList.contains("yoga"))
-        {
-            ref.child("yoga").setValue("5");
-        }
-        else{
-            ref.child("yoga").setValue("0");
-        }
+            ref.child("exercisee").setValue(exercisepointer+"");
+            ref.child("musicpodcast").setValue(musicpodcastpointer+"");
+            ref.child("relaxinactivities").setValue(relaxinpointer+"");
+            ref.child("wetimee").setValue(wetimePointer+"");
+            ref.child("nutrition").setValue(0+"");
     }
-
-    private void addtoList(String s, ImageView v) {
+    private int addtoList(String s, ImageView v, int pointer) {
         if(arrayList.contains(s))
         {
             arrayList.remove(s);
             v.setBackgroundResource(R.color.white);
+            pointer--;
         }
         else{
             arrayList.add(s);
             v.setBackgroundResource(R.color.blue);
+            pointer++;
           //  Toast.makeText(this, arrayList.toString(),Toast.LENGTH_SHORT ).show();
         }
+        return pointer;
     }
 
     private void movetohome() {
