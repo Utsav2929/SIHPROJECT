@@ -188,13 +188,6 @@
                     android:src="@drawable/meditationcheck4" />
 
             </LinearLayout>
-
-
-
-
-
-
-
         </LinearLayout>
 
     </ScrollView>

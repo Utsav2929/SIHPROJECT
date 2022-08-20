@@ -1,4 +1,5 @@
 package com.aaks32173.sih2022new;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,12 +22,15 @@ import java.time.LocalDate;
 public class SixthEighthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference2;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sixth_eighth_group);
+        String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
+
         ImageButton menstural = findViewById(R.id.menstural);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton flextime = findViewById(R.id.flextime);
@@ -42,6 +47,75 @@ public class SixthEighthGroup extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         LocalDate td=LocalDate.now();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
+        String [] intrestspoint = new String[9];
+
+//        String [] interests ={"exercise", "dancing", "indoorgames","music", "drawing", "travel", "reading", "sports", "yoga"};
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child(interests[0]).getValue().toString();
+                intrestspoint[0]= (exercise);
+                String dancing = snapshot.child(interests[1]).getValue().toString();
+                intrestspoint[1]= (dancing);
+                String indoorgames = snapshot.child(interests[2]).getValue().toString();
+                intrestspoint[2]= (indoorgames);
+                String music = snapshot.child(interests[3]).getValue().toString();
+                intrestspoint[3]= (music);
+                String drawing = snapshot.child(interests[4]).getValue().toString();
+                intrestspoint[4]= (drawing);
+//                    String travel = snapshot.child(interests[5]).getValue().toString();
+//                    intrestspoint[5]= (travel);
+//                    String reading = snapshot.child(interests[6]).getValue().toString();
+//                    intrestspoint[6]= (reading);
+//                    String sports = snapshot.child(interests[7]).getValue().toString();
+//                    intrestspoint[7]= (sports);
+//                    String yoga = snapshot.child(interests[8]).getValue().toString();
+//                    intrestspoint[8]= (yoga);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        String encodedemmail=encodeUserEmail(email.toString());
+
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean todotoday = dataSnapshot.child(td.toString()).exists();
+
+                if(!todotoday){
+                    String[] wetime={"exercise",
+                            "music&podcast",
+                            "nutrition",
+                            "relaxinactivities",
+                            "wetime"};
+
+                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+
+                    for (int i = 1; i <= 5; i++) {
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("intrest").setValue(intrestspoint[i-1]);
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());
+                        databaseReference2.child(td.toString()).child(wetime[i-1]).child("progress").setValue("0");
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
         reference12.addValueEventListener(new ValueEventListener() {
             @Override
@@ -79,7 +153,6 @@ public class SixthEighthGroup extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
         music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

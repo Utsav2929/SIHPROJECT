@@ -103,8 +103,8 @@ public class AddpostActivity extends AppCompatActivity {
                     Toast.makeText(AddpostActivity.this,"Posted",Toast.LENGTH_SHORT).show();
                     Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
 
-                    DatabaseReference newPost = mDatabase.child(title_val+desc_val);
-                    DatabaseReference newPost1 = database.child(title_val+desc_val);
+                    DatabaseReference newPost = mDatabase.child(title_val);
+                    DatabaseReference newPost1 = database.child(title_val);
 
                     newPost.child("title").setValue(title_val);
                             newPost.child("desc").setValue(desc_val);

@@ -79,14 +79,15 @@ public class flex_time extends AppCompatActivity {
     private void openyogas(){
         Intent intent = new Intent(this,yoga.class);
         intent.putExtra("category", "exercises1");
-        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
-            intent.putExtra("group", "SixthEight");
-            intent.putExtra("age", "10");
-        }
+
         startActivity(intent);
     }
     private void openworkouts(){
         Intent intent = new Intent(this,workout.class);
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
     }
     private void openstrerchings(){

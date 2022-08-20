@@ -18,28 +18,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIH2022NEW">
+
         <activity
             android:name=".SixthEighthGroup"
             android:exported="false" />
         <activity
             android:name=".gtbtPanelFourthFifth"
             android:exported="false" />
-
         <activity
-            android:name=".splash"
-            android:exported="true" >
+            android:name=".splashac"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".recommended"
+            android:exported="false" />
         <activity
             android:name=".addtodo"
             android:exported="false" />
-        <activity android:name=".addintrest"
-            android:exported="false"/>
+        <activity
+            android:name=".addintrest"
+            android:exported="false" />
         <activity
             android:name=".flextimefourthfifth"
             android:exported="false" />
@@ -69,11 +72,7 @@
             android:exported="false" />
         <activity
             android:name=".fouthFifthGroup"
-            android:exported="false" >
-
-
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".sports"
             android:exported="false" />
@@ -97,9 +96,6 @@
             android:exported="false" />
         <activity
             android:name=".relaxingJournaling"
-            android:exported="false" />
-        <activity
-            android:name=".councellor"
             android:exported="false" />
         <activity
             android:name=".relaxingActivityPrimary"
@@ -143,15 +139,12 @@
         <activity
             android:name=".yoga"
             android:exported="false" />
-
         <activity
             android:name=".UserDiet"
             android:exported="false" />
-
         <activity
             android:name=".Details"
             android:exported="false" />
-
         <activity
             android:name=".chekk"
             android:exported="false" />
@@ -162,10 +155,8 @@
             android:name=".ui.chatbotquestion"
             android:exported="false" />
         <activity
-
             android:name=".LoginActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".DashHome_Nur_3"
             android:exported="false" />
@@ -178,14 +169,12 @@
         <activity
             android:name=".vedioPlay"
             android:exported="false" />
-
         <activity
             android:name=".goodBadtouch"
             android:exported="false" />
         <activity
             android:name=".AddpostActivity"
             android:exported="false" />
-
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
@@ -220,6 +209,9 @@
             android:name=".MenstrualHome"
             android:exported="false" />
         <activity
+            android:name=".councellor"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -228,16 +220,11 @@
             android:label="@string/title_activity_bottom_navigation" />
         <activity
             android:name=".Interest"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.SIH2022NEW.NoActionBar"/>
-
-
-
+            android:theme="@style/Theme.SIH2022NEW.NoActionBar" />
 
         <receiver android:name=".recieverAlarm" />
 

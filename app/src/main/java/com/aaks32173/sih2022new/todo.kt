@@ -1,26 +1,18 @@
 package com.aaks32173.sih2022new
 
-import android.os.Build
 import android.os.Bundle
-
-import android.widget.ImageView
-
 import android.widget.EditText
 import android.widget.TextView
-
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaks32173.sih2022new.databinding.ActivityTodoBinding
 import com.google.firebase.auth.FirebaseAuth
 
-import com.google.firebase.auth.FirebaseUser
-
 import com.google.firebase.database.*
-import java.lang.Integer.*
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class todo  : AppCompatActivity() {
@@ -32,17 +24,6 @@ class todo  : AppCompatActivity() {
     private lateinit var rewrd : TextView
     private lateinit var trending : TextView
     private lateinit var userArrayList : ArrayList<usertodo>
-
-    private lateinit var mauth :FirebaseAuth
-    private lateinit var Currentuser : FirebaseUser
-    private lateinit var email:String
-    private lateinit var imageView: ImageView
-    private lateinit var age:Integer
-
-    private lateinit var dbref1 : DatabaseReference
-
-    @RequiresApi(Build.VERSION_CODES.O)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =  ActivityTodoBinding.inflate(layoutInflater)
@@ -57,49 +38,18 @@ class todo  : AppCompatActivity() {
         userRecyclerview = findViewById(R.id.userList)
         userRecyclerview.layoutManager = LinearLayoutManager(this)
         userRecyclerview.setHasFixedSize(true)
-        imageView = findViewById(R.id.todobgimg)
 
         userArrayList = arrayListOf<usertodo>()
 
-        mauth = FirebaseAuth.getInstance()
-        Currentuser = mauth.getCurrentUser()!!
-        email = Currentuser.email.toString()
-        dbref1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(
-            encodeUserEmail(email).toString()
-        ).child("info");
-        dbref1.child("age").addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                if (snapshot.exists()){
-                    val age1= (snapshot.getValue().toString()).toInt()
-                    if (age1>10){
-                        imageView.setBackground(getDrawable(R.drawable.todolistbgcheck))
-                    }
-                    else
-                    {
-                        imageView.setBackground(getDrawable(R.drawable.todo_bg))
-
-                    }
-
-                }                }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
         setreward(encodedemmail.toString())
         trend()
-
         getUserData()
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getUserData() {
 
-       val email = intent.getStringExtra("email").toString()
+        val email = intent.getStringExtra("email").toString()
         Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
 
         val today= LocalDate.now()
@@ -109,7 +59,7 @@ class todo  : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-               if (snapshot.exists()){
+                if (snapshot.exists()){
 
                     for (userSnapshot in snapshot.children){
 
@@ -137,9 +87,6 @@ class todo  : AppCompatActivity() {
         })
 
 
-    }
-    private fun encodeUserEmail(email: String): String? {
-        return email.replace(".", ",")
     }
     private fun setreward(email :String) {
 

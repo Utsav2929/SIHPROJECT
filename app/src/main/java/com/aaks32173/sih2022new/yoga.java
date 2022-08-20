@@ -36,7 +36,6 @@ public class yoga extends AppCompatActivity {
             setContentView(R.layout.activity_yoga);
 
           String category = getIntent().getExtras().getString("category");
-          String group = getIntent().getExtras().getString("group");
           Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
 
 
@@ -53,29 +52,27 @@ public class yoga extends AppCompatActivity {
           linearLayout = findViewById(R.id.giflinearlayout);
           LottieAnimationView gif2 =findViewById(R.id.gif2);
           GifImageView gif1=findViewById(R.id.gif1);
+          linearLayout = findViewById(R.id.giflinearlayout);
           ImageButton btn9 = findViewById(R.id.btn9);
           if( category.equals("exercises")){
 
-                  videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(1).mp4?alt=media&token=3a92fa5d-8f01-43a8-8460-d2235221fa54";
-                  videoUrl2="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(2).mp4?alt=media&token=1066c402-f42b-4cb4-adb2-f7bbe8b0bd23";
-                  videoUrl3="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(3).mp4?alt=media&token=c247b817-bc3e-4bbc-8ce6-d5d49ed77c84";
-                  videoUrl4="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(4).mp4?alt=media&token=7b1938a0-552c-45e2-b571-17cc41a7b586";
-                  videoUrl5="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback.mp4?alt=media&token=01b76b1f-3337-4270-a089-59cab6dce358";
-                  videoUrl6="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(7).mp4?alt=media&token=d90b5430-e0aa-472f-9fa7-f88d58299734";
-                  videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(8).mp4?alt=media&token=e171c2d8-f31b-4214-ad17-5dc1c5761634";
-                  videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
-                  videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
-
-              }
-
-
-
+              videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(1).mp4?alt=media&token=3a92fa5d-8f01-43a8-8460-d2235221fa54";
+              videoUrl2="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(2).mp4?alt=media&token=1066c402-f42b-4cb4-adb2-f7bbe8b0bd23";
+              videoUrl3="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(3).mp4?alt=media&token=c247b817-bc3e-4bbc-8ce6-d5d49ed77c84";
+              videoUrl4="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(4).mp4?alt=media&token=7b1938a0-552c-45e2-b571-17cc41a7b586";
+              videoUrl5="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback.mp4?alt=media&token=01b76b1f-3337-4270-a089-59cab6dce358";
+              videoUrl6="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(7).mp4?alt=media&token=d90b5430-e0aa-472f-9fa7-f88d58299734";
+              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(8).mp4?alt=media&token=e171c2d8-f31b-4214-ad17-5dc1c5761634";
+              videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
+              videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
+          }
           else if(category.equals("exercises1")){
               background.setImageResource(R.drawable.yogabgcheck);
               heading.setVisibility(View.GONE);
               gif2.setVisibility(View.INVISIBLE);
-//              gif1.setImageResource(R.drawable.yogagifcheck);
-                gif1.setVisibility(View.GONE);
+              gif1.setImageResource(R.drawable.yogagifcheck);
+              gif1.setVisibility(View.GONE);
+              gif1.setVisibility(View.GONE);
 //yoga
               videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
               videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
@@ -87,7 +84,24 @@ public class yoga extends AppCompatActivity {
               videoUrl = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga1.mp4?alt=media&token=7208a3c5-5d4c-4a79-82e0-cca9cd53e1a9";
               videoUrl2 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fconcentration_build_yoga2.mp4?alt=media&token=0abd607f-9ff1-43df-a3ae-cea3d2b7d446";
           }
-         else if(category.equals("health")){
+          else if(category.equals("health")){
+              background.setImageResource(R.drawable.gk_bg2);
+              heading.setVisibility(View.INVISIBLE);
+              gif2.setVisibility(View.INVISIBLE);
+              gif1.setImageResource(R.drawable.food_gif);
+
+              videoUrl9="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz1.mp4?alt=media&token=2a3e42b5-8d3b-4c2b-8de6-6b2c34750c1f";
+              videoUrl8="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz2.mp4?alt=media&token=e6c25d0f-3c6e-48ca-be0b-5c0597a99d74";
+              videoUrl6 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz3.mp4?alt=media&token=5ddd34ed-a5f4-4fa0-b9ce-dc434f68337a";
+              videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fquiz4.mp4?alt=media&token=16aaea66-a049-4867-8f8a-0de8251cae14";
+              videoUrl5 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback%20(1).mp4?alt=media&token=0aebfebc-cba0-4cbb-9b26-88bdcb99f160";
+              videoUrl4 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback%20(2).mp4?alt=media&token=faafabcd-2e68-46d3-b129-f266e8895443";
+              videoUrl3 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
+              videoUrl ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
+              videoUrl2 ="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/kids%2FG.K%2Fvideoplayback.mp4?alt=media&token=cd9302c6-896f-45b9-bb74-72e3fb3b90b9";
+
+          }
+          else if(category.equals("health")){
                        background.setImageResource(R.drawable.gk_bg2);
               heading.setVisibility(View.INVISIBLE);
               gif2.setVisibility(View.INVISIBLE);

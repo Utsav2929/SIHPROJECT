@@ -162,11 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-
                         android:text="TO-DO LIST "
-
-                        android:text="Personal Todo"
-
                         android:textAlignment="center"
 
                         android:textColor="@color/black" />
@@ -200,9 +196,7 @@
                         android:layout_width="match_parent"
 
                         android:layout_height="wrap_content"
-
                         android:fontFamily="@font/salsa"
-
                         android:text="FLEX TIME"
                         android:textAlignment="center"
 
@@ -219,13 +213,8 @@
 
                     <ImageButton
                         android:id="@+id/diet"
-
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
                         app:srcCompat="@drawable/dietcheck" />
@@ -234,9 +223,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:fontFamily="@font/salsa"
-
                         android:text="DIET"
                         android:textAlignment="center"
 
@@ -290,19 +277,11 @@
 
                     <ImageButton
                         android:id="@+id/relaxing"
-
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
                         app:srcCompat="@drawable/relaxingactivitycheck" />
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_16"
-                        android:background="@drawable/shape"/>
-
 
                     <TextView
                         android:id="@+id/relaxingtv"
@@ -432,7 +411,6 @@
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
 
             </LinearLayout>
 

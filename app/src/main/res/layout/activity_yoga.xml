@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".yoga"
     >
-
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:translationZ="-200dp" />
-
     <TextView
         android:id="@+id/head"
         android:layout_width="match_parent"
@@ -39,8 +37,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="5dp">
-
+            android:padding="5dp"
+            >
             <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/gif1"
                 android:layout_width="800dp"
