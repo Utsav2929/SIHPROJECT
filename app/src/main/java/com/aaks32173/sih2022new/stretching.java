@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
 public class stretching extends AppCompatActivity {
     String videoUrl;
     String videoUrl2;
@@ -15,11 +17,11 @@ public class stretching extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stretching);
-        Button btn1 = findViewById(R.id.btn1);
-        Button btn2 = findViewById(R.id.btn2);
-        Button btn3 = findViewById(R.id.btn3);
-        Button btn4 = findViewById(R.id.btn4);
-        Button btn5 = findViewById(R.id.btn5);
+        LinearLayout btn1 = findViewById(R.id.stretch1);
+        LinearLayout btn2 = findViewById(R.id.stretch2);
+        LinearLayout btn3 = findViewById(R.id.stretch3);
+        LinearLayout btn4 = findViewById(R.id.stretch4);
+        LinearLayout btn5 = findViewById(R.id.stretch5);
         String group = getIntent().getExtras().getString("group");
         if(group.equals("SixthEight"))
         {

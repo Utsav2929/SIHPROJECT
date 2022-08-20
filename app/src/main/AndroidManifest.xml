@@ -99,6 +99,9 @@
             android:name=".relaxingJournaling"
             android:exported="false" />
         <activity
+            android:name=".councellor"
+            android:exported="false" />
+        <activity
             android:name=".relaxingActivityPrimary"
             android:exported="false" />
         <activity

@@ -1,7 +1,9 @@
 package com.aaks32173.sih2022new;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +21,7 @@ public class SixthEighthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
     DatabaseReference databaseReference2;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +34,11 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
+
+        ImageButton convo = findViewById(R.id.convo6to8);
         ImageButton diet = findViewById(R.id.diet);
+        ImageButton nowcast = findViewById(R.id.nowcast6to8);
+
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         LocalDate td=LocalDate.now();
@@ -91,6 +98,23 @@ public class SixthEighthGroup extends AppCompatActivity {
                 gotoTodo(encodeUserEmail(Currentuser.getEmail().toString()));
             }
         });
+
+
+        nowcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SixthEighthGroup.this,Showpost.class);
+                startActivity(intent);
+            }
+        });
+
+        convo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoTotherapist();
+            }
+        });
+
         diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,10 +151,18 @@ public class SixthEighthGroup extends AppCompatActivity {
                 movetogtbt();
             }
         });}
+
+    private void gotoTotherapist() {
+        Intent intent = new Intent(SixthEighthGroup.this, councellor.class);
+        startActivity(intent);
+    }
+
+
     private void gotodiet() {
         Intent intent = new Intent(SixthEighthGroup.this, chekk.class);
         startActivity(intent);
     }
+
     private void gotoWetime(String email) {
         Intent intent = new Intent(SixthEighthGroup.this, WetimeActivity.class);
         intent.putExtra("email",email);
@@ -140,12 +172,14 @@ public class SixthEighthGroup extends AppCompatActivity {
         Intent intent =  new Intent(SixthEighthGroup.this, MusicPlayer.class);
         intent.putExtra("path","PodcastSixthEight");
         intent.putExtra("email", email);
+        intent.putExtra("grp", "podcast");
         startActivity(intent);
     }
     private void gotoMusic(String email) {
         Intent intent = new Intent(SixthEighthGroup.this, MusicPlayer.class);
         intent.putExtra("path","MusicFourthFifth");
         intent.putExtra("email", email);
+        intent.putExtra("grp", "music");
         startActivity(intent);
     }
     private void movetogtbt() {

@@ -1,6 +1,7 @@
 package com.aaks32173.sih2022new;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,18 +50,24 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 
 public class MusicPlayer extends AppCompatActivity{
+    String group;
     String path;
     private boolean checkPermission = false;
     Uri uri;
     String songName,songUrl;
     ListView listView;
-
+    ImageView imageviewbg;
+    DatabaseReference dbref;
+    FirebaseUser muser;
+    String current_email;
+    Integer age;
     ArrayList<String> arrayListSongsName = new ArrayList<>();
     ArrayList<String> arrayListSongsUrl = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
     JcPlayerView jcPlayerView;
     ArrayList<JcAudio> jcAudios = new ArrayList<>();
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +75,36 @@ public class MusicPlayer extends AppCompatActivity{
         listView = findViewById(R.id.myListView);
         jcPlayerView = findViewById(R.id.jcplayer);
         path = getIntent().getExtras().getString("path");
+        group = getIntent().getExtras().getString("grp");
         retrieveSongs(path);
+        imageviewbg = findViewById(R.id.musicplayer_bg);
+        muser = FirebaseAuth.getInstance().getCurrentUser();
+        current_email = muser.getEmail();
+        dbref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(current_email)).child("info");
+        dbref.child("age").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                age = Integer.parseInt(snapshot.getValue().toString());
+                if (age>10 && !group.equals("podcast")){
+                    imageviewbg.setBackground(getDrawable(R.drawable.musiccheck_bg1));
+//            musicplayer_bg.setBackground(getDrawable(R.drawable.musiccheck_bg1));
+                }
+                else if (age>10 && group.equals("podcast")){
+                    imageviewbg.setBackground(getDrawable(R.drawable.podcastbgcheck));
+
+                }
+                else {
+                    imageviewbg.setBackground(getDrawable(R.drawable.musiccheck_bg1));
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -284,4 +323,8 @@ public class MusicPlayer extends AppCompatActivity{
 
         return checkPermission;
     }
+    private String encodeUserEmail(String email) {
+        return email.replace(".",",");
+    }
+
 }
