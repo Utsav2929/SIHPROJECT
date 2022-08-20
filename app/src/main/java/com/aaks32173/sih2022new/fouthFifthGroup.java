@@ -317,7 +317,6 @@ public class fouthFifthGroup extends AppCompatActivity {
     }
     private void opendiet(String email) {
         Intent intent = new Intent(fouthFifthGroup.this, chekk.class);
-
         startActivity(intent);
     }
     private void movetoflextime(String email) {

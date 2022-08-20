@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".relaxingActivityHigher">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/relaxingbgcheck"
+        android:alpha="1"/>
+
     <LinearLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
@@ -24,6 +30,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="5dp"
+            android:fontFamily="@font/salsa"
+            android:textColor="@color/black"
             android:text="@string/relaxingPrimary"
             android:textSize="30sp"
             android:textStyle="bold" />
