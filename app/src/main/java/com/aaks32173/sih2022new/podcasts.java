@@ -90,7 +90,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("1");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn7 = findViewById(R.id.btn7);
@@ -98,7 +98,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("7");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn2 = findViewById(R.id.btn2);
@@ -106,7 +106,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("2");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn3 = findViewById(R.id.btn3);
@@ -114,7 +114,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("3");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn4 = findViewById(R.id.btn4);
@@ -122,7 +122,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("4");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn5 = findViewById(R.id.btn5);
@@ -130,7 +130,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("5");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
         LinearLayout btn6 = findViewById(R.id.btn6);
@@ -138,7 +138,7 @@ public class podcasts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("6");
-                increasecounter(email);
+                increasecounter(email, "music&podcast");
             }
         });
     }
@@ -208,7 +208,7 @@ public class podcasts extends AppCompatActivity {
 //
 //    }
 
-    private void increasecounter(String email) {
+    private void increasecounter(String email, String trend) {
         LocalDate today = LocalDate.now();
 
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
@@ -221,7 +221,7 @@ public class podcasts extends AppCompatActivity {
 
                 if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-
+                    trending(trend);
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
 
                     if(prg==100) {
@@ -244,6 +244,24 @@ public class podcasts extends AppCompatActivity {
             }
         });
 
+    }
+    private void trending(String trend)
+    {        DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("trending");
+
+
+        ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String p = snapshot.child(trend).getValue().toString();
+                int p2 = Integer.parseInt(p);
+                ref2.child(trend).setValue(Integer.toString(10+p2));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     void reward() {

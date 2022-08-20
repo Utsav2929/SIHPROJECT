@@ -1,17 +1,11 @@
 package com.aaks32173.sih2022new;
 
-import static ai.api.util.ParametersConverter.parseFloat;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,30 +13,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.time.LocalDate;
-
 public class flextimefourthfifth extends AppCompatActivity {
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
     String email;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flextimefourthfifth);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
-        //sleepdetail = false;
-
         email = getIntent().getExtras().getString("email");
-//                LottieAnimationView gif2 =findViewById(R.id.gif1_exercise_3to5);
-//        gif2.setImageResource(R.drawable.exercisegif_3to5);
-
-
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("FlexFouthFifth");
         LinearLayout btn1 = findViewById(R.id.btn1);
@@ -50,8 +34,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("1");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn7 = findViewById(R.id.btn7);
@@ -59,8 +42,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("7");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn2 = findViewById(R.id.btn2);
@@ -68,8 +50,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("2");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn3 = findViewById(R.id.btn3);
@@ -77,8 +58,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("3");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn4 = findViewById(R.id.btn4);
@@ -86,8 +66,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("4");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn5 = findViewById(R.id.btn5);
@@ -95,8 +74,7 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("5");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
         });
         LinearLayout btn6 = findViewById(R.id.btn6);
@@ -104,46 +82,35 @@ public class flextimefourthfifth extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getfun("6");
-
-                increasecounter(email);
+                increasecounter(email, "exercise");
             }
-        });
-
-    }
-
+        });}
     public void getfun(String s) {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+            databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 String url = dataSnapshot.child("Vedio" + s).getValue().toString();
                 Intent intent = new Intent(flextimefourthfifth.this, vedioPlay.class);
                 intent.putExtra("url", url);
                 startActivity(intent);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-
         });
-
     }
-
-    private void increasecounter(String email) {
+    private void increasecounter(String email, String trend) {
         LocalDate today = LocalDate.now();
-
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             String progress;
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progress = dataSnapshot.child("exercise").child("progress").getValue().toString();
 
                 if (Integer.parseInt(progress) <= 90) {
                     int prg = Integer.parseInt(progress) + 10;
-
+                    trending(trend);
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
 
                     if(prg==100) {
@@ -157,40 +124,38 @@ public class flextimefourthfifth extends AppCompatActivity {
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
                     reward();
                 }
-
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
     }
-
-    void reward() {
-        DatabaseReference reference1 =
-                FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
-
+    private void trending(String trend)
+    {       DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference();
+            ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String p = snapshot.child("trending").child(trend).getValue().toString();
+                int p2 = Integer.parseInt(p);
+                ref2.child("trending").child(trend).setValue(Integer.toString(10+p2));
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+            }
+        });}
+    void reward(){
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 DatabaseReference reference2 =
                         FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
                 String rew = snapshot.child("rewards").getValue().toString();
-
                 int rev = Integer.parseInt(rew) + 50;
                 reference2.child("rewards").setValue(rev + "");
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
-
-
         });
-    }
-}
+    }}

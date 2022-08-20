@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"All fields are mandatory",Toast.LENGTH_LONG).show();
             return;
         }
-        if (!password.equals(confirm_password) || Integer.parseInt(age)>0){
+        if (!password.equals(confirm_password) ){
             Toast.makeText(getApplicationContext(),"Passwords don't match",Toast.LENGTH_LONG).show();
             return;
         }

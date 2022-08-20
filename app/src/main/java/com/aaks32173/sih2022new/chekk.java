@@ -1,6 +1,8 @@
 package com.aaks32173.sih2022new;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,7 +79,7 @@ public class chekk extends AppCompatActivity {
     public double weight=0.0;
     public double age_id=0.0;
     ImageView imageView;
-
+    ProgressBar progress;
     public MyAdapter.onItemClickListener listener;
     EditText show;
     Button submit;
@@ -88,6 +91,7 @@ public class chekk extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chekk);
+        progress = findViewById(R.id.progress_bar1);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
         //sleepdetail = false;
@@ -135,30 +139,18 @@ public class chekk extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(chekk.this, "1", Toast.LENGTH_SHORT).show();
-
-
-
-
-
-//
-//                Double p= Double.parseDouble(show.getText().toString());
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                         dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
                         String cl = dataSnapshot.child("calinitial").getValue().toString();
-
-
                         int i = Integer.parseInt(show.getText().toString()) + Integer.parseInt(cl);
                         dbref.child("calinitial").setValue(i + "");
-
-//                        Toast.makeText(chekk.this, i + "", Toast.LENGTH_SHORT).show();
-
                         String finalc=edt_calf.getText().toString();
                         float calfdd= Float.parseFloat(finalc);
                         int c=(int)Math.round(calfdd) ;
+                        progress.setMax(c);
+                        progress.setProgress(Integer.parseInt(cl));
                         Toast.makeText(chekk.this, c+"", Toast.LENGTH_SHORT).show();
 
                         fetchdata();
