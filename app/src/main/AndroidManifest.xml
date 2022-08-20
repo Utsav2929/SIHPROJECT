@@ -35,6 +35,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".recommended"
+            android:exported="false" />
         <activity
             android:name=".addtodo"
             android:exported="false" />
@@ -215,6 +219,9 @@
             android:exported="false" />
         <activity
             android:name=".MenstrualHome"
+            android:exported="false" />
+        <activity
+            android:name=".councellor"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

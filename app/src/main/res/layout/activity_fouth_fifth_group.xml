@@ -44,10 +44,12 @@
             android:layout_height="654dp"
             android:orientation="vertical"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
+                android:id="@+id/lla"
                 android:orientation="horizontal">
 
                 <com.airbnb.lottie.LottieAnimationView
@@ -72,13 +74,34 @@
                     android:layout_marginBottom="90dp"
                     android:padding="10sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                                <Button
+                    android:id="@+id/recommended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFC400"
 
-        <LinearLayout
+                    android:fontFamily="@font/salsa"
+                    android:padding="10dp"
+                    android:textSize="20dp"
+                    android:text="Recommendations🔥"
+                    android:textColor="@color/black"
+                    app:cornerRadius="40dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -355,17 +378,20 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
         />
+
+
     <TextView
+        android:id="@+id/chatbotbadge_3to5"
         android:layout_width="18sp"
         android:layout_height="18sp"
+        android:layout_alignTop="@id/chatbot_3to5"
+        android:layout_alignRight="@id/chatbot_3to5"
         android:background="@drawable/roundbadge"
         android:elevation="6dp"
         android:gravity="center"
         android:text=""
-        android:id="@+id/chatbotbadge_3to5"
         android:textColor="#fff"
-        android:textSize="10sp"
-        android:layout_alignTop="@id/chatbot_3to5"
-        android:layout_alignRight="@id/chatbot_3to5"/>
+        android:textSize="10sp" />
+
 
 </RelativeLayout>

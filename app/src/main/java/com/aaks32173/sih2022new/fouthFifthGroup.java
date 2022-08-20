@@ -22,6 +22,7 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,8 +43,7 @@ public class fouthFifthGroup extends AppCompatActivity {
     AutoScrollAdapter autoScrollAdapter;
 
     DatabaseReference databaseReference2;
-
-
+    Button recommondtaion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class fouthFifthGroup extends AppCompatActivity {
 
         recycler_view = findViewById(R.id.recycler_view_3to5);
         setRV();
-
+        recommondtaion = findViewById(R.id.recommended);
         ImageButton todobtn = findViewById(R.id.todobtn);
         ImageButton music = findViewById(R.id.music);
         ImageButton podcasts = findViewById(R.id.podcasts);
@@ -64,19 +64,10 @@ public class fouthFifthGroup extends AppCompatActivity {
 
         ImageButton chatbot = findViewById(R.id.chatbot);
         ImageButton diet =findViewById(R.id.imageButton3);
-
         ImageButton post =findViewById(R.id.post);
-
         ImageButton wetime =findViewById(R.id.wetime);
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);
-
-
-
-
-
-
         ExtendedFloatingActionButton letshaveconversation = findViewById(R.id.chatbot_3to5);
 
                 TextView badge = findViewById(R.id.chatbotbadge_3to5);
@@ -87,6 +78,14 @@ public class fouthFifthGroup extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent a =  new Intent(fouthFifthGroup.this,com.aaks32173.sih2022new.ui.MainActivity.class);
+                startActivity(a);
+            }
+        });
+        recommondtaion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a =  new Intent(fouthFifthGroup.this,recommended.class);
+                a.putExtra("email", encodeUserEmail(Currentuser.getEmail().toString()));
                 startActivity(a);
             }
         });
