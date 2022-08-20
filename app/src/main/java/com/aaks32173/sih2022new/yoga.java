@@ -36,7 +36,6 @@ public class yoga extends AppCompatActivity {
             setContentView(R.layout.activity_yoga);
 
           String category = getIntent().getExtras().getString("category");
-          String group = getIntent().getExtras().getString("group");
           Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
 
 
@@ -50,11 +49,11 @@ public class yoga extends AppCompatActivity {
           ImageButton btn6 = findViewById(R.id.btn6);
           ImageButton btn7 = findViewById(R.id.btn7);
           ImageButton btn8 = findViewById(R.id.btn8);
+          linearLayout = findViewById(R.id.giflinearlayout);
           LottieAnimationView gif2 =findViewById(R.id.gif2);
           GifImageView gif1=findViewById(R.id.gif1);
           linearLayout = findViewById(R.id.giflinearlayout);
           ImageButton btn9 = findViewById(R.id.btn9);
-
           if( category.equals("exercises")){
 
               videoUrl="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(1).mp4?alt=media&token=3a92fa5d-8f01-43a8-8460-d2235221fa54";
@@ -66,16 +65,13 @@ public class yoga extends AppCompatActivity {
               videoUrl7="https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/7th-9th%2Fyoga%2Fvideoplayback%20(8).mp4?alt=media&token=e171c2d8-f31b-4214-ad17-5dc1c5761634";
               videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
               videoUrl8 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga4.mp4?alt=media&token=d04e8c49-885a-4713-9d87-5406eae0d5cc";
-
           }
-
-
-
           else if(category.equals("exercises1")){
               background.setImageResource(R.drawable.yogabgcheck);
               heading.setVisibility(View.GONE);
               gif2.setVisibility(View.INVISIBLE);
-//              gif1.setImageResource(R.drawable.yogagifcheck);
+              gif1.setImageResource(R.drawable.yogagifcheck);
+              gif1.setVisibility(View.GONE);
               gif1.setVisibility(View.GONE);
 //yoga
               videoUrl9 = "https://firebasestorage.googleapis.com/v0/b/sih2022-15182.appspot.com/o/exercises%2Fyogas%2Fanxiety_release_yoga5.mp4?alt=media&token=ff509dbb-24f9-4d8c-921c-fd16e687cf2e";
@@ -129,7 +125,6 @@ public class yoga extends AppCompatActivity {
               heading.setText("Healthy Habits");
               gif2.setVisibility(View.INVISIBLE);
               gif1.setImageResource(R.drawable.health35);
-
               btn1.setImageResource(R.drawable.health1);
               btn2.setImageResource(R.drawable.health2);
               btn3.setImageResource(R.drawable.health3);

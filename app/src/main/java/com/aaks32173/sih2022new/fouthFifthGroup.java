@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,10 +31,11 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Handler;
 
 public class fouthFifthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
-
+    long previousTime;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -44,12 +46,14 @@ public class fouthFifthGroup extends AppCompatActivity {
 
     DatabaseReference databaseReference2;
     Button recommondtaion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fouth_fifth_group);
         ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
+
 
 
         recycler_view = findViewById(R.id.recycler_view_3to5);
@@ -288,6 +292,7 @@ public class fouthFifthGroup extends AppCompatActivity {
                 openShowpost();
             }
         });
+
     }
     private void openShowpost() {
         Intent intent = new Intent(fouthFifthGroup.this, Showpost.class);
@@ -378,6 +383,18 @@ public class fouthFifthGroup extends AppCompatActivity {
                 }
             }
         },0,3000);
+
     }
+    @Override
+    public void onBackPressed() {
+//
+//        if (2000 + previousTime > (previousTime = System.currentTimeMillis()))
+//        {
+//            super.onBackPressed();
+//        } else {
+//            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
+//        }
+    }
+
 
 }

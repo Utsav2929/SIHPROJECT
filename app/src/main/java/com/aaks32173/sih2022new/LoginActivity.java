@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
+        Currentuser = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         login_email=findViewById(R.id.login_email);
         login_password=findViewById(R.id.login_password);
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     @NonNull Task<AuthResult> task)
             {
                 if (task.isSuccessful()) {
-                    Currentuser = mAuth.getCurrentUser();
+
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo");
 
                     databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {

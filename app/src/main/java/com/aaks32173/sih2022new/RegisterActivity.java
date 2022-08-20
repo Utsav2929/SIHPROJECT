@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText register_name,register_email,register_password,register_confirm_password,register_age,register_sssm_id,register_family_id;
@@ -127,8 +130,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                     FirebaseUser user= mAuth.getCurrentUser();
                     addDatatoFirebase(name,email,password,age,sssm_id,family_id,gender);
-
-
 
                      if (Integer.parseInt(age)<8) {
                     Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);

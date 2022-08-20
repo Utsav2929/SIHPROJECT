@@ -21,9 +21,12 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_margin="10dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image">
+        android:layout_below="@+id/image"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="369dp"
@@ -56,8 +59,8 @@
                         android:layout_margin="20dp"
 
                         android:layout_marginBottom="0dp"
-                        app:srcCompat="@drawable/rectangle_19"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_19" />
 
                     <TextView
                         android:id="@+id/textView"
@@ -66,8 +69,7 @@
                         android:fontFamily="@font/salsa"
                         android:text="POEMS+RYHMES"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
-                        />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -82,8 +84,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_18"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_18" />
+
                     <TextView
                         android:id="@+id/textView1"
                         android:layout_width="match_parent"
@@ -92,9 +95,10 @@
                         android:text="STORIES"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,8 +121,8 @@
                         android:layout_margin="20dp"
 
                         android:layout_marginBottom="0dp"
-                        app:srcCompat="@drawable/rectangle_19"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_19" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -127,8 +131,7 @@
                         android:fontFamily="@font/salsa"
                         android:text="Good And Bad Touch"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
-                        />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,8 +146,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_18"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_18" />
+
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="match_parent"
@@ -153,7 +157,7 @@
                         android:text="Fight Your Fear"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -176,18 +180,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_20"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_20" />
+
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
 
-                        android:fontFamily="@font/salsa"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/salsa"
                         android:text="SPORTS"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -203,17 +208,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_9"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_9" />
+
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
-                        android:fontFamily="@font/salsa"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/salsa"
                         android:text="GK SECTION"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>
@@ -238,8 +244,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_8"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_8" />
+
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="match_parent"
@@ -248,7 +255,7 @@
                         android:text="WE TIME"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>
@@ -265,8 +272,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_13"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_13" />
+
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="match_parent"
@@ -275,7 +283,7 @@
                         android:text="SCREEN TIME RECORD"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -299,8 +307,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_15"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_15" />
+
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
@@ -309,7 +318,7 @@
                         android:text="LET'S HAVE CONVERSATION"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -327,6 +336,7 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
                         app:srcCompat="@drawable/rectangle_14" />
+
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="match_parent"
@@ -335,7 +345,7 @@
                         android:text="TO-DO LIST "
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -359,8 +369,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_17"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_17" />
 
                     <TextView
                         android:id="@+id/textView8"
@@ -370,7 +380,7 @@
                         android:text="NOWCAST"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>
@@ -387,8 +397,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        app:srcCompat="@drawable/rectangle_16"
-                        android:background="@drawable/shape"/>
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_16" />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -398,7 +408,7 @@
                         android:text="Relaxing ACTIVITY"
                         android:textAlignment="center"
 
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
             </LinearLayout>

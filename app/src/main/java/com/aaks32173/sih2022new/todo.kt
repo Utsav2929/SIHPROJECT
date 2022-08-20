@@ -49,7 +49,7 @@ class todo  : AppCompatActivity() {
 
     private fun getUserData() {
 
-       val email = intent.getStringExtra("email").toString()
+        val email = intent.getStringExtra("email").toString()
         Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
 
         val today= LocalDate.now()
@@ -59,7 +59,7 @@ class todo  : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-               if (snapshot.exists()){
+                if (snapshot.exists()){
 
                     for (userSnapshot in snapshot.children){
 

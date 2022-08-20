@@ -43,8 +43,8 @@ public class flex_time extends AppCompatActivity {
                 String age = dataSnapshot.child("age").getValue().toString();
                 age1[0] =age;
                 if (parseInt(age) < 14 && parseInt(age) >= 11) {
-                    LinearLayout ly = findViewById(R.id.workout);
-                    ly.setVisibility(LinearLayout.GONE);
+//                    LinearLayout ly = findViewById(R.id.workout);
+//                    ly.setVisibility(LinearLayout.GONE);
                 }
             }
             @Override
@@ -78,15 +78,16 @@ public class flex_time extends AppCompatActivity {
     }
     private void openyogas(){
         Intent intent = new Intent(this,yoga.class);
-        intent.putExtra("category", "exercises");
-        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
-            intent.putExtra("group", "SixthEight");
-            intent.putExtra("age", "10");
-        }
+        intent.putExtra("category", "exercises1");
+
         startActivity(intent);
     }
     private void openworkouts(){
         Intent intent = new Intent(this,workout.class);
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
     }
     private void openstrerchings(){
@@ -99,6 +100,10 @@ public class flex_time extends AppCompatActivity {
     }
     private void openmeditations(){
         Intent intent = new Intent(this,meditation.class);
+        if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
+            intent.putExtra("group", "SixthEight");
+            intent.putExtra("age", "10");
+        }
         startActivity(intent);
     }
     private String encodeUserEmail(String email) {
