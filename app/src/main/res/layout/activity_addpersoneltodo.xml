@@ -11,7 +11,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rate-Us "
+        android:text="Add Your Personal TODO"
         android:textColor="#00ADB5"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -36,15 +36,15 @@
 
 
         <EditText
-            android:id="@+id/rank"
+            android:id="@+id/title"
             android:layout_width="277dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25sp"
             android:layout_weight="1"
             android:ems="10"
 
-            android:hint=" Rate 1-5"
-            android:inputType="phone"
+            android:hint="Title"
+            android:inputType="textPersonName"
             tools:ignore="InvalidId,TouchTargetSizeCheck" />
 
         <LinearLayout
@@ -73,7 +73,7 @@
             android:layout_marginLeft="30sp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Percent"
+            android:hint="Description"
             android:inputType="textPersonName"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:visibility="visible"
@@ -97,6 +97,21 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.349" />
 
+
+    <Button
+        android:id="@+id/showtodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00FFF5"
+        android:text="My Todo"
+        android:textColor="#222831"
+        app:cornerRadius="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.549" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

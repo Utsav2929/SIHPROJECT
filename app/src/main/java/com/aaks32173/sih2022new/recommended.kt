@@ -32,7 +32,6 @@ class recommended  : AppCompatActivity() {
     }
 
     private fun getUserData(email:String ) {
-//        val today =LocalDate.now()
         dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/recommondation")
 
         dbref.addValueEventListener(object : ValueEventListener{

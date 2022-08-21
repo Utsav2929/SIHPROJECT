@@ -2,14 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".SixthEighthGroup">
+    tools:context=".ninetwelvegroup">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.6"
-        android:background="@drawable/piche7" />
+        android:background="@drawable/piche7"
+        android:alpha="0.6"/>
 
     <ImageView
         android:id="@+id/image"
@@ -45,6 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -427,6 +428,32 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
                         android:text="Menstural Tracker"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <ImageButton
+                        android:id="@+id/ptodo"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/shape"
+                        app:srcCompat="@drawable/rectangle_16" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/salsa"
+                        android:text="Personal Todo"
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>

@@ -20,17 +20,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
-public class SixthEighthGroup extends AppCompatActivity {
+public class ninetwelvegroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference2;
+
     Button recommondtaion;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sixth_eighth_group);
+        setContentView(R.layout.activity_ninetwelvegroup);
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
 
         ImageButton menstural = findViewById(R.id.menstural);
@@ -42,18 +43,21 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
 
-        ImageButton convo = findViewById(R.id.convo6to8);
-        ImageButton diet = findViewById(R.id.diet);
-        ImageButton nowcast = findViewById(R.id.nowcast6to8);
         recommondtaion = findViewById(R.id.recommended);
         recommondtaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent a =  new Intent(SixthEighthGroup.this,recommended.class);
+                Intent a =  new Intent(ninetwelvegroup.this,recommended.class);
                 a.putExtra("email", encodeUserEmail(Currentuser.getEmail().toString()));
                 startActivity(a);
             }
         });
+        ImageButton ptodo = findViewById(R.id.ptodo);
+
+        ImageButton convo = findViewById(R.id.convo6to8);
+        ImageButton diet = findViewById(R.id.diet);
+        ImageButton nowcast = findViewById(R.id.nowcast6to8);
+
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         LocalDate td=LocalDate.now();
@@ -169,6 +173,12 @@ public class SixthEighthGroup extends AppCompatActivity {
                 gotoMusic(Currentuser.getEmail().toString());
             }
         });
+        ptodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoptodo();
+            }
+        });
         wetime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +196,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         nowcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SixthEighthGroup.this,Showpost.class);
+                Intent intent = new Intent(ninetwelvegroup.this,Showpost.class);
                 startActivity(intent);
             }
         });
@@ -236,53 +246,57 @@ public class SixthEighthGroup extends AppCompatActivity {
         });}
 
     private void gotoTotherapist() {
-        Intent intent = new Intent(SixthEighthGroup.this, councellor.class);
+        Intent intent = new Intent(ninetwelvegroup.this, councellor.class);
         startActivity(intent);
     }
 
 
     private void gotodiet() {
-        Intent intent = new Intent(SixthEighthGroup.this, chekk.class);
+        Intent intent = new Intent(ninetwelvegroup.this, chekk.class);
+        startActivity(intent);
+    }
+    private void gotoptodo() {
+        Intent intent = new Intent(ninetwelvegroup.this, addpersoneltodo.class);
         startActivity(intent);
     }
 
     private void gotoWetime(String email) {
-        Intent intent = new Intent(SixthEighthGroup.this, WetimeActivity.class);
+        Intent intent = new Intent(ninetwelvegroup.this, WetimeActivity.class);
         intent.putExtra("email",email);
         startActivity(intent);
     }
     private void gotoPodcats(String email) {
-        Intent intent =  new Intent(SixthEighthGroup.this, MusicPlayer.class);
+        Intent intent =  new Intent(ninetwelvegroup.this, MusicPlayer.class);
         intent.putExtra("path","PodcastSixthEight");
         intent.putExtra("email", email);
         intent.putExtra("grp", "podcast");
         startActivity(intent);
     }
     private void gotoMusic(String email) {
-        Intent intent = new Intent(SixthEighthGroup.this, MusicPlayer.class);
+        Intent intent = new Intent(ninetwelvegroup.this, MusicPlayer.class);
         intent.putExtra("path","MusicFourthFifth");
         intent.putExtra("email", email);
         intent.putExtra("grp", "music");
         startActivity(intent);
     }
     private void movetogtbt() {
-        Intent intent =  new Intent(SixthEighthGroup.this, gtbtPanelFourthFifth.class);
+        Intent intent =  new Intent(ninetwelvegroup.this, gtbtPanelFourthFifth.class);
         startActivity(intent);
     }
     private void gotoFlex() {
-        Intent intent = new Intent(SixthEighthGroup.this, flex_time.class);
+        Intent intent = new Intent(ninetwelvegroup.this, flex_time.class);
         startActivity(intent);
     }
     private void gotoRelaxing() {
-        Intent intent = new Intent(SixthEighthGroup.this, relaxingActivityHigher.class);
+        Intent intent = new Intent(ninetwelvegroup.this, relaxingActivityHigher.class);
         startActivity(intent);
     }
     private void gotoMenstural() {
-        Intent intent = new Intent(SixthEighthGroup.this, MainActivity.class);
+        Intent intent = new Intent(ninetwelvegroup.this, MainActivity.class);
         startActivity(intent);
     }
     private void gotoTodo(String email) {
-        Intent intent = new Intent(SixthEighthGroup.this, todo.class);
+        Intent intent = new Intent(ninetwelvegroup.this, todo.class);
         intent.putExtra("email", email);
         startActivity(intent);
     }

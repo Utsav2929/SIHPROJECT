@@ -17,14 +17,7 @@ class personeltodo  : AppCompatActivity() {
     private lateinit var userRecyclerview : RecyclerView
     private lateinit var userArrayList : ArrayList<ptodo>
 
-    val today= LocalDate.now()
 
-    val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)
-    //    val date= Calendar.getInstance()
-//
-//    val year=date.get(Calendar.YEAR).toString()
-//    val datee= date.get(Calendar.DATE).toString()
-    val d ="weektodo/"+tomorrow.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +36,8 @@ class personeltodo  : AppCompatActivity() {
 
     private fun getUserData() {
 
-        dbref = FirebaseDatabase.getInstance().getReference("personaltodo/"+today)
+        val email = intent.getStringExtra("email").toString()
+        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/PersonalTodo")
 
         dbref.addValueEventListener(object : ValueEventListener{
 
@@ -60,7 +54,7 @@ class personeltodo  : AppCompatActivity() {
                     }
 
 
-                    userRecyclerview.adapter = todoadapterp(userArrayList)
+                    userRecyclerview.adapter = todoadapterp(userArrayList,email)
 
 
 

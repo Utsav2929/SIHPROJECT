@@ -153,9 +153,11 @@ public class Details extends AppCompatActivity {
             Intent intent = new Intent(Details.this, SixthEighthGroup.class);
             startActivity(intent);
         }
-//                Intent i = new Intent(Details.this,chekk.class);
-//                finish();
-//                startActivity(i);
+
+                else if (Integer.parseInt(age) >= 14 ) {
+                    Intent intent = new Intent(Details.this, ninetwelvegroup.class);
+                    startActivity(intent);
+                }
             }
         });
 

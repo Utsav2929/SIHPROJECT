@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIH2022NEW">
-
+        <activity
+            android:name=".ninetwelvegroup"
+            android:exported="false" />
         <activity
             android:name=".SixthEighthGroup"
             android:exported="false" />
@@ -72,7 +74,7 @@
             android:exported="false" />
         <activity
             android:name=".fouthFifthGroup"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".sports"
             android:exported="false" />
@@ -220,7 +222,7 @@
             android:label="@string/title_activity_bottom_navigation" />
         <activity
             android:name=".Interest"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

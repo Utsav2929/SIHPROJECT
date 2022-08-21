@@ -1,0 +1,967 @@
+Index: app/src/main/java/com/aaks32173/sih2022new/addpersoneltodo.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.widget.Button\r\nimport android.widget.EditText\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport com.google.firebase.auth.FirebaseAuth\r\nimport com.google.firebase.database.DatabaseReference\r\nimport com.google.firebase.database.FirebaseDatabase\r\nimport java.time.LocalDate\r\nimport java.time.temporal.ChronoUnit\r\nimport java.util.*\r\n\r\nclass addpersoneltodo : AppCompatActivity() {\r\n\r\n    private lateinit var auth: FirebaseAuth\r\n    private lateinit var database: DatabaseReference\r\n    private var firebaseUserID: String = \"\"\r\n    private lateinit var subButton : Button\r\n//    lateinit var title : EditText\r\n    private lateinit var desc : EditText\r\n\r\n    private lateinit var rank : EditText\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_addpersoneltodo)\r\n\r\n        auth = FirebaseAuth.getInstance()\r\n\r\n        subButton = findViewById(R.id.submitbutton)\r\n//        title= findViewById(R.id.title)\r\n        desc= findViewById(R.id.desc)\r\n        rank= findViewById(R.id.rank)\r\n\r\n        subButton.setOnClickListener {\r\n            registerUser()\r\n        }\r\n    }\r\n\r\n    private fun registerUser() {\r\n//        val date= Calendar.getInstance()\r\n//\r\n//        val year=date.get(Calendar.YEAR).toString()\r\n//         val datee= date.get(Calendar.DATE).toString()\r\n//\r\n                    val today = LocalDate.now()\r\n\r\n        val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)\r\n//        val title :String= title.text.toString()\r\n        val description: String=desc.text.toString()\r\n\r\n        val rank: String=rank.text.toString()\r\n        val Status:String=\"False\"\r\n        if (description.isBlank()  || rank.isBlank()) {\r\n            Toast.makeText(this, \"All fields are compulsory.\", Toast.LENGTH_LONG).show()\r\n            return\r\n        }\r\n//        Toast.makeText(this,title,Toast.LENGTH_SHORT).show()\r\n\r\n//val d= datee+year.toString()\r\n        database = FirebaseDatabase.getInstance().getReference(\"WeTime\")\r\n        val attendance = wetime(rank,description.toString(),Status)\r\n\r\n        database.child(rank).setValue(attendance).addOnSuccessListener {\r\n            Toast.makeText(applicationContext, \"Submitted successfully\", Toast.LENGTH_SHORT).show()\r\n\r\n           desc.setText(\"\")\r\n\r\n        }\r\n\r\n\r\n    }}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/addpersoneltodo.kt b/app/src/main/java/com/aaks32173/sih2022new/addpersoneltodo.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/addpersoneltodo.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/addpersoneltodo.kt	
+@@ -7,8 +7,7 @@
+ import android.widget.Toast
+ import androidx.appcompat.app.AppCompatActivity
+ import com.google.firebase.auth.FirebaseAuth
+-import com.google.firebase.database.DatabaseReference
+-import com.google.firebase.database.FirebaseDatabase
++import com.google.firebase.database.*
+ import java.time.LocalDate
+ import java.time.temporal.ChronoUnit
+ import java.util.*
+@@ -19,10 +18,9 @@
+     private lateinit var database: DatabaseReference
+     private var firebaseUserID: String = ""
+     private lateinit var subButton : Button
+-//    lateinit var title : EditText
++    lateinit var title : EditText
+     private lateinit var desc : EditText
+ 
+-    private lateinit var rank : EditText
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -33,10 +31,11 @@
+         subButton = findViewById(R.id.submitbutton)
+ //        title= findViewById(R.id.title)
+         desc= findViewById(R.id.desc)
+-        rank= findViewById(R.id.rank)
++        title= findViewById(R.id.title)
+ 
+         subButton.setOnClickListener {
+             registerUser()
++//            increasecounter()
+         }
+     }
+ 
+@@ -46,30 +45,64 @@
+ //        val year=date.get(Calendar.YEAR).toString()
+ //         val datee= date.get(Calendar.DATE).toString()
+ //
+-                    val today = LocalDate.now()
++//                    val today = LocalDate.now()
+ 
+-        val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)
+ //        val title :String= title.text.toString()
+         val description: String=desc.text.toString()
+ 
+-        val rank: String=rank.text.toString()
+-        val Status:String="False"
+-        if (description.isBlank()  || rank.isBlank()) {
++        val tit: String=title.text.toString()
++      if (description.isBlank() ||tit.isBlank()) {
+             Toast.makeText(this, "All fields are compulsory.", Toast.LENGTH_LONG).show()
+             return
+         }
+ //        Toast.makeText(this,title,Toast.LENGTH_SHORT).show()
+ 
+-//val d= datee+year.toString()
+-        database = FirebaseDatabase.getInstance().getReference("WeTime")
+-        val attendance = wetime(rank,description.toString(),Status)
++        val email = FirebaseAuth.getInstance().currentUser?.email
++////val d= datee+year.toString()
++        database = FirebaseDatabase.getInstance().getReference("UserInfo/"+encodeUserEmail(email.toString())+"/PersonalTodo")
++        val attendance = wetime(tit,description.toString(),)
+ 
+-        database.child(rank).setValue(attendance).addOnSuccessListener {
++        database.child(tit+description).setValue(attendance).addOnSuccessListener {
+             Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
+ 
+            desc.setText("")
++            title.setText("")
++
++        }
++
+ 
+-        }
++    }
++
++    private fun encodeUserEmail(email: String): String? {
++        return email.replace(".", ",")
++    }
++
++
++//    private fun increasecounter() {
++//        Toast.makeText(applicationContext, "Submitted1 successfully", Toast.LENGTH_SHORT).show()
++//
++//        val email = FirebaseAuth.getInstance().currentUser?.email
++//        val reference1 =
++//            FirebaseDatabase.getInstance().reference.child("UserInfo/dee@gmail,com")
++////                .child(encodeUserEmail(email.toString()).toString())
++//        reference1.addListenerForSingleValueEvent(object : ValueEventListener {
++//            var progress: String? = null
++//            override fun onDataChange(dataSnapshot: DataSnapshot) {
++//                progress =
++//                    dataSnapshot.child("chat").value.toString()
++//                Toast.makeText(applicationContext, "Submitted2 successfully", Toast.LENGTH_SHORT).show()
++//
++//                val description: String=desc.text.toString()
++//
++//                val tit: String=title.text.toString()
++//                reference1.child("chat").setValue(progress+description+tit)
++//
++//            Toast.makeText(applicationContext, "Submitted 3successfully", Toast.LENGTH_SHORT).show()
++//            }
++//
++//            override fun onCancelled(databaseError: DatabaseError) {}
++//        })
++//    }
+ 
+ 
+-    }}
+\ No newline at end of file
++}
+\ No newline at end of file
+Index: app/src/main/java/com/aaks32173/sih2022new/chatbot/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new.chatbot\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport com.aaks32173.sih2022new.R\r\nimport com.aaks32173.sih2022new.good_bad_touch_panel\r\nimport kotlinx.android.synthetic.main.activity_chatbotsenior.*\r\nimport kotlinx.android.synthetic.main.activity_main.*\r\nimport retrofit2.Call\r\nimport retrofit2.Callback\r\nimport retrofit2.Response\r\nimport retrofit2.Retrofit\r\nimport retrofit2.converter.gson.GsonConverterFactory\r\n\r\n\r\nclass MainActivity : AppCompatActivity() {\r\n    private val adapterChatBot = AdapterChatBot()\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_chatbotsenior)\r\n\r\n        val retrofit = Retrofit.Builder()\r\n            .baseUrl(\"http://192.168.2.107:5000\")\r\n            .addConverterFactory(GsonConverterFactory.create())\r\n            .build()\r\n\r\n        val apiService = retrofit.create(APIService::class.java)\r\n\r\n        rvChatList.layoutManager = LinearLayoutManager(this)\r\n        rvChatList.adapter = adapterChatBot\r\n\r\n        btnSend.setOnClickListener {\r\n            if(etChat.text.isNullOrEmpty()){\r\n                Toast.makeText(this@MainActivity, \"Please enter a text\", Toast.LENGTH_LONG).show()\r\n                return@setOnClickListener\r\n            }\r\n\r\n            adapterChatBot.addChatToList(ChatModel(etChat.text.toString()))\r\n            apiService.chatWithTheBit(etChat.text.toString()).enqueue(callBack)\r\n            etChat.text.clear()\r\n        }\r\n    }\r\n\r\n    private val callBack = object  : Callback<ChatResponse>{\r\n        override fun onResponse(call: Call<ChatResponse>, response: Response<ChatResponse>) {\r\n            if(response.isSuccessful &&  response.body()!= null){\r\n                adapterChatBot.addChatToList(ChatModel(response.body()!!.chatBotReply, true))\r\n\r\n            }\r\n            if(response.body()!!.chatBotReply==\"you can try relaxing activities \"){\r\n                Toast.makeText(this@MainActivity, \"intent to sleep schedule\", Toast.LENGTH_LONG).show()\r\n                gotorelaxingactivityhigher()\r\n\r\n            }\r\n\r\n\r\n        }\r\n\r\n        override fun onFailure(call: Call<ChatResponse>, t: Throwable) {\r\n            Toast.makeText(this@MainActivity, \"Something went wrong2\", Toast.LENGTH_LONG).show()\r\n        }\r\n\r\n    }\r\n\r\n     fun gotorelaxingactivityhigher() {\r\n        val a = Intent(this, com.aaks32173.sih2022new.relaxingActivityHigher::class.java)\r\n        startActivity(a)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/chatbot/MainActivity.kt b/app/src/main/java/com/aaks32173/sih2022new/chatbot/MainActivity.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/chatbot/MainActivity.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/chatbot/MainActivity.kt	
+@@ -23,7 +23,7 @@
+         setContentView(R.layout.activity_chatbotsenior)
+ 
+         val retrofit = Retrofit.Builder()
+-            .baseUrl("http://192.168.2.107:5000")
++            .baseUrl("http://192.168.99.37:5000")
+             .addConverterFactory(GsonConverterFactory.create())
+             .build()
+ 
+Index: app/src/main/java/com/aaks32173/sih2022new/todoadapterp.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new\r\n\r\nimport android.content.Intent\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.TextView\r\nimport android.widget.Toast\r\nimport androidx.core.content.ContextCompat.startActivity\r\nimport androidx.lifecycle.LiveData\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.google.firebase.database.DatabaseReference\r\nimport com.google.firebase.database.FirebaseDatabase\r\nimport java.security.AccessController.getContext\r\nimport java.time.LocalDate\r\n\r\nclass todoadapterp(private val userList : ArrayList<ptodo> ) : RecyclerView.Adapter<todoadapterp.MyViewHolder>() {\r\n\r\n\r\n    private lateinit var database : DatabaseReference\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {\r\n\r\n//        userList.sortBy { it.percent?.toInt() }\r\n        val itemView = LayoutInflater.from(parent.context).inflate(\r\n            R.layout.user_list2,\r\n            parent,false)\r\n\r\n\r\n\r\n        return MyViewHolder(itemView)\r\n\r\n\r\n\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {\r\n\r\n        val currentitem = userList[position]\r\n\r\n//        holder.cname.text = currentitem.cname\r\n//if (currentitem.name=)\r\n\r\n        holder.name.text = currentitem.title\r\n\r\n        holder.percent.text = currentitem.descripton\r\n\r\n        holder.ismarked.text = currentitem.ismarked\r\n\r\n        holder.btndelete.setOnClickListener() {\r\n            val today= LocalDate.now()\r\n            currentitem.ismarked=\"false\"\r\n\r\n            database = FirebaseDatabase.getInstance().getReference(\"personaltodo/\"+today.toString())\r\n            val at= ptodo(today.toString(),currentitem.title, currentitem.descripton,currentitem.ismarked)\r\n\r\n//            itemView.setOnClickListener(new View.OnClickListener() {\r\n//                @Override\r\n//                public void OnClick(View view) {\r\n//                }\r\n            database.child(currentitem.title.toString()+currentitem.descripton.toString()).removeValue().addOnSuccessListener {\r\n//                Toast.makeText( \"Submitted successfully\", Toast.LENGTH_SHORT).show()\r\n//                val a = Intent(context, todo::class.java)\r\n//                startActivity()\r\n\r\n            }\r\n\r\n        }\r\n\r\n\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n\r\n        return userList.size\r\n    }\r\n\r\n\r\n\r\n    class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){\r\n\r\n        //        val cname : TextView = itemView.findViewById(R.id.cname)\r\n        val name : TextView = itemView.findViewById(R.id.tvfirstName)\r\n\r\n        val percent : TextView = itemView.findViewById(R.id.percent)\r\n\r\n        val ismarked : TextView = itemView.findViewById(R.id.ismarked)\r\n\r\n        val btndelete : Button = itemView.findViewById(R.id.btndelete)\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/todoadapterp.kt b/app/src/main/java/com/aaks32173/sih2022new/todoadapterp.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/todoadapterp.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/todoadapterp.kt	
+@@ -10,19 +10,19 @@
+ import androidx.core.content.ContextCompat.startActivity
+ import androidx.lifecycle.LiveData
+ import androidx.recyclerview.widget.RecyclerView
++import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.database.DatabaseReference
+ import com.google.firebase.database.FirebaseDatabase
+ import java.security.AccessController.getContext
+ import java.time.LocalDate
+ 
+-class todoadapterp(private val userList : ArrayList<ptodo> ) : RecyclerView.Adapter<todoadapterp.MyViewHolder>() {
++class todoadapterp (private val userList : ArrayList<ptodo>,val email :String) : RecyclerView.Adapter<todoadapterp.MyViewHolder>() {
+ 
+ 
+     private lateinit var database : DatabaseReference
+ 
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+ 
+-//        userList.sortBy { it.percent?.toInt() }
+         val itemView = LayoutInflater.from(parent.context).inflate(
+             R.layout.user_list2,
+             parent,false)
+@@ -39,21 +39,17 @@
+ 
+         val currentitem = userList[position]
+ 
+-//        holder.cname.text = currentitem.cname
+-//if (currentitem.name=)
+-
+         holder.name.text = currentitem.title
+ 
+         holder.percent.text = currentitem.descripton
+ 
+-        holder.ismarked.text = currentitem.ismarked
+ 
+         holder.btndelete.setOnClickListener() {
+-            val today= LocalDate.now()
+-            currentitem.ismarked="false"
++//            val today= LocalDate.now()
+ 
+-            database = FirebaseDatabase.getInstance().getReference("personaltodo/"+today.toString())
+-            val at= ptodo(today.toString(),currentitem.title, currentitem.descripton,currentitem.ismarked)
++            val email = FirebaseAuth.getInstance().currentUser?.email
++            database = FirebaseDatabase.getInstance().getReference("UserInfo/"+ encodeUserEmail(email.toString())+"/PersonalTodo")
++            val at= ptodo(currentitem.title, currentitem.descripton)
+ 
+ //            itemView.setOnClickListener(new View.OnClickListener() {
+ //                @Override
+@@ -85,7 +81,6 @@
+ 
+         val percent : TextView = itemView.findViewById(R.id.percent)
+ 
+-        val ismarked : TextView = itemView.findViewById(R.id.ismarked)
+ 
+         val btndelete : Button = itemView.findViewById(R.id.btndelete)
+ 
+@@ -97,4 +92,9 @@
+     }
+ 
+ 
+-}
+\ No newline at end of file
++}
++
++private fun encodeUserEmail(email: String): String? {
++    return email.replace(".", ",")
++}
++
+Index: app/src/main/java/com/aaks32173/sih2022new/personeltodo.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new\r\n\r\nimport android.os.Bundle\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.aaks32173.sih2022new.databinding.ActivityPersoneltodoBinding\r\nimport com.google.firebase.database.*\r\nimport java.time.LocalDate\r\nimport java.time.temporal.ChronoUnit\r\nimport java.util.*\r\n\r\nclass personeltodo  : AppCompatActivity() {\r\n\r\n    private lateinit var binding: ActivityPersoneltodoBinding\r\n    private lateinit var dbref : DatabaseReference\r\n    private lateinit var userRecyclerview : RecyclerView\r\n    private lateinit var userArrayList : ArrayList<ptodo>\r\n\r\n    val today= LocalDate.now()\r\n\r\n    val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)\r\n    //    val date= Calendar.getInstance()\r\n//\r\n//    val year=date.get(Calendar.YEAR).toString()\r\n//    val datee= date.get(Calendar.DATE).toString()\r\n    val d =\"weektodo/\"+tomorrow.toString()\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding =  ActivityPersoneltodoBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        userRecyclerview = findViewById(R.id.userList)\r\n        userRecyclerview.layoutManager = LinearLayoutManager(this)\r\n        userRecyclerview.setHasFixedSize(true)\r\n\r\n        userArrayList = arrayListOf<ptodo>()\r\n        getUserData()\r\n\r\n\r\n\r\n    }\r\n\r\n    private fun getUserData() {\r\n\r\n        dbref = FirebaseDatabase.getInstance().getReference(\"personaltodo/\"+today)\r\n\r\n        dbref.addValueEventListener(object : ValueEventListener{\r\n\r\n            override fun onDataChange(snapshot: DataSnapshot) {\r\n\r\n                if (snapshot.exists()){\r\n\r\n                    for (userSnapshot in snapshot.children){\r\n\r\n\r\n                        val user = userSnapshot.getValue(ptodo::class.java)\r\n                        userArrayList.add(user!!)\r\n\r\n                    }\r\n\r\n\r\n                    userRecyclerview.adapter = todoadapterp(userArrayList)\r\n\r\n\r\n\r\n                }\r\n\r\n            }\r\n\r\n\r\n            override fun onCancelled(error: DatabaseError) {\r\n                TODO(\"Not yet implemented\")\r\n            }\r\n\r\n        })\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/personeltodo.kt b/app/src/main/java/com/aaks32173/sih2022new/personeltodo.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/personeltodo.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/personeltodo.kt	
+@@ -5,6 +5,7 @@
+ import androidx.recyclerview.widget.LinearLayoutManager
+ import androidx.recyclerview.widget.RecyclerView
+ import com.aaks32173.sih2022new.databinding.ActivityPersoneltodoBinding
++import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.database.*
+ import java.time.LocalDate
+ import java.time.temporal.ChronoUnit
+@@ -12,19 +13,20 @@
+ 
+ class personeltodo  : AppCompatActivity() {
+ 
++    lateinit var auth: FirebaseAuth
+     private lateinit var binding: ActivityPersoneltodoBinding
+     private lateinit var dbref : DatabaseReference
+     private lateinit var userRecyclerview : RecyclerView
+     private lateinit var userArrayList : ArrayList<ptodo>
+ 
+-    val today= LocalDate.now()
+-
+-    val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)
++//    val today= LocalDate.now()
++//
++//    val tomorrow = LocalDate.now().plus(1, ChronoUnit.DAYS)
+     //    val date= Calendar.getInstance()
+ //
+ //    val year=date.get(Calendar.YEAR).toString()
+ //    val datee= date.get(Calendar.DATE).toString()
+-    val d ="weektodo/"+tomorrow.toString()
++//    val d ="weektodo/"+tomorrow.toString()
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -43,7 +45,8 @@
+ 
+     private fun getUserData() {
+ 
+-        dbref = FirebaseDatabase.getInstance().getReference("personaltodo/"+today)
++        val email = FirebaseAuth.getInstance().currentUser?.email
++        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+encodeUserEmail(email.toString())+"/PersonalTodo")
+ 
+         dbref.addValueEventListener(object : ValueEventListener{
+ 
+@@ -60,7 +63,7 @@
+                     }
+ 
+ 
+-                    userRecyclerview.adapter = todoadapterp(userArrayList)
++                    userRecyclerview.adapter = todoadapterp(userArrayList,email.toString())
+ 
+ 
+ 
+@@ -77,4 +80,11 @@
+ 
+ 
+     }
+-}
+\ No newline at end of file
++
++
++
++    private fun encodeUserEmail(email: String): String? {
++        return email.replace(".", ",")
++    }
++
++}
+Index: app/src/main/res/layout/user_list2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.cardview.widget.CardView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:layout_margin=\"16dp\"\r\n    android:background=\"#393E46\"\r\n    android:backgroundTint=\"#00ADB5\"\r\n    app:cardBackgroundColor=\"#393E46\"\r\n    app:cardCornerRadius=\"8dp\"\r\n    app:cardElevation=\"8dp\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"327dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginVertical=\"6dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"20sp\"\r\n        android:background=\"#393E46\"\r\n        android:backgroundTint=\"#00ADB5\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"232dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            android:layout_marginTop=\"10sp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\" Name:\"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"26sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvfirstName\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\"Arya\"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"20sp\" />\r\n\r\n        </LinearLayout>\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            android:layout_marginTop=\"10sp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\"Percent : \"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"26sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/percent\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\"Stark\"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"20sp\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            android:layout_marginTop=\"10sp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\"Status: \"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"26sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/ismarked\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:fontFamily=\"cursive\"\r\n                android:text=\"20\"\r\n                android:textColor=\"#222831\"\r\n                android:textSize=\"20sp\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <Button\r\n            android:id=\"@+id/btndelete\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"delete\" />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</androidx.cardview.widget.CardView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/user_list2.xml b/app/src/main/res/layout/user_list2.xml
+--- a/app/src/main/res/layout/user_list2.xml	
++++ b/app/src/main/res/layout/user_list2.xml	
+@@ -75,33 +75,7 @@
+ 
+         </LinearLayout>
+ 
+-        <LinearLayout
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="center_vertical"
+-            android:layout_marginTop="10sp"
+-            android:orientation="horizontal">
+-
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:fontFamily="cursive"
+-                android:text="Status: "
+-                android:textColor="#222831"
+-                android:textSize="26sp"
+-                android:textStyle="bold" />
+ 
+-            <TextView
+-                android:id="@+id/ismarked"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:layout_marginStart="8dp"
+-                android:fontFamily="cursive"
+-                android:text="20"
+-                android:textColor="#222831"
+-                android:textSize="20sp" />
+-
+-        </LinearLayout>
+ 
+         <Button
+             android:id="@+id/btndelete"
+Index: app/src/main/java/com/aaks32173/sih2022new/ptodo.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new\r\n\r\nclass ptodo (val date: String?=null, val title: String?=null, val descripton: String?=null,\r\n             var ismarked: String?=null)\r\n{\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/ptodo.kt b/app/src/main/java/com/aaks32173/sih2022new/ptodo.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/ptodo.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/ptodo.kt	
+@@ -1,7 +1,6 @@
+ package com.aaks32173.sih2022new
+ 
+-class ptodo (val date: String?=null, val title: String?=null, val descripton: String?=null,
+-             var ismarked: String?=null)
++class ptodo (val title: String?=null, val descripton: String?=null)
+ {
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_addpersoneltodo.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#222831\"\r\n    tools:context=\".addpersoneltodo\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView3\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Rate-Us \"\r\n        android:textColor=\"#00ADB5\"\r\n        android:textSize=\"24sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/linearLayout\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.507\" />\r\n\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/linearLayout\"\r\n        android:layout_width=\"351dp\"\r\n        android:layout_height=\"151dp\"\r\n        android:background=\"#00ADB5\"\r\n        android:orientation=\"vertical\"\r\n        android:padding=\"20dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/rank\"\r\n            android:layout_width=\"277dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"25sp\"\r\n            android:layout_weight=\"1\"\r\n            android:ems=\"10\"\r\n\r\n            android:hint=\" Rate 1-5\"\r\n            android:inputType=\"phone\"\r\n            tools:ignore=\"InvalidId,TouchTargetSizeCheck\" />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\">\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n        <EditText\r\n            android:id=\"@+id/desc\"\r\n            android:layout_width=\"273dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginLeft=\"30sp\"\r\n            android:layout_weight=\"1\"\r\n            android:ems=\"10\"\r\n            android:hint=\"Percent\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textAppearance=\"@style/TextAppearance.AppCompat.Body1\"\r\n            android:visibility=\"visible\"\r\n            tools:ignore=\"EditableContentDescCheck\" />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/submitbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:backgroundTint=\"#00FFF5\"\r\n        android:text=\"Submit\"\r\n        android:textColor=\"#222831\"\r\n        app:cornerRadius=\"20sp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/linearLayout\"\r\n        app:layout_constraintVertical_bias=\"0.349\" />\r\n\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_addpersoneltodo.xml b/app/src/main/res/layout/activity_addpersoneltodo.xml
+--- a/app/src/main/res/layout/activity_addpersoneltodo.xml	
++++ b/app/src/main/res/layout/activity_addpersoneltodo.xml	
+@@ -36,15 +36,15 @@
+ 
+ 
+         <EditText
+-            android:id="@+id/rank"
++            android:id="@+id/title"
+             android:layout_width="277dp"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="25sp"
+             android:layout_weight="1"
+             android:ems="10"
+ 
+-            android:hint=" Rate 1-5"
+-            android:inputType="phone"
++            android:hint="Title"
++            android:inputType="textPersonName"
+             tools:ignore="InvalidId,TouchTargetSizeCheck" />
+ 
+         <LinearLayout
+@@ -73,7 +73,7 @@
+             android:layout_marginLeft="30sp"
+             android:layout_weight="1"
+             android:ems="10"
+-            android:hint="Percent"
++            android:hint="Description"
+             android:inputType="textPersonName"
+             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+             android:visibility="visible"
+Index: app/src/main/java/com/aaks32173/sih2022new/SixthEighthGroup.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.ImageButton;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.time.LocalDate;\r\n\r\npublic class SixthEighthGroup extends AppCompatActivity {\r\n    FirebaseAuth mAuth;\r\n    FirebaseUser Currentuser;\r\n\r\n    DatabaseReference databaseReference2;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_sixth_eighth_group);\r\n        ImageButton menstural = findViewById(R.id.menstural);\r\n        ImageButton relaxing = findViewById(R.id.relaxing);\r\n        ImageButton flextime = findViewById(R.id.flextime);\r\n        ImageButton gtbt = findViewById(R.id.gtbt);\r\n        ImageButton podcast = findViewById(R.id.podcasts);\r\n        ImageButton wetime = findViewById(R.id.wetime);\r\n        ImageButton music = findViewById(R.id.music);\r\n        mAuth = FirebaseAuth.getInstance();\r\n        Currentuser = mAuth.getCurrentUser();\r\n\r\n\r\n        LocalDate td=LocalDate.now();\r\n        DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"WeTime\");\r\n        reference12.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                Boolean todotoday = dataSnapshot.child(td.toString()).exists();\r\n\r\n                if(!todotoday){\r\n                    String[][] wetime={\r\n                            {\"1\",\"Go for a walk with your parents\"},\r\n                            {\"2\",\"Have dinner with family\"},\r\n                            {\"3\",\"Ask your family members to tell you a story before bed.\"},\r\n                            {\"4\",\"Plant a seed with the help with your elder and water it daily\"},\r\n                            {\"5\",\"Ask your mom to let you help in kitchen. Do as she instructs.\"},\r\n                            {\"6\",\"Tell your mom how good she looks.\"},\r\n                            {\"7\",\"Take blessings from your elders.\"},\r\n                            {\"8\",\"Ask your parents to help you with your TODO list \"},\r\n                            {\"9\",\"Thank god for givng you such a wonderful family.\"},\r\n                            {\"10\",\"Have a small dance party with songs played on your phone with your family.\"},\r\n                            {\"11\",\"Maintain a piggy bank.Save money and add to it.\"},\r\n                            {\"12\",\"Dress up and join your elders to temples, mosques,churches or gurudwaras\"},\r\n                            {\"13\",\"Set tables  for meals.\"},\r\n                            {\"14\",\"Go to fruit or vegetable market with your elders.\"},\r\n                            {\"15\",\"Arrange your closet with your elders.\"},\r\n                            {\"16\",\"Check your photo albums with your family.\"}\r\n                    };\r\n                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"WeTime\");\r\n                    for (int i = 1; i <= 16; i++) {\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"status\").setValue(\"False\");\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"description\").setValue(wetime[i-1][1]);\r\n\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"date\").setValue(td.toString());\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"id\").setValue(wetime[i-1][0]);\r\n                    }\r\n                }\r\n            }\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"info\");\r\n        music.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoMusic(Currentuser.getEmail().toString());\r\n            }\r\n        });\r\n        wetime.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoWetime(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        podcast.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoPodcats(Currentuser.getEmail().toString());\r\n            }\r\n        });\r\n        flextime.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoFlex();\r\n            }\r\n        });\r\n        relaxing.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoRelaxing();\r\n            }\r\n        });\r\n        menstural.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                gotoMenstural();\r\n            }\r\n        });\r\n        gtbt.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                movetogtbt();\r\n            }\r\n        });}\r\n    private void gotoWetime(String email) {\r\n        Intent intent = new Intent(SixthEighthGroup.this, WetimeActivity.class);\r\n        intent.putExtra(\"email\",email);\r\n        startActivity(intent);\r\n    }\r\n    private void gotoPodcats(String email) {\r\n        Intent intent =  new Intent(SixthEighthGroup.this, MusicPlayer.class);\r\n        intent.putExtra(\"path\",\"PodcastSixthEight\");\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void gotoMusic(String email) {\r\n        Intent intent = new Intent(SixthEighthGroup.this, MusicPlayer.class);\r\n        intent.putExtra(\"path\",\"MusicFourthFifth\");\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void movetogtbt() {\r\n        Intent intent =  new Intent(SixthEighthGroup.this, gtbtPanelFourthFifth.class);\r\n        startActivity(intent);\r\n    }\r\n    private void gotoFlex() {\r\n        Intent intent = new Intent(SixthEighthGroup.this, flex_time.class);\r\n        startActivity(intent);\r\n    }\r\n    private void gotoRelaxing() {\r\n        Intent intent = new Intent(SixthEighthGroup.this, relaxingActivityHigher.class);\r\n        startActivity(intent);\r\n    }\r\n    private void gotoMenstural() {\r\n        Intent intent = new Intent(SixthEighthGroup.this, MainActivity.class);\r\n        startActivity(intent);\r\n    }\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\",\",\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/SixthEighthGroup.java b/app/src/main/java/com/aaks32173/sih2022new/SixthEighthGroup.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/SixthEighthGroup.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/SixthEighthGroup.java	
+@@ -120,14 +120,14 @@
+             }
+         });}
+     private void gotoWetime(String email) {
+-        Intent intent = new Intent(SixthEighthGroup.this, WetimeActivity.class);
+-        intent.putExtra("email",email);
++        Intent intent = new Intent(SixthEighthGroup.this, addpersoneltodo.class);
++//        intent.putExtra("email",email);
+         startActivity(intent);
+     }
+     private void gotoPodcats(String email) {
+-        Intent intent =  new Intent(SixthEighthGroup.this, MusicPlayer.class);
+-        intent.putExtra("path","PodcastSixthEight");
+-        intent.putExtra("email", email);
++        Intent intent =  new Intent(SixthEighthGroup.this, personeltodo.class);
++//        intent.putExtra("path","PodcastSixthEight");
++//        intent.putExtra("email", email);
+         startActivity(intent);
+     }
+     private void gotoMusic(String email) {
+Index: app/src/main/java/com/aaks32173/sih2022new/fouthFifthGroup.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.LinearSnapHelper;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.provider.ContactsContract;\r\nimport android.view.View;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationUtils;\r\nimport android.widget.ImageButton;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\npublic class fouthFifthGroup extends AppCompatActivity {\r\n    FirebaseAuth mAuth;\r\n\r\n    FirebaseUser Currentuser;\r\n    FirebaseDatabase firebaseDatabase;\r\n    DatabaseReference databaseReference;\r\n\r\n    RecyclerView recycler_view;\r\n    LinearLayoutManager layoutManager;\r\n    AutoScrollAdapter autoScrollAdapter;\r\n\r\n    DatabaseReference databaseReference2;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_fouth_fifth_group);\r\n\r\n        ImageButton button5=(ImageButton)findViewById(R.id.imageButton5);\r\n        String [] interests ={\"exercisee\", \"nutrition\", \"musicpodcast\",\"relaxinactivities\", \"wetimee\"};\r\n\r\n\r\n        recycler_view = findViewById(R.id.recycler_view_3to5);\r\n        setRV();\r\n\r\n        ImageButton todobtn = findViewById(R.id.todobtn);\r\n        ImageButton music = findViewById(R.id.music);\r\n        ImageButton podcasts = findViewById(R.id.podcasts);\r\n        ImageButton gtbt = findViewById(R.id.gtbt);\r\n        ImageButton relaxing = findViewById(R.id.relaxing);\r\n        ImageButton menstural = findViewById(R.id.menstural);\r\n\r\n        ImageButton chatbot = findViewById(R.id.chatbot);\r\n        ImageButton diet =findViewById(R.id.imageButton3);\r\n\r\n        ImageButton post =findViewById(R.id.post);\r\n\r\n        ImageButton wetime =findViewById(R.id.wetime);\r\n        firebaseDatabase = FirebaseDatabase.getInstance();\r\n\r\n        ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);\r\n\r\n\r\n\r\n\r\n\r\n\r\n        ExtendedFloatingActionButton letshaveconversation = findViewById(R.id.chatbot_3to5);\r\n\r\n                TextView badge = findViewById(R.id.chatbotbadge_3to5);\r\n                Animation myanim2 = AnimationUtils.loadAnimation(this, R.anim.shake);\r\n        letshaveconversation.startAnimation(myanim2);\r\n        badge.startAnimation(myanim2);\r\n        letshaveconversation.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent a =  new Intent(fouthFifthGroup.this,com.aaks32173.sih2022new.ui.MainActivity.class);\r\n                startActivity(a);\r\n            }\r\n        });\r\n                firebaseDatabase = FirebaseDatabase.getInstance();\r\n\r\n        LocalDate td= LocalDate.now();\r\n        Toast.makeText(getApplicationContext(),td.toString(),Toast.LENGTH_LONG).show();\r\n        mAuth = FirebaseAuth.getInstance();\r\n        Currentuser = mAuth.getCurrentUser();\r\n\r\n        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"UserIntrest\");\r\n        String [] intrestspoint = new String[5];\r\n\r\n\r\n            ref.addValueEventListener(new ValueEventListener() {\r\n                @Override\r\n                public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                    String exercise = snapshot.child(interests[0]).getValue().toString();\r\n                    intrestspoint[0]= (exercise);\r\n                    String nutrition = snapshot.child(interests[1]).getValue().toString();\r\n                    intrestspoint[1]= (nutrition);\r\n                    String music = snapshot.child(interests[2]).getValue().toString();\r\n                    intrestspoint[2]= (music);\r\n                    String relaxin = snapshot.child(interests[3]).getValue().toString();\r\n                    intrestspoint[3]= (relaxin);\r\n                    String wetime = snapshot.child(interests[4]).getValue().toString();\r\n                    intrestspoint[4]= (wetime);\r\n                }\r\n                @Override\r\n                public void onCancelled(@NonNull DatabaseError error) {\r\n                }\r\n            });\r\n\r\n        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();\r\n\r\n        String encodedemmail=encodeUserEmail(email.toString());\r\n\r\n\r\n\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"TODO\");\r\n\r\n        reference.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                Boolean todotoday = dataSnapshot.child(td.toString()).exists();\r\n\r\n                if(!todotoday){\r\n                    String[] wetime={\"exercise\",\r\n                            \"music&podcast\",\r\n                            \"nutrition\",\r\n                            \"relaxinactivities\",\r\n                            \"wetime\"};\r\n\r\n                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"TODO\");\r\n\r\n                    for (int i = 1; i <= 5; i++) {\r\n                        databaseReference2.child(td.toString()).child(wetime[i-1]).child(\"intrest\").setValue(intrestspoint[i-1]);\r\n                        databaseReference2.child(td.toString()).child(wetime[i-1]).child(\"activity\").setValue(wetime[i-1]);\r\n                        databaseReference2.child(td.toString()).child(wetime[i-1]).child(\"date\").setValue(td.toString());\r\n                        databaseReference2.child(td.toString()).child(wetime[i-1]).child(\"progress\").setValue(\"0\");\r\n                    }\r\n\r\n                }\r\n            }\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n        DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"WeTime\");\r\n        reference12.addValueEventListener(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                Boolean todotoday = dataSnapshot.child(td.toString()).exists();\r\n\r\n                if(!todotoday){\r\n                    String[][] wetime={\r\n                            {\"1\",\"Go for a walk with your parents\"},\r\n                            {\"2\",\"Have dinner with family\"},\r\n                            {\"3\",\"Ask your family members to tell you a story before bed.\"},\r\n                            {\"4\",\"Plant a seed with the help with your elder and water it daily\"},\r\n                            {\"5\",\"Ask your mom to let you help in kitchen. Do as she instructs.\"},\r\n                            {\"6\",\"Tell your mom how good she looks.\"},\r\n                            {\"7\",\"Take blessings from your elders.\"},\r\n                            {\"8\",\"Ask your parents to help you with your TODO list \"},\r\n                            {\"9\",\"Thank god for givng you such a wonderful family.\"},\r\n                            {\"10\",\"Have a small dance party with songs played on your phone with your family.\"},\r\n                            {\"11\",\"Maintain a piggy bank.Save money and add to it.\"},\r\n                            {\"12\",\"Dress up and join your elders to temples, mosques,churches or gurudwaras\"},\r\n                            {\"13\",\"Set tables  for meals.\"},\r\n                            {\"14\",\"Go to fruit or vegetable market with your elders.\"},\r\n                            {\"15\",\"Arrange your closet with your elders.\"},\r\n                            {\"16\",\"Check your photo albums with your family.\"}\r\n                    };\r\n\r\n\r\n                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"WeTime\");\r\n\r\n                    for (int i = 1; i <= 16; i++) {\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"status\").setValue(\"False\");\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"description\").setValue(wetime[i-1][1]);\r\n\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"date\").setValue(td.toString());\r\n                        databaseReference2.child(td.toString()).child(\"\"+i).child(\"id\").setValue(wetime[i-1][0]);\r\n                    }\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n        gtbt.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openGtbt();\r\n            }\r\n        });\r\n        diet.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                opendiet(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        wetime.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openwetime(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n//        wetime.setOnClickListener(new View.OnClickListener( {\r\n//                Intent a =  new Intent(fouthFifthGroup.this,com.aaks32173.sih2022new.ui.MainActivity.class);\r\n//\r\n////        Intent intent = new Intent(fouthFifthGroup.this, WetimeActivity.class).putExtra(\"email\",encodedemmail);\r\n//            startActivity(intent);\r\n//        )};\r\n        todobtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                opentodo(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        exercise.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                movetoflextime(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n\r\n//        health.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View view) {\r\n//                Intent intent = new Intent(fouthFifthGroup.this, yoga.class);\r\n//                intent.putExtra(\"category\", \"health\");\r\n//                startActivity(intent);\r\n//            }\r\n//        });\r\n        music.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openMusic(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        podcasts.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openPodcasts(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        relaxing.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                movetoRelaxing(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n        menstural.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                movetoMenstural(encodeUserEmail(Currentuser.getEmail().toString()));\r\n            }\r\n        });\r\n//        chatbot.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View v) {\r\n//                movetoBot();\r\n//            }\r\n//        });\r\n        post.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openShowpost();\r\n            }\r\n        });\r\n    }\r\n    private void openShowpost() {\r\n        Intent intent = new Intent(fouthFifthGroup.this, addintrest.class);\r\n        startActivity(intent);\r\n    }\r\n\r\n    private void opentodo(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, todo.class);\r\n     intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n\r\n    private void openwetime(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, WetimeActivity.class);\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void openGtbt() {\r\n        Intent intent = new Intent(fouthFifthGroup.this, gtbtPanelFourthFifth.class);\r\n        startActivity(intent);\r\n    }\r\n    private void openMusic( String email) {\r\n            Intent intent = new Intent(fouthFifthGroup.this, MusicPlayer.class);\r\n            intent.putExtra(\"path\", \"MusicFourthFifth\");\r\n\r\n        intent.putExtra(\"email\", email);\r\n            startActivity(intent);\r\n    }\r\n    private void openPodcasts(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, podcasts.class);\r\n        intent.putExtra(\"group\", \"FourthFifth\");\r\n\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void opendiet(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, chekk.class);\r\n\r\n        startActivity(intent);\r\n    }\r\n    private void movetoflextime(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, flextimefourthfifth.class);\r\n\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void movetoRelaxing(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, relaxingActivityPrimary.class);\r\n\r\n        intent.putExtra(\"email\", email);\r\n        startActivity(intent);\r\n    }\r\n    private void movetoMenstural(String email) {\r\n        Intent intent = new Intent(fouthFifthGroup.this, MensturalFourthFifthGroup.class);\r\n\r\n        startActivity(intent);\r\n    }\r\n    private void movetoBot() {\r\n        Intent intent = new Intent(fouthFifthGroup.this, com.aaks32173.sih2022new.ui.MainActivity.class);\r\n        startActivity(intent);\r\n    }\r\n\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\",\",\");\r\n    }\r\n\r\n    private void setRV() {\r\n\r\n        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);\r\n        recycler_view.setLayoutManager(layoutManager);\r\n        autoScrollAdapter = new AutoScrollAdapter(this);\r\n        recycler_view.setAdapter(autoScrollAdapter);\r\n\r\n        LinearSnapHelper snapHelper = new LinearSnapHelper();\r\n        snapHelper.attachToRecyclerView(recycler_view);\r\n\r\n        Timer timer =new Timer();\r\n        timer.schedule(new TimerTask() {\r\n            @Override\r\n            public void run() {\r\n                if(layoutManager.findLastCompletelyVisibleItemPosition() <(autoScrollAdapter.getItemCount()-1)){\r\n                    layoutManager.smoothScrollToPosition(recycler_view, new RecyclerView.State(),layoutManager.findLastCompletelyVisibleItemPosition()+1);\r\n                }\r\n                else if(layoutManager.findLastCompletelyVisibleItemPosition()<(autoScrollAdapter.getItemCount()-1)){\r\n                    layoutManager.smoothScrollToPosition(recycler_view, new RecyclerView.State(),0);\r\n                }\r\n                {\r\n\r\n                }\r\n            }\r\n        },0,3000);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/fouthFifthGroup.java b/app/src/main/java/com/aaks32173/sih2022new/fouthFifthGroup.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/fouthFifthGroup.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/fouthFifthGroup.java	
+@@ -282,7 +282,7 @@
+         });
+     }
+     private void openShowpost() {
+-        Intent intent = new Intent(fouthFifthGroup.this, addintrest.class);
++        Intent intent = new Intent(fouthFifthGroup.this, Showpost.class);
+         startActivity(intent);
+     }
+ 
+Index: app/src/main/java/com/aaks32173/sih2022new/wetimeadapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new\r\n\r\nimport android.content.Intent\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.TextView\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.google.firebase.database.*\r\nimport java.time.LocalDate\r\n\r\nclass wetimeadapter(private val userList : ArrayList<wetime> ,val email :String) : RecyclerView.Adapter<wetimeadapter.MyViewHolder>() {\r\n\r\n\r\n    private lateinit var database : DatabaseReference\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {\r\n\r\n//        userList.sortBy { it.percent?.toInt() }\r\n        val itemView = LayoutInflater.from(parent.context).inflate(\r\n            R.layout.user_listwetime,\r\n            parent,false)\r\n\r\n\r\n\r\n        return MyViewHolder(itemView)\r\n\r\n\r\n\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {\r\n\r\n        val currentitem = userList[position]\r\n\r\n\r\n        holder.name.text = currentitem.description\r\n\r\n        holder.btndelete.setOnClickListener() {\r\n            val today= LocalDate.now()\r\n\r\n            database = FirebaseDatabase.getInstance().getReference(\"UserInfo/\"+email+\"/WeTime/\"+today.toString())\r\n\r\n                database.child(currentitem.id.toString()).removeValue().addOnSuccessListener {\r\n                    increasecounter(email)\r\n\r\n\r\n                }\r\n\r\n        }\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n    override fun getItemCount(): Int {\r\n\r\n        return userList.size\r\n    }\r\n\r\n\r\n\r\n    class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){\r\n\r\n        //        val cname : TextView = itemView.findViewById(R.id.cname)\r\n        val name : TextView = itemView.findViewById(R.id.tvfirstName)\r\n\r\n\r\n\r\n        val btndelete : Button = itemView.findViewById(R.id.btndelete)\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n    private fun increasecounter(email: String) {\r\n        val today = LocalDate.now()\r\n        val reference1 =\r\n            FirebaseDatabase.getInstance().reference.child(\"UserInfo\").child(email).child(\"TODO\")\r\n                .child(today.toString())\r\n        reference1.addListenerForSingleValueEvent(object : ValueEventListener {\r\n            var progress: String? = null\r\n            override fun onDataChange(dataSnapshot: DataSnapshot) {\r\n                progress =\r\n                    dataSnapshot.child(\"wetime\").child(\"progress\").value.toString()\r\n                if (progress!!.toInt() <= 90) {\r\n                    val prg = progress!!.toInt() + 10\r\n                    reference1.child(\"wetime\").child(\"progress\")\r\n                        .setValue(Integer.toString(prg))\r\n                } else {\r\n                    val prg = 100\r\n                    reference1.child(\"wetime\").child(\"progress\")\r\n                        .setValue(Integer.toString(prg))\r\n                }\r\n            }\r\n\r\n            override fun onCancelled(databaseError: DatabaseError) {}\r\n        })\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/wetimeadapter.kt b/app/src/main/java/com/aaks32173/sih2022new/wetimeadapter.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/wetimeadapter.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/wetimeadapter.kt	
+@@ -64,8 +64,7 @@
+ 
+     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+ 
+-        //        val cname : TextView = itemView.findViewById(R.id.cname)
+-        val name : TextView = itemView.findViewById(R.id.tvfirstName)
++       val name : TextView = itemView.findViewById(R.id.tvfirstName)
+ 
+ 
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.aaks32173.sih2022new\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.SCHEDULE_EXACT_ALARM\" />\r\n    <uses-permission android:name=\"android.permission.SCHEDULE_EXACT_ALARM\" />\r\n    <uses-permission android:name=\"android.permission.VIBRATE\" />\r\n    <uses-permission android:name=\"android.permission.WAKE_LOCK\" />\r\n    <uses-permission android:name=\"android.permission.SET_ALARM\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.SIH2022NEW\">\r\n        <activity\r\n            android:name=\".SixthEighthGroup\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".gtbtPanelFourthFifth\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".splash\"\r\n            android:exported=\"true\" >\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n\r\n        </activity>\r\n        <activity\r\n            android:name=\".addtodo\"\r\n            android:exported=\"false\" />\r\n        <activity android:name=\".addintrest\"\r\n            android:exported=\"false\"/>\r\n        <activity\r\n            android:name=\".flextimefourthfifth\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".podcasts\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MensturalFourthFifthGroup\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MusicPlayerPlaylist\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".stepcounter\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".depressn_main\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".addpersoneltodo\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".personeltodo\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".todo\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".fouthFifthGroup\"\r\n            android:exported=\"false\" >\r\n\r\n\r\n\r\n        </activity>\r\n        <activity\r\n            android:name=\".sports\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".exercise\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingPanel\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingQuizes\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ActivityRiddles\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingActivityHigher\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingHobies\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingJournaling\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingActivityPrimary\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".webView\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".relaxingActivityKids\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".sleepTips\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".symptomsSleep\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".sleepHygienePanle\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MusicPlayer\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".musicSleep\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".getSleepDetails\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".sleepTracker\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".meditation\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".stretching\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".workout\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".yoga\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".UserDiet\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".Details\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".chekk\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".flex_time\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.chatbotquestion\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"true\"/>\r\n\r\n        <activity\r\n            android:name=\".DashHome_Nur_3\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".good_bad_touch_comic\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".good_bad_touch_panel\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".vedioPlay\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".goodBadtouch\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AddpostActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".WetimeActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Dash_home\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".refresh\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Showpost\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".WelcomeActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".doanddont\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".magazine\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".diet\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".log\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MenstrualHome\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".BottomNavigation\"\r\n            android:exported=\"false\"\r\n            android:label=\"@string/title_activity_bottom_navigation\" />\r\n        <activity\r\n            android:name=\".Interest\"\r\n            android:exported=\"true\" >\r\n\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.MainActivity\"\r\n            android:exported=\"true\"\r\n            android:theme=\"@style/Theme.SIH2022NEW.NoActionBar\"/>\r\n\r\n\r\n\r\n\r\n        <receiver android:name=\".recieverAlarm\" />\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -19,27 +19,29 @@
+         android:supportsRtl="true"
+         android:theme="@style/Theme.SIH2022NEW">
+         <activity
++            android:name=".addpersoneltodo"
++            android:exported="false" />
++        <activity
+             android:name=".SixthEighthGroup"
+             android:exported="false" />
+         <activity
+             android:name=".gtbtPanelFourthFifth"
+             android:exported="false" />
+-
+         <activity
+-            android:name=".splash"
+-            android:exported="true" >
++            android:name=".phq_9"
++            android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+-
+         </activity>
+         <activity
+             android:name=".addtodo"
+             android:exported="false" />
+-        <activity android:name=".addintrest"
+-            android:exported="false"/>
++        <activity
++            android:name=".addintrest"
++            android:exported="false" />
+         <activity
+             android:name=".flextimefourthfifth"
+             android:exported="false" />
+@@ -59,7 +61,7 @@
+             android:name=".depressn_main"
+             android:exported="false" />
+         <activity
+-            android:name=".addpersoneltodo"
++            android:name=".chatbot.MainActivity"
+             android:exported="false" />
+         <activity
+             android:name=".personeltodo"
+@@ -69,11 +71,7 @@
+             android:exported="false" />
+         <activity
+             android:name=".fouthFifthGroup"
+-            android:exported="false" >
+-
+-
+-
+-        </activity>
++            android:exported="false"/>
+         <activity
+             android:name=".sports"
+             android:exported="false" />
+@@ -140,15 +138,12 @@
+         <activity
+             android:name=".yoga"
+             android:exported="false" />
+-
+         <activity
+             android:name=".UserDiet"
+             android:exported="false" />
+-
+         <activity
+             android:name=".Details"
+             android:exported="false" />
+-
+         <activity
+             android:name=".chekk"
+             android:exported="false" />
+@@ -159,10 +154,8 @@
+             android:name=".ui.chatbotquestion"
+             android:exported="false" />
+         <activity
+-
+             android:name=".LoginActivity"
+-            android:exported="true"/>
+-
++            android:exported="true" />
+         <activity
+             android:name=".DashHome_Nur_3"
+             android:exported="false" />
+@@ -175,14 +168,12 @@
+         <activity
+             android:name=".vedioPlay"
+             android:exported="false" />
+-
+         <activity
+             android:name=".goodBadtouch"
+             android:exported="false" />
+         <activity
+             android:name=".AddpostActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".RegisterActivity"
+             android:exported="false" />
+@@ -225,17 +216,12 @@
+             android:label="@string/title_activity_bottom_navigation" />
+         <activity
+             android:name=".Interest"
+-            android:exported="true" >
+-
+-        </activity>
++            android:exported="true"></activity>
+         <activity
+             android:name=".ui.MainActivity"
+             android:exported="true"
+-            android:theme="@style/Theme.SIH2022NEW.NoActionBar"/>
++            android:theme="@style/Theme.SIH2022NEW.NoActionBar" />
+ 
+-
+-
+-
+         <receiver android:name=".recieverAlarm" />
+ 
+         <meta-data
+Index: app/src/main/res/layout/activity_recommended.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_recommended.xml b/app/src/main/res/layout/activity_recommended.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_recommended.xml	
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:background="@color/white"
++    android:layout_height="match_parent"
++    tools:context=".recommended">
++
++
++    <androidx.recyclerview.widget.RecyclerView
++
++        android:id="@+id/userList"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.0"
++        tools:listitem="@layout/user_listrec" />
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/aaks32173/sih2022new/recommended.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/recommended.kt b/app/src/main/java/com/aaks32173/sih2022new/recommended.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/aaks32173/sih2022new/recommended.kt	
+@@ -0,0 +1,74 @@
++package com.aaks32173.sih2022new
++
++import android.os.Bundle
++import android.widget.Toast
++import androidx.appcompat.app.AppCompatActivity
++import androidx.recyclerview.widget.LinearLayoutManager
++import androidx.recyclerview.widget.RecyclerView
++import com.aaks32173.sih2022new.databinding.ActivityWetimeBinding
++import com.google.firebase.database.*
++import java.time.LocalDate
++import java.time.temporal.ChronoUnit
++import java.util.*
++
++class recommended  : AppCompatActivity() {
++
++    private lateinit var binding: ActivityWetimeBinding
++    private lateinit var dbref : DatabaseReference
++    private lateinit var userRecyclerview : RecyclerView
++    private lateinit var userArrayList : ArrayList<reco>
++
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        binding =  ActivityWetimeBinding.inflate(layoutInflater)
++        setContentView(binding.root)
++        userRecyclerview = findViewById(R.id.userList)
++        userRecyclerview.layoutManager = LinearLayoutManager(this)
++        userRecyclerview.setHasFixedSize(true)
++
++        userArrayList = arrayListOf<reco>()
++        getUserData()
++
++
++
++    }
++
++    private fun getUserData() {
++//        val today =LocalDate.now()
++        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/dee@gmail,com/recommondation")
++
++        dbref.addValueEventListener(object : ValueEventListener{
++
++            override fun onDataChange(snapshot: DataSnapshot) {
++
++                if (snapshot.exists()){
++
++                    for (userSnapshot in snapshot.children){
++
++
++
++
++                        val user = userSnapshot.getValue(reco::class.java)
++                        userArrayList.add(user!!)
++
++                    }
++
++                    userRecyclerview.adapter = recadapter(userArrayList)
++
++
++
++                }
++
++            }
++
++
++            override fun onCancelled(error: DatabaseError) {
++                TODO("Not yet implemented")
++            }
++
++        })
++
++
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/aaks32173/sih2022new/reco.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/reco.kt b/app/src/main/java/com/aaks32173/sih2022new/reco.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/aaks32173/sih2022new/reco.kt	
+@@ -0,0 +1,6 @@
++package com.aaks32173.sih2022new
++
++class reco(val rec: String?=null)
++{
++
++}
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable-v24/shape2.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable-v24/toggle_selector.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/button_bg.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/ic_baseline_chat_24.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/roundbadge.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/roundedbuttonexercise.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shape2.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shape3.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shape5.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shape6.xml\" value=\"0.1475\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shape7.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/drawable/shapeflex.xml\" value=\"0.1425\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_chat_bot.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_chatbotquestion.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_councellor.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml\" value=\"0.136\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_depressn_main.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_diet.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_exercise.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_good_badtouch.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_interest.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml\" value=\"0.128\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_menstrual_home.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_phq9.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_refresh.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_relaxing_kids.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_splash.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_workout.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml\" value=\"0.176\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/bot_msg_rv_item.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/content_main.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/fragment_dashboard.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/message_item.xml\" value=\"0.2484375\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/rv_layout.xml\" value=\"0.136\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/scroll_layout.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/user_list.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/SIHPROJECT/app/src/main/res/layout/welcome.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chekk.xml\" value=\"0.17604166666666668\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml\" value=\"0.23489583333333333\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_diett.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml\" value=\"0.25052083333333336\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml\" value=\"0.25416666666666665\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml\" value=\"0.23489583333333333\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_user_diet.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml\" value=\"0.25416666666666665\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml\" value=\"0.25416666666666665\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_councellor.xml\" value=\"0.17255434782608695\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_dash_home.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_dash_home_nur3.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_good_bad_touch_comic.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_mainchatbot.xml\" value=\"0.25416666666666665\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_music_player_playlist.xml\" value=\"0.17255434782608695\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_personeltodo.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_phq9.xml\" value=\"0.17255434782608695\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_higher.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_hobies.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_journaling.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_kids.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_panel.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_primary.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_relaxing_quizes.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_riddles.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_showpost.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_todo.xml\" value=\"0.20364583333333333\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_web_view.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_wetime.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_yoga.xml\" value=\"0.11203703703703703\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/bot_msg_rv_item.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/popup_window12.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/popup_windowhobbies1.xml\" value=\"0.16576086956521738\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/user_list2.xml\" value=\"0.1359375\" />\r\n        <entry key=\"..\\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/user_listwetime.xml\" value=\"0.1359375\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-mdpi/ic_baseline_favorite_24.xml\" value=\"0.1415\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-mdpi/send_round_box.xml\" value=\"0.1415\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/drawable-v24/toggle_selector.xml\" value=\"0.1415\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_addpost.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_chatbotquestion.xml\" value=\"0.176\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_dash_home.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_diet.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_doanddont.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_exercise.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_flex_time.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_get_sleep_details.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_log.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_login.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_magazine.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_main.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_mainchatbot.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_meditation.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_menstrual_home.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_music_sleep.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_reciever_alarm.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_refresh.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_showpost.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_showpost_cardview.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_hygiene_panle.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_tips.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_sleep_tracker.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_stretching.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_symptoms_sleep.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_vedio_play.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_workout.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/activity_yoga.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/dropdown_items.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/message_item.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/nav_header_main.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window10.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window11.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window2.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window3.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window4.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window5.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window6.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window7.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window8.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/popup_window9.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/text_color_layout.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/user_msg_rv_item.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chatbotsenior.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/aakan/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/listitem_chat.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_flextimefourthfifth.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_gtbt_panel_fourth_fifth.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_podcasts.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_relaxing_hobies.xml\" value=\"0.16485507246376813\" />\r\n        <entry key=\"..\\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_vedio_play.xml\" value=\"0.16485507246376813\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -44,14 +44,23 @@
+         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_list.xml" value="0.22826086956521738" />
+         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.2" />
+         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/welcome.xml" value="0.22826086956521738" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1911231884057971" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chat_bot.xml" value="0.12183383991894631" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chatbotsenior.xml" value="0.12183383991894631" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chekk.xml" value="0.17604166666666668" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.23489583333333333" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_diett.xml" value="0.1" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.25052083333333336" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml" value="0.25416666666666665" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_main.xml" value="0.12183383991894631" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml" value="0.23489583333333333" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_recommended.xml" value="0.25052083333333336" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_user_diet.xml" value="0.1" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml" value="0.25052083333333336" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.25416666666666665" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/message_item.xml" value="0.25052083333333336" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_list2.xml" value="0.25052083333333336" />
++        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listrec.xml" value="0.25052083333333336" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.25416666666666665" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1" />
+         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml" value="0.16576086956521738" />
+Index: app/src/main/java/com/aaks32173/sih2022new/recadapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/recadapter.kt b/app/src/main/java/com/aaks32173/sih2022new/recadapter.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/aaks32173/sih2022new/recadapter.kt	
+@@ -0,0 +1,70 @@
++package com.aaks32173.sih2022new
++
++import android.content.Intent
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import android.widget.Button
++import android.widget.TextView
++import androidx.recyclerview.widget.RecyclerView
++import com.google.firebase.database.*
++import java.time.LocalDate
++
++class recadapter(private val userList : ArrayList<reco> ) : RecyclerView.Adapter<recadapter.MyViewHolder>() {
++
++
++    private lateinit var database : DatabaseReference
++
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
++
++//        userList.sortBy { it.percent?.toInt() }
++        val itemView = LayoutInflater.from(parent.context).inflate(
++            R.layout.user_listrec,
++            parent,false)
++
++
++
++        return MyViewHolder(itemView)
++
++
++
++    }
++
++    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
++
++        val currentitem = userList[position]
++
++
++        holder.name.text = currentitem.rec
++
++
++
++
++    }
++
++
++
++    override fun getItemCount(): Int {
++
++        return userList.size
++    }
++
++
++
++    class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
++
++        val name : TextView = itemView.findViewById(R.id.tvfirstName)
++
++
++
++
++
++
++
++
++    }
++
++
++
++
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/user_listrec.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/user_listrec.xml b/app/src/main/res/layout/user_listrec.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/user_listrec.xml	
+@@ -0,0 +1,49 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:layout_margin="10dp"
++    android:backgroundTint="#FFCD28"
++    android:background="@drawable/shape5"
++    android:padding="10dp"
++    app:cardCornerRadius="8dp"
++    app:cardElevation="2dp">
++
++    <LinearLayout
++        android:layout_width="327dp"
++        android:layout_height="wrap_content"
++        android:layout_marginVertical="6dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="20sp"
++        android:backgroundTint="#00ADB5"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="232dp"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center_vertical"
++            android:layout_marginTop="10sp"
++            android:orientation="horizontal">
++
++
++
++            <TextView
++                android:id="@+id/tvfirstName"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="8dp"
++                android:fontFamily="@font/salsa"
++                android:text="We Time"
++                android:textColor="#222831"
++                android:textSize="20sp" />
++
++        </LinearLayout>
++
++
++
++
++    </LinearLayout>
++
++
++</androidx.cardview.widget.CardView>
+\ No newline at end of file
+Index: app/src/main/java/com/aaks32173/sih2022new/Details.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\n\r\nimport static ai.api.util.ParametersConverter.parseFloat;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\npublic class Details extends AppCompatActivity {\r\n    FirebaseDatabase firebaseDatabase;\r\n    DatabaseReference databaseReference;\r\n    FirebaseAuth mauth;\r\n    FirebaseUser Currentuser;\r\n    EditText heightt, weightt;\r\n    Button bmi,next;\r\n    String check;\r\n    TextView showbmi, bmiinfo;\r\n    DatabaseReference dbref;\r\n    private FirebaseAuth mAuth;\r\n    private FirebaseUser mCurrentUser;\r\n\r\n\r\n\r\n    private FirebaseAuth mAuth1;\r\n    private FirebaseUser mCurrentUser1;\r\n    RadioGroup radioGroup;\r\n    RadioButton rb1,rb2;\r\n    String diet;\r\n    String final_email =\"\";\r\n    int age1;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_details);\r\n        firebaseDatabase = FirebaseDatabase.getInstance();\r\n        mauth = FirebaseAuth.getInstance();\r\n        //sleepdetail = false;\r\n        Currentuser = mauth.getCurrentUser();\r\n        databaseReference = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(encodeUserEmail(Currentuser.getEmail())).child(\"info\");\r\n\r\n        heightt = findViewById(R.id.height);\r\n        weightt = findViewById(R.id.weight);\r\n        bmi = findViewById(R.id.bmibtn);\r\n        showbmi = findViewById(R.id.bmishow);\r\n        bmiinfo = findViewById(R.id.bmiinfo);\r\n        next = findViewById(R.id.next_bmi);\r\n\r\n        mAuth = FirebaseAuth.getInstance();\r\n        mCurrentUser = mAuth.getCurrentUser();\r\n\r\n\r\n\r\n        mAuth1 = FirebaseAuth.getInstance();\r\n        mCurrentUser1 = mAuth1.getCurrentUser();\r\n\r\n        radioGroup=findViewById(R.id.radioGroup);\r\n\r\n\r\n\r\n        bmi.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n\r\n                Float h= Float.parseFloat(String.valueOf(heightt.getText()));\r\n                Float w= Float.parseFloat(String.valueOf(weightt.getText()));\r\n                h=h/100;\r\n                Float b=w/(h*h);\r\n                bmiinfo.setVisibility(view.getVisibility());\r\n\r\n                if (b < 18.5) {\r\n                    check = \"Under Weight\";\r\n                } else if (b >= 18.5 && b < 24.9) {\r\n                    check = \"Healthy\";\r\n                } else if (b >= 24.9 && b < 30) {\r\n                    check = \"Overweight\";\r\n                } else if (b >= 30) {\r\n                    check = \"Suffering from Obesity\";\r\n                }\r\n                Float finalH = h;\r\n                databaseReference.addValueEventListener(new ValueEventListener() {\r\n                    @Override\r\n                    public void onDataChange(DataSnapshot dataSnapshot) {\r\n                        Toast.makeText(Details.this, \"Hello \", Toast.LENGTH_SHORT).show();\r\n                        String age = dataSnapshot.child(\"age\").getValue().toString();\r\n                        int age2 = Integer.parseInt(age);\r\n                        double calories = ((finalH *4.7)+(w*4.35)-(age2*4.7))*1.35;\r\n\r\n                        String s = calories+\"\";\r\n                        dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email).child(\"BMI\");\r\n                        dbref.child(\"calinitial\").setValue(\"0\");\r\n                        dbref.child(\"calfinal\").setValue(s);\r\n\r\n\r\n                    }\r\n\r\n                    @Override\r\n                    public void onCancelled(DatabaseError databaseError) {\r\n                    }\r\n\r\n                });\r\n\r\n//\r\n//                calories = ((height_inch*4.7)+(weight_pounds*4.35)-(age_id*4.7))*1.35;\r\n                bmiinfo.setText(check);\r\n                showbmi.setVisibility(view.getVisibility());\r\n                showbmi.setText(b.toString());\r\n                next.setVisibility(view.getVisibility());\r\n                String email = mAuth.getCurrentUser().getEmail();\r\n                final_email = encodeUserEmail(email);\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email).child(\"BMI\");\r\n                dbref.child(\"height\").setValue(h.toString());\r\n                dbref.child(\"weight\").setValue(w.toString());\r\n                dbref.child(\"bmi\").setValue(b.toString());\r\n                dbref.child(\"condition\").setValue(check);\r\n\r\n            }\r\n        });\r\n\r\n//        next.setOnClickListener(new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View view) {\r\n//\r\n//                Intent i= new Intent(Details.this,Diett.class);\r\n//                finish();\r\n//                startActivity(i);\r\n//            }\r\n//        });\r\n        next.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                String email= mCurrentUser1.getEmail();\r\n//                Toast.makeText(view.getContext(), \"2\", Toast.LENGTH_SHORT).show();\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email);\r\n                dbref.child(\"userDiet\").setValue(diet);\r\n\r\n                Intent i = new Intent(Details.this,fouthFifthGroup.class);\r\n                finish();\r\n                startActivity(i);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void getUserData() {\r\n        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\").child(final_email).child(\"info\");\r\n        reference.addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(DataSnapshot dataSnapshot) {\r\n                String age = dataSnapshot.child(\"age\").getValue().toString();\r\n                dbref = FirebaseDatabase.getInstance().getReference(\"UserInfo\").child(final_email);\r\n                dbref.child(\"age\").setValue(age);\r\n\r\n                age1=Integer.parseInt(age);\r\n\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onCancelled(DatabaseError databaseError) {\r\n            }\r\n        });\r\n    }\r\n    public void rbclick(View v) {\r\n        int radioId = radioGroup.getCheckedRadioButtonId();\r\n        rb1 = findViewById(radioId);\r\n        diet =rb1.getText().toString();\r\n//        Toast.makeText(this, diet,\r\n//                Toast.LENGTH_SHORT).show();\r\n    }\r\n\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\", \",\");\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/Details.java b/app/src/main/java/com/aaks32173/sih2022new/Details.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/Details.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/Details.java	
+@@ -151,7 +151,7 @@
+                 dbref = FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email);
+                 dbref.child("userDiet").setValue(diet);
+ 
+-                Intent i = new Intent(Details.this,fouthFifthGroup.class);
++                Intent i = new Intent(Details.this,LoginActivity.class);
+                 finish();
+                 startActivity(i);
+             }
+Index: app/src/main/java/com/aaks32173/sih2022new/chatbot/APIService.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new.chatbot\r\n\r\nimport retrofit2.Call\r\nimport retrofit2.http.Field\r\nimport retrofit2.http.FormUrlEncoded\r\nimport retrofit2.http.POST\r\n\r\ninterface APIService {\r\n    @FormUrlEncoded\r\n    @POST(\"chat1\")\r\n    fun chatWithTheBit(@Field(\"chatInput\") chatText : String ): Call<ChatResponse>\r\n}\r\n\r\ndata class ChatResponse(val chatBotReply: String)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/chatbot/APIService.kt b/app/src/main/java/com/aaks32173/sih2022new/chatbot/APIService.kt
+--- a/app/src/main/java/com/aaks32173/sih2022new/chatbot/APIService.kt	
++++ b/app/src/main/java/com/aaks32173/sih2022new/chatbot/APIService.kt	
+@@ -7,7 +7,7 @@
+ 
+ interface APIService {
+     @FormUrlEncoded
+-    @POST("chat1")
++    @POST("chat")
+     fun chatWithTheBit(@Field("chatInput") chatText : String ): Call<ChatResponse>
+ }
+ 
+Index: app/src/main/java/com/aaks32173/sih2022new/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aaks32173.sih2022new;\r\n\r\nimport static java.lang.Integer.parseInt;\r\n\r\nimport static ai.api.util.ParametersConverter.parseFloat;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\n\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.Calendar;\r\n\r\npublic class LoginActivity extends AppCompatActivity {\r\n\r\n    EditText login_email,login_password;\r\n    Button login;\r\n    private FirebaseAuth mAuth;\r\n    DatabaseReference databaseReference2;\r\n    FirebaseUser Currentuser;\r\n    FirebaseDatabase firebaseDatabase;\r\n    public static boolean sleepdetail=true;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_login);\r\n        mAuth = FirebaseAuth.getInstance();\r\n        firebaseDatabase = FirebaseDatabase.getInstance();\r\n        login_email=findViewById(R.id.login_email);\r\n        login_password=findViewById(R.id.login_password);\r\n        login=findViewById(R.id.login_loginbtn);\r\n\r\n        login.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v)\r\n            {\r\n                loginUserAccount();\r\n            }\r\n        });\r\n\r\n        final TextView login_registernow = findViewById(R.id.login_registernow);\r\n        login_registernow.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                movetoregister();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void loginUserAccount() {\r\n        String email, password;\r\n        email =login_email.getText().toString();\r\n        password = login_password.getText().toString();\r\n        if (TextUtils.isEmpty(email)) {\r\n            Toast.makeText(getApplicationContext(),\r\n                    \"Please enter email!!\", Toast.LENGTH_LONG).show();\r\n            return;\r\n        }\r\n\r\n        if (TextUtils.isEmpty(password)) {\r\n            Toast.makeText(getApplicationContext(), \"Please enter password!!\", Toast.LENGTH_LONG).show();\r\n            return;\r\n        }\r\n\r\n        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {\r\n            @Override\r\n            public void onComplete(\r\n                    @NonNull Task<AuthResult> task)\r\n            {\r\n                if (task.isSuccessful()) {\r\n\r\n                    Currentuser = mAuth.getCurrentUser();\r\n                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child(\"UserInfo\");\r\n\r\n                    databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {\r\n                        @Override\r\n                        public void onDataChange(DataSnapshot dataSnapshot) {\r\n                            String age = dataSnapshot.child(encodeUserEmail(email)).child(\"info\").child(\"age\").getValue().toString();\r\n                            if(parseInt(age)<8 && parseInt(age)>2)\r\n                            {\r\n                                Intent intent = new Intent(LoginActivity.this, DashHome_Nur_3.class);\r\n                                startActivity(intent);\r\n                            }\r\n                            else{\r\n                                Calendar calendar = Calendar.getInstance();\r\n                                SimpleDateFormat mdformat = new SimpleDateFormat(\"HH:mm\");\r\n                                String strDate = mdformat.format(calendar.getTime());\r\n                                String hour = strDate.substring(0,2);\r\n                                int hourday = parseInt(hour);\r\n                                final boolean[] processDone = {true};\r\n                                databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {\r\n                                    @Override\r\n                                    public void onDataChange(DataSnapshot dataSnapshot) {\r\n                                        if(processDone[0]) {\r\n                                            String booleanvar = dataSnapshot.child(encodeUserEmail(email)).child(\"SleepDetails\").child(\"SleepActivity\").getValue().toString();\r\n                                            if(hourday>=7 && hourday<=9 && booleanvar.equals(\"true\"))\r\n                                            {\r\n                                                Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);\r\n                                                startActivity(intent);\r\n                                            }\r\n                                            else {\r\n                                                Calendar calendar2 = Calendar.getInstance();\r\n                                                SimpleDateFormat mdformat2 = new SimpleDateFormat(\"HH:mm\");\r\n                                                String strDate2 = mdformat2.format(calendar2.getTime());\r\n                                                String hour2 = strDate2.substring(0,1);\r\n                                                int hourday2 = parseInt(hour2);\r\n                                                if(hourday2>9)\r\n                                                {\r\n                                                    databaseReference2.child(encodeUserEmail(email)).child(\"SleepDetails\").child(\"SleepActivity\").setValue(\"true\");\r\n                                                }\r\n                                                if(parseInt(age)>8 && parseInt(age)<11) {\r\n                                                    Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);\r\n                                                    startActivity(intent);\r\n                                                }\r\n                                                else if (parseInt(age) < 14 && parseInt(age) >= 11) {\r\n                                                    Intent intent = new Intent(LoginActivity.this, SixthEighthGroup.class);\r\n                                                    startActivity(intent);\r\n                                                }\r\n                                            }\r\n                                            processDone[0] =false;\r\n                                        }\r\n                                    }\r\n\r\n                                    @Override\r\n                                    public void onCancelled(DatabaseError databaseError) {\r\n                                    }\r\n\r\n                                });\r\n                            }\r\n\r\n\r\n                        }\r\n\r\n                        @Override\r\n                        public void onCancelled(DatabaseError databaseError) {\r\n                        }\r\n\r\n                    });\r\n                    Toast.makeText(getApplicationContext(), \"Login successful!!\",Toast.LENGTH_LONG).show();\r\n\r\n\r\n\r\n                }\r\n                else {\r\n                    // sign-in failed\r\n                    Toast.makeText(getApplicationContext(), \"Login failed!!\", Toast.LENGTH_LONG).show();\r\n                }\r\n            }\r\n        });\r\n    }\r\n    private String encodeUserEmail(String email) {\r\n        return email.replace(\".\",\",\");\r\n    }\r\n    private void movetoregister(){\r\n        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);\r\n        startActivity(i);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/aaks32173/sih2022new/LoginActivity.java b/app/src/main/java/com/aaks32173/sih2022new/LoginActivity.java
+--- a/app/src/main/java/com/aaks32173/sih2022new/LoginActivity.java	
++++ b/app/src/main/java/com/aaks32173/sih2022new/LoginActivity.java	
+@@ -134,7 +134,7 @@
+                                                     Intent intent = new Intent(LoginActivity.this, fouthFifthGroup.class);
+                                                     startActivity(intent);
+                                                 }
+-                                                else if (parseInt(age) < 14 && parseInt(age) >= 11) {
++                                                else if (parseInt(age) <=14 && parseInt(age) >= 11) {
+                                                     Intent intent = new Intent(LoginActivity.this, SixthEighthGroup.class);
+                                                     startActivity(intent);
+                                                 }

@@ -44,14 +44,27 @@
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_list.xml" value="0.22826086956521738" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.2" />
         <entry key="..\:/SIHPROJECT/app/src/main/res/layout/welcome.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chat_bot.xml" value="0.12183383991894631" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chatbotsenior.xml" value="0.12183383991894631" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chekk.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home_nur3.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_diett.xml" value="0.1" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_good_bad_touch_panel.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_login.xml" value="0.1359375" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_main.xml" value="0.12183383991894631" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_mainchatbot.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_ninetwelvegroup.xml" value="0.2" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_personeltodo.xml" value="0.176" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_recommended.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_sixth_eighth_group.xml" value="0.1359375" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_user_diet.xml" value="0.1" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/message_item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_list2.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listrec.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml" value="0.16576086956521738" />
@@ -130,32 +143,13 @@
         <entry key="..\:/Users/aakan/AndroidStudioProjects/SIH2022NEW (harsh)/SIH2022NEW/app/src/main/res/layout/user_msg_rv_item.xml" value="0.25" />
         <entry key="..\:/Users/aakan/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chatbotsenior.xml" value="0.25" />
         <entry key="..\:/Users/aakan/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/listitem_chat.xml" value="0.25" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/drawable-mdpi/circular_progress_bar.xml" value="0.1735" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/drawable-mdpi/circular_shape.xml" value="0.1735" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/drawable/shape2.xml" value="0.1555" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_addintrest.xml" value="0.1585144927536232" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_chekk.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_dash_home.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_flextimefourthfifth.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.264" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_fouth_fifth_group.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_gtbt_panel_fourth_fifth.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_interest.xml" value="0.4" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_meditation.xml" value="0.11548913043478261" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_menstural_fourth_fifth_group.xml" value="0.10645812310797174" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_podcasts.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_recommended.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_relaxing_hobies.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_sixth_eighth_group.xml" value="0.10645812310797174" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_splash.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_splashac.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_stretching.xml" value="0.10645812310797174" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_todo.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_vedio_play.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_workout.xml" value="0.1" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.10645812310797174" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.20018115942028986" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/welcome.xml" value="0.10645812310797174" />
       </map>
     </option>
   </component>
