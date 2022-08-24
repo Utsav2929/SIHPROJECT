@@ -144,8 +144,6 @@
         <activity
             android:name=".UserDiet"
             android:exported="false" />
-        <activity android:name=".Diett"
-            android:exported="false"/>
         <activity
             android:name=".Details"
             android:exported="false" />

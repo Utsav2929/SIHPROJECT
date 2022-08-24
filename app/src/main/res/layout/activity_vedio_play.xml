@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".vedioPlay"
     android:background="#ECF9FE">
-
-
     <LinearLayout
         android:id="@+id/ly1"
         android:layout_width="match_parent"
@@ -20,23 +18,6 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ly1"
-        android:layout_marginTop="20dp"
-        android:gravity="right"
-        >
-        <Button
-            android:id="@+id/prevactivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-
-            android:text="Next"
-            android:layout_gravity="center"/>
-
     </LinearLayout>
 
 
