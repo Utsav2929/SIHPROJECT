@@ -1,6 +1,5 @@
 package com.aaks32173.sih2022new;
 
-import static java.lang.Integer.parseInt;
 import static ai.api.util.ParametersConverter.parseFloat;
 //import static com.aaks32173.sih2022new.LoginActivity.sleepdetail;
 
@@ -39,9 +38,9 @@ public class getSleepDetails extends AppCompatActivity {
         setContentView(R.layout.activity_get_sleep_details);
        firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
+        //sleepdetail = false;
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("SleepDetails");
-        int age = Integer.parseInt(getIntent().getExtras().getString("age"));
        Button submit = findViewById(R.id.submit);
         Button good = findViewById(R.id.good);
         Button bad = findViewById(R.id.bad);
@@ -106,7 +105,10 @@ public class getSleepDetails extends AppCompatActivity {
                     }
 
                 });
-                sleeptrack(age);
+
+
+
+                sleeptrack();
             }
         });
 
@@ -127,17 +129,10 @@ public class getSleepDetails extends AppCompatActivity {
             ans = 30;
         return ans;
     }
-    private  void sleeptrack(int age)
+    private  void sleeptrack()
     {
-
-        if(age>8 && age<11) {
-            Intent intent = new Intent(getSleepDetails.this, fouthFifthGroup.class);
-            startActivity(intent);
-        }
-        else if (age < 14 && (age) >= 11) {
-            Intent intent = new Intent(getSleepDetails.this, SixthEighthGroup.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(getSleepDetails.this, fouthFifthGroup.class);
+        startActivity(intent);
     }
 
     private String encodeUserEmail(String email) {

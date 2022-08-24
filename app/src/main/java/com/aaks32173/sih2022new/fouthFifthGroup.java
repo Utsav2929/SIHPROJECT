@@ -45,7 +45,7 @@ public class fouthFifthGroup extends AppCompatActivity {
     AutoScrollAdapter autoScrollAdapter;
 
     DatabaseReference databaseReference2;
-
+    Button recommondtaion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class fouthFifthGroup extends AppCompatActivity {
 
         recycler_view = findViewById(R.id.recycler_view_3to5);
         setRV();
-
+        recommondtaion = findViewById(R.id.recommended);
         ImageButton todobtn = findViewById(R.id.todobtn);
         ImageButton music = findViewById(R.id.music);
         ImageButton podcasts = findViewById(R.id.podcasts);
@@ -85,7 +85,14 @@ public class fouthFifthGroup extends AppCompatActivity {
                 startActivity(a);
             }
         });
-
+        recommondtaion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a =  new Intent(fouthFifthGroup.this,recommended.class);
+                a.putExtra("email", encodeUserEmail(Currentuser.getEmail().toString()));
+                startActivity(a);
+            }
+        });
                 firebaseDatabase = FirebaseDatabase.getInstance();
 
         LocalDate td= LocalDate.now();

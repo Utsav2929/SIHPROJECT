@@ -19,7 +19,8 @@ public class vedioPlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vedio_play);
         VideoView videoView = findViewById(R.id.videoView);
-
+        Button prev = findViewById(R.id.prevactivity);
+        String nxt = getIntent().getExtras().getString("nxt");
         String videoUrl = getIntent().getExtras().getString("url");
         Uri uri = Uri.parse(videoUrl);
         videoView.setVideoURI(uri);
@@ -28,12 +29,12 @@ public class vedioPlay extends AppCompatActivity {
         mediaController.setMediaPlayer(videoView);
         videoView.setMediaController(mediaController);
         videoView.start();
-//        prev.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                prevActivity(nxt);
-//            }
-//        });
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prevActivity(nxt);
+            }
+        });
     }
     private void prevActivity(String nxt){
         if(Objects.equals(nxt, "yoga")) {

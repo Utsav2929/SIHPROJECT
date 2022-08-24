@@ -32,7 +32,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sixth_eighth_group);
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
-        recommondtaion = findViewById(R.id.recommended);
+
         ImageButton menstural = findViewById(R.id.menstural);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton flextime = findViewById(R.id.flextime);
@@ -58,14 +58,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         Currentuser = mAuth.getCurrentUser();
         LocalDate td=LocalDate.now();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        recommondtaion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent a =  new Intent(SixthEighthGroup.this,recommended.class);
-                a.putExtra("email", encodeUserEmail(Currentuser.getEmail().toString()));
-                startActivity(a);
-            }
-        });
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
         String [] intrestspoint = new String[9];
 

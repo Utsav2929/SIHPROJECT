@@ -11,4 +11,4 @@ interface APIService {
     fun chatWithTheBit(@Field("chatInput") chatText : String ): Call<ChatResponse>
 }
 
-data class ChatResponse(val chatBotReply: String)
+data class ChatResponse(val chatBotReply: String,val sentiment: String)

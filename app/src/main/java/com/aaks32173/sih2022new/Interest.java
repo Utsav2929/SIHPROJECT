@@ -34,14 +34,12 @@ public class Interest extends AppCompatActivity implements QuantityListener {
     String age;
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
-    FirebaseDatabase firebaseDatabase2;
     DatabaseReference ref;
-    DatabaseReference ref2;
     int exercisepointer=0;
     int musicpodcastpointer=0;
     int relaxinpointer=0;
     int wetimePointer=0;
-    String update="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +48,9 @@ public class Interest extends AppCompatActivity implements QuantityListener {
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
-        ref2 =FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail()));
         age= getIntent().getExtras().getString("age");
+
+
         ImageView img1 = findViewById(R.id.img1);
         ImageView img2 = findViewById(R.id.img2);
         ImageView img3 = findViewById(R.id.img3);
@@ -138,14 +137,10 @@ public class Interest extends AppCompatActivity implements QuantityListener {
 //            }
 //        })
         //setRecyclerView() ;
-
         Button button=(Button)findViewById(R.id.next_Button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0; i<arrayList.size(); i++) {
-                    update += arrayList.get(i) +" ";
-                }
                 getData();
                 movetohome();
             }
@@ -153,7 +148,6 @@ public class Interest extends AppCompatActivity implements QuantityListener {
     }
 
     private void getData() {
-            ref2.child("chat").setValue(update+"");
             ref.child("exercisee").setValue(exercisepointer+"");
             ref.child("musicpodcast").setValue(musicpodcastpointer+"");
             ref.child("relaxinactivities").setValue(relaxinpointer+"");
