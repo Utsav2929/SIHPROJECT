@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if(hourday>=7 && hourday<=12 && booleanvar.equals("true"))
                                             {
                                                 Intent intent = new Intent(LoginActivity.this, getSleepDetails.class);
+                                                intent.putExtra("age", age);
                                                 startActivity(intent);
                                             }
                                             else {

@@ -42,20 +42,16 @@ public class Diett extends AppCompatActivity {
         recyclerView = findViewById(R.id.diet_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        Toast.makeText(this, "hleee", Toast.LENGTH_SHORT).show();
         mAuth = FirebaseAuth.getInstance();
-        Toast.makeText(Diett.this, "hre"+mAuth.toString(), Toast.LENGTH_SHORT).show();
-
         currentUser = mAuth.getCurrentUser();
         String email = currentUser.getEmail();
         String final_email = encodeUserEmail(email);
 
         list = new ArrayList<diet_class>();
-
         dietAdapter = new DietAdapter(this, list);
         recyclerView.setAdapter(dietAdapter);
 
-        FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("BMI").child("bmi").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("User").child(final_email).child("BMI").child("bmi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snap) {
 
@@ -63,19 +59,14 @@ public class Diett extends AppCompatActivity {
 //                double bmi = Double.parseDouble(check);
 //                String c=Double.toString(bmi);
 //               Toast.makeText(Diet.this, snap.getValue().toString(),Toast.LENGTH_LONG).show();
-                FirebaseDatabase.getInstance().getReference("UserInfo").child(final_email).child("userDiet").addValueEventListener(new ValueEventListener() {
+                FirebaseDatabase.getInstance().getReference("User").child(final_email).child("userDiet").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         diet = snapshot.getValue().toString();
 
-
-                        Toast.makeText(Diett.this, "Dooo"+diet, Toast.LENGTH_SHORT).show();
                         if((diet.equals("Vegeterian")) && (check <=(double)18.0) ){
 //                        Toast.makeText(Diet.this,diet,Toast.LENGTH_LONG).show();
-                            dbref=FirebaseDatabase.getInstance().getReference("highCalorie");}
-                        else if((diet.equals("Vegeterian")) && (check >=(double)18.0) && (check <= (double)22.0)){
-//                        Toast.makeText(Diet.this,diet,Toast.LENGTH_LONG).show();
-                        dbref=FirebaseDatabase.getInstance().getReference("moderateCalorieVeg");}
+                            dbref=FirebaseDatabase.getInstance().getReference("VegDiet");}
                         else if((diet.equals("Vegeterian")) && (check >=(double)18.0) && (check <= (double)22.0)){
 //                        Toast.makeText(Diet.this,diet,Toast.LENGTH_LONG).show();
                         dbref=FirebaseDatabase.getInstance().getReference("moderateCalorieVeg");}

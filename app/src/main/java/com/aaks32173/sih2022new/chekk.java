@@ -190,10 +190,7 @@ public class chekk extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(chekk.this, "hre", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(chekk.this,Diett.class);
-                Toast.makeText(chekk.this, "hre1", Toast.LENGTH_SHORT).show();
-
                 startActivity(intent);
             }
         });
