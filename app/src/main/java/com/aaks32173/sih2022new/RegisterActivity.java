@@ -132,10 +132,15 @@ public class RegisterActivity extends AppCompatActivity {
                     if (Integer.parseInt(age) < 8) {
                         Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
                         startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(RegisterActivity.this, Interest.class);
+                    } else if(gender.equals("Female")) {
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.putExtra("age", age);
-                        startActivity(intent);
+                        startActivity(intent);}
+                        else{
+                            Intent intent = new Intent(RegisterActivity.this, Interest.class);
+                            intent.putExtra("age", age);
+                            startActivity(intent);
+
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Registration failed!!" + task.getException().getMessage(), Toast.LENGTH_LONG).show();

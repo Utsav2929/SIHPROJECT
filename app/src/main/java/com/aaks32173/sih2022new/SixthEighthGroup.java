@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,10 +43,11 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
-
+        ImageButton sleep = findViewById(R.id.sleept);
         ImageButton convo = findViewById(R.id.convo6to8);
         ImageButton diet = findViewById(R.id.diet);
         ImageButton nowcast = findViewById(R.id.nowcast6to8);
+        TextView tv = findViewById(R.id.textView9);
         recommondtaion = findViewById(R.id.recommended);
         recommondtaion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +108,24 @@ public class SixthEighthGroup extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child("gender").getValue().toString();
+                if(exercise.equals("Male"))
+                {
+                    Toast.makeText(SixthEighthGroup.this, exercise, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SixthEighthGroup.this, "hello", Toast.LENGTH_SHORT).show();
+                    menstural.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -157,6 +178,10 @@ public class SixthEighthGroup extends AppCompatActivity {
                             {"15","Arrange your closet with your elders."},
                             {"16","Check your photo albums with your family."}
                     };
+                    DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+
+                    reference3.child("calinitial").setValue("0");
+
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
                     for (int i = 1; i <= 16; i++) {
                         databaseReference2.child(td.toString()).child(""+i).child("status").setValue("False");
@@ -189,7 +214,12 @@ public class SixthEighthGroup extends AppCompatActivity {
             }
         });
 
-
+        sleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoSleep();
+            }
+        });
         nowcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,6 +272,11 @@ public class SixthEighthGroup extends AppCompatActivity {
             }
         });}
 
+    private void gotoSleep() {
+        Intent intengt = new Intent(SixthEighthGroup.this , sleepTracker.class);
+        startActivity(intengt);
+    }
+
     private void gotoTotherapist() {
         Intent intent = new Intent(SixthEighthGroup.this, councellor.class);
         startActivity(intent);
@@ -285,7 +320,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         startActivity(intent);
     }
     private void gotoMenstural() {
-        Intent intent = new Intent(SixthEighthGroup.this, MainActivity.class);
+        Intent intent = new Intent(SixthEighthGroup.this, MenstrualHome.class);
         startActivity(intent);
     }
     private void gotoTodo(String email) {

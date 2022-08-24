@@ -54,10 +54,10 @@
                     <ImageButton
                         android:id="@+id/yogabtn"
 
-                        android:layout_width="106dp"
+                        android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_margin="15dp"
-                        android:src="@drawable/yoga2"/>
+                        android:src="@drawable/meditation"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -144,7 +144,7 @@
                         android:layout_width="106dp"
                         android:layout_height="100dp"
                         android:layout_margin="15dp"
-                        android:src="@drawable/meditation"/>
+                        android:src="@drawable/yoga2"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

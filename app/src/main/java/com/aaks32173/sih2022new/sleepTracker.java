@@ -1,5 +1,4 @@
 package com.aaks32173.sih2022new;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -30,7 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 public class sleepTracker extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -45,12 +43,10 @@ public class sleepTracker extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
         Currentuser = mauth.getCurrentUser();
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("SleepDetails");
       Button music = findViewById(R.id.musicforsleep);
         sleepscore = findViewById(R.id.sleepscore);
         Button sleep=findViewById(R.id.sleephygine);
-
         sleepNotify();
         music.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +99,6 @@ public class sleepTracker extends AppCompatActivity {
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(sleepTracker.this);
         managerCompat.notify(1, builder.build());
     }
-
     private void getUserData() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("SleepDetails");
         reference.addValueEventListener(new ValueEventListener() {
@@ -112,7 +107,6 @@ public class sleepTracker extends AppCompatActivity {
                 String SleepScore = dataSnapshot.child("SleepScore").getValue().toString();
                 sleepscore.setText(SleepScore+"/100");
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -121,6 +115,4 @@ public class sleepTracker extends AppCompatActivity {
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
     }
-
-
 }

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +36,7 @@ public class ninetwelvegroup extends AppCompatActivity {
         setContentView(R.layout.activity_ninetwelvegroup);
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
 
-        ImageButton menstural = findViewById(R.id.menstural);
+        LinearLayout menstural = findViewById(R.id.menstural);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton flextime = findViewById(R.id.flextime);
         ImageButton gtbt = findViewById(R.id.gtbt);
@@ -42,6 +44,8 @@ public class ninetwelvegroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
+
+        TextView tv = findViewById(R.id.textView9);
 
         recommondtaion = findViewById(R.id.recommended);
         recommondtaion.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +56,27 @@ public class ninetwelvegroup extends AppCompatActivity {
                 startActivity(a);
             }
         });
+
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child("gender").getValue().toString();
+                if(exercise.equals("Male"))
+                {
+                    Toast.makeText(ninetwelvegroup.this, exercise, Toast.LENGTH_SHORT).show();
+
+                    menstural.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+
         ImageButton ptodo = findViewById(R.id.ptodo);
 
         ImageButton convo = findViewById(R.id.convo6to8);
@@ -155,6 +180,11 @@ public class ninetwelvegroup extends AppCompatActivity {
                             {"16","Check your photo albums with your family."}
                     };
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
+                    DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+
+                    reference3.child("calinitial").setValue("0");
+
+
                     for (int i = 1; i <= 16; i++) {
                         databaseReference2.child(td.toString()).child(""+i).child("status").setValue("False");
                         databaseReference2.child(td.toString()).child(""+i).child("description").setValue(wetime[i-1][1]);
@@ -292,7 +322,7 @@ public class ninetwelvegroup extends AppCompatActivity {
         startActivity(intent);
     }
     private void gotoMenstural() {
-        Intent intent = new Intent(ninetwelvegroup.this, MainActivity.class);
+        Intent intent = new Intent(ninetwelvegroup.this, MenstrualHome.class);
         startActivity(intent);
     }
     private void gotoTodo(String email) {

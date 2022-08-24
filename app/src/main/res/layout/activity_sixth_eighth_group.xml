@@ -3,14 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".SixthEighthGroup">
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.6"
         android:background="@drawable/piche7" />
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="404dp"
@@ -23,7 +20,6 @@
         android:contentDescription="image"
         android:src="@drawable/selfcare_check"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
         android:id="@+id/rec"
@@ -65,25 +61,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-                <Button
-                    android:id="@+id/recommended"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FFC400"
-
-                    android:fontFamily="@font/salsa"
-                    android:padding="10dp"
-                    android:textSize="20dp"
-                    android:text="Recommendations🔥"
-                    android:textColor="@color/black"
-                    app:cornerRadius="40dp" />
-
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -414,24 +391,42 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
-
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
-
+                    <ImageButton
+                        android:id="@+id/sleept"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/shape"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/sleeptrack"  />
+                    <TextView
+                        android:id="@+id/sleep"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/salsa"
+                        android:text="Sleep Tracker"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
                     <ImageButton
                         android:id="@+id/menstural"
                         android:layout_width="150dp"
@@ -439,7 +434,6 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
                         app:srcCompat="@drawable/rectangle_16" />
-
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
@@ -449,7 +443,6 @@
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
             </LinearLayout>
 
 

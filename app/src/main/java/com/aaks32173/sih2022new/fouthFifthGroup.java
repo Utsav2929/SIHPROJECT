@@ -89,11 +89,11 @@ public class fouthFifthGroup extends AppCompatActivity {
                 firebaseDatabase = FirebaseDatabase.getInstance();
 
         LocalDate td= LocalDate.now();
-        Toast.makeText(getApplicationContext(),td.toString(),Toast.LENGTH_LONG).show();
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
+
         String [] intrestspoint = new String[9];
 
 //        String [] interests ={"exercise", "dancing", "indoorgames","music", "drawing", "travel", "reading", "sports", "yoga"};
@@ -133,6 +133,8 @@ public class fouthFifthGroup extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+        DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -187,6 +189,9 @@ public class fouthFifthGroup extends AppCompatActivity {
                             {"16","Check your photo albums with your family."}
                     };
 
+                    DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+
+                    reference3.child("calinitial").setValue("0");
 
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
 

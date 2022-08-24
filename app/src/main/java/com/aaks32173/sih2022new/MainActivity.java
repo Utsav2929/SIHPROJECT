@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
     public static int i = 2;
+    String age;
     // creating a variable for our Database
     // Reference for Firebase.
     DatabaseReference databaseReference;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Currentuser = mauth.getCurrentUser();
         databaseReference = firebaseDatabase.getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("PeriodDetails");
         saveBtn = findViewById(R.id.save);
+        age= getIntent().getExtras().getString("age");
         daysentry = findViewById(R.id.daysinput);
         cycleentry = findViewById(R.id.cycleinput);
         c = Calendar.getInstance();
@@ -111,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void nextActivity () {
-            Intent intent = new Intent(this, MenstrualHome.class);
+            Intent intent = new Intent(this, Interest.class);
+            intent.putExtra("age", age);
             startActivity(intent);
 
         }
