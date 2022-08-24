@@ -30,10 +30,6 @@ public class flex_time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flex_time);
-        LinearLayout yogall=findViewById(R.id.flextime_ll1) ;
-        LinearLayout strechingll=findViewById(R.id.flextime_ll2) ;
-        LinearLayout workoutll=findViewById(R.id.flextime_ll3) ;
-        LinearLayout meditationll=findViewById(R.id.flextime_ll4) ;
         ImageButton yoga = findViewById(R.id.yogabtn);
         ImageButton workout = findViewById(R.id.workoutbtn);
         ImageButton stretching = findViewById(R.id.stretchingbth);
@@ -55,25 +51,25 @@ public class flex_time extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        yogall.setOnClickListener(new View.OnClickListener() {
+        yoga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openyogas();
             }
         });
-        workoutll.setOnClickListener(new View.OnClickListener() {
+        workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openworkouts();
             }
         });
-        strechingll.setOnClickListener(new View.OnClickListener() {
+        stretching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openstrerchings();
             }
         });
-        meditationll.setOnClickListener(new View.OnClickListener() {
+        meditation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openmeditations();
