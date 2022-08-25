@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (Integer.parseInt(age) < 8) {
                         Intent intent = new Intent(RegisterActivity.this, DashHome_Nur_3.class);
                         startActivity(intent);
-                    } else if(gender.equals("Female")) {
+                    } else if(gender.equals("Female") &&Integer.parseInt(age)>11) {
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         intent.putExtra("age", age);
                         startActivity(intent);}
