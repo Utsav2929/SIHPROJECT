@@ -163,6 +163,8 @@ public class chekk extends AppCompatActivity {
 
                         fetchdata();
                         increasecounter(encodeUserEmail(email),i,c);
+
+                        week(encodeUserEmail(email),i,c);
                         show.setText("");
 
 
@@ -340,11 +342,10 @@ public class chekk extends AppCompatActivity {
         });
     }
 
-    private void increasecounter(String email,int ttldiet,int diet ) {
+    private void week(String email,int ttldiet,int diet ) {
         LocalDate today = LocalDate.now();
 
-        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
-        DatabaseReference refre2=FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("WEEKTODO");
 
 
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -353,7 +354,40 @@ public class chekk extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                progress = dataSnapshot.child("nutrition").child("progress").getValue().toString();
+                progress = dataSnapshot.child("3").child("progress").getValue().toString();
+
+                int prg =  ((ttldiet*100)/diet);
+
+
+                reference1.child("3").child("progress").setValue(Integer.toString(prg));
+
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+    }
+    private void increasecounter(String email,int ttldiet,int diet ) {
+        LocalDate today = LocalDate.now();
+
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+
+
+        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                progress = dataSnapshot.child("3").child("progress").getValue().toString();
 
                 int prg =  ((ttldiet*100)/diet);
 
@@ -361,7 +395,7 @@ public class chekk extends AppCompatActivity {
                     prg = 100;
 
                 }
-                    reference1.child("nutrition").child("progress").setValue(Integer.toString(prg));
+                    reference1.child("3").child("progress").setValue(Integer.toString(prg));
                 reward();
 
                 }

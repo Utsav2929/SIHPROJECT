@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaks32173.sih2022new.databinding.ActivityTodoBinding
+import com.aaks32173.sih2022new.databinding.ActivityWeektodoBinding
 import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.database.*
@@ -17,38 +18,38 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import java.util.*
 
-class todo  : AppCompatActivity() {
+class weektodo  : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTodoBinding
+    private lateinit var binding: ActivityWeektodoBinding
     private lateinit var dbref : DatabaseReference
     private lateinit var dbref1 : DatabaseReference
     private lateinit var userRecyclerview : RecyclerView
     private lateinit var rewrd : TextView
     private lateinit var trending : TextView
-    private lateinit var week : Button
-    private lateinit var userArrayList : ArrayList<usertodo>
+
+    private lateinit var today : Button
+    private lateinit var userArrayList : ArrayList<weekt>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =  ActivityTodoBinding.inflate(layoutInflater)
+        binding =  ActivityWeektodoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         trending = findViewById(R.id.trending)
+
+         today = findViewById(R.id.week)
 
         val email = FirebaseAuth.getInstance().currentUser?.email
         val encodedemmail=encodeUserEmail(email.toString())
 
         rewrd=findViewById(R.id.reward)
-        week=findViewById(R.id.week)
         userRecyclerview = findViewById(R.id.userList)
         userRecyclerview.layoutManager = LinearLayoutManager(this)
         userRecyclerview.setHasFixedSize(true)
 
-        userArrayList = arrayListOf<usertodo>()
+        userArrayList = arrayListOf<weekt>()
+        today.setOnClickListener {
 
-
-        week.setOnClickListener {
-
-            val a = Intent(this, weektodo::class.java)
+            val a = Intent(this, todo::class.java)
 
                 .putExtra("email",encodeUserEmail(email.toString()))
             startActivity(a)
@@ -63,8 +64,7 @@ class todo  : AppCompatActivity() {
 
         val email = intent.getStringExtra("email").toString()
 
-        val today= LocalDate.now()
-        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/TODO/"+today)
+        dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WEEKTODO")
 
         dbref.addValueEventListener(object : ValueEventListener{
 
@@ -75,14 +75,14 @@ class todo  : AppCompatActivity() {
                     for (userSnapshot in snapshot.children){
 
 
-                        val user = userSnapshot.getValue(usertodo::class.java)
+                        val user = userSnapshot.getValue(weekt::class.java)
                         userArrayList.add(user!!)
 
 
                     }
 
 
-                    userRecyclerview.adapter = todoadapter(userArrayList)
+                    userRecyclerview.adapter = weekadapter(userArrayList)
 
 
 

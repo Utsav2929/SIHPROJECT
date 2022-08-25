@@ -9,15 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class todoadapter(private val userList : ArrayList<usertodo> ) : RecyclerView.Adapter<todoadapter.MyViewHolder>() {
+class weekadapter(private val userList : ArrayList<weekt> ) : RecyclerView.Adapter<weekadapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        userList.sortBy {
-            it.intrest?.toInt()
-            it.progress?.toInt()
-        }
+
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.user_list,
             parent,false)

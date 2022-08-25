@@ -63,14 +63,23 @@
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_podcasts.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_recommended.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_sixth_eighth_group.xml" value="0.1359375" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_stepcounter.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_todo.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_user_diet.xml" value="0.1" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_weektodo.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_wetime.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/activity_yoga.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/blank_fragment.xml" value="0.1953125" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/diet_cardview.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/message_item.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/rv_layout.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_list.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_list2.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listrec.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listweek.xml" value="0.1953125" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_listwetime.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/user_msg_rv_item.xml" value="0.1953125" />
+        <entry key="..\:/Users/INDIAN/AndroidStudioProjects/SIHPROJECT/app/src/main/res/layout/welcome.xml" value="0.1953125" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_addpersoneltodo.xml" value="0.1" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_chat_bot.xml" value="0.16576086956521738" />
         <entry key="..\:/Users/INDIAN/AndroidStudioProjects/kansha ke isse/SIH2022NEW/app/src/main/res/layout/activity_councellor.xml" value="0.17255434782608695" />

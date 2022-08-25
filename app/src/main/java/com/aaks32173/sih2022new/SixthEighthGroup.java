@@ -23,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class SixthEighthGroup extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser Currentuser;
@@ -30,6 +32,12 @@ public class SixthEighthGroup extends AppCompatActivity {
     DatabaseReference databaseReference2;
     Button recommondtaion;
     ExtendedFloatingActionButton bot;
+    String exweek="";
+    String relaxweek="";
+    String weweek="";
+    String nutritionweek="";
+    String mpweek="";
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -111,8 +119,96 @@ public class SixthEighthGroup extends AppCompatActivity {
 
 
 
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+
+        LocalDate yesterday = LocalDate.now().plus(-1, ChronoUnit.DAYS);
+
+       for(int i=0;i<7;i++) {
+           reference2.addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot snapshot) {
+                   String exercise = snapshot.child("gender").getValue().toString();
+                   if (exercise.equals("Male")) {
+                       Toast.makeText(SixthEighthGroup.this, exercise, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(SixthEighthGroup.this, "hello", Toast.LENGTH_SHORT).show();
+                       menstural.setVisibility(View.INVISIBLE);
+                       tv.setVisibility(View.INVISIBLE);
+                   }
+               }
+
+               @Override
+               public void onCancelled(@NonNull DatabaseError error) {
+               }
+           });
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail()));
+
+        reference4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean todotoday = dataSnapshot.child("WEEKTODO").exists();
+
+                if(!todotoday){
+                    String[] wetime={"exercise",
+                            "music&podcast",
+                            "nutrition",
+                            "relaxinactivities",
+                            "wetime"};
+                    DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WEEKTODO");
+
+
+                    for (int i = 1; i <= 5; i++) {
+
+
+
+                        reference4.child(""+i).child("activity").setValue(wetime[i-1]);
+                        reference4.child(""+i).child("progress").setValue("0");
+
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+//        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

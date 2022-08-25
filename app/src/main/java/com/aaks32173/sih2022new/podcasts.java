@@ -223,7 +223,7 @@ public class podcasts extends AppCompatActivity {
                     int prg = Integer.parseInt(progress) + 10;
                     trending(trend);
                     reference1.child("music&podcast").child("progress").setValue(Integer.toString(prg));
-
+                    week();
                     if(prg==100) {
 
                         reward() ;
@@ -263,7 +263,29 @@ public class podcasts extends AppCompatActivity {
             }
         });
     }
+    private void week()
+    {        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("WEEKTODO");
 
+
+
+        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("2").child("progress").getValue().toString();
+
+                int prg = Integer.parseInt(progress) + 10;
+
+                reference2.child("2").child("progress").setValue(Integer.toString(prg));
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
     void reward() {
         DatabaseReference reference1 =
                 FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);

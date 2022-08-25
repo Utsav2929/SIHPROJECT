@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.TextView
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -28,6 +30,9 @@ class DashHome_Nur_3 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_home_nur3)
+
+
+
 
         val poemsandrhymes = findViewById<ImageButton>(R.id.poemsryhmes)
         val email = FirebaseAuth.getInstance().currentUser?.email

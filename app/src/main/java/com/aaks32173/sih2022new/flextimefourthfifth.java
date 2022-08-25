@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +21,7 @@ public class flextimefourthfifth extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser Currentuser;
     String email;
+//    Button step ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,16 @@ public class flextimefourthfifth extends AppCompatActivity {
         Currentuser = mauth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("FlexFouthFifth");
         LinearLayout btn1 = findViewById(R.id.btn1);
+       Button step=findViewById(R.id.walk);
+
+        step.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(flextimefourthfifth.this, stepcounter.class);
+
+                startActivity(intent);
+            }
+        });
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +114,8 @@ public class flextimefourthfifth extends AppCompatActivity {
     private void increasecounter(String email, String trend) {
         LocalDate today = LocalDate.now();
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("TODO").child(today.toString());
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("WEEKTODO");
+
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {
             String progress;
             @Override
@@ -112,7 +126,7 @@ public class flextimefourthfifth extends AppCompatActivity {
                     int prg = Integer.parseInt(progress) + 10;
                     trending(trend);
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
-
+                    week();
                     if(prg==100) {
 
                         reward() ;
@@ -123,6 +137,7 @@ public class flextimefourthfifth extends AppCompatActivity {
 
                     reference1.child("exercise").child("progress").setValue(Integer.toString(prg));
                     reward();
+
                 }
             }
             @Override
@@ -143,6 +158,29 @@ public class flextimefourthfifth extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error){
             }
         });}
+    private void week()
+    {        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email).child("WEEKTODO");
+
+
+
+        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+            String progress;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progress = dataSnapshot.child("1").child("progress").getValue().toString();
+
+                    int prg = Integer.parseInt(progress) + 10;
+
+                    reference2.child("1").child("progress").setValue(Integer.toString(prg));
+
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        }
     void reward(){
         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(email);
         reference1.addListenerForSingleValueEvent(new ValueEventListener() {

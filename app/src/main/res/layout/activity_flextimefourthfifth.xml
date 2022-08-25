@@ -26,6 +26,14 @@
         android:src="@drawable/exercisegif_3to5"
         android:visibility="visible" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/walk"
+        android:text="walk"
+        android:fontFamily="@font/salsa"
+        android:textSize="25dp"
+        />
     <LinearLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
