@@ -69,6 +69,8 @@ public class fouthFifthGroup extends AppCompatActivity {
         ImageButton chatbot = findViewById(R.id.chatbot);
         ImageButton diet =findViewById(R.id.imageButton3);
         ImageButton post =findViewById(R.id.post);
+
+        TextView tv = findViewById(R.id.textView90);
         ImageButton wetime =findViewById(R.id.wetime);
         firebaseDatabase = FirebaseDatabase.getInstance();
         ImageButton exercise=(ImageButton)findViewById(R.id.exercise_3to5);
@@ -134,6 +136,23 @@ public class fouthFifthGroup extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
         DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
+
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child("gender").getValue().toString();
+                if(exercise.equals("Male"))
+                {
+                    Toast.makeText(fouthFifthGroup.this, exercise, Toast.LENGTH_SHORT).show();
+                    menstural.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
 
         reference.addValueEventListener(new ValueEventListener() {

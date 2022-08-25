@@ -20,6 +20,15 @@
         android:layout_height="80dp"
         android:alpha="0.96"
         android:src="@drawable/selfcare_check" />
+    <TextView
+        android:id="@+id/tvm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_3to5"
+        android:layout_centerHorizontal="true"
+        android:text="Preparatory Level"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"

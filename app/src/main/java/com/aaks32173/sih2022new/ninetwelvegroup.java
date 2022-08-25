@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aaks32173.sih2022new.ui.chatbot;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,16 +29,16 @@ public class ninetwelvegroup extends AppCompatActivity {
     FirebaseUser Currentuser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference2;
-
     Button recommondtaion;
+    ExtendedFloatingActionButton bot;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ninetwelvegroup);
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
-
-        LinearLayout menstural = findViewById(R.id.menstural);
+        recommondtaion = findViewById(R.id.recommended);
+        ImageButton menstural = findViewById(R.id.menstural);
         ImageButton relaxing = findViewById(R.id.relaxing);
         ImageButton flextime = findViewById(R.id.flextime);
         ImageButton gtbt = findViewById(R.id.gtbt);
@@ -44,10 +46,14 @@ public class ninetwelvegroup extends AppCompatActivity {
         ImageButton wetime = findViewById(R.id.wetime);
         ImageButton music = findViewById(R.id.music);
         ImageButton todo = findViewById(R.id.todo);
-
+        ImageButton sleep = findViewById(R.id.sleept);
+        ImageButton convo = findViewById(R.id.convo6to8);
+        ImageButton diet = findViewById(R.id.diet);
+        ImageButton nowcast = findViewById(R.id.nowcast6to8);
+        ImageButton ptodo = findViewById(R.id.ptodo);
         TextView tv = findViewById(R.id.textView9);
-
         recommondtaion = findViewById(R.id.recommended);
+        bot = findViewById(R.id.chatbot_6_12);
         recommondtaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,38 +62,18 @@ public class ninetwelvegroup extends AppCompatActivity {
                 startActivity(a);
             }
         });
-
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
-        reference2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String exercise = snapshot.child("gender").getValue().toString();
-                if(exercise.equals("Male"))
-                {
-                    Toast.makeText(ninetwelvegroup.this, exercise, Toast.LENGTH_SHORT).show();
-
-                    menstural.setVisibility(View.INVISIBLE);
-                    tv.setVisibility(View.INVISIBLE);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-
-
-        ImageButton ptodo = findViewById(R.id.ptodo);
-
-        ImageButton convo = findViewById(R.id.convo6to8);
-        ImageButton diet = findViewById(R.id.diet);
-        ImageButton nowcast = findViewById(R.id.nowcast6to8);
-
         mAuth = FirebaseAuth.getInstance();
         Currentuser = mAuth.getCurrentUser();
         LocalDate td=LocalDate.now();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
+        recommondtaion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a =  new Intent(ninetwelvegroup.this,recommended.class);
+                a.putExtra("email", encodeUserEmail(Currentuser.getEmail().toString()));
+                startActivity(a);
+            }
+        });
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("UserIntrest");
         String [] intrestspoint = new String[9];
 
@@ -127,6 +113,22 @@ public class ninetwelvegroup extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        reference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String exercise = snapshot.child("gender").getValue().toString();
+                if(exercise.equals("Male"))
+                {
+                    menstural.setVisibility(View.GONE);
+                    tv.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -179,12 +181,9 @@ public class ninetwelvegroup extends AppCompatActivity {
                             {"15","Arrange your closet with your elders."},
                             {"16","Check your photo albums with your family."}
                     };
-                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
                     DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
-
                     reference3.child("calinitial").setValue("0");
-
-
+                    databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
                     for (int i = 1; i <= 16; i++) {
                         databaseReference2.child(td.toString()).child(""+i).child("status").setValue("False");
                         databaseReference2.child(td.toString()).child(""+i).child("description").setValue(wetime[i-1][1]);
@@ -197,16 +196,22 @@ public class ninetwelvegroup extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-        music.setOnClickListener(new View.OnClickListener() {
+        bot.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                gotoMusic(Currentuser.getEmail().toString());
+            public void onClick(View view) {
+               gotobot();
             }
         });
         ptodo.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view) {
+                gotopTodo(encodedemmail);
+            }
+        });
+        music.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                gotoptodo();
+                gotoMusic(Currentuser.getEmail().toString());
             }
         });
         wetime.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +227,12 @@ public class ninetwelvegroup extends AppCompatActivity {
             }
         });
 
-
+        sleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoSleep();
+            }
+        });
         nowcast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,6 +285,16 @@ public class ninetwelvegroup extends AppCompatActivity {
             }
         });}
 
+    private void gotobot() {
+        Intent intent = new Intent(ninetwelvegroup.this, com.aaks32173.sih2022new.chatbot.MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void gotoSleep() {
+        Intent intengt = new Intent(ninetwelvegroup.this , sleepTracker.class);
+        startActivity(intengt);
+    }
+
     private void gotoTotherapist() {
         Intent intent = new Intent(ninetwelvegroup.this, councellor.class);
         startActivity(intent);
@@ -283,10 +303,6 @@ public class ninetwelvegroup extends AppCompatActivity {
 
     private void gotodiet() {
         Intent intent = new Intent(ninetwelvegroup.this, chekk.class);
-        startActivity(intent);
-    }
-    private void gotoptodo() {
-        Intent intent = new Intent(ninetwelvegroup.this, addpersoneltodo.class);
         startActivity(intent);
     }
 
@@ -330,6 +346,12 @@ public class ninetwelvegroup extends AppCompatActivity {
         intent.putExtra("email", email);
         startActivity(intent);
     }
+    private void gotopTodo(String email) {
+        Intent intent = new Intent(ninetwelvegroup.this, addpersoneltodo.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
+
     private String encodeUserEmail(String email) {
         return email.replace(".",",");
     }

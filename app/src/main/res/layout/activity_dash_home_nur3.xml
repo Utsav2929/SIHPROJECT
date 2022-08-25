@@ -4,17 +4,22 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@drawable/bgbacche"
     tools:context=".DashHome_Nur_3">
-
     <ImageView
         android:id="@+id/imgselfcarebacche"
         android:layout_width="match_parent"
-        android:alpha="0.96"
         android:layout_height="80dp"
+        android:alpha="0.96"
         android:src="@drawable/selfcae_heading" />
-
-
-
-    <ScrollView
+    <TextView
+        android:id="@+id/tvm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgselfcarebacche"
+        android:layout_centerHorizontal="true"
+        android:text="Foundation Level"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+        <ScrollView
         android:layout_width="wrap_content"
         android:layout_margin="10dp"
         android:layout_height="610dp"

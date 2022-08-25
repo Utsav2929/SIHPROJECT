@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".ninetwelvegroup">
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/piche7"
-        android:alpha="0.6"/>
+        android:alpha="0.6"
+        android:background="@drawable/piche7" />
 
     <ImageView
         android:id="@+id/image"
@@ -23,13 +21,40 @@
         android:contentDescription="image"
         android:src="@drawable/selfcare_check"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:text="Secondary and University Level"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/rec"
+        android:layout_below="@+id/tvm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/recommended"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFC400"
+            android:fontFamily="@font/salsa"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:text="Recommendations🔥"
+            android:textColor="@color/black"
+            app:cornerRadius="40dp" />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/rec"
         android:layout_centerInParent="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -45,28 +70,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/recommended"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FFC400"
-
-                    android:fontFamily="@font/salsa"
-                    android:padding="10dp"
-                    android:text="Recommendations🔥"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    app:cornerRadius="40dp" />
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -398,50 +401,42 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
-
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="5">
-
                 <LinearLayout
-                    android:id="@+id/menstural"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
-
                     <ImageButton
+                        android:id="@+id/sleept"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
-                        app:srcCompat="@drawable/rectangle_16" />
-
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/sleeptrack"  />
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/sleep"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
-                        android:text="Menstural Tracker"
+                        android:text="Sleep Tracker"
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:weightSum="2">
-
                     <ImageButton
                         android:id="@+id/ptodo"
                         android:layout_width="150dp"
@@ -449,10 +444,9 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/perdonaltodo" />
-
+                        app:srcCompat="@drawable/perdonaltodo"  />
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/tvptodo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/salsa"
@@ -460,7 +454,6 @@
                         android:textAlignment="center"
                         android:textColor="@color/black" />
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -470,32 +463,30 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:weightSum="2">
-
                 <ImageButton
-                    android:id="@+id/sleept"
+                    android:id="@+id/menstural"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/shape"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/sleeptrack" />
-
+                    app:srcCompat="@drawable/rectangle_16" />
                 <TextView
-                    android:id="@+id/sleep"
+                    android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/salsa"
-                    android:text="Sleep Tracker"
+                    android:text="Menstural Tracker"
                     android:textAlignment="center"
                     android:textColor="@color/black" />
             </LinearLayout>
+
 
 
         </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/chatbot_3to5"
+        android:id="@+id/chatbot_6_12"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
@@ -512,16 +503,16 @@
         android:layout_marginBottom="20dp"
         />
     <TextView
+        android:id="@+id/chatbotbadge_6_12"
         android:layout_width="18sp"
         android:layout_height="18sp"
+        android:layout_alignTop="@id/chatbot_6_12"
+        android:layout_alignRight="@id/chatbot_6_12"
         android:background="@drawable/roundbadge2"
         android:elevation="6dp"
         android:gravity="center"
         android:text=""
-        android:id="@+id/chatbotbadge_3to5"
         android:textColor="#fff"
-        android:textSize="10sp"
-        android:layout_alignTop="@id/chatbot_3to5"
-        android:layout_alignRight="@id/chatbot_3to5"/>
+        android:textSize="10sp" />
 
 </RelativeLayout>

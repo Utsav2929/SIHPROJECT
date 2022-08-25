@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatbotsenior)
-
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.2.107:5000")
             .addConverterFactory(GsonConverterFactory.create())

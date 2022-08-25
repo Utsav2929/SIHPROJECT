@@ -88,6 +88,11 @@ public class flex_time extends AppCompatActivity {
             intent.putExtra("group", "SixthEight");
             intent.putExtra("age", "10");
         }
+        else
+        {
+            intent.putExtra("group", "ninth");
+            intent.putExtra("age", "14");
+        }
         startActivity(intent);
     }
     private void openstrerchings(){
@@ -96,6 +101,11 @@ public class flex_time extends AppCompatActivity {
             intent.putExtra("group", "SixthEight");
             intent.putExtra("age", "10");
         }
+        else
+        {
+            intent.putExtra("group", "ninth");
+            intent.putExtra("age", "14");
+        }
         startActivity(intent);
     }
     private void openmeditations(){
@@ -103,6 +113,11 @@ public class flex_time extends AppCompatActivity {
         if(Integer.parseInt(age1[0])>=10 && Integer.parseInt(age1[0])<14) {
             intent.putExtra("group", "SixthEight");
             intent.putExtra("age", "10");
+        }
+        else
+        {
+            intent.putExtra("group", "ninth");
+            intent.putExtra("age", "14");
         }
         startActivity(intent);
     }

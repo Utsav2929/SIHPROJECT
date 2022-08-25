@@ -153,7 +153,8 @@ public class Details extends AppCompatActivity {
             startActivity(intent);
         }
 
-                else if (Integer.parseInt(age) >= 14 ) {
+                else {
+                    Toast.makeText(Details.this, "details", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Details.this, ninetwelvegroup.class);
                     startActivity(intent);
                 }
