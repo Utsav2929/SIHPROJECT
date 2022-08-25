@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +29,8 @@ public class SixthEighthGroup extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference2;
     Button recommondtaion;
+    ExtendedFloatingActionButton bot;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class SixthEighthGroup extends AppCompatActivity {
         ImageButton diet = findViewById(R.id.diet);
         ImageButton nowcast = findViewById(R.id.nowcast6to8);
         TextView tv = findViewById(R.id.textView9);
+        bot = findViewById(R.id.chatbot_3to5);
         recommondtaion = findViewById(R.id.recommended);
         recommondtaion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +257,13 @@ public class SixthEighthGroup extends AppCompatActivity {
                 gotoFlex();
             }
         });
+        bot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotobot();
+            }
+        });
+
         relaxing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,6 +318,11 @@ public class SixthEighthGroup extends AppCompatActivity {
         intent.putExtra("grp", "music");
         startActivity(intent);
     }
+    private void gotobot() {
+        Intent intent = new Intent(SixthEighthGroup.this, com.aaks32173.sih2022new.chatbot.MainActivity.class);
+        startActivity(intent);
+    }
+
     private void movetogtbt() {
         Intent intent =  new Intent(SixthEighthGroup.this, gtbtPanelFourthFifth.class);
         startActivity(intent);

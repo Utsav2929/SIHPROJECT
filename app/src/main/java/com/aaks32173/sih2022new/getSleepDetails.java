@@ -138,6 +138,10 @@ public class getSleepDetails extends AppCompatActivity {
             Intent intent = new Intent(getSleepDetails.this, SixthEighthGroup.class);
             startActivity(intent);
         }
+        else{
+            Intent intent = new Intent(getSleepDetails.this, ninetwelvegroup.class);
+            startActivity(intent);
+        }
     }
 
     private String encodeUserEmail(String email) {

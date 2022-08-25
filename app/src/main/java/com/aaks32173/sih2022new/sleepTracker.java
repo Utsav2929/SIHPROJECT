@@ -75,6 +75,7 @@ public class sleepTracker extends AppCompatActivity {
     {
        Intent intent = new Intent(sleepTracker.this, MusicPlayer.class);
        intent.putExtra("path", "SleepMusic");
+        intent.putExtra("grp", "SleepMusic");
        startActivity(intent);
     }
     public void gotosleep()

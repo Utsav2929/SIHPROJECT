@@ -28,6 +28,9 @@
             android:name=".gtbtPanelFourthFifth"
             android:exported="false" />
         <activity
+            android:name=".chatbot.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".splashac"
             android:exported="true">
             <intent-filter>

@@ -21,9 +21,18 @@
         android:src="@drawable/selfcare_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tvm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:text="Middle Level"
+        android:textSize="20dp"
+        android:textStyle="bold" />
     <LinearLayout
         android:id="@+id/rec"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/tvm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
