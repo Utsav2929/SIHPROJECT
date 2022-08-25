@@ -55,7 +55,6 @@ public class fouthFifthGroup extends AppCompatActivity {
         String [] interests ={"exercisee", "musicpodcast", "nutrition","relaxinactivities", "wetimee"};
 
 
-
         recycler_view = findViewById(R.id.recycler_view_3to5);
         setRV();
 
@@ -135,6 +134,8 @@ public class fouthFifthGroup extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
+
+        DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail()));
         DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("BMI");
 
         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
@@ -153,6 +154,43 @@ public class fouthFifthGroup extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+        reference4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean todotoday = dataSnapshot.child("WEEKTODO").exists();
+
+                if(!todotoday){
+                    String[] wetime={"exercise",
+                            "music&podcast",
+                            "nutrition",
+                            "relaxinactivities",
+                            "wetime"};
+                    DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WEEKTODO");
+
+
+                    for (int i = 1; i <= 5; i++) {
+
+
+
+                        reference4.child(""+i).child("activity").setValue(wetime[i-1]);
+                        reference4.child(""+i).child("progress").setValue("0");
+
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+
+
+
+
+
 
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -166,6 +204,7 @@ public class fouthFifthGroup extends AppCompatActivity {
                             "nutrition",
                             "relaxinactivities",
                             "wetime"};
+                    DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WEEKTODO");
 
                     databaseReference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
 
@@ -174,6 +213,14 @@ public class fouthFifthGroup extends AppCompatActivity {
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("activity").setValue(wetime[i-1]);
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("date").setValue(td.toString());
                         databaseReference2.child(td.toString()).child(wetime[i-1]).child("progress").setValue("0");
+
+
+
+                        reference4.child(wetime[i-1]).setValue("0");
+                        reference4.child(wetime[i-1]).setValue("0");
+                        reference4.child(wetime[i-1]).setValue("0");
+                        reference4.child(wetime[i-1]).setValue("0");
+
                     }
 
                 }
@@ -402,16 +449,7 @@ public class fouthFifthGroup extends AppCompatActivity {
         },0,3000);
 
     }
-    @Override
-    public void onBackPressed() {
-//
-//        if (2000 + previousTime > (previousTime = System.currentTimeMillis()))
-//        {
-//            super.onBackPressed();
-//        } else {
-//            Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show();
-//        }
-    }
+
 
 
 }

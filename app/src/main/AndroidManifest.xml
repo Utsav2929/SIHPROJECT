@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
 
     <application
         android:allowBackup="true"
@@ -18,6 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SIH2022NEW">
+        <activity
+            android:name=".weektodo"
+            android:exported="false" />
         <activity
             android:name=".ninetwelvegroup"
             android:exported="false" />
@@ -31,6 +35,9 @@
             android:name=".chatbot.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".stepcounter"
+            android:exported="true"/>
+        <activity
             android:name=".splashac"
             android:exported="true">
             <intent-filter>
@@ -42,7 +49,6 @@
         <activity
             android:name=".recommended"
             android:exported="false" />
-
         <activity
             android:name=".depressn_main"
             android:exported="false" />
@@ -64,10 +70,9 @@
         <activity
             android:name=".MusicPlayerPlaylist"
             android:exported="false" />
-        <activity
-            android:name=".stepcounter"
-            android:exported="false" />
-
+<!--        <activity-->
+<!--            android:name=".stepcounter"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".addpersoneltodo"
             android:exported="false" />

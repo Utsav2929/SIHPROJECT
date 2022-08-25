@@ -157,6 +157,41 @@ public class ninetwelvegroup extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail()));
+
+        reference4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean todotoday = dataSnapshot.child("WEEKTODO").exists();
+
+                if(!todotoday){
+                    String[] wetime={"exercise",
+                            "music&podcast",
+                            "nutrition",
+                            "relaxinactivities",
+                            "wetime"};
+                    DatabaseReference reference4 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WEEKTODO");
+
+
+                    for (int i = 1; i <= 5; i++) {
+
+
+
+                        reference4.child(""+i).child("activity").setValue(wetime[i-1]);
+                        reference4.child(""+i).child("progress").setValue("0");
+
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
         DatabaseReference reference12 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("WeTime");
         reference12.addValueEventListener(new ValueEventListener() {
             @Override

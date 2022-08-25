@@ -31,6 +31,7 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
             database = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/WeTime/"+today.toString())
                 database.child(currentitem.id.toString()).removeValue().addOnSuccessListener {
                     increasecounter(email, "wetime")
+                    week()
                 }
            // holder.lay.visibility = View.GONE
         }
@@ -50,6 +51,22 @@ class wetimeadapter(private val userList : ArrayList<wetime> ,val email :String)
 
 
         val btndelete : Button = itemView.findViewById(R.id.btndelete)
+    }
+
+
+    private fun week() {
+        val reference2 = FirebaseDatabase.getInstance().reference.child("UserInfo").child(email)
+            .child("WEEKTODO")
+        reference2.addListenerForSingleValueEvent(object : ValueEventListener {
+            var progress: String? = null
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                progress = dataSnapshot.child("5").child("progress").value.toString()
+                val prg = progress!!.toInt() + 10
+                reference2.child("5").child("progress").setValue(Integer.toString(prg))
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
     private fun increasecounter(email: String, trend: String) {
         val today = LocalDate.now()

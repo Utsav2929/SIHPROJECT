@@ -32,7 +32,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatbotsenior)
-        val question = arrayOf( "tell your parents to tell you story in bed","tell your parents to play with you" )
+        val question = arrayOf(
+            "What kind of music do you like?",
+            "What is your favourite instrument?",
+            "Who is your favourite singer?",
+            "Who is your favourite band?",
+             ""
+        )
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.2.107:5000")

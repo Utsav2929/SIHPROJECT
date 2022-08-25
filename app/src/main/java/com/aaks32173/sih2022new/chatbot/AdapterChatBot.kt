@@ -19,7 +19,7 @@ class AdapterChatBot : RecyclerView.Adapter<AdapterChatBot.MyViewHolder>() {
                 txtChat.setTextColor(Color.BLACK)
                 txtChat.text = chat.chat
             }else{
-                txtChat.setBackgroundColor(Color.GRAY)
+                txtChat.setBackgroundColor(Color.YELLOW)
                 txtChat.setTextColor(Color.BLACK)
                 txtChat.text = chat.chat
             }
