@@ -3,23 +3,19 @@ package com.aaks32173.sih2022new.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.aaks32173.sih2022new.*
-
-import com.aaks32173.sih2022new.R
 import com.aaks32173.sih2022new.data.Message
-import com.aaks32173.sih2022new.depressn_main
-
 import com.aaks32173.sih2022new.utils.Constants.OPEN_GOOGLE
 import com.aaks32173.sih2022new.utils.Constants.OPEN_SEARCH
 import com.aaks32173.sih2022new.utils.Constants.RECEIVE_ID
 import com.aaks32173.sih2022new.utils.Constants.SEND_ID
 import com.aaks32173.sih2022new.utils.Time
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,6 +28,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
+    lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
 
 
@@ -193,8 +190,12 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this, councellor::class.java)
                         startActivity(intent)
                     }
-                    if (answer1.toString() == "threapist" && mainindex.toString() == "13" && chatbottype == "chatbotprimary") {
-                        val intent = Intent(this, councellor::class.java)
+                    if (answer1.toString() == "Yes" && mainindex.toString() == "22" && chatbottype == "chatbot") {
+                        val intent = Intent(this, fouthFifthGroup::class.java)
+                        startActivity(intent)
+                    }
+                    if (answer1.toString() == "Relaxing Activities " && mainindex.toString() == "3" && chatbottype == "chatbot") {
+                        val intent = Intent(this, relaxingActivityPrimary::class.java)
                         startActivity(intent)
                     }
 
@@ -207,6 +208,22 @@ class MainActivity : AppCompatActivity() {
                     btn_send2.setOnClickListener {
 
                         et_message.setText(answer2)
+
+
+                        if (answer2.toString() == "Listening to Music" && mainindex.toString() == "3" && chatbottype == "chatbot") {
+
+                            val intent = Intent(this, MusicPlayer::class.java)
+                            intent.putExtra("path", "MusicFourthFifth")
+                            startActivity(intent)
+                        }
+
+                        if (answer2.toString() == "No" && mainindex.toString() == "22" && chatbottype == "chatbot") {
+                            Toast.makeText(applicationContext, "Moving  To Todo", Toast.LENGTH_SHORT).show()
+
+                            val intent = Intent(this, todo::class.java)
+                            startActivity(intent)
+                        }
+
                         if (answer2.toString() == "Sad" && chatbottype == "chatbot") {
 
                             chatbottype = "chatbotprimary"
@@ -222,7 +239,14 @@ class MainActivity : AppCompatActivity() {
                     }
                     btn_send3.setOnClickListener {
                         qs = answer3index
+                        if (answer3.toString() == "Exercise" && mainindex.toString() == "3" && chatbottype == "chatbot") {
 
+                            val intent = Intent(this, flextimefourthfifth::class.java)
+
+                            val email=FirebaseAuth.getInstance().currentUser?.email
+                            intent.putExtra("email", encodeUserEmail(email.toString()))
+                            startActivity(intent)
+                        }
                         et_message.setText(answer3)
 
                         sendMessage()
@@ -285,4 +309,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+    private fun encodeUserEmail(email: String): String? {
+        return email.replace(".", ",")
+    }
     }

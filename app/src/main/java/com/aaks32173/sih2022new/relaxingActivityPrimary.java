@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.time.LocalDate;
 
 public class relaxingActivityPrimary extends AppCompatActivity {
-
+    FirebaseAuth mAuth;
+    FirebaseUser Currentuser;
 
 
     DatabaseReference databaseReference2;
@@ -36,8 +39,10 @@ public class relaxingActivityPrimary extends AppCompatActivity {
         ImageButton btn5 = findViewById(R.id.btn5);
         ImageButton btn6 = findViewById(R.id.btn6);
 
+        mAuth = FirebaseAuth.getInstance();
+        Currentuser = mAuth.getCurrentUser();
 
-         email = getIntent().getExtras().getString("email");
+         email = encodeUserEmail(Currentuser.getEmail().toString());
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -196,6 +201,9 @@ public class relaxingActivityPrimary extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private String encodeUserEmail(String email) {
+        return email.replace(".",",");
+    }
     public void openWeb(String url,String email)
     {
         Intent intent = new Intent(relaxingActivityPrimary.this, webView.class);

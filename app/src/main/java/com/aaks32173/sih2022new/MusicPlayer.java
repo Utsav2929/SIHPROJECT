@@ -52,6 +52,9 @@ import java.util.ArrayList;
 public class MusicPlayer extends AppCompatActivity{
     String group;
     String path;
+    FirebaseAuth mAuth;
+    FirebaseUser Currentuser;
+
     private boolean checkPermission = false;
     Uri uri;
     String songName,songUrl;
@@ -72,6 +75,15 @@ public class MusicPlayer extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
+
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        Currentuser = mAuth.getCurrentUser();
+
+        current_email = encodeUserEmail(Currentuser.getEmail().toString());
+
         listView = findViewById(R.id.myListView);
         jcPlayerView = findViewById(R.id.jcplayer);
         path = getIntent().getExtras().getString("path");
@@ -79,7 +91,7 @@ public class MusicPlayer extends AppCompatActivity{
         retrieveSongs(path);
         imageviewbg = findViewById(R.id.musicplayer_bg);
         muser = FirebaseAuth.getInstance().getCurrentUser();
-        current_email = muser.getEmail();
+
         dbref = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(current_email)).child("info");
         dbref.child("age").addValueEventListener(new ValueEventListener() {
             @Override

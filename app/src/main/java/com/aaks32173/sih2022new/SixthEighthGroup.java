@@ -119,30 +119,6 @@ public class SixthEighthGroup extends AppCompatActivity {
 
 
 
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
-
-        LocalDate yesterday = LocalDate.now().plus(-1, ChronoUnit.DAYS);
-
-       for(int i=0;i<7;i++) {
-           reference2.addValueEventListener(new ValueEventListener() {
-               @Override
-               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                   String exercise = snapshot.child("gender").getValue().toString();
-                   if (exercise.equals("Male")) {
-                       Toast.makeText(SixthEighthGroup.this, exercise, Toast.LENGTH_SHORT).show();
-                       Toast.makeText(SixthEighthGroup.this, "hello", Toast.LENGTH_SHORT).show();
-                       menstural.setVisibility(View.INVISIBLE);
-                       tv.setVisibility(View.INVISIBLE);
-                   }
-               }
-
-               @Override
-               public void onCancelled(@NonNull DatabaseError error) {
-               }
-           });
-       }
-
-
 
 
 
@@ -208,7 +184,7 @@ public class SixthEighthGroup extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("TODO");
-//        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(Currentuser.getEmail())).child("info");
         reference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
