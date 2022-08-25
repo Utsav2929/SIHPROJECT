@@ -50,7 +50,6 @@ class todo  : AppCompatActivity() {
     private fun getUserData() {
 
         val email = intent.getStringExtra("email").toString()
-        Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_SHORT).show()
 
         val today= LocalDate.now()
         dbref = FirebaseDatabase.getInstance().getReference("UserInfo/"+email+"/TODO/"+today)

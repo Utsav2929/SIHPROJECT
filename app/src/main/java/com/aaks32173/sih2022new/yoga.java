@@ -36,7 +36,6 @@ public class yoga extends AppCompatActivity {
             setContentView(R.layout.activity_yoga);
 
           String category = getIntent().getExtras().getString("category");
-          Toast.makeText(this, category, Toast.LENGTH_SHORT).show();
 
 
           TextView heading=findViewById(R.id.head);

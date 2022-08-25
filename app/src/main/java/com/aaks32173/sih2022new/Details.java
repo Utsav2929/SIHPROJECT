@@ -94,7 +94,6 @@ public class Details extends AppCompatActivity {
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Toast.makeText(Details.this, "Hello ", Toast.LENGTH_SHORT).show();
                         String age = dataSnapshot.child("age").getValue().toString();
                         int age2 = Integer.parseInt(age);
                         double calories = ((finalH *4.7)+(w*4.35)-(age2*4.7))*1.35;

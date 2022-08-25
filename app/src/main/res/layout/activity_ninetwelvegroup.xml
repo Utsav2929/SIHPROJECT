@@ -51,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
+
                 <Button
                     android:id="@+id/recommended"
                     android:layout_width="wrap_content"
@@ -59,13 +60,14 @@
 
                     android:fontFamily="@font/salsa"
                     android:padding="10dp"
-                    android:textSize="20dp"
                     android:text="Recommendations🔥"
                     android:textColor="@color/black"
+                    android:textSize="20dp"
                     app:cornerRadius="40dp" />
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -408,6 +410,7 @@
                 android:weightSum="5">
 
                 <LinearLayout
+                    android:id="@+id/menstural"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -415,7 +418,6 @@
                     android:weightSum="2">
 
                     <ImageButton
-                        android:id="@+id/menstural"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_margin="20dp"
@@ -446,7 +448,8 @@
                         android:layout_height="150dp"
                         android:layout_margin="20dp"
                         android:background="@drawable/shape"
-                        app:srcCompat="@drawable/rectangle_16" />
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/perdonaltodo" />
 
                     <TextView
                         android:id="@+id/textView10"
@@ -458,6 +461,33 @@
                         android:textColor="@color/black" />
                 </LinearLayout>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <ImageButton
+                    android:id="@+id/sleept"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/shape"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/sleeptrack" />
+
+                <TextView
+                    android:id="@+id/sleep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/salsa"
+                    android:text="Sleep Tracker"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
 

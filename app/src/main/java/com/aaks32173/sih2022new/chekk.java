@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -136,10 +137,16 @@ public class chekk extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
 
+
+
+
             //            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                Toast.makeText(chekk.this, "1", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(show.getText())){
+                    return;
+
+                }
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -156,6 +163,7 @@ public class chekk extends AppCompatActivity {
 
                         fetchdata();
                         increasecounter(encodeUserEmail(email),i,c);
+                        show.setText("");
 
 
                     }
@@ -245,7 +253,6 @@ public class chekk extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_LONG).show();
 
                     }
                 }) ;
@@ -383,7 +390,6 @@ public class chekk extends AppCompatActivity {
                         FirebaseDatabase.getInstance().getReference().child("UserInfo").child(encodeUserEmail(email));
                 String rew = snapshot.child("rewards").getValue().toString();
 
-                Toast.makeText(chekk.this, "initial rewards "+rew, Toast.LENGTH_SHORT).show();
 
                 int rev = Integer.parseInt(rew) + 50;
                 reference2.child("rewards").setValue(rev + "");
